@@ -1,0 +1,213 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <!---->
+		<script type="text/javascript" src="cordova.js"></script>
+        <!---->
+        <title>SquadrApp</title> 
+        <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1">
+		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile-1.3.2.min.css" />
+        <link rel="stylesheet" href="css/estilos.css" />
+		<script src="lib/jquery/jquery.js"></script>
+		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+		<script src="js/cdv-plugin-fb-connect.js"></script>
+		<script src="js/facebook-js-sdk.js"></script>
+        <script src="lib/swipe/swipe.js"></script>
+        
+        <style>
+		/* Swipe 2 required styles */
+			.swipe {
+			  overflow: hidden;
+			  visibility: hidden;
+			  position: relative;
+			}
+			.swipe-wrap {
+			  overflow: hidden;
+			  position: relative;
+			}
+			.swipe-wrap > div {
+			  float:left;
+			  width:100%;
+			  position: relative;
+			  text-align:center;
+			  color:#FFF;
+			}
+			#slider_counter{
+				position:absolute;
+				top:-87px;
+				left:13px;
+				z-index:2000;
+			}
+			#position_slider li{
+				width:5px;
+				height:5px;
+				display:inline-block;
+				border-radius:5px;
+				background:#666;
+			}
+			#position_slider .on{
+				background:#FFF;
+			}
+			.logo_188x40{
+				margin:50px 0;
+			}
+		/* END required styles */
+		</style>
+    </head>
+    <body>
+        <div data-role="page" id="page">
+            <div id="header" data-role="header" data-position="fixed" data-tap-toggle="false">
+            	<p><a href="#" class="search_home"></a></p>
+            </div>
+            <div id="content_home">
+        		<div class="logo_188x40"></div>
+                <div id='slider' class='swipe'>
+                  <div class='swipe-wrap'>
+                    <div><img width="125" src="img/prueba_pic1.png"><br>Encuentra</div>
+                    <div><img width="125" src="img/prueba_pic1.png"><br>jugadores</div>
+                    <div><img width="125" src="img/prueba_pic1.png"><br>Locales</div>
+                  </div>
+                </div>
+                <div id="slider_counter">
+                    <ul id='position_slider'>
+                      <li class='on'></li>
+                      <li></li>
+                      <li></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div id="footer" data-position="fixed" data-tap-toggle="false">
+            	<a href="#" class="start show-page-loading-msg" data-role="button" data-theme="a" data-corners="false" data-textvisible="true" data-msgtext="Cargando">Empezar</a>
+            </div>
+		</div><!-- /page -->
+
+		<div id="overlay" style="display:none;"><img src="img/loader.gif"></div><!-- Cargador para cualquier evento, agregar a todos los .html -->
+
+			<div id="fb-root"></div>
+			
+
+        <script type="text/javascript">
+		    var saved_user;
+			$(function(){				
+				
+				$('.search_home').click(function(){
+					alert('Buscar');
+				});
+				
+				$('.start').click(function(){
+					$('#overlay').show();
+					login();
+				});
+				
+				var slider =
+				  Swipe(document.getElementById('slider'), {
+					auto: 5000,
+					continuous: true,
+					callback: function(pos) {
+				
+					  var i = bullets.length;
+					  while (i--) {
+						bullets[i].className = ' ';
+					  }
+					  bullets[pos].className = 'on';
+				
+					}
+				  });
+				var bullets = document.getElementById('position_slider').getElementsByTagName('li');
+
+			});
+			
+            document.addEventListener('deviceready', function() {
+				try {
+					FB.init({
+						appId : "518581128197028",
+						nativeInterface : CDV.FB,
+						useCachedDialogs : false
+					});
+					validateFacebookUser('start');
+				} catch (e) {
+					alert(e);
+				}
+			}, false);
+            
+	          
+	        function loadMe() {
+				FB.api('/me', function(response) {
+					if (response.error) {
+						alert(JSON.stringify(response.error));
+					} else {
+						var fdata = response;
+						$('#content_home').html('');
+						var user={ 
+								 login: 1
+								,facebook_id:fdata.id
+								,name:fdata.name
+								,first_name:fdata.first_name
+								,last_name:fdata.last_name
+								,facebook_link:fdata.link
+								,facebook_username:fdata.username
+								,hometown:fdata.hometown.name
+								,location:fdata.location.name
+								,gender:fdata.gender
+								,email:fdata.email
+								,timezone:fdata.timezone
+								,locale:fdata.locale
+								,facebook_update_time:fdata.updated_time
+								};
+						localStorage.setItem('user', JSON.stringify(user));		// Almacena la información del usuario logueado
+						$('#content_home').append('<p>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br><a href="#" onClick="logout();">Log Out</a><p>');
+						$('#overlay').hide();
+					}
+				});
+			}
+	
+			function login() {
+				FB.login(function(response) {
+					if (response.authResponse) {
+						loadMe();
+					} else {
+						alert('not logged in');
+					}
+				}, {
+					scope : "email,user_likes,publish_actions"
+				});
+			}
+			
+			function logout(){
+				localStorage.removeItem('user');	// Elimina la informacion de usuario logueado
+				alert('logout');
+			}
+			
+			function validateFacebookUser(command){
+				if(command == 'start'){
+					timerChat = setInterval(function () {
+					/*
+					** Si usuario no coincide realizar logout
+					*/
+					if (localStorage['user'] != undefined )
+					{
+						saved_user = JSON.parse(localStorage.getItem('user'));
+						FB.getLoginStatus(function(response) {
+						  if (response.status === 'connected') {
+							var uid = response.authResponse.userId;
+							alert (uid+' -> '+saved_user.facebook_id)
+							if (uid != saved_user.facebook_id) {
+								logout();
+							}
+						  } else if (response.status === 'not_authorized') {
+							logout();
+						  } else {
+							logout();
+						  }
+						 }, true);
+					}else{
+						saved_user = {login: 0};
+					}
+					/******************************************/
+					}, 30000); 
+				}
+			}
+        </script>
+    </body>
+</html>

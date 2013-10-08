@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+<script src="lib/jquery/jquery.js"></script>
+
+</head>
+
+<body>
+	<div id="search_result"></div>
+</body>
+ <script type="text/javascript">
+    $(function(){
+		
+		var a = 'http://54.200.40.200/';
+		$.get(a, function (data) {
+			 //$('#search_result').html(data);
+		});
+		$.ajax({
+                            url: a,
+                            success: function(data) {
+ 
+                                $('#search_result').html(data);
+                            }
+                        });
+		
+		
+	});
+    </script>
+</html>
