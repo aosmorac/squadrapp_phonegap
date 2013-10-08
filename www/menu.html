@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jQuery Mobile: Theme Download</title>
+		<link rel="stylesheet" href="css/mobile.css" />
+		<link rel="stylesheet" href="css/empty.css" />
+		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
+		<script src="lib/jquery/jquery.js"></script>
+		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.js"></script>
+	</head>
+	<style>
+		.containing-element .ui-slider-switch { width: 14em }
+	</style>
+	<body>
+		<div data-role="page" data-theme="a" id="reserva" class="ui-responsive-panel">
+			<div data-role="content">
+			<div class="headerEmpty">
+			<table style="width:100%;">
+				<tr>
+					<td valign="middle" class="menuIcon" onclick="$.mobile.activePage.find('#menu').panel('toggle');">
+						<img   src="images/icon_menu.png" height="65%"/>
+					</td>
+					<td>
+						<p>Reservas</p>
+					</td>
+					<td>
+						<img src="images/icon_menu.png" style="visibility:hidden"/>
+					</td>
+				</tr>
+			</table>
+			</div>
+			<div class="imageEmpty">
+				<img src="images/pic_reserva.png" align="middle"/>
+				<p>Aún no tienes reservas</p>
+			</div>
+			</div>
+		</div>
+		<div data-role="page" data-theme="a" id="solicitud">
+			<div data-role="content">
+			<div class="headerEmpty">
+			<table style="width:100%;">
+				<tr>
+					<td valign="middle" class="menuIcon" onclick="$.mobile.activePage.find('#menu').panel('toggle');">
+						<img src="images/icon_menu.png" height="65%"/>
+					</td>
+					<td>
+						<p>Solicitud de Reserva</p>
+					</td>
+					<td>
+						<img src="images/icon_menu.png" style="visibility:hidden"/>
+					</td>
+				</tr>
+			</table>
+			</div>
+			<div style="" class="imageEmpty">
+				<img src="images/pic_solicitud.png" align="middle"/>
+				<p>No tienes solicitudes pendientes</p>
+			</div>
+			</div>
+			<div data-role="panel" id="menu" data-position="left" data-position-fixed="false" data-display="push" data-swipe-close="false" data-dismissible="false">
+			<table style="width:100%; text-align:center; border-bottom:solid 1px rgb(77, 77, 77); border-spacing:0px; border-right:solid 1px rgb(77, 77, 77);">
+			<tr>
+				<td width="5px" style="border-bottom:solid 1px rgb(22, 23, 26); padding:10px 0px; padding-left:10px;">
+					<img src="images/icon_mensajes.png" width="30px;"/>
+				</td>
+				<td style="border-bottom:solid 1px rgb(22, 23, 26);">
+					<img src="images/icon_notificaciones.png" align="middle" width="30px"/>
+				</td>
+				<td width="5px" style="padding-right:10px;  border-bottom:solid 1px rgb(22, 23, 26);">
+					<img src="images/icon_ajustes.png" width="30px;"/>
+				</td>
+			</tr>
+			</table>
+			<table style="width:100%; border-spacing:0px; border-bottom:solid 1px rgb(77, 77, 77); border-right:solid 1px rgb(77, 77, 77);" cellpadding="0px">
+				<tr>
+				<td>
+					<table style="width:100%; margin-top:20px; border-spacing:0px 0px;" cellpadding="0px">
+					<tr>
+					<td>
+						<table style="width:100%; border-spacing:0px;">
+							<tr>
+								<td style="width:5px; border-bottom:solid 1px rgb(22, 23, 26); padding-left:5%; padding-bottom:15px;">
+									<img src="images/Cesar.jpg" style="width:80px; height:80px; -moz-border-radius:50%; border-radius:50%; border:solid 3px #FFFFFF"/>
+								</td>
+								<td style="text-align:left; padding-left:8%; border-bottom:solid 1px rgb(22, 23, 26); padding-bottom:15px;">
+									<p style="font-family:Helvetica; font-weight:bold; margin:0px; font-size:18px;">Cesar Valderrama</p>
+									<p style="font-family:Helvetica; margin:0px; font-size:16px;">Bogotá, Colombia</p>
+								</td>
+								<td style="font-family:Helvetica; font-size:25px; padding-right:10px; border-bottom:solid 1px rgb(22, 23, 26); padding-bottom:15px; padding-left:10px;">
+									>
+								</td>
+							</tr>
+						</table>
+					</td>
+					</tr>
+					<tr>
+						<td style="padding-left:5%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);">
+							<div class="containing-element">
+								<select name="flip-min" id="flip-min" data-role="slider">
+									<option value="off">Desliza para activar</option>
+									<option value="on">Disponible para jugar</option>
+								</select>
+							</div>
+						</td>
+					</tr>
+					<tr>
+					<td style="border-top:solid 1px rgb(77, 77, 77);">
+						<table style="width:100%; border-spacing:0px 0px;" cellpadding="0px">
+						<tr>
+						<td style="padding-top:10px; padding-bottom:5px; width:5px; padding-left:5%;  border-bottom:solid 1px rgb(22, 23, 26);">
+							<img src="images/icon_buscar_cancha.png" width="30px"/>
+						</td>
+						<td style="font-family:Helvetica; font-size:18px; padding-left:8%; border-bottom:solid 1px rgb(22, 23, 26);">
+							Buscar Cancha
+						</td>
+						<td style="border-bottom:solid 1px rgb(22, 23, 26); padding-right:10px;">
+							0
+						</td>
+						</tr>
+						<tr onclick="$.mobile.changePage($('#reserva'), { transition: 'slide'})">
+						<td style="padding-top:10px; padding-bottom:5px; width:5px; padding-left:5%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);">
+							<img src="images/icon_reservas.png" width="30px"/>
+						</td>
+						<td style="font-family:Helvetica; font-size:18px; padding-left:8%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);">
+							Reservas
+						</td>
+						<td style=" border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26); padding-right:10px;">
+							0
+						</td>
+						</tr>
+						<tr onclick="$.mobile.changePage($('#solicitud'), { transition: 'slide'})">
+						<td style="padding-top:10px; padding-bottom:5px; width:5px; padding-left:5%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);">
+							<img src="images/icon_solicitud.png" width="30px"/>
+						</td>
+						<td style="font-family:Helvetica; font-size:18px; padding-left:8%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);">
+							Solicitud de reserva
+						</td>
+						<td style="border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26); color:rgb(236, 28, 36); padding-right:10px;">
+							0
+						</td>
+						</tr>
+						<tr onclick="$.mobile.changePage($('#favoritos'), { transition: 'slide'})">
+						<td style="padding-top:10px; padding-bottom:5px; width:5px; padding-left:5%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);">
+							<img src="images/icon_favoritos.png" width="30px"/>
+						</td>
+						<td style="font-family:Helvetica; font-size:18px; padding-left:8%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);">
+							Favoritos
+						</td>
+						<td style="border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26); padding-right:10px;">
+							0
+						</td>
+						</tr>
+						<tr onclick="$.mobile.changePage($('#amigos'), { transition: 'slide'})">
+						<td style="padding-top:10px; padding-bottom:5px; width:5px; padding-left:5%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);">
+							<img src="images/icon_jugadores.png" width="35px"/>
+						</td>
+						<td style="font-family:Helvetica; font-size:18px; padding-left:8%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);;">
+							Amigos
+						</td>
+						<td style="border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26); padding-right:10px;">
+							0
+						</td>
+						</tr>
+						<tr>
+						<td style="padding-top:10px; padding-bottom:5px; width:5px; padding-left:5%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);">
+							<img src="images/icon_jugadores.png" width="35px"/>
+						</td>
+						<td style="font-family:Helvetica; font-size:18px; padding-left:8%; border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26);">
+							Jugadores locales
+						</td>
+						<td style="border-top:solid 1px rgb(77, 77, 77); border-bottom:solid 1px rgb(22, 23, 26); padding-right:10px;">
+							0
+						</td>
+						</tr>
+						</table>
+					</td>
+					</tr>
+					</table>
+				</td>
+				</tr>
+			</table>
+			</div>
+		</div>
+		<div data-role="page" data-theme="a" id="favoritos">
+			<div data-role="content">
+			<div class="headerEmpty">
+			<table style="width:100%;">
+				<tr>
+					<td valign="middle" class="menuIcon" onclick="$.mobile.activePage.find('#menu').panel('toggle');">
+						<img src="images/icon_menu.png" height="65%"/>
+					</td>
+					<td>
+						<p>Favoritos</p>
+					</td>
+					<td>
+						<img src="images/icon_menu.png" style="visibility:hidden"/>
+					</td>
+				</tr>
+			</table>
+			</div>
+			<div style="" class="imageEmpty">
+				<img src="images/pic_favorito.png" align="middle"/>
+				<p>Aún no tienes favoritos</p>
+			</div>
+			</div>
+		</div>
+		<div data-role="page" data-theme="a" id="amigos">
+			<div data-role="content">
+			<div class="headerEmpty">
+			<table style="width:100%;">
+				<tr>
+					<td valign="middle" class="menuIcon" onclick="$.mobile.activePage.find('#menu').panel('toggle');">
+						<img src="images/icon_menu.png" height="65%"/>
+					</td>
+					<td>
+						<p>Amigos</p>
+					</td>
+					<td>
+						<img src="images/icon_menu.png" style="visibility:hidden"/>
+					</td>
+				</tr>
+			</table>
+			</div>
+			<div class="imageEmpty">
+				<img src="images/Pic_amigos.png" align="middle"/>
+				<p style="margin-bottom:0px;">Agrega jugadores</p>
+				<p style="margin-top:0px">a tu lista de amigos</p>
+			</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		$(document).ready(function(){
+			var phoneHeight = window.innerHeight;
+			$('div[data-role="page"]').each(function(){
+				$(this).append($('#menu').clone());
+			})
+			var top = (phoneHeight - 140)/2;
+			$('.imageEmpty').css('top', top + "px");
+			$('img').on('dragstart', function(event) { event.preventDefault(); });
+			$("td.menuIcon").on( "swiperight", swiperightHandler);
+			
+			function swiperightHandler(event){
+				$.mobile.activePage.find('#menu').panel('open');
+			}
+			
+			$("td.menuIcon").on( "swipeleft", swipeleftHandler);
+			function swipeleftHandler(event){
+				$.mobile.activePage.find('#menu').panel('close');
+			}
+		});
+		
+		$( document ).on( "pageinit", '[data-role="page"]', function(){ 
+			
+		});
+	</script>
+</html>
