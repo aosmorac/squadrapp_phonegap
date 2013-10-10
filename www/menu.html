@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="css/empty.css" />
 		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
 		<script src="lib/jquery/jquery.js"></script>
+		<script src="js/jquery-ui-1.10.3.custom.js"></script>
 		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.js"></script>
 		<script src="js/iscroll.js"></script>
 	</head>
@@ -256,13 +257,25 @@
 			<div data-role="content">
 				<div id="listSearch" style="width:100%; padding:1px 0px; background:rgb(245, 245, 245); border-bottom:solid 1px rgb(102, 102, 102)">
 					<center>
-						<div style="width:90%;">
-							<input type="text" placeholder="Buscar cancha" style="background:url(images/lupa.png) no-repeat center right; background-size:30px"/>
+						<div style="width:95%;">
+							<table style="width:100%">
+							<tr>
+							<td>
+							<input type="text" placeholder="Buscar cancha" style="background:url(images/lupa.png) no-repeat center right; background-size:30px" onfocus="$('#cancelSearch').show('slide', {direction:'right'}, 500); $('#wrapper').css({'-webkit-opacity':'0.1', '-moz-opacity':'0.1', 'opacity':'0.1'});"/>
+							</td>
+							<td style="width:5px; color:rgb(102, 102, 102); font-family: Helvetica;" onclick="$('#listSearch input').blur(); $('#cancelSearch').hide('slide', {direction:'right'}, 500); $('#wrapper').css({'-webkit-opacity':'1', '-moz-opacity':'1', 'opacity':'1'});"">
+								<div id="cancelSearch" style="display:none; padding-left:20%;">
+									<span>Cancelar</span>
+								</div>
+							</td>
+							</tr>
+							</table>
 						</div>
 					</center>
 				</div>
 				
 				<div id="wrapper" style="height:300px; overflow:auto; position:relative; z-index:1;">
+				<div id="allList">
 				<div style="padding-bottom:10px;">
 				<div style="width:100%; background:rgb(245, 245, 245); padding:10px 0px; text-align:center; color:rgb(143, 143, 143); border-bottom:solid 1px rgb(128, 128, 128);">
 					<span>64 canchas encontradas en 18 sedes</span>
@@ -329,6 +342,24 @@
 				</div>
 				</center>
 				</div>
+				</div>
+				</div>
+				<div id="filterList" style="display:none">
+					<table style="width:100%; color:rgb(102, 102, 102); border-spacing:0px;" cellpadding="0px">
+						<tr>
+							<td style="width:20%; border:solid 1px rgb(77, 77, 77); border-right:none; border-left:none">
+								<img src="images/foto_example.png" style="width:100%;"/>
+							</td>
+							<td valign="top" style="padding-top:10px; padding-left:10px; border:solid 1px rgb(77, 77, 77); border-right:none; border-left:none">
+								<p style="margin:0px; font-size:18px; font-weight:bold">Futboleros</p>
+								<p style="margin:0px;">Cra 9 #23-75, Piso 5, Bogotá</p>
+								<p style="margin:0px;">Colombia</p>
+							</td>
+							<td style="width:2px; font-size:24px; padding-right:20px; border:solid 1px rgb(77, 77, 77); border-right:none; border-left:none">
+								>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			
