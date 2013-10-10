@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
 		<script src="lib/jquery/jquery.js"></script>
 		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.js"></script>
+		<script src="js/iscroll.js"></script>
 	</head>
 	<style>
 		.containing-element .ui-slider-switch { width: 14em }
@@ -231,7 +232,7 @@
 			</div>
 		</div>
 		<div data-role="page" data-theme="b" id="lista">
-			<div data-role="header" data-position="fixed" id="listHeader">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false" id="listHeader">
 			<table style="width:100%;">
 				<tr>
 					<td valign="middle" class="menuIcon" onclick="$.mobile.activePage.find('#menu').panel('toggle');" style="padding-left:20px; width:10px;">
@@ -253,19 +254,21 @@
 			</table>
 			</div>
 			<div data-role="content">
-				<div style="width:100%; padding:1px 0px; background:rgb(245, 245, 245); border-bottom:solid 1px rgb(102, 102, 102)">
+				<div id="listSearch" style="width:100%; padding:1px 0px; background:rgb(245, 245, 245); border-bottom:solid 1px rgb(102, 102, 102)">
 					<center>
-						<div style="width:90%;" id="listSearch">
+						<div style="width:90%;">
 							<input type="text" placeholder="Buscar cancha" style="background:url(images/lupa.png) no-repeat center right; background-size:30px"/>
 						</div>
 					</center>
 				</div>
-				<div style="height:300px; overflow:auto;">
+				
+				<div id="wrapper" style="height:300px; overflow:auto; position:relative; z-index:1;">
+				<div style="padding-bottom:10px;">
 				<div style="width:100%; background:rgb(245, 245, 245); padding:10px 0px; text-align:center; color:rgb(143, 143, 143); border-bottom:solid 1px rgb(128, 128, 128);">
 					<span>64 canchas encontradas en 18 sedes</span>
 				</div>
 				<center style="margin-top:10px;">
-				<div style="width:93%; -moz-box-shadow:3px 3px 3px 3px #ccc; -webkit-box-shadow:3px 3px 3px 3px #ccc; box-shadow:0 0 5px rgb(77, 77, 77);">
+				<div style="width:93%; -moz-box-shadow:3px 3px 3px 3px #ccc; -webkit-box-shadow:3px 3px 3px 3px #ccc; box-shadow:0 0 5px rgb(77, 77, 77); margin-bottom:20px;">
 					<img src="images/foto_example.png" style="width:100%;"/>
 					<table style="width:100%; margin-top:10px;">
 						<tr>
@@ -295,7 +298,7 @@
 					</table>
 				</div>
 				
-				<div style="width:93%; -moz-box-shadow:3px 3px 3px 3px #ccc; -webkit-box-shadow:3px 3px 3px 3px #ccc; box-shadow:0 0 5px rgb(77, 77, 77); margin-top:20px;">
+				<div style="width:93%; -moz-box-shadow:3px 3px 3px 3px #ccc; -webkit-box-shadow:3px 3px 3px 3px #ccc; box-shadow:0 0 5px rgb(77, 77, 77); margin-bottom:20px;">
 					<img src="images/foto_example.png" style="width:100%;"/>
 					<table style="width:100%; margin-top:10px;">
 						<tr>
@@ -326,8 +329,10 @@
 				</div>
 				</center>
 				</div>
+				</div>
 			</div>
-			<div data-role="footer" data-position="fixed" data-theme="c">
+			
+			<div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="c" id="listFooter">
 				<table style="width:100%; font-size:20px; color:rgb(102, 102, 102); border-spacing:0px;" cellpadding="0px">
 					<tr>
 					<td style="padding:10px; text-align:center; border-right:1px solid rgb(128, 128, 128)">
@@ -343,15 +348,17 @@
 	</body>
 	<script>
 		var topPosition = 0;
+		var listSearchHeight = 0;
+		var scrollDone = false;
 		$(document).ready(function(){
-			var phoneHeight = window.innerHeight;
 			$('div[data-role="page"]').each(function(){
 				$(this).append($('#menu').clone());
-			})
+			});
+			var phoneHeight = window.innerHeight;
 			var top = (phoneHeight - 140)/2;
 			$('.imageEmpty').css('top', top + "px");
-			$('img').on('dragstart', function(event) { event.preventDefault(); });
 			$("td.menuIcon").on( "swiperight", swiperightHandler);
+			
 			
 			function swiperightHandler(event){
 				$.mobile.activePage.find('#menu').panel('open');
@@ -362,14 +369,36 @@
 				$.mobile.activePage.find('#menu').panel('close');
 			}
 			
-			$(window).scroll(function(){
-				if(topPosition < $(this).scrollTop() && $('#listSearch').css('display') != 'none'){
-					$('#listSearch').slideDown();
-				}
-				else if(topPosition > $(this).scrollTop() && $('#listSearch').css('display') == 'none'){
-					$('#listSearch').slideUp();
-				}
-				topPosition = $(this).scrollTop();
+			$('#lista').on("pageshow", function(event, ui){			
+				var listHeaderHeight = $('#listHeader').height() + 3;
+				var listFooterHeight = $('#listFooter').height() + 3;
+				listSearchHeight = $('#listSearch').height() + 3;
+				var wrapperHeight = phoneHeight - listHeaderHeight - listFooterHeight - listSearchHeight;
+				$('#wrapper').css('height', wrapperHeight + "px");
+				myScroll = new iScroll('wrapper', {
+					vScrollbar:false,
+					bounce:false,
+					onScrollMove: function(e) {
+						if(this.distY < 0 && $('#listSearch').css('display') != 'none' && scrollDone == false){
+							scrollDone = true;
+							$('#listSearch').slideUp(function(){
+								var wrapperHeight = $('#wrapper').height() + listSearchHeight;
+								$('#wrapper').css('height', wrapperHeight + "px");
+								myScroll.refresh();
+								scrollDone = false;
+							});
+						}
+						else if(this.distY > 0 && $('#listSearch').css('display') == 'none' && scrollDone == false){
+							scrollDone = true;
+							var wrapperHeight = $('#wrapper').height() - listSearchHeight;
+							$('#wrapper').css('height', wrapperHeight + "px");
+							myScroll.refresh();
+							$('#listSearch').slideDown(function(){
+								scrollDone = false;
+							});
+						}
+					},
+				});
 			});
 		});
 	</script>
