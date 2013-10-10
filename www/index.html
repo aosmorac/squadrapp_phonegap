@@ -14,6 +14,7 @@
 		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
 		<script src="js/cdv-plugin-fb-connect.js"></script>
 		<script src="js/facebook-js-sdk.js"></script>
+        <script src="js/squadrapp-user.js"></script>
         <script src="lib/swipe/swipe.js"></script>
         <meta name="viewport" content="width=device-width, user-scalable=no">
     </head>
@@ -56,9 +57,31 @@
 			
 
         <script type="text/javascript">
-		    var saved_user;
-			$(function(){				
-				
+		    var SAVED_USER;
+			$('#overlay').show();
+			
+			document.addEventListener('deviceready', function() {
+				try {
+					alert('Dispositivo listo!');
+					FB.init({
+						appId : "518581128197028",
+						nativeInterface : CDV.FB,
+						useCachedDialogs : false
+					});
+					validateFacebookUser('start');
+					$('#overlay').hide();
+				} catch (e) {
+					alert(e);
+				}
+			}, false);
+			
+			$(function(){	
+				if (localStorage.user){
+					alert('User logueado');
+					SAVED_USER = JSON.parse(localStorage.getItem('user'));
+					seeUser();
+				}
+					
 				$('.search_home').click(function(){
 					alert('Buscar');
 				});
@@ -86,96 +109,6 @@
 
 			});
 			
-            document.addEventListener('deviceready', function() {
-				try {
-					FB.init({
-						appId : "518581128197028",
-						nativeInterface : CDV.FB,
-						useCachedDialogs : false
-					});
-					validateFacebookUser('start');
-				} catch (e) {
-					alert(e);
-				}
-			}, false);
-            
-	          
-	        function loadMe() {
-				FB.api('/me', function(response) {
-					if (response.error) {
-						alert(JSON.stringify(response.error));
-					} else {
-						var fdata = response;
-						$('#content_home').html('');
-						var user={ 
-								 login: 1
-								,facebook_id:fdata.id
-								,name:fdata.name
-								,first_name:fdata.first_name
-								,last_name:fdata.last_name
-								,facebook_link:fdata.link
-								,facebook_username:fdata.username
-								,hometown:fdata.hometown.name
-								,location:fdata.location.name
-								,gender:fdata.gender
-								,email:fdata.email
-								,timezone:fdata.timezone
-								,locale:fdata.locale
-								,facebook_update_time:fdata.updated_time
-								};
-						localStorage.setItem('user', JSON.stringify(user));		// Almacena la información del usuario logueado
-						$('#content_home').append('<p>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br><a href="#" onClick="logout();">Log Out</a><p>');
-						$('#overlay').hide();
-					}
-				});
-			}
-	
-			function login() {
-				FB.login(function(response) {
-					if (response.authResponse) {
-						loadMe();
-					} else {
-						alert('not logged in');
-					}
-				}, {
-					scope : "email,user_likes,publish_actions"
-				});
-			}
-			
-			function logout(){
-				localStorage.removeItem('user');	// Elimina la informacion de usuario logueado
-				alert('logout');
-			}
-			
-			function validateFacebookUser(command){
-				if(command == 'start'){
-					timerChat = setInterval(function () {
-					/*
-					** Si usuario no coincide realizar logout
-					*/
-					if (localStorage['user'] != undefined )
-					{
-						saved_user = JSON.parse(localStorage.getItem('user'));
-						FB.getLoginStatus(function(response) {
-						  if (response.status === 'connected') {
-							var uid = response.authResponse.userId;
-							alert (uid+' -> '+saved_user.facebook_id)
-							if (uid != saved_user.facebook_id) {
-								logout();
-							}
-						  } else if (response.status === 'not_authorized') {
-							logout();
-						  } else {
-							logout();
-						  }
-						 }, true);
-					}else{
-						saved_user = {login: 0};
-					}
-					/******************************************/
-					}, 30000); 
-				}
-			}
         </script>
     </body>
 </html>
