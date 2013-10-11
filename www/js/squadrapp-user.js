@@ -130,7 +130,6 @@ $(function(){
 			
 			
 			function login() {
-				$('#overlay').show();
 				FB.login(function(response) {
 					if (response.authResponse) {
 						loadMe();

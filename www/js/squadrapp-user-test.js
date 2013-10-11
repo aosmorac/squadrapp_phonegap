@@ -124,7 +124,6 @@ $(function(){
 			
 			
 			function login(){
-				$('#overlay').show();
 				loadMe();
 				var userLogueado = JSON.parse(localStorage.getItem('userLogueado'));							
 					if (userLogueado.login == 1) {
