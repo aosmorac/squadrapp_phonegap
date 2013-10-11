@@ -124,7 +124,7 @@ $(function(){
 			
 			
 			function login(){
-				loadMeA();
+				loadMe();
 				var userLogueado = JSON.parse(localStorage.getItem('userLogueado'));							
 					if (userLogueado.login == 1) {
 								var serv = 'http://squadrapp.com/app/user/login-facebook';
