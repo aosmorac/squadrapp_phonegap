@@ -8,15 +8,13 @@
 		<link rel="stylesheet" href="css/empty.css" />
 		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
 		<script src="lib/jquery/jquery.js"></script>
-		<script src="js/jquery-ui-1.10.3.custom.js"></script>
 		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.js"></script>
-		<script src="js/iscroll.js"></script>
 	</head>
 	<style>
 		.containing-element .ui-slider-switch { width: 14em }
 	</style>
 	<body>
-		<div data-role="page" data-theme="a" id="reserva">
+		<div data-role="page" data-theme="a" id="reserva" class="ui-responsive-panel">
 			<div data-role="content">
 			<div class="headerEmpty">
 			<table style="width:100%;">
@@ -110,7 +108,7 @@
 					<tr>
 					<td style="border-top:solid 1px rgb(77, 77, 77);">
 						<table style="width:100%; border-spacing:0px 0px;" cellpadding="0px">
-						<tr onclick="$.mobile.changePage($('#lista'), { transition: 'slide'})">
+						<tr>
 						<td style="padding-top:10px; padding-bottom:5px; width:5px; padding-left:5%;  border-bottom:solid 1px rgb(22, 23, 26);">
 							<img src="images/icon_buscar_cancha.png" width="30px"/>
 						</td>
@@ -232,164 +230,17 @@
 			</div>
 			</div>
 		</div>
-		<div data-role="page" data-theme="b" id="lista">
-			<div data-role="header" data-position="fixed" data-tap-toggle="false" id="listHeader">
-			<table style="width:100%;">
-				<tr>
-					<td valign="middle" class="menuIcon" onclick="$.mobile.activePage.find('#menu').panel('toggle');" style="padding-left:20px; width:10px;">
-						<img   src="images/icon_menu.png" height="65%"/>
-					</td>
-					<td style="width:5px">
-						<span style="visibility:hidden">Filtro</span>
-					</td>
-					<td style="text-align:center">
-						<p>Lista</p>
-					</td>
-					<td style="width:5px">
-						Filtro
-					</td>
-					<td style="width:10px; padding-right:20px;">
-						<img src="images/filtrado.png" style="height:60%"/>
-					</td>
-				</tr>
-			</table>
-			</div>
-			<div data-role="content">
-				<div id="listSearch" style="width:100%; padding:1px 0px; background:rgb(245, 245, 245); border-bottom:solid 1px rgb(102, 102, 102)">
-					<center>
-						<div style="width:95%;">
-							<table style="width:100%">
-							<tr>
-							<td>
-							<input type="text" placeholder="Buscar cancha" style="background:url(images/lupa.png) no-repeat center right; background-size:30px" onfocus="$('#cancelSearch').show('slide', {direction:'right'}, 500); $('#wrapper').css({'-webkit-opacity':'0.1', '-moz-opacity':'0.1', 'opacity':'0.1'});"/>
-							</td>
-							<td style="width:5px; color:rgb(102, 102, 102); font-family: Helvetica;" onclick="$('#listSearch input').blur(); $('#cancelSearch').hide('slide', {direction:'right'}, 500); $('#wrapper').css({'-webkit-opacity':'1', '-moz-opacity':'1', 'opacity':'1'});"">
-								<div id="cancelSearch" style="display:none; padding-left:20%;">
-									<span>Cancelar</span>
-								</div>
-							</td>
-							</tr>
-							</table>
-						</div>
-					</center>
-				</div>
-				
-				<div id="wrapper" style="height:300px; overflow:auto; position:relative; z-index:1;">
-				<div id="allList">
-				<div style="padding-bottom:10px;">
-				<div style="width:100%; background:rgb(245, 245, 245); padding:10px 0px; text-align:center; color:rgb(143, 143, 143); border-bottom:solid 1px rgb(128, 128, 128);">
-					<span>64 canchas encontradas en 18 sedes</span>
-				</div>
-				<center style="margin-top:10px;">
-				<div style="width:93%; -moz-box-shadow:3px 3px 3px 3px #ccc; -webkit-box-shadow:3px 3px 3px 3px #ccc; box-shadow:0 0 5px rgb(77, 77, 77); margin-bottom:20px;">
-					<img src="images/foto_example.png" style="width:100%;"/>
-					<table style="width:100%; margin-top:10px;">
-						<tr>
-						<td style="color:rgb(102, 102, 102); font-size:20px;">
-							Futboleros
-						</td>
-						<td style="color:rgb(143, 143, 143); font-size:16px;">
-							Desde
-						</td>
-						</tr>
-						<tr>
-						<td style="color:rgb(143, 143, 143);">
-							Cra 9 #23-75, Piso 5, Bogotá
-						</td>
-						<td style="color:rgb(102, 102, 102); font-size:20px;">
-							$120.000
-						</td>
-						</tr>
-						<tr>
-						<td style="color:rgb(143, 143, 143); font-size:16px;">
-							Colombia
-						</td>
-						<td style="color:rgb(143, 143, 143);">
-							Por hora
-						</td>
-						</tr>
-					</table>
-				</div>
-				
-				<div style="width:93%; -moz-box-shadow:3px 3px 3px 3px #ccc; -webkit-box-shadow:3px 3px 3px 3px #ccc; box-shadow:0 0 5px rgb(77, 77, 77); margin-bottom:20px;">
-					<img src="images/foto_example.png" style="width:100%;"/>
-					<table style="width:100%; margin-top:10px;">
-						<tr>
-						<td style="color:rgb(102, 102, 102); font-size:20px;">
-							Futboleros
-						</td>
-						<td style="color:rgb(143, 143, 143); font-size:16px;">
-							Desde
-						</td>
-						</tr>
-						<tr>
-						<td style="color:rgb(143, 143, 143);">
-							Cra 9 #23-75, Piso 5, Bogotá
-						</td>
-						<td style="color:rgb(102, 102, 102); font-size:20px;">
-							$120.000
-						</td>
-						</tr>
-						<tr>
-						<td style="color:rgb(143, 143, 143); font-size:16px;">
-							Colombia
-						</td>
-						<td style="color:rgb(143, 143, 143);">
-							Por hora
-						</td>
-						</tr>
-					</table>
-				</div>
-				</center>
-				</div>
-				</div>
-				</div>
-				<div id="filterList" style="display:none">
-					<table style="width:100%; color:rgb(102, 102, 102); border-spacing:0px;" cellpadding="0px">
-						<tr>
-							<td style="width:20%; border:solid 1px rgb(77, 77, 77); border-right:none; border-left:none">
-								<img src="images/foto_example.png" style="width:100%;"/>
-							</td>
-							<td valign="top" style="padding-top:10px; padding-left:10px; border:solid 1px rgb(77, 77, 77); border-right:none; border-left:none">
-								<p style="margin:0px; font-size:18px; font-weight:bold">Futboleros</p>
-								<p style="margin:0px;">Cra 9 #23-75, Piso 5, Bogotá</p>
-								<p style="margin:0px;">Colombia</p>
-							</td>
-							<td style="width:2px; font-size:24px; padding-right:20px; border:solid 1px rgb(77, 77, 77); border-right:none; border-left:none">
-								>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			
-			<div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="c" id="listFooter">
-				<table style="width:100%; font-size:20px; color:rgb(102, 102, 102); border-spacing:0px;" cellpadding="0px">
-					<tr>
-					<td style="padding:10px; text-align:center; border-right:1px solid rgb(128, 128, 128)">
-						Lista
-					</td>
-					<td  style="padding:10px; text-align:center">
-						Mapa
-					</td>
-					</tr>
-				</table>
-			</div>
-		</div>
 	</body>
 	<script>
-		var topPosition = 0;
-		var listSearchHeight = 0;
-		var scrollDone = false;
 		$(document).ready(function(){
+			var phoneHeight = window.innerHeight;
 			$('div[data-role="page"]').each(function(){
 				$(this).append($('#menu').clone());
-			});
-			var phoneHeight = window.innerHeight;
+			})
 			var top = (phoneHeight - 140)/2;
 			$('.imageEmpty').css('top', top + "px");
+			$('img').on('dragstart', function(event) { event.preventDefault(); });
 			$("td.menuIcon").on( "swiperight", swiperightHandler);
-			
 			
 			function swiperightHandler(event){
 				$.mobile.activePage.find('#menu').panel('open');
@@ -399,38 +250,10 @@
 			function swipeleftHandler(event){
 				$.mobile.activePage.find('#menu').panel('close');
 			}
+		});
+		
+		$( document ).on( "pageinit", '[data-role="page"]', function(){ 
 			
-			$('#lista').on("pageshow", function(event, ui){			
-				var listHeaderHeight = $('#listHeader').height() + 3;
-				var listFooterHeight = $('#listFooter').height() + 3;
-				listSearchHeight = $('#listSearch').height() + 3;
-				var wrapperHeight = phoneHeight - listHeaderHeight - listFooterHeight - listSearchHeight;
-				$('#wrapper').css('height', wrapperHeight + "px");
-				myScroll = new iScroll('wrapper', {
-					vScrollbar:false,
-					bounce:false,
-					onScrollMove: function(e) {
-						if(this.distY < 0 && $('#listSearch').css('display') != 'none' && scrollDone == false){
-							scrollDone = true;
-							$('#listSearch').slideUp(function(){
-								var wrapperHeight = $('#wrapper').height() + listSearchHeight;
-								$('#wrapper').css('height', wrapperHeight + "px");
-								myScroll.refresh();
-								scrollDone = false;
-							});
-						}
-						else if(this.distY > 0 && $('#listSearch').css('display') == 'none' && scrollDone == false){
-							scrollDone = true;
-							var wrapperHeight = $('#wrapper').height() - listSearchHeight;
-							$('#wrapper').css('height', wrapperHeight + "px");
-							myScroll.refresh();
-							$('#listSearch').slideDown(function(){
-								scrollDone = false;
-							});
-						}
-					},
-				});
-			});
 		});
 	</script>
 </html>

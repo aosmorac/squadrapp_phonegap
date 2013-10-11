@@ -65,9 +65,10 @@ body{
 	z-index:200;
 }
 
-@media screen and (max-width:320px){  
+/*	Movil-1	Moviles con un ancho maximo de 400px */
+/** /@media screen and (max-width:400px){/**/
 	.squadrapp {
-		width:320px;
+		/*width:320px;*/
 		margin:0 auto;
 	}
 
@@ -85,8 +86,8 @@ body{
 	}  
 	
 	.logo_home {
-		background: url(../img/logo_375x80.png) top center no-repeat;
-		background-size:188px 40px;
+		background: url(../img/L_720.png) top center no-repeat;
+		background-size:192px 39px;
 		height:40px;
 	}
 	
@@ -154,4 +155,6 @@ body{
 			}
 		/* END required styles */
 	
-}  
+/** /
+}
+/**/  
