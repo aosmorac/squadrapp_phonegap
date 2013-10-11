@@ -127,63 +127,10 @@ $(function(){
 						localStorage.removeItem('userLogueado');
 		}
 			
-			function loadMeA() {
-						var userLogueado={ 
-								 login: 1
-								,facebook_id:'736187925'
-								,name:'Abel'
-								,first_name:'Abel'
-								,last_name:'Moreno'
-								,facebook_link:''
-								,facebook_username:''
-								,hometown_id:''
-								,hometown:''
-								,location_id:'1'
-								,location:'Bogotá'
-								,gender:''
-								,email:''
-								,timezone:'-5'
-								,locale:''
-								,facebook_update_time:''
-								};
-						var serv = 'http://squadrapp.com/app/user/login-facebook';
-								$.post(serv, { user: JSON.stringify(userLogueado) }, function (data) {
-									 var user = JSON.parse(data);
-									 if (user.login=1){
-										 var userSquadrapp={ 
-											 login:user.login
-											,id:user.id_user
-											,facebook_id:user.Facebook_id
-											,name:user.use_name
-											,first_name:user.use_first_name
-											,last_name:user.use_last_name
-											,facebook_link:user.Facebook_link
-											,facebook_username:user.Facebook_username
-											,hometown_id:user.use_hometown_id
-											,hometown:user.use_hometown_name
-											,location_id:user.use_location_id
-											,location:user.use_location_name
-											,coordinates:user.use_location_coordinates
-											,gender:user.use_gener
-											,email:user.use_email
-											,timezone:user.timezone
-											,locale:user.use_loacale
-											};
-										localStorage.setItem('user', JSON.stringify(userSquadrapp));		// Almacena la información del usuario logueado
-										SAVED_USER = JSON.parse(localStorage.getItem('user'));
-										$('.content').html('');
-										$.each( SAVED_USER, function( key, value ) {
-										  $('.content').append( key + ": " + value + "<br>" );
-										});
-										$('.content').append('<br><a href="#" onClick="logout();">Log Out</a><p>');
-									 }else{
-										 alert('Error en el servidor');
-									 }
-								  });
-									$('#overlay').hide();
-			}
+			
 			
 			function login() {
+				$('#overlay').show();
 				FB.login(function(response) {
 					if (response.authResponse) {
 						loadMe();
@@ -195,105 +142,7 @@ $(function(){
 				});
 			}
 	
-			function loginaaaa() {
-				FB.login(function(response) {alert('log-in');
-					if (response.authResponse) {
-						loadMe();
-						var userLogueado = JSON.parse(localStorage.getItem('userLogueado'));							
-						if (userLogueado.login == 1) {
-								var serv = 'http://squadrapp.com/app/user/login-facebook';
-								$.post(serv, { user: localStorage.getItem('userLogueado') }, function (data) {
-									 var user = JSON.parse(data);
-									 if (user.login=1){
-										 var userSquadrapp={ 
-											 login:user.login
-											,id:user.id_user
-											,facebook_id:user.Facebook_id
-											,name:user.use_name
-											,first_name:user.use_first_name
-											,last_name:user.use_last_name
-											,facebook_link:user.Facebook_link
-											,facebook_username:user.Facebook_username
-											,hometown_id:user.use_hometown_id
-											,hometown:user.use_hometown_name
-											,location_id:user.use_location_id
-											,location:user.use_location_name
-											,coordinates:user.use_location_coordinates
-											,gender:user.use_gener
-											,email:user.use_email
-											,timezone:user.timezone
-											,locale:user.use_loacale
-											};
-									localStorage.setItem('user', JSON.stringify(userSquadrapp));		// Almacena la información del usuario logueado
-									SAVED_USER = JSON.parse(localStorage.getItem('user'));
-									$('.content').html('');
-									$.each( SAVED_USER, function( key, value ) {
-									  $('.content').append( key + ": " + value + "<br>" );
-									});
-									$('.content').append('<p>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br><a href="#" onClick="logout();">Log Out</a><p>');
-									$('#overlay').hide();
-									 }else{
-										 alert('Error al ingresar, intentelo nuevamente mas tarde');
-										 $('#overlay').hide();
-										 localStorage.removeItem('user');
-									 }
-								});
-							}else{
-								 alert('Error al ingresar, intentelo nuevamente mas tarde');
-								 $('#overlay').hide();
-							 }
-						localStorage.removeItem('userLogueado');
-					} else {
-						alert('not logged in');
-					}
-				}, {
-					scope : "email"
-				});
-			}
-			
-			function loginA(){
-				loadMeA();
-				var userLogueado = JSON.parse(localStorage.getItem('userLogueado'));							
-					if (userLogueado.login == 1) {
-								var serv = 'http://squadrapp.com/app/user/login-facebook';
-								$.post(serv, { user: localStorage.getItem('userLogueado') }, function (data) {
-									 var user = JSON.parse(data);
-									 if (user.login=1){
-										 var userSquadrapp={ 
-											 login:user.login
-											,id:user.id_user
-											,facebook_id:user.Facebook_id
-											,name:user.use_name
-											,first_name:user.use_first_name
-											,last_name:user.use_last_name
-											,facebook_link:user.Facebook_link
-											,facebook_username:user.Facebook_username
-											,hometown_id:user.use_hometown_id
-											,hometown:user.use_hometown_name
-											,location_id:user.use_location_id
-											,location:user.use_location_name
-											,coordinates:user.use_location_coordinates
-											,gender:user.use_gener
-											,email:user.use_email
-											,timezone:user.timezone
-											,locale:user.use_loacale
-											};
-									localStorage.setItem('user', JSON.stringify(userSquadrapp));		// Almacena la información del usuario logueado
-									seeUser();
-									$('#overlay').hide();
-									 }else{
-										 localStorage.removeItem('user');
-										 alert('Error al ingresar, intentelo nuevamente mas tarde');
-										 $('#overlay').hide();
-									 }
-								});
-					 }else{
-						 alert('Error al ingresar, intentelo nuevamente mas tarde');
-						 $('#overlay').hide();
-					 }
-				localStorage.removeItem('userLogueado');
-			}
-			
+						
 			function logout(){
 				localStorage.removeItem('user');	// Elimina la informacion de usuario logueado
 				alert('logout');
