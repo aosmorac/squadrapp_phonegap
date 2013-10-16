@@ -1,3 +1,5 @@
+//	localStorage.user
+
 /*
 	Libreria manejo del usuario en squadrapp
 	Aplicación movil utilizando phonegap
@@ -19,7 +21,7 @@ $(function(){
 				FB.api('/me', function(response) {
 					if (response.error) {
 						alert(JSON.stringify(response.error));
-					} else {alert('Cargando Usuario');
+					} else {
 						var fdata = response;
 						$('#content_home').html('');
 						var userLogueado={ 
@@ -62,7 +64,14 @@ $(function(){
 											,gender:user.use_gener
 											,email:user.use_email
 											,timezone:user.timezone
-											,locale:user.use_loacale
+											,locale:user.use_locale
+											,since:user.use_date
+											,birthday:user.use_birthday
+											,document_id:user.use_document_id
+											,mobile:user.use_mobile
+											,telephone:user.use_telephone
+											,address:user.use_address
+											,available:user.use_available
 											};
 										localStorage.setItem('user', JSON.stringify(userSquadrapp));		// Almacena la información del usuario logueado
 										SAVED_USER = JSON.parse(localStorage.getItem('user'));
@@ -79,53 +88,6 @@ $(function(){
 					}
 				});
 			}
-			
-		function setLoadMe(){
-					var userLogueado = JSON.parse(localStorage.getItem('userLogueado'));							
-						if (userLogueado.login == 1) {
-								var serv = 'http://squadrapp.com/app/user/login-facebook';
-								$.post(serv, { user: localStorage.getItem('userLogueado') }, function (data) {
-									 var user = JSON.parse(data);
-									 if (user.login=1){
-										 var userSquadrapp={ 
-											 login:user.login
-											,id:user.id_user
-											,facebook_id:user.Facebook_id
-											,name:user.use_name
-											,first_name:user.use_first_name
-											,last_name:user.use_last_name
-											,facebook_link:user.Facebook_link
-											,facebook_username:user.Facebook_username
-											,hometown_id:user.use_hometown_id
-											,hometown:user.use_hometown_name
-											,location_id:user.use_location_id
-											,location:user.use_location_name
-											,coordinates:user.use_location_coordinates
-											,gender:user.use_gener
-											,email:user.use_email
-											,timezone:user.timezone
-											,locale:user.use_loacale
-											};
-									localStorage.setItem('user', JSON.stringify(userSquadrapp));		// Almacena la información del usuario logueado
-									SAVED_USER = JSON.parse(localStorage.getItem('user'));
-									$('.content').html('');
-									$.each( SAVED_USER, function( key, value ) {
-									  $('.content').append( key + ": " + value + "<br>" );
-									});
-									$('.content').append('<p>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br><a href="#" onClick="logout();">Log Out</a><p>');
-									$('#overlay').hide();
-									 }else{
-										 alert('Error al ingresar, intentelo nuevamente mas tarde');
-										 $('#overlay').hide();
-										 localStorage.removeItem('user');
-									 }
-								});
-							}else{
-								 alert('Error al ingresar, intentelo nuevamente mas tarde');
-								 $('#overlay').hide();
-							 }
-						localStorage.removeItem('userLogueado');
-		}
 			
 			
 			
@@ -147,6 +109,11 @@ $(function(){
 				alert('logout');
 			}
 			
+			
+			
+			/*
+			 * Validar si el usuario en facebook es diferente al de squadrapp o ya hizo logout
+			 */
 			function validateFacebookUser(command){
 				if(command == 'start'){
 					timerChat = setInterval(function () {
@@ -178,12 +145,3 @@ $(function(){
 			}
 			
 			
-			function seeUser(){
-					if (SAVED_USER.login == 1){
-						$('.content').html('');
-						$.each( SAVED_USER, function( key, value ) {
-						  $('.content').append( key + ": " + value + "<br>" );
-						});
-						$('.content').append('<p>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br><a href="#" onClick="logout();">Log Out</a><p>');
-					}
-			}

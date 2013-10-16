@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+		<!---- >
+		<script type="text/javascript" src="js/cordova.js"></script>
+        <!---->
+        <title>SquadrApp</title> 
+		<link rel="stylesheet" href="css/mobile.css" />
+		<link rel="stylesheet" href="css/empty.css" />
+        <link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile-1.3.2.min.css" />
+        <link rel="stylesheet" href="css/estilos.css" />
+		<script src="lib/jquery/jquery.js"></script>
+		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+		<script src="js/cdv-plugin-fb-connect.js"></script>
+		<script src="js/facebook-js-sdk.js"></script>
+        <!---- ><script src="js/squadrapp-user.js"></script>	<!-- GestiÃ³n de usuarios con facebook en mobiles -->
+        <!----><script src="js/squadrapp-user-test.js"></script>	<!-- Login en web sin manejo de facebook, pruebas -->
+        <!----><script src="js/squadrapp.js"></script>	<!-- Javascript para el manejo de todo squadrapp -->
+        <script src="lib/swipe/swipe.js"></script>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+    </head>
+    <body>
+    
+	<div id="content_prueba"> </div>
+    
+    <br>
+    <a href="#" onClick="login();">Ingresar</a>
+    <br>
+    <a href="#" onClick="printUser();">Ver usuario</a>
+    <br>
+    <a href="#" onClick="logout();">Salir</a>
+    
+    
+       
+			
+
+        <script type="text/javascript">
+        
+			function printUser(){
+				squadrapp.user.reloadUser();	// Carga nuevamente el usuario que esta logueado
+				if (squadrapp.user.isUser()){	// Valida que exista un usuario logueado
+					alert('login');
+					
+					//Datos del usuario, uno por uno
+					$('#content_prueba').append( squadrapp.user.data().login + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().id + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().facebook_id + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().name + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().first_name + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().last_name + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().facebook_link + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().facebook_username + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().hometown_id + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().hometown + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().location_id + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().location + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().coordinates + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().gender + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().email + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().timezone + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().since + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().birthday + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().document_id + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().mobile + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().telephone + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().address + "<br>" );
+					$('#content_prueba').append( squadrapp.user.data().available + "<br><br><br>" );
+					
+					// Recorriendo toda la información del usuario
+					d = squadrapp.user.data();	
+					$.each( d, function( key, value ) {
+						$('#content_prueba').append( key + ": " + value + "<br>" );
+					});	
+					
+					$('#content_prueba').append( '<br><br><img src="'+squadrapp.user.getImageUrl()+'" />' );	//Obteniendo la imagen del usuario
+				}else{
+					alert('No login');
+					$('#content_prueba').html('');
+				}
+			}
+			
+			
+			
+        </script>
+    </body>
+</html>
