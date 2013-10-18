@@ -1,0 +1,10 @@
+<div class="notifications"><a class="btn_notification"></a> Notificaciones</div>
+<div style="padding: 20px;" onclick="goToPage('solicitud_reserva.html');"><a>Solicitud de reserva</a></div>
+<div style="padding: 20px;" onclick="goToPage('reservas.html');"><a>Reservas</a></div>
+<div id="avatar"></div>
+<script>
+	$(function(){
+		var image = '<img src="'+squadrapp.user.getImageUrl()+'" />';
+		$('#avatar').html(image);
+	});
+</script>

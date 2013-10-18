@@ -1,0 +1,146 @@
+@charset "utf-8";
+/* 
+ * Squadrapp App
+ * Inicialmente para el desarrollo en phonegap
+ *
+ * 
+ */
+
+html, body {
+	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; height:100%;
+}
+
+div, span, applet, object, iframe, 
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+abbr, acronym, address, big, cite, code, del, 
+dfn, em, font, img, ins, kbd, q, s, samp, small, 
+strike, strong, sub, sup, tt, var, b, u, i, 
+center, dl, dt, dd, ol, ul, li, fieldset, form, 
+label, legend, table, caption, tbody, tfoot, 
+thead, tr, th, td { 
+	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; position:relative; 
+}
+
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	color: #333;
+	height: 100vh;
+	background: #FFFFFF;
+}
+.squadrapp-content {
+	padding: 0;
+	margin: 0;
+	text-shadow: 0;
+	background: #FFFFFF;
+}
+.squadrapp-content div{
+	text-shadow: 0;
+}
+
+.corte { clear:both; }
+
+#header{
+	background: #f5f5f5;
+	height: 24px;
+	padding:10px 0;
+	margin: 0;
+	border-bottom: #ccc 1px solid;
+	text-align: center;
+	color: #23262b;
+}	
+#header .link_menu{
+	position: absolute;
+	bottom: 0; left: 0; top: 0;
+	width: 40px;
+	padding: 10px 0 0 10px;
+	z-index: 101;
+	text-shadow: 0;
+}		
+#footer{
+	background: #f5f5f5;
+	height: 44px;
+	border-top: #ccc 1px solid;
+	text-align: center;
+	color: #23262b;
+}
+	
+	
+
+#menu_panel{
+	color: #FFFFFF;
+	text-shadow: 0 0 0 #FFFFFF;
+	z-index: 200;
+	background: #23262b;
+	padding: 0;
+	margin: 0;
+}	
+#menu_panel .notifications{
+	height: 24px;
+	padding: 10px 45px;
+	border-bottom: #ccc 1px solid;
+	font-size: 18px;
+	font-weight: lighter;
+}
+#menu_panel .notifications .btn_notification{
+	position: absolute;
+	top: 8px; left: 10px;
+}
+#pageslide{
+	width: 200px;
+}
+	
+#content{
+	margin: 0;
+	background: #ffffff;
+	color: #333333;
+}
+
+
+
+
+
+/*
+ * ------ JQuery Mobile --------
+ * Sobreescribir estilos que estan teniendo conflictos con el diseño
+ * de la aplicación.
+ * 
+ * */
+  			
+.ui-panel-inner{
+	padding: 0;
+	margin: 0;
+}
+body .ui-body-a, body .ui-overlay-a, body .ui-bar-a { 
+	text-shadow:0 0 0; 
+	background: #FFFFFF;
+} 
+.ui-page { -webkit-backface-visibility: hidden; }
+			
+/*---- Fin JQuery Mobile ------*/
+
+
+
+
+/*
+ * Botones
+ * Todos los botones utilizados en la aplicacion deberan ser
+ * configurados a partir de este punto (Al finalizar el archivo css)
+ */
+
+a.btn_menu{
+	display:inline-block;
+	width: 23px;
+	height: 23px;
+	text-decoration: none;
+	background: url(../img/btn/btn_menu_52x52.png) center no-repeat;
+	background-size: 23px 23px;
+}
+
+a.btn_notification{
+	display:inline-block;
+	width: 24px;
+	height: 24px;
+	text-decoration: none;
+	background: url(../img/btn/notificaciones_54x54.png) center no-repeat;
+	background-size: 24px 24px;
+}

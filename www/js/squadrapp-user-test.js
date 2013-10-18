@@ -78,9 +78,6 @@ $(function(){
 										 alert('Error en el servidor');
 									 }
 								  });
-									$('#overlay').hide();
-									
-				alert('login');
 			}
 			
 			

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>HTML</title>
+		<meta name="description" content="">
+		<meta name="author" content="Abel">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		
+		<script src="../lib/jquery/jquery.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqPeF6eGogk2Z9w9wvH7lt750gSSQk1e8&sensor=true"></script>
+		
+		<style>
+			#map{
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+			}
+			#geolocation{
+				position: absolute;
+				top: 10px; left: 10px;
+				font-size: 14px;
+			}
+		</style>
+		
+	</head>
+
+	<body>
+		<div id="map">
+		</div>		
+		<div id="geolocation"><a href="#" onclick="getGeolocation();">Aquí</a></div>
+	<script>
+	
+		var geocoder;
+		var map;
+		
+		$(function(){
+			initializeMap();
+		});
+		
+		function initializeMap() {
+		  geocoder = new google.maps.Geocoder();
+		  var myLatlng = new google.maps.LatLng(4.602648299999999,-74.12591229999998);
+		  var mapOptions = {
+			zoom: 16,
+			center: myLatlng,
+			mapTypeControl: false,
+			overviewMapControl: false,
+			panControl: false,
+			scrollwheel: false,
+			streetViewControl: false,
+			zoomControl: true,
+			zoomControlOptions: {
+			  style: google.maps.ZoomControlStyle.SMALL
+			},
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		  };
+		  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		}	
+		
+		
+		function getGeolocation(){
+			if(navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+				  var pos = new google.maps.LatLng(position.coords.latitude,
+												   position.coords.longitude);
+			
+				  
+				  map.setCenter(pos);
+				}, function() {
+				});
+			}
+		}
+		
+	</script>
+	
+	</body>
+</html>
