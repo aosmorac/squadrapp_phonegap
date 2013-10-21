@@ -4,5 +4,8 @@
 		$('#menu').panel( "toggle" );
 	})
 	$("#chat_icon").css('left', ((stage_width/2)-25));
-	$('#menu').load("menu.html");
 })();
+
+function getMenu(){
+	$('#menu').load("menu.html");
+}

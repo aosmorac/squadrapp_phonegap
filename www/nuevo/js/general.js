@@ -11,21 +11,17 @@
  */
 
 $(function(){
-	
-	login();
-	
+	var stage_width = $(document).width();
+	//login();
 });
 
 
 // .menu_panel
 // Carga el menu en todas las paginas en las que se encuentre la clase .menu_panel
 function getMenu(){
-	if ($('.menu_panel').length) {
-		var $menu;	// Menu
-		$menu = $('<div>');
-		$menu.load('menu.html');
-		$.mobile.activePage.find('#menu_panel').panel('toggle');
-		$('.menu_panel').html($menu);
+	if ($('.menu').length) {
+		$('.menu').load('menu.html');
+		$.mobile.activePage.find('#menu').panel('toggle');
 	}
 }
 
