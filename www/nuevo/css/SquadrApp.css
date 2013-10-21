@@ -1,0 +1,215 @@
+@charset "utf-8";
+/* 
+ * Squadrapp App
+ * Inicialmente para el desarrollo en phonegap
+ *
+ * 
+ */
+html, body {
+	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; height:100%;
+}
+div, span, applet, object, iframe, 
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+abbr, acronym, address, big, cite, code, del, 
+dfn, em, font, img, ins, kbd, q, s, samp, small, 
+strike, strong, sub, sup, tt, var, b, u, i, 
+center, dl, dt, dd, ol, ul, li, fieldset, form, 
+label, legend, table, caption, tbody, tfoot, 
+thead, tr, th, td { 
+	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; position:relative; 
+}
+/*
+ * ------ JQuery Mobile --------
+ * Sobreescribir estilos que estan teniendo conflictos con el diseño
+ * de la aplicación.
+ * 
+ * */
+  			
+.ui-panel-inner{
+	padding: 0;
+	margin: 0;
+}
+body .ui-body-a, body .ui-overlay-a, body .ui-bar-a { 
+	text-shadow:0 0 0; 
+	background: #FFFFFF;
+} 
+.ui-page { -webkit-backface-visibility: hidden; }
+			
+/*---- Fin JQuery Mobile ------*/
+/*fonta face*/
+@font-face {
+    font-family: 'swansearegular';
+    src: url('../fonts/swanse__-webfont.eot');
+    src: url('../fonts/swanse__-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/swanse__-webfont.woff') format('woff'),
+         url('../fonts/swanse__-webfont.ttf') format('truetype'),
+         url('../fonts/swanse__-webfont.svg#swansearegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'swanseabold';
+    src: url('../fonts/swanse_b-webfont.eot');
+    src: url('../fonts/swanse_b-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/swanse_b-webfont.woff') format('woff'),
+         url('../fonts/swanse_b-webfont.ttf') format('truetype'),
+         url('../fonts/swanse_b-webfont.svg#swanseabold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'swansea_italic';
+    src: url('../fonts/swanse_i-webfont.eot');
+    src: url('../fonts/swanse_i-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/swanse_i-webfont.woff') format('woff'),
+         url('../fonts/swanse_i-webfont.ttf') format('truetype'),
+         url('../fonts/swanse_i-webfont.svg#swansea_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/*Globales*/
+body{
+	font-family: 'swansearegular', Helvetica, Arial, sans-serif;
+}
+#header{
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	background: #f5f5f5;
+	color: #22262b;
+	text-align: center;
+	display: block;
+	padding: 10px 0;
+	border-bottom: 1px solid #666;
+}
+#menu_icon{
+	background: url(../images/menu.png) no-repeat;
+	background-size: 23px 23px;
+	width: 24px;
+	height: 24px;
+	margin: 5px;
+}
+#menu_icon:hover{
+	background: url(../images/menu.png) no-repeat #f0f0f0;
+	background-size: 23px 23px;
+}
+#menu{
+	background:#22262b;
+	color: #fff;
+}
+#nav-user{
+	border-bottom: solid 1px #4d4d4d;
+}
+#nav-user #notificaciones{
+	background:url(../images/notificaciones.png) no-repeat 15px 8px;
+	background-size: 23px 23px;
+	padding: 10px  0 10px 45px;
+	display: block;
+}
+#nav-user #notificaciones a{
+	color: #fff;
+}
+#user-menu{
+	border-bottom: solid 1px #4d4d4d;
+	padding: 20px 0;
+}
+#user-menu .image{
+	overflow: hidden;
+	border-radius: 40px;
+	border: solid 1px #fff;
+	display: inline-block;
+	max-width: 70px;
+	max-height: 70px;
+	display: inline-block;
+	vertical-align: middle;
+}
+#user-menu .info, #user-menu .arrow{
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 5px;
+}
+#user-menu .info{
+	font-size: 0.75em;
+}
+#user-menu .info p:first-child{
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+}
+#user-menu .arrow{
+	background: url(../images/arrow_profile.png) no-repeat;
+	background-size: 15px;
+	width: 15px;
+	height: 25px;
+}
+#user-menu .image img{
+	width: 70px;
+}
+nav ul li a{
+	color: #fff;
+	padding: 10px 0 10px 30px;
+	display: block;
+	border-bottom: 1px solid #4d4d4d;
+	position: relative;
+	font-size: 0.85em;
+}
+nav ul li a span{
+	position: absolute;
+	right: 20px;
+}
+#buscar{background: url(../images/buscar_cancha.png) no-repeat 5px; background-size: 20px;}
+#reservas{background: url(../images/reservas.png) no-repeat 5px; background-size: 20px;}
+#solicitud{background: url(../images/solicitud_reserva.png) no-repeat 5px; background-size: 20px;}
+#favoritos{background: url(../images/favoritos.png) no-repeat 5px; background-size: 20px;}
+#amigos{background: url(../images/amigos_jugadores.png) no-repeat 5px; background-size: 20px;}
+#otros{background: url(../images/amigos_jugadores.png) no-repeat 5px; background-size: 20px;}
+#configuracion{background: url(../images/ajustes.png) no-repeat 5px; background-size: 20px;}
+#footer{
+	background: #f5f5f5;
+	color: #22262b;
+	height: 40px;
+	border-top: solid 1px #666; 
+}
+#chat_icon{
+	background: url(../images/maximizar_chat.png) no-repeat;
+	background-size: 50px;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top: -25px;
+}
+/*sin contenido*/
+.null_content{
+	display: block;
+	margin: 80px auto;
+	text-align: center;
+}
+.null_content img{
+	width: 100px;
+}
+.null_content p{
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	color: #8f8f8f;
+	margin: 10px;
+}
+
+/*
+ * Botones
+ * Todos los botones utilizados en la aplicacion deberan ser
+ * configurados a partir de este punto (Al finalizar el archivo css)
+ */
+
+a.btn_menu{
+	display:inline-block;
+	width: 23px;
+	height: 23px;
+	text-decoration: none;
+	background: url(../img/btn/btn_menu_52x52.png) center no-repeat;
+	background-size: 23px 23px;
+}
+
+a.btn_notification{
+	display:inline-block;
+	width: 24px;
+	height: 24px;
+	text-decoration: none;
+	background: url(../img/btn/notificaciones_54x54.png) center no-repeat;
+	background-size: 24px 24px;
+}
