@@ -11,8 +11,32 @@
  */
 
 $(function(){
-	var stage_width = $(document).width();
+	var stage_width = $(document).width(),
+		stage_height = $(document).height();
 	//login();
+	$('#chat').css({top:stage_height, height : stage_height});
+	$.mobile.activePage.find('#chat_icon').css('left',((stage_width/2)-25));
+	$('#chat_icon').click(function(){
+		if(($(this).data("estado")) == "quiet"){
+			$('#chat').animate({
+				top: (44)
+			}
+				, 500);
+			$('#chat_icon').animate({
+				top : -(stage_height-60)
+			},500);
+			$(this).data("estado",'active');
+		}else{
+			$('#chat').animate({
+				top: stage_height
+			}
+				, 500);
+			$('#chat_icon').animate({
+				top : -25
+			});
+			$(this).data("estado",'quiet');
+		}
+	})
 });
 
 

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Squadrapp :: Solicitud</title>
+		<title>Squadrapp :: Lista</title>
 		<link rel="stylesheet" href="css/SquadrApp.css" />
 		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,12 +11,52 @@
 		<section data-role="page" data-theme="a" id="home">
 			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
 				<a id="menu_icon" onclick="getMenu();"></a>
-				<p>Solicitud</p>
+				<p>Lista</p>
+				<a href="#" id="filter">Filtro</a>
 			</header>
-			<section data-role="content">	
-					<p> contenido acá</p>
+			<section data-role="content">
+				<form>
+					<input type="text" name="find" placeholder="Buscar cancha">
+				</form>
+				<p>
+					64 canchas encontradas en 18 sedes
+				</p>
+				<ul class="big_photos">
+					<li>
+						<section class="distance">
+							<p class="km">a 1,4Km</p>
+							<p class="canchas">2 canchas</p>
+						</section>
+						<section class="fav">
+							<a href="#"></a>
+						</section>
+						<section class="imagen">
+							<img src="images/">
+						</section>
+						<section class="info">
+							<section class="basic">
+								<p id="name">
+									<strong>Futboleros</strong>
+								</p>
+								<p id="adrress">
+									Cra 9 #23-75, Piso 5, Bogotá
+								</p>
+								<p id='ubication'>
+									Colombia
+								</p>
+							</section>
+							<section class="cost">
+								<p>Desde</p>
+								<p id="value">$120.000</p>
+								<p id="time">por hora</p>
+							</section>
+						</section>
+					</li>
+				</ul>
 			</section><!-- /content -->
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
+				<a href="buscar_lista.html">Lista</a>
+				<a href="buscar_mapa.html">Mapa</a>
 				<a href="#" id="chat_icon"></a>
 			</footer>
 			<section data-role="panel" data-position="left" data-display="reveal" id="menu" class="menu">

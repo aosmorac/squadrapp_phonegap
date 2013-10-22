@@ -189,6 +189,13 @@ nav ul li a span{
 	color: #8f8f8f;
 	margin: 10px;
 }
+/*chat */
+#chat{
+	position: absolute;
+	background: #eee;
+	bottom: solid 4px #666;
+	width: 100%;
+}
 
 /*
  * Botones
