@@ -16,9 +16,9 @@
 			</header>
 			<section data-role="content">
 				<form>
-					<input type="text" name="find" placeholder="Buscar cancha">
+					<input type="text" name="find" id="find" placeholder="Buscar cancha">
 				</form>
-				<p>
+				<p class="count_result">
 					64 canchas encontradas en 18 sedes
 				</p>
 				<ul class="big_photos">
@@ -31,7 +31,7 @@
 							<a href="#"></a>
 						</section>
 						<section class="imagen">
-							<img src="images/">
+							<img src="images/thumb_1.jpg" alt='cancha'>
 						</section>
 						<section class="info">
 							<section class="basic">
@@ -55,8 +55,10 @@
 				</ul>
 			</section><!-- /content -->
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
-				<a href="buscar_lista.html">Lista</a>
-				<a href="buscar_mapa.html">Mapa</a>
+				<section id='buscar_nav'>
+					<a href="buscar_lista.html">Lista</a>
+					<a href="buscar_mapa.html">Mapa</a>
+				</section>
 				<a href="#" id="chat_icon"></a>
 			</footer>
 			<section data-role="panel" data-position="left" data-display="reveal" id="menu" class="menu">
