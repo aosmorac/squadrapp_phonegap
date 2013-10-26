@@ -71,6 +71,9 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
 body{
 	font-family: 'swansearegular', Helvetica, Arial, sans-serif;
 }
+body [data-role="content"]{
+	background-color: #f5f5f5;
+}
 #header{
 	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
 	background: #f5f5f5;
@@ -157,7 +160,7 @@ nav ul li a span{
 #buscar{background: url(../images/buscar_cancha.png) no-repeat 5px; background-size: 20px;}
 #reservas{background: url(../images/reservas.png) no-repeat 5px; background-size: 20px;}
 #solicitud{background: url(../images/solicitud_reserva.png) no-repeat 5px; background-size: 20px;}
-#favoritos{background: url(../images/favoritos.png) no-repeat 5px; background-size: 20px;}
+#favoritos{background: url(../images/corazon.png) no-repeat 5px; background-size: 20px;}
 #amigos{background: url(../images/amigos_jugadores.png) no-repeat 5px; background-size: 20px;}
 #otros{background: url(../images/amigos_jugadores.png) no-repeat 5px; background-size: 20px;}
 #configuracion{background: url(../images/ajustes.png) no-repeat 5px; background-size: 20px;}
@@ -225,6 +228,12 @@ nav ul li a span{
 	display: block;
 	margin: 5px;
 }
+.big_photos li .imagen{
+	overflow: hidden;
+}
+.big_photos li .imagen img{
+	max-width: 100%;
+}
 .distance, .fav{
 	position: absolute;
 	color: #fff;
@@ -238,20 +247,27 @@ nav ul li a span{
 	background-size: 35px;
 }
 .fav{
-	background: url(../images/favoritos.png) no-repeat 0;
-	background-size: 30px;
+	background-image: url(../images/favoritos.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: 30px 60px;
 	width: 30px;
 	height: 30px;
 	right: 10px;
-	opacity:0.6; 
+	opacity:0.6;
+	padding: 0;
+}
+.fav:hover{
+	background-position: 0 100%;
 }
 .info{
 	display: block;
 	font-size: 0.8em;
 	color: #666;
+	position: relative;
 }
 .basic{
-	margin: 0 40px 0 0;
+	margin: 0;
 }
 .basic , .cost{
 	display: inline-block;
@@ -261,6 +277,8 @@ nav ul li a span{
 }
 .cost{
 	text-align: right;
+	position: absolute;
+	right: 0;
 }
 .cost #value{
 	font-size: 1.4em;
@@ -333,12 +351,67 @@ nav ul li a span{
 	top: 10px; left: 10px;
 	font-size: 14px;
 }
+/*filtros*/
+.aplicarfiltros{
+	background: #29abe2;
+	color: #fff;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	text-align: center;
+	padding: 10px 0;
+}
+.aplicarfiltros a{
+	color: #fff;
+}
+#filtro .filter{
+	background: #fff;
+	position: relative;
+	margin: 0 0 5px;
+}
+#filtro header{
+	color: #23262b;
+}
+#filtro header a{
+	color: #8f8f8f;
+}
+#filtro .filter_name, #filtro .filter_input{
+	display: inline-block;
+	border:solid 1px #eee;
+	vertical-align: top;
+	max-height: 53px;
+	color: #666;
+}
+#filtro .filter_name{
+	width: 29%;
+	text-align: center;
+	padding: 16px 0;
+}
+#filtro .filter_input{
+	position: absolute;
+	right: 0;
+	width: 68%;
+	text-align: center;
+}
+#filtro .filter_input input{
+	max-width: 95%;
+}
+#filtro .filter_input .filter_action{
+	background-image: url(../images/Plus_x_filtro.png);
+	background-repeat: none;
+	background-repeat: no-repeat;
+	background-size: 30px 60px;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	top: 10px;
+	right: 15px;
+} 
 /*chat */
 #chat{
 	position: absolute;
 	background: #eee;
 	bottom: solid 4px #666;
 	width: 100%;
+	display: none;
 }
 
 /*footer salir*/

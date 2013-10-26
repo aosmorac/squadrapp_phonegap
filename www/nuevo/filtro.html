@@ -2,33 +2,67 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Squadrapp :: Home</title>
+		<title>Squadrapp :: Filtro</title>
 		<link rel="stylesheet" href="css/SquadrApp.css" />
 		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
-		<section data-role="page" data-theme="a" id="home">
+		<section data-role="page" data-theme="a" id="filtro">
 			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
-				<a id="menu_icon" onclick="getMenu();"></a>
-				<p>Home</p>
+				<a href="buscar.html">cancelar</a>
+				<p>Filtro</p>
 			</header>
 			<section data-role="content">	
-					<p> contenido acá</p>
-					<section class="null_content">
-						<section class="image">
+					<section class="filter">
+						<section class="filter_name">
+							<p>Fecha</p>
 						</section>
-						<p></p>
+						<section class="filter_input">
+							<form>
+								<input type="date" name="date" placeholder="toca para seleccionar">
+							</form>
+							<section class="filter_action">
+							</section>
+						</section>
+					</section>
+					<section class="filter">
+						<section class="filter_name">
+							<p>Hora</p>
+						</section>
+						<section class="filter_input">
+							<form>
+								<input type="time" name="time" placeholder="toca para seleccionar">
+							</form>
+							<section class="filter_action">
+							</section>
+						</section>
+					</section>
+					<section class="filter">
+						<section class="filter_name">
+							<p>Tipo de cancha</p>
+						</section>
+						<section class="filter_input">
+							<form>
+								<select name="field_type">
+									<option value="null">Toque para seleccionar</option>
+									<option value="sintetica 5">Futbol 5/6 Grama sintética</option>
+									<option value="sintetica 7">Fútbol 7 Grama sintética</option>
+									<option value="natural 11">Fútbol 11 Grama natural</option>
+								</select>
+							</form>
+							<section class="filter_action">
+							</section>
+						</section>
 					</section>
 			</section><!-- /content -->
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
-				<a href="#" id="chat_icon" data-estado="quiet"></a>
+				<p class='aplicarfiltros'>
+					<a href="#">Utilizar filtros</a>
+				</p>
 			</footer>
 			<section data-role="panel" data-position="left" data-display="reveal" id="menu" class="menu">
 				
-			</section>
-			<section id="chat" class="chat">
-				panel chat
 			</section>
 		</section>
 		<script src="lib/jquery/jquery.js"></script>
