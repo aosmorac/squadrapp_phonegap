@@ -190,6 +190,19 @@ nav ul li a span{
 	margin: 10px;
 }
 /*buscador*/
+#filter{
+	background-image: url(../images/filter_states.png);
+	background-size: 28px 56px;
+	color: #666;
+	background-repeat: no-repeat;
+	padding: 0 20px 0;
+}
+.fl_inactive{
+	background-position: 100% 100%;
+}
+.fl_active{
+	background-position: 100% 0;
+}
 #find{
 	background: url(../images/buscador_cancha.png) no-repeat 99% 5px;
 	background-size: 25px;
@@ -221,7 +234,7 @@ nav ul li a span{
 	margin: 0 5px 0;
 }
 .distance{
-	background: url(../images/icon_ubication.png) no-repeat 0 3px;
+	background: url(../images/ubicacion_mapa_cancha.png) no-repeat 0 3px;
 	background-size: 35px;
 }
 .fav{
@@ -306,6 +319,19 @@ nav ul li a span{
 	position: absolute;
 	right: 0;
 	top: 15px;
+}
+/*map*/
+#map{
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+#geolocation{
+	position: absolute;
+	top: 10px; left: 10px;
+	font-size: 14px;
 }
 /*chat */
 #chat{

@@ -6,6 +6,8 @@
 		<link rel="stylesheet" href="css/SquadrApp.css" />
 		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqPeF6eGogk2Z9w9wvH7lt750gSSQk1e8&sensor=true"></script>
 	</head>
 	<body>
 		<section data-role="page" data-theme="a" id="home">
@@ -14,10 +16,16 @@
 				<p>Solicitud</p>
 			</header>
 			<section data-role="content">	
-					<p> contenido acá</p>
+					<div id="map">
+					</div>		
+					<div id="geolocation"><a href="#" onclick="getGeolocation();">Aquí</a></div>
 			</section><!-- /content -->
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
 				<a href="#" id="chat_icon"></a>
+				<section id='buscar_nav'>
+					<a href="buscar.html">lista 1</a>
+					<a href="buscar_lista.html">Lista</a>
+				</section>
 			</footer>
 			<section data-role="panel" data-position="left" data-display="reveal" id="menu" class="menu">
 				
@@ -26,5 +34,48 @@
 		<script src="lib/jquery/jquery.js"></script>
 		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
 		<script type="text/javascript" src="js/general.js"></script>
+		<script>
+			var geocoder;
+			var map;
+			
+			$(function(){
+				initializeMap();
+			});
+			
+			function initializeMap() {
+			  geocoder = new google.maps.Geocoder();
+			  var myLatlng = new google.maps.LatLng(4.602648299999999,-74.12591229999998);
+			  var mapOptions = {
+				zoom: 16,
+				center: myLatlng,
+				mapTypeControl: false,
+				overviewMapControl: false,
+				panControl: false,
+				scrollwheel: false,
+				streetViewControl: false,
+				zoomControl: true,
+				zoomControlOptions: {
+				  style: google.maps.ZoomControlStyle.SMALL
+				},
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			  };
+			  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+			}	
+			
+			
+			function getGeolocation(){
+				if(navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(function(position) {
+					  var pos = new google.maps.LatLng(position.coords.latitude,
+													   position.coords.longitude);
+				
+					  
+					  map.setCenter(pos);
+					}, function() {
+					});
+				}
+			}
+			
+		</script>
 	</body>
 </html>
