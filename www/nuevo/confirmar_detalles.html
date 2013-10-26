@@ -2,18 +2,35 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Squadrapp :: Filtro</title>
+		<title>Squadrapp :: confirmar detalles</title>
 		<link rel="stylesheet" href="css/SquadrApp.css" />
 		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
-		<section data-role="page" data-theme="a" id="filtro">
+		<section data-role="page" data-theme="a" id="confirmar_filtro">
 			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
 				<a href="buscar.html">cancelar</a>
-				<p>Filtro</p>
+				<p>Confirmar detalles</p>
 			</header>
-			<section data-role="content">	
+
+			<section data-role="content">
+					<section class="field_filter">
+						<section class="list_image">
+							<img src="images/thumb_1.jpg" alt='cancha'>
+						</section>
+						<section class="list_info">
+							<p class="name">
+								Futboleros
+							</p>
+							<p>
+								Cra 9 #23-75, Piso 5, Bogotá
+							</p>
+							<p>
+								Colombia
+							</p>
+						</section>
+					</section>
 					<section class="filter">
 						<section class="filter_name">
 							<p>Fecha</p>
@@ -28,7 +45,7 @@
 					</section>
 					<section class="filter">
 						<section class="filter_name">
-							<p>Hora</p>
+							<p>Hora inicio</p>
 						</section>
 						<section class="filter_input">
 							<form>
@@ -36,6 +53,29 @@
 							</form>
 							<section class="filter_action">
 							</section>
+						</section>
+					</section>
+					<section class="filter">
+						<section class="filter_name">
+							<p>Hora final</p>
+						</section>
+						<section class="filter_input numerohoras">
+							<section class="horas">
+									<section class="horafinal">
+										8:00 pm
+									</section>
+									<section class="totalhoras">
+										1 hora
+									</section>
+								</section>
+								<ul class="horas_operdador">
+									<li data-value="menos">
+
+									</li>
+									<li data-value="mas">
+
+									</li>
+								</ul>
 						</section>
 					</section>
 					<section class="filter">
@@ -53,12 +93,24 @@
 							</form>
 							<section class="filter_action">
 							</section>
+							<section class="techo">
+								<ul>
+									<li data-value="cubierto">
+										Techo cubierto
+									</li>
+									<li data-value="descubierto" class="selected">
+										Techo descubierto
+									</li>
+								</ul>
+							</section>
 						</section>
 					</section>
+					<p id="price"> precio <span>$70.000</span></p>
 			</section><!-- /content -->
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
+				
 				<p class='aplicarfiltros'>
-					<a href="confirmar_detalles.html">Utilizar filtros</a>
+					<a href="#">ver detalles</a>
 				</p>
 			</footer>
 			<section data-role="panel" data-position="left" data-display="reveal" id="menu" class="menu">

@@ -2,59 +2,56 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Squadrapp :: Filtro</title>
+		<title>Squadrapp :: Filtro chat</title>
 		<link rel="stylesheet" href="css/SquadrApp.css" />
 		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
-		<section data-role="page" data-theme="a" id="filtro">
+		<section data-role="page" data-theme="a" id="filtro_chat">
 			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
 				<a href="buscar.html">cancelar</a>
-				<p>Filtro</p>
+				<p>Filtro chat</p>
 			</header>
 			<section data-role="content">	
 					<section class="filter">
 						<section class="filter_name">
-							<p>Fecha</p>
+							<p>Disponibilidad</p>
 						</section>
 						<section class="filter_input">
 							<form>
-								<input type="date" name="date" placeholder="toca para seleccionar">
-							</form>
-							<section class="filter_action">
-							</section>
-						</section>
-					</section>
-					<section class="filter">
-						<section class="filter_name">
-							<p>Hora</p>
-						</section>
-						<section class="filter_input">
-							<form>
-								<input type="time" name="time" placeholder="toca para seleccionar">
-							</form>
-							<section class="filter_action">
-							</section>
-						</section>
-					</section>
-					<section class="filter">
-						<section class="filter_name">
-							<p>Tipo de cancha</p>
-						</section>
-						<section class="filter_input">
-							<form>
-								<select name="field_type">
+								<select name="disponibilidad">
 									<option value="null">Toque para seleccionar</option>
-									<option value="sintetica 5">Futbol 5/6 Grama sintética</option>
-									<option value="sintetica 7">Fútbol 7 Grama sintética</option>
-									<option value="natural 11">Fútbol 11 Grama natural</option>
+									<option value="cualquiera">Cualquiera</option>
+									<option value="Hoy">Hoy</option>
+									<option value="mañana">mañana</option>
+									<option value="tarde">tarde</option>
+									<option value="noche">noche</option>
 								</select>
 							</form>
 							<section class="filter_action">
 							</section>
 						</section>
 					</section>
+					<section class="filter">
+						<section class="filter_name">
+							<p>Género</p>
+						</section>
+						<section class="filter_input">
+							<form>
+								<select name="disponibilidad">
+									<option value="null">Toque para seleccionar</option>
+									<option value="Mujer">Mujer</option>
+									<option value="Hombre">Hombre</option>
+									<option value="ambos">Ambos</option>
+								</select>
+							</form>
+							<section class="filter_action">
+							</section>
+						</section>
+					</section>
+					
+					
 			</section><!-- /content -->
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
 				<p class='aplicarfiltros'>
