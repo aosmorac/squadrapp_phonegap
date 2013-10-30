@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Squadrapp :: Lista</title>
+		<link rel="stylesheet" href="css/SquadrApp.css" />
+		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<section data-role="page" data-theme="a" id="buscar">
+			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
+				<a id="menu_icon" onclick="getMenu();"></a>
+				<p>Lista</p>
+				<a href="filtro.html" id="filter" class="fl_inactive" data-transition="slide">Filtro</a>
+			</header>
+			<section data-role="content">
+				<section class="field_section">
+						<section class="imagen">
+							<img src="images/thumb_1.jpg" alt='cancha'>
+						</section>
+						<a id="reserve">Solicitar Reserva</a>
+						<section class="info">
+							<section class="extended">
+								<p id="name">
+									<strong>Futboleros</strong>
+								</p>
+								<p id="adrress">
+									Cra 9 #23-75, Piso 5, Bogotá Colombia
+								</p>
+							</section>
+							<section class="Logo">
+								
+							</section>
+						</section>
+						<section class="detailed_info">
+							<ul data-role="listview">
+								<li><a href="detalles.html" data-transition="slide">Detalles</a></li>
+								<li><a href="ubicacion.html" data-transition="slide">Ubicación</a></li>
+								<li><a href="politicas.html" data-transition="slide">Politicas</a></li>
+							</ul>
+						</section>
+				</section>
+			</section><!-- /content -->
+			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
+				<section id='buscar_nav'>
+					<a href="buscar_lista.html">Lista</a>
+					<a href="buscar_mapa.html">Mapa</a>
+				</section>
+				<a href="#" id="chat_icon"></a>
+			</footer>
+			<section data-role="panel" data-position="left" data-display="reveal" id="menu" class="menu">
+				
+			</section>
+		</section>
+		<script src="lib/jquery/jquery.js"></script>
+		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/general.js"></script>
+	</body>
+</html>
