@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Squadrapp :: Home</title>
+		<link rel="stylesheet" href="css/SquadrApp.css" />
+		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<section data-role="page" data-theme="a" id="detalles">
+			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
+				<a id="menu_icon" onclick="getMenu();"></a>
+				<p>Detalles</p>
+				<a href="#" data-icon="back" data-rel="back"></a>
+			</header>
+			<section data-role="content">
+				<section class="info">
+					<section class="extended">
+						<p id="name">
+							<strong>Futboleros</strong>
+						</p>
+						<p>Sede Alameda</p>
+						<p id="adrress">
+							Cra 9 #23-75, Piso 5, Bogotá Colombia
+						</p>
+					</section>
+					<section class="Logo">
+						
+					</section>
+				</section>	
+				<div data-role="collapsible-set">
+				    <div data-role="collapsible" data-collapsed="false">
+				        <h3>Descripción</h3>
+				        <p>
+				        	En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lantejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.
+				        </p>
+				    </div>
+				    <div data-role="collapsible">
+				        <h3>Canchas <span id='numero'>3</span></h3>
+				        <p>
+				        	En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lantejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.
+				        </p>
+				    </div>
+				    <div data-role="collapsible">
+				        <h3>Horario</h3>
+				        <p>
+				        	En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lantejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.
+				        </p>
+				    </div>
+				    <div data-role="collapsible">
+				        <h3>Amenities</h3>
+				        <ul>
+				        	<li id="parqueadero" class="aviable">
+				        		parqueadero
+				        	</li>
+				        	<li id="restaurante">
+				        		restaurante
+				        	</li>
+				        </ul>
+				    </div>
+
+			    </div>
+			</section><!-- /content -->
+			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
+				<a href="#" id="chat_icon" data-estado="quiet"></a>
+			</footer>
+			<section data-role="panel" data-position="left" data-display="reveal" id="menu" class="menu">
+				
+			</section>
+			<section id="chat" class="chat">
+				panel chat
+			</section>
+		</section>
+		<script src="lib/jquery/jquery.js"></script>
+		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/general.js"></script>
+	</body>
+</html>

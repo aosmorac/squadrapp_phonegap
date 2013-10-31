@@ -503,6 +503,19 @@ header a{
 	width: 100%;
 	display: none;
 }
+/*cancha*/
+.imagen{
+	text-align: center;
+}
+#reserve{
+	background: #45ff8b;
+	color: #fff;
+	display: block;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 1.2em;
+	font-weight: bold;
+}
 
 /*footer salir*/
 footer.salir{
