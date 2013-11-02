@@ -418,7 +418,7 @@ header a{
 	background-size: 30px 60px;
 	width: 30px;
 	height: 30px;
-	top: 0px;
+	top: 10px;
 	right: 0px;
 }
 #filtro .custom-input .ui-input-clear .ui-icon{
