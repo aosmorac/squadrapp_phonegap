@@ -89,6 +89,7 @@ body [data-role="content"]{
 	width: 24px;
 	height: 24px;
 	margin: 5px;
+	border: none;
 }
 #menu_icon:hover{
 	background: url(../images/menu.png) no-repeat #f0f0f0;
@@ -131,6 +132,7 @@ body [data-role="content"]{
 }
 #user-menu .info{
 	font-size: 0.75em;
+	color: #fff;
 }
 #user-menu .info p:first-child{
 	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
@@ -177,6 +179,7 @@ nav ul li a span{
 	height: 50px;
 	position: absolute;
 	top: -25px;
+	border: none;
 }
 /*sin contenido*/
 .null_content{
@@ -516,7 +519,51 @@ header a{
 	font-size: 1.2em;
 	font-weight: bold;
 }
-
+#descripcion{}
+#descripcion h3 a, #canchas h3 a, #horario h3 a, #amenities h3 a{
+	color: #666;
+}
+#descripcion h3 a .ui-btn-inner, #canchas h3 a .ui-btn-inner, #horario h3 a .ui-btn-inner, #amenities h3 a .ui-btn-inner{
+	padding: 5px 0 5px 5px;
+}
+#descripcion h3 a .ui-btn-inner .ui-icon, #canchas h3 a .ui-btn-inner .ui-icon, #horario h3 a .ui-btn-inner .ui-icon{
+	display: block;
+	width: 25px;
+	height: 25px;
+	background-position: 0 0;
+	background-size: 25px;
+	top: 40%;
+	left: 97%;
+}
+#descripcion h3 a .ui-btn-inner .ui-icon{
+	background-image: url(../images/descripcion_cancha.png);
+}
+#canchas h3 a .ui-btn-inner .ui-icon{
+	background-image: url(../images/detalles_canchas.png);
+} 
+#horario h3 a .ui-btn-inner .ui-icon{
+	background-image: url(../images/horarios.png);
+}
+#amenities h3 a .ui-btn-inner .ui-icon{
+	top: 40%;
+	left: 97%;
+}
+#descripcion .ui-collapsible-content, #canchas .ui-collapsible-content, #horario .ui-collapsible-content, #amenities .ui-collapsible-content{
+	background: #fff;
+}
+#amenities ul li{
+	margin: 0 0 0 0 10px;
+	display: block;
+	padding: 5px 0;
+	text-transform: capitalize;
+	border-bottom: solid 1px #999;
+}
+#amenities ul li.aviable{
+	background-image: url(../images/check_amenities.png);
+	background-position: 100% 0;
+	background-size: 20px;
+	background-repeat: no-repeat;
+}
 /*footer salir*/
 footer.salir{
 	background: #ec1c24 !important;
