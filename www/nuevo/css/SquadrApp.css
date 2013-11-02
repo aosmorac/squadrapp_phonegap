@@ -363,7 +363,7 @@ nav ul li a span{
 	padding: 10px 0;
 }
 .aplicarfiltros a{
-	color: #fff;
+	color: #fff!important;
 }
 .filter{
 	background: #fff;
@@ -394,27 +394,52 @@ header a{
 	border-right:solid 1px #eee;
 }
 .filter_input{
-	position: absolute;
 	right: 0;
 	width: 68%;
 	text-align: center;
 	color: #8f8f8f;
-	border-left:solid 1px #eee;
 }
 .filter_input input{
 	max-width: 95%;
 }
 .filter_input .filter_action{
 	background-image: url(../images/Plus_x_filtro.png);
-	background-repeat: none;
 	background-repeat: no-repeat;
 	background-size: 30px 60px;
-	position: absolute;
 	width: 30px;
 	height: 30px;
 	top: 10px;
-	right: 15px;
+	right: 10px;
+	position: absolute;
 } 
+#filtro .custom-input .ui-input-clear{
+	background-image: url(../images/Plus_x_filtro.png);
+	background-repeat: no-repeat;
+	background-size: 30px 60px;
+	width: 30px;
+	height: 30px;
+	top: 0px;
+	right: 0px;
+}
+#filtro .custom-input .ui-input-clear .ui-icon{
+	visibility: hidden;
+}
+#filtro .custom-input .ui-body-a{
+	border: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+#filtro .ui-select .ui-btn {
+	background: transparent;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border: none;
+}
+#filtro .ui-select .ui-icon{
+	visibility: hidden;
+}
 .field_filter{
 	background: #fff;
 	margin: 5px 0;
@@ -497,6 +522,18 @@ header a{
 }
 #filtro_chat .aplicarfiltros{
 	background: #ed1e79;
+}
+.ui-datebox-container{
+
+}
+/*#filtro .ui-datebox-container h1{
+	background-color: #29abe2;
+	padding: .6em 30% .8em;
+	color: #fff;
+	margin: 0;
+}*/
+#filtro .ui-datebox-container{
+	
 }
 /*chat */
 #chat{
@@ -596,3 +633,5 @@ a.btn_notification{
 	background: url(../img/btn/notificaciones_54x54.png) center no-repeat;
 	background-size: 24px 24px;
 }
+/*Date piker*/
+

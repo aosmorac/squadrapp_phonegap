@@ -4,8 +4,10 @@
 		<meta charset="utf-8">
 		<title>Squadrapp :: Filtro</title>
 		<link rel="stylesheet" href="css/SquadrApp.css" />
+		<link rel="stylesheet" href="css/squadrapp.min.css" />
 		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="css/jqm-datebox.min.css" />
 	</head>
 	<body>
 		<section data-role="page" data-theme="a" id="filtro">
@@ -13,17 +15,16 @@
 				<a href="buscar.html">cancelar</a>
 				<p>Filtro</p>
 			</header>
-			<section data-role="content">	
+			<section data-role="content">
+				<form id="hiden-form">	
 					<section class="filter">
 						<section class="filter_name">
 							<p>Fecha</p>
 						</section>
 						<section class="filter_input">
-							<form>
-								<input type="date" name="date" placeholder="toca para seleccionar">
-							</form>
-							<section class="filter_action">
-							</section>
+							<seection id="fecha-input" class="custom-input">
+								<input name="mydate" id="mydate" type="date" data-role="datebox" data-options='{"mode": "flipbox", "useFocus": true, "showInitialValue": "true", "usePlaceholder": "Toque para seleccionar"}'>
+							</seection>
 						</section>
 					</section>
 					<section class="filter">
@@ -31,10 +32,8 @@
 							<p>Hora</p>
 						</section>
 						<section class="filter_input">
-							<form>
-								<input type="time" name="time" placeholder="toca para seleccionar">
-							</form>
-							<section class="filter_action">
+							<section id="hora-input" class="custom-input">
+								<input name="mydate" id="mydate" type="date" data-role="datebox"data-options='{"mode": "timeflipbox", "useFocus": true, "overrideTimeFormat": 12, "overrideTimeOutput": "%k:%M", "usePlaceholder": "Toque para seleccionar"}'>
 							</section>
 						</section>
 					</section>
@@ -43,18 +42,19 @@
 							<p>Tipo de cancha</p>
 						</section>
 						<section class="filter_input">
-							<form>
+							<section id="cancha-select" class="custom-input">
 								<select name="field_type">
-									<option value="null">Toque para seleccionar</option>
-									<option value="sintetica 5">Futbol 5/6 Grama sintética</option>
-									<option value="sintetica 7">Fútbol 7 Grama sintética</option>
-									<option value="natural 11">Fútbol 11 Grama natural</option>
-								</select>
-							</form>
+							<option value="null">Toque para seleccionar</option>
+							<option value="sintetica 5">Futbol 5/6 Grama sintética</option>
+							<option value="sintetica 7">Fútbol 7 Grama sintética</option>
+							<option value="natural 11">Fútbol 11 Grama natural</option>
+						</select>
+							</section>
 							<section class="filter_action">
 							</section>
 						</section>
 					</section>
+				</form>
 			</section><!-- /content -->
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
 				<p class='aplicarfiltros'>
@@ -68,5 +68,9 @@
 		<script src="lib/jquery/jquery.js"></script>
 		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
 		<script type="text/javascript" src="js/general.js"></script>
+		<script type="text/javascript" src="lib/jquery.mobile/datebox.js"></script>
+		<script type="text/javascript" src="lib/jquery.mobile/flipbox.js"></script>
+		<script type="text/javascript" src="lib/jquery.mobile/datebox-ES.js"></script>
+		
 	</body>
 </html>
