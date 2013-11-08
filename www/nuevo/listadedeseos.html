@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Squadrapp :: Home</title>
+		<link rel="stylesheet" href="css/SquadrApp.css" />
+		<link rel="stylesheet" href="css/squadrapp.min.css" />
+		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<section data-role="page" data-theme="a" id="detalles">
+			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
+				<a id="menu_icon" onclick="getMenu();"></a>
+				<p>Lista de deseos</p>
+				<a href="#" data-icon="back" data-rel="back"></a>
+			</header>
+			<section data-role="content">	
+				<div data-role="collapsible-set">
+				    
+				    <div data-role="collapsible" id="amenities">
+				    	<h3>Canchas locales - Bogotá, Colombia</h3>
+				    	<ul>
+				    		<li>
+						        <section id="field_fav">
+						        	<section class="list_image">
+										<img src="images/thumb_1.jpg" alt='cancha'>
+									</section>
+									<section class="list_info">
+										<p class="name">
+											Futboleros
+										</p>
+										<p>
+											Cra 9 #23-75, Piso 5, Bogotá
+										</p>
+										<p>
+											Colombia
+										</p>
+										<span class="arrow">
+											>
+										</span>	
+									</section>
+									<section class="info">
+										<section class="location">
+											a 1,4km
+										</section>
+										<section class="fav active">
+											
+										</section>
+									</section>	
+						        </section>
+						    </li>	
+					    </ul>
+				    </div>
+
+			    </div>
+			</section><!-- /content -->
+			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
+				<a href="#" id="chat_icon" data-estado="quiet"></a>
+			</footer>
+			<section data-role="panel" data-position="left" data-display="reveal" id="menu" class="menu">
+				
+			</section>
+			<section id="chat" class="chat">
+				panel chat
+			</section>
+		</section>
+		<script src="lib/jquery/jquery.js"></script>
+		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/general.js"></script>
+	</body>
+</html>
