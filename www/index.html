@@ -1,115 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html>
-    <head>
-        <meta charset="utf-8" />
-		<!---- >
-		<script type="text/javascript" src="js/cordova.js"></script>
-        <!---->
-        <title>SquadrApp</title> 
-		<link rel="stylesheet" href="css/mobile.css" />
-		<link rel="stylesheet" href="css/empty.css" />
-        <link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile-1.3.2.min.css" />
-        <link rel="stylesheet" href="css/estilos.css" />
-		<script src="lib/jquery/jquery.js"></script>
-		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
-		<script src="js/cdv-plugin-fb-connect.js"></script>
-		<script src="js/facebook-js-sdk.js"></script>
-        <!---- ><script src="js/squadrapp-user.js"></script>	<!-- Gestión de usuarios con facebook en mobiles -->
-        <!----><script src="js/squadrapp-user-test.js"></script>	<!-- Login en web sin manejo de facebook, pruebas -->
-        <script src="lib/swipe/swipe.js"></script>
-        <meta name="viewport" content="width=device-width, user-scalable=no">
-    </head>
-    <body>
-    
 
-        <div data-role="page" id="page">
-        	<div class="squadrapp">
-                <div class="header">
-                    <p><a href="#" class="search_home"></a></p>
-                </div>
-                <div class="content home">
-                    <div class="logo_home"></div>
-                    <div id='slider' class='swipe'>
-                      <div class='swipe-wrap'>
-                        <div><img width="125" src="img/prueba_pic1.png"><br>Encuentra</div>
-                        <div><img width="125" src="img/prueba_pic1.png"><br>jugadores</div>
-                        <div><img width="125" src="img/prueba_pic1.png"><br>Locales</div>
-                      </div>
-                    </div>
-                    <div id="slider_counter">
-                        <ul id='position_slider'>
-                          <li class='on'></li>
-                          <li></li>
-                          <li></li>
-                        </ul>
-                    </div>
-    
-                </div>
-                <div class="footer">
-                    <a href="#" class="start show-page-loading-msg" data-role="button" data-theme="a" data-corners="false" data-textvisible="true" data-msgtext="Cargando">Empezar</a>
-                </div>
-            </div><!-- /squadrapp -->
-		</div><!-- /page -->
+	<head>
 
-		<div id="overlay" style="display:none;"><img src="img/loader.gif"></div><!-- Cargador para cualquier evento, agregar a todos los .html -->
+		<title>tittle</title>
 
+	<body>	
+		<div style="padding: 100px 0; text-align: center;">Cargando</div>	
+		<script>
+			window.location='./main.html';
+		</script>
+	</body>
 
-			<div id="fb-root"></div>
-			
-
-        <script type="text/javascript">
-		    var SAVED_USER;
-			//$('#overlay').show();	//Dispositivo cargado, solo descomentar para generar aplicacion
-			
-			document.addEventListener('deviceready', function() {
-				try {
-					alert('Dispositivo listo!');
-					FB.init({
-						appId : "518581128197028",
-						nativeInterface : CDV.FB,
-						useCachedDialogs : false
-					});
-					validateFacebookUser('start');
-					$('#overlay').hide();
-				} catch (e) {
-					alert(e);
-				}
-			}, false);
-			
-			$(function(){	
-				if (localStorage.user){
-					alert('User logueado');
-					SAVED_USER = JSON.parse(localStorage.getItem('user'));
-					seeUser();
-				}
-					
-				$('.search_home').click(function(){
-					alert('Buscar');
-				});
-				
-				$('.start').click(function(){
-					$('#overlay').show();
-					login();
-				});
-				
-				var slider =
-				  Swipe(document.getElementById('slider'), {
-					auto: 5000,
-					continuous: true,
-					callback: function(pos) {
-				
-					  var i = bullets.length;
-					  while (i--) {
-						bullets[i].className = ' ';
-					  }
-					  bullets[pos].className = 'on';
-				
-					}
-				  });
-				var bullets = document.getElementById('position_slider').getElementsByTagName('li');
-
-			});
-			
-        </script>
-    </body>
 </html>
