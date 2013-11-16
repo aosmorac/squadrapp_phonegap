@@ -72,10 +72,16 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
 	#field_fav .list_info{
 		min-width: 50%;
 	}
+	#fiends-list{
+		max-width: 78%;
+	}
 }
 @media screen and (min-width: 361px) and (max-width: 600px) {
 	#field_fav .list_info{
 		min-width: 70%;
+	}
+	#fiends-list{
+		max-width: 85%;
 	}
 }
 
@@ -127,7 +133,7 @@ body [data-role="content"]{
 	border-bottom: solid 1px #4d4d4d;
 	padding: 20px 0;
 }
-#user-menu .image{
+#user-menu .image, #fiends-list .image{
 	overflow: hidden;
 	border-radius: 40px;
 	border: solid 1px #fff;
@@ -156,7 +162,7 @@ body [data-role="content"]{
 	width: 15px;
 	height: 25px;
 }
-#user-menu .image img{
+#user-menu .image img, #fiends-list .image img{
 	width: 70px;
 }
 nav ul li a{
@@ -184,6 +190,7 @@ nav ul li a span{
 	height: 40px;
 	border-top: solid 1px #666; 
 }
+.red{background-color: #ed1e79; color: #fff;}
 #chat_icon{
 	background: url(../images/maximizar_chat.png) no-repeat;
 	background-size: 50px;
@@ -623,10 +630,10 @@ footer.salir{
 	font-weight: bold;
 }
 /* Fav list */
-#lista_deseos .ui-icon{
+#lista_deseos .ui-icon, #custom .ui-icon{
 	left: 90%;
 }
-#lista_deseos .ui-btn-inner{
+#lista_deseos .ui-btn-inner, #custom .ui-btn-inner{
 	padding-left: 10px;
 	font-size: 0.9em;
 	color: #22262b;
@@ -666,6 +673,7 @@ footer.salir{
 	display: inline-block;
 	float: left;
 	font-size: 1.2em;
+	color: #999;
 }
 #field_fav .info .fav{
 	background-image: url(../images/favorito_listadeseos.png);
@@ -677,6 +685,61 @@ footer.salir{
 	background-position: 0 100%;
 }
 /*End fav list*/
+/*Inicio lista amigos*/
+#fiends-list .image, #fiends-list .info{
+	display: inline-block;
+	vertical-align: middle;
+}
+.list_fiends ul{
+	margin: 0;
+	padding: 0;
+}
+.list_fiends li{
+	display: block;
+	position: relative;
+	border-bottom: 1px solid #666;
+	padding: 0;
+	overflow: hidden;
+	background: #fff;
+}
+.list_fiends #friend_chat{
+	background-image: url(../images/mensaje.png);
+	background-position: 10px 20px;
+	background-size: 30px;
+	width: 35px;
+	height: 77px;
+	background-repeat: no-repeat;
+	border-left: solid 1px #999;
+	padding: 0 5px;
+	position: absolute;
+	right: 0;
+	top: 4px;
+}
+#friends_options{
+	background-image: url(../images/accion_amigo.png);
+	background-size: 26px 100px;
+	background-repeat: no-repeat;
+	border-left: solid 1px #999;
+	width: 35px;
+	height: 77px;
+	position: absolute;
+	top: 2px;
+	right: 60px;
+}
+.list_fiends .add{
+	background-position: 5px 20px;
+}
+.list_fiends .delete{
+	background-position: 5px 180%;
+}
+#fiends-list{
+	background: #fdfdfd;
+	position: relative;
+	z-index: 1;
+	padding: 5px;
+}
+/*FIn lista de amigos*/
+
 /*
  * Botones
  * Todos los botones utilizados en la aplicacion deberan ser

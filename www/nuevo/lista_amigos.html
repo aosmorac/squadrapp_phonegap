@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Squadrapp :: Home</title>
+		<link rel="stylesheet" href="css/SquadrApp.css" />
+		<link rel="stylesheet" href="css/squadrapp.min.css" />
+		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<section data-role="page" data-theme="a" id="listadedeseos">
+			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
+				<a id="menu_icon" onclick="getMenu();"></a>
+				<p>Jugadores</p>
+				<a href="#" data-icon="back" data-rel="back"></a>
+			</header>
+			<section data-role="content">
+				<section class="find_friends">
+					<form>
+						<input type="text" name='find_friends' class='finder'>
+					</form>
+				</section>
+				<section class="filter_id red">
+					disponibles en la mañanas
+				</section>
+				<div data-role="collapsible-set">
+				    
+				    <div data-role="collapsible" id="custom" class='list_fiends'>
+				    	<h3>Amigos locales - Bogotá, Colombia</h3>
+				    	<ul>
+				    		<li>
+						        <section id="fiends-list" class='user_001'>
+									<section class="image">
+										<img src="images/avatar.png"/>
+									</section>
+									<section class="info">
+										<p>Cesar Valderrama</p>
+										<p>a 1km</p>
+									</section>
+						        </section>
+						        <section id="friends_options" class='snap-drawer snap-drawer-right add'>
+
+						        </section>
+						        <section id="friend_chat">
+
+						        </section>
+						    </li>
+						    <!-- <li>
+						        <section id="fiends-list">
+									<section class="image">
+										<img src="images/avatar.png"/>
+									</section>
+									<section class="info">
+										<p>Cesar Valderrama</p>
+										<p>a 1km</p>
+									</section>
+						        </section>
+						        <section id="friends_options" class='delete'>
+
+						        </section>
+						        <section id="friend_chat">
+
+						        </section>
+						    </li> -->	
+					    </ul>
+				    </div>
+				    <div data-role="collapsible" id="lista_deseos">
+				    	<h3>Amigos en resto del mundo</h3>
+				    </div>
+
+			    </div>
+			</section><!-- /content -->
+			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
+				<a href="#" id="chat_icon" data-estado="quiet"></a>
+			</footer>
+			<section data-role="panel" data-position="left" data-display="reveal" id="menu" class="menu">
+				
+			</section>
+			<section id="chat" class="chat">
+				panel chat
+			</section>
+		</section>
+		<script src="lib/jquery/jquery.js"></script>
+		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
+		<script src="lib/snap/snap.min.js"></script>
+		<script type="text/javascript" src="js/general.js"></script>
+		<script type="text/javascript">
+			var snapper = new Snap({
+			  element: document.getElementById('fiends-list')
+			});
+			/*snapper.open('right');*/
+			snapper.settings({
+			    element: document.getElementById('fiends-list'),
+			    dragger: null,
+			    disable: 'none',
+			    addBodyClasses: true,
+			    hyperextensible: true,
+			    resistance: 0.5,
+			    flickThreshold: 50,
+			    transitionSpeed: 0.3,
+			    easing: 'ease',
+			    maxPosition: 0,
+			    minPosition: -50,
+			    tapToClose: true,
+			    touchToDrag: true,
+			    slideIntent: 40,
+			    minDragDistance: 5
+			})
+			
+		</script>
+	</body>
+</html>
