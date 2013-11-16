@@ -67,6 +67,18 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
     font-weight: normal;
     font-style: normal;
 }
+/*responsive*/
+@media screen and (max-width: 360px) {
+	#field_fav .list_info{
+		min-width: 50%;
+	}
+}
+@media screen and (min-width: 361px) and (max-width: 600px) {
+	#field_fav .list_info{
+		min-width: 70%;
+	}
+}
+
 /*Globales*/
 body{
 	font-family: 'swansearegular', Helvetica, Arial, sans-serif;
@@ -610,6 +622,61 @@ footer.salir{
 	color: #fff;
 	font-weight: bold;
 }
+/* Fav list */
+#lista_deseos .ui-icon{
+	left: 90%;
+}
+#lista_deseos .ui-btn-inner{
+	padding-left: 10px;
+	font-size: 0.9em;
+	color: #22262b;
+}
+#field_fav{
+	clear: both;
+	overflow: hidden;
+	background: #fff;
+}
+#field_fav .list_image{
+	width: 120px;
+	height: 90px;
+}
+#field_fav .list_image img{
+	max-height: 90px;
+}
+#field_fav .list_info{
+	max-width: 80%;
+	font-size: 0.75em;
+	padding: 5px 0;
+}
+#field_fav .list_info .name{
+	font-size: 1.2em;
+
+}
+#field_fav .info{
+	display: block;
+	border-top: solid 1px #666;
+	padding: 5px 0;
+	margin: 5px 0 0;
+}
+#field_fav .info .location{
+	background-image: url(../images/ubicacion.png);
+	background-repeat: no-repeat;
+	background-size: 23px;
+	padding: 5px 0 10px 28px;
+	display: inline-block;
+	float: left;
+	font-size: 1.2em;
+}
+#field_fav .info .fav{
+	background-image: url(../images/favorito_listadeseos.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	float: right;
+}
+#field_fav .info .active{
+	background-position: 0 100%;
+}
+/*End fav list*/
 /*
  * Botones
  * Todos los botones utilizados en la aplicacion deberan ser
@@ -633,9 +700,4 @@ a.btn_notification{
 	background: url(../img/btn/notificaciones_54x54.png) center no-repeat;
 	background-size: 24px 24px;
 }
-/*Date piker*/
-/* Fav list */
-#field_fav{
-	
-}
-/*End fav list*/
+
