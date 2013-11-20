@@ -73,7 +73,7 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
 		min-width: 50%;
 	}
 	#fiends-list{
-		max-width: 78%;
+		min-width: 78%;
 	}
 }
 @media screen and (min-width: 361px) and (max-width: 600px) {
@@ -81,7 +81,7 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
 		min-width: 70%;
 	}
 	#fiends-list{
-		max-width: 85%;
+		min-width: 85%;
 	}
 }
 
@@ -737,6 +737,14 @@ footer.salir{
 	position: relative;
 	z-index: 1;
 	padding: 5px;
+}
+ul.friend{
+
+}
+ul.friends li{
+	height: 85px;
+	overflow: hidden;
+	position: relative !important;
 }
 /*FIn lista de amigos*/
 
