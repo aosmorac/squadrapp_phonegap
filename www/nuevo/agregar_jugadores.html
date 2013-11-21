@@ -12,8 +12,8 @@
 		<section data-role="page" data-theme="a" id="listadedeseos">
 			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
 				<a id="menu_icon" onclick="getMenu();"></a>
-				<p>Jugadores <a href="#" id='add_firends'></a></p>
-				<a href="#" id="filter_estatus" class='active'></a>
+				<p>Agregar Jugadores</p>
+				<a href="#" id="cerrar">X</a>
 			</header>
 			<section data-role="content">
 				<section class="find_friends">
@@ -21,56 +21,57 @@
 						<input type="text" name='find_friends' class='finder' id='finder_f' placeholder='buscar'>
 					</form>
 				</section>
-				<section class="filter_id red">
-					disponibles en la mañanas
+				<section class="nav_addFriends">
+					<ul>
+						<li>Facebook</li>
+						<li>Contactos</li>
+						<li>Linkedin</li>
+						<li id="action" class="add">Agregar</li>
+					</ul>
 				</section>
-				<div data-role="collapsible-set">
+				<div id='slider' class='swipe'>
 				    
-				    <div data-role="collapsible" id="custom" class='list_fiends'>
-				    	<h3>Jugadores locales - Bogotá, Colombia</h3>
-				    	<ul class="players">
-				    		<li>
-						        <section id="fiends-list">
-									<section class="image">
-										<img src="images/avatar.png"/>
-									</section>
-									<section class="info">
-										<p>Cesar Valderrama</p>
-										<p>a 1km</p>
-									</section>
-						        </section>
-						        <section id="friends_options" class='snap-drawer snap-drawer-right add'>
-
-						        </section>
-						        <section id="friend_chat">
-
-						        </section>
-						    </li>
-						    <li>
-						        <section id="fiends-list">
-									<section class="image">
-										<img src="images/avatar.png"/>
-									</section>
-									<section class="info">
-										<p>Cesar Valderrama</p>
-										<p>a 1km</p>
-									</section>
-						        </section>
-						        <section id="friends_options" class='snap-drawer snap-drawer-right added'>
-
-						        </section>
-						        <section id="friend_chat">
-
-						        </section>
-						    </li>
-						    	
-					    </ul>
+				    <div class='swipe-wrap'>
+				    	<section id="silide1">
+					        <section id="fiends-list">
+								<section class="image">
+									<img src="images/avatar.png"/>
+								</section>
+								<section class="info">
+									<p>Cesar Valderrama</p>
+								</section>
+								<section id="add_btn">
+									
+								</section>
+					        </section>
+					    </section>
+					    <section id="silide2">
+					        <section id="fiends-list">
+								<section class="image">
+									<img src="images/avatar.png"/>
+								</section>
+								<section class="info">
+									<p>Cesar Valderrama</p>
+								</section>
+								<section id="add_btn">
+									
+								</section>
+					        </section>
+					    </section>
+					    <section id="silide3">
+					        <section id="fiends-list">
+								<section class="image">
+									<img src="images/avatar.png"/>
+								</section>
+								<section class="info">
+									<p>Cesar Valderrama</p>
+								</section>
+								<section id="add_btn">
+									
+								</section>
+					        </section>
+					    </section>
 				    </div>
-				    <div data-role="collapsible" id="custom" class="list_fiends">
-				    	<h3>Jugadores en resto del mundo</h3>
-				    	
-				    </div>
-
 			    </div>
 			</section><!-- /content -->
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
@@ -89,9 +90,12 @@
 		</section>
 		<script src="lib/jquery/jquery.js"></script>
 		<script src="lib/jquery.mobile/jquery.mobile-1.3.2.min.js"></script>
-		<script type="text/javascript" src="lib/drags/jquery.pep.js"></script>
+		<script type="text/javascript" src="lib/swipe/swipe.js"></script>
 		<script type="text/javascript" src="js/general.js"></script>
-		
-
+		<script>
+		$(document).ready(function () {
+			window.mySwipe = $('#slider').Swipe();
+		});
+		</script>
 	</body>
 </html>

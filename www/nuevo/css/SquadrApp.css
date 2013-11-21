@@ -75,6 +75,9 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
 	#fiends-list{
 		min-width: 78%;
 	}
+	.nav_addFriends ul li{
+		font-size: 0.8em;
+	}
 }
 @media screen and (min-width: 361px) and (max-width: 600px) {
 	#field_fav .list_info{
@@ -784,6 +787,35 @@ ul.friends li{
 	
 }
 /*FIn lista de amigos*/
+/*Agregar Amigos*/
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+}
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap > section {
+  float:left;
+  width:100%;
+  position: relative;
+}
+.nav_addFriends{
+
+}
+.nav_addFriends ul li{
+	display: inline-block;
+	padding: 10px 0;
+	min-width: 20%;
+	text-align: center;
+}
+.nav_addFriends ul .add{
+	background: #22b473;
+	color: #fff;
+}
+/*Fin agregar amigos*/
 
 /*
  * Botones
