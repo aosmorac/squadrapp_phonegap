@@ -726,6 +726,16 @@ footer.salir{
 	top: 2px;
 	right: 60px;
 }
+.filter_id{
+	text-align: center;
+}
+.find_friends #finder_f{
+	background-image: url(../images/lupa.png);
+	background-size: 24px;
+	background-repeat: no-repeat;
+	background-position: 99% 0;
+	padding: 0;
+}
 .list_fiends .add{
 	background-position: 5px 20px;
 }
@@ -745,6 +755,33 @@ ul.friends li{
 	height: 85px;
 	overflow: hidden;
 	position: relative !important;
+}
+#add_firends{
+	background-image: url(../images/agregar_jugadores.png);
+	background-size: 24px;
+	height: 25px;
+	width: 25px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 5px;
+}
+#filter_estatus{
+	background-image: url(../images/filter_friends_states.png);
+	background-size: 27px 54px;
+	background-position: 0 100%;
+	border: none;
+	height: 27px;
+	width: 27px;
+	margin: 5px 5px 0 0;
+}
+.active{
+	background-position: 0 0 !important;
+}
+.players #friends_options, .players #friend_chat{
+	z-index: 1;
+}
+.players .added{
+	
 }
 /*FIn lista de amigos*/
 
