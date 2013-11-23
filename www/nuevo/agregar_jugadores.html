@@ -11,7 +11,6 @@
 	<body>
 		<section data-role="page" data-theme="a" id="listadedeseos">
 			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
-				<a id="menu_icon" onclick="getMenu();"></a>
 				<p>Agregar Jugadores</p>
 				<a href="#" id="cerrar">X</a>
 			</header>
@@ -23,53 +22,107 @@
 				</section>
 				<section class="nav_addFriends">
 					<ul>
-						<li>Facebook</li>
-						<li>Contactos</li>
-						<li>Linkedin</li>
+						<li class="active" data-pos='0'>Facebook</li>
+						<li data-pos='1'>Contactos</li>
+						<li data-pos='2'>Linkedin</li>
 						<li id="action" class="add">Agregar</li>
 					</ul>
 				</section>
+				<section class="all_contacts">
+					<p>Amigos que estan usando Squadrapp <a href="#" class="todos">Todos</a> </p>
+				</section>
 				<div id='slider' class='swipe'>
 				    
-				    <div class='swipe-wrap'>
+				    <div class='swipe-wrap' >
 				    	<section id="silide1">
-					        <section id="fiends-list">
-								<section class="image">
-									<img src="images/avatar.png"/>
-								</section>
-								<section class="info">
-									<p>Cesar Valderrama</p>
-								</section>
-								<section id="add_btn">
-									
-								</section>
-					        </section>
+				    		<ul id='agregar_amigos'>
+				    			<li>
+				    				<section id="fiends-list">
+										<section class="image">
+											<img src="images/avatar.png"/>
+										</section>
+										<section class="info">
+											<p>Cesar Valderrama</p>
+										</section>
+										<section class='add_btn selected'>
+											
+										</section>
+							        </section>
+				    			</li>
+				    			<li>
+				    				<section id="fiends-list">
+										<section class="image">
+											<img src="images/avatar.png"/>
+										</section>
+										<section class="info">
+											<p>Cesar Valderrama</p>
+										</section>
+										<section class='add_btn'>
+											
+										</section>
+							        </section>
+				    			</li>
+				    		</ul>
 					    </section>
 					    <section id="silide2">
-					        <section id="fiends-list">
-								<section class="image">
-									<img src="images/avatar.png"/>
-								</section>
-								<section class="info">
-									<p>Cesar Valderrama</p>
-								</section>
-								<section id="add_btn">
-									
-								</section>
-					        </section>
+					        <ul id='agregar_amigos'>
+				    			<li>
+				    				<section id="fiends-list">
+										<section class="image">
+											<img src="images/avatar.png"/>
+										</section>
+										<section class="info">
+											<p>Cesar Valderrama</p>
+										</section>
+										<section class='add_btn'>
+											
+										</section>
+							        </section>
+				    			</li>
+				    			<li>
+				    				<section id="fiends-list">
+										<section class="image">
+											<img src="images/avatar.png"/>
+										</section>
+										<section class="info">
+											<p>Cesar Valderrama</p>
+										</section>
+										<section class='add_btn'>
+											
+										</section>
+							        </section>
+				    			</li>
+				    		</ul>
 					    </section>
 					    <section id="silide3">
-					        <section id="fiends-list">
-								<section class="image">
-									<img src="images/avatar.png"/>
-								</section>
-								<section class="info">
-									<p>Cesar Valderrama</p>
-								</section>
-								<section id="add_btn">
-									
-								</section>
-					        </section>
+					        <ul id='agregar_amigos'>
+				    			<li>
+				    				<section id="fiends-list">
+										<section class="image">
+											<img src="images/avatar.png"/>
+										</section>
+										<section class="info">
+											<p>Cesar Valderrama</p>
+										</section>
+										<section class='add_btn'>
+											
+										</section>
+							        </section>
+				    			</li>
+				    			<li>
+				    				<section id="fiends-list">
+										<section class="image">
+											<img src="images/avatar.png"/>
+										</section>
+										<section class="info">
+											<p>Cesar Valderrama</p>
+										</section>
+										<section class='add_btn'>
+											
+										</section>
+							        </section>
+				    			</li>
+				    		</ul>
 					    </section>
 				    </div>
 			    </div>
@@ -94,18 +147,33 @@
 		<script type="text/javascript" src="js/general.js"></script>
 		<script>
 		$(document).ready(function () {
-			window.mySwipe = $('#slider').Swipe({
-			  startSlide: 1,
+			window.mySwipe = new Swipe( document.getElementById('slider'), {
+			  startSlide: 0,
 			  speed: 400,
-			  auto: 3000,
-			  continuous: true,
+			  continuous: false,
 			  disableScroll: false,
 			  stopPropagation: false,
-			  callback: function(index, elem) {
-			  	console.log(elem.getPos());
+			  callback: function(pos) {
+			  	var cantidad = $('.nav_addFriends ul li').length;
+    			$('.nav_addFriends ul li').siblings().removeClass('active');
+    			$('.nav_addFriends ul li:nth-child('+(pos+1)+')').addClass('active');
 			  },
 			  transitionEnd: function(index, elem) {}
 			});
+			$('.nav_addFriends ul li').bind('touchend click', function(){
+				var slideTo = $(this).data('pos');
+				mySwipe.slide(slideTo, 400);
+				// mySwipe.prev();
+				// console.log(mySwipe);
+			});
+			$('.add_btn').bind('click' , function(){
+				if ($(this).attr('class') == 'add_btn selected') {
+					$(this).removeClass('selected');
+				}else{
+					$(this).addClass('selected');
+				};
+			});
+
 		});
 		</script>
 	</body>

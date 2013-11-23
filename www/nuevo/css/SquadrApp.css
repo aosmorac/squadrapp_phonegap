@@ -77,7 +77,10 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
 	}
 	.nav_addFriends ul li{
 		font-size: 0.8em;
-		width: 24%;
+		width: 24.12%;
+	}
+	.all_contacts{
+		font-size: 0.7em;
 	}
 }
 @media screen and (min-width: 361px) and (max-width: 600px) {
@@ -89,6 +92,9 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
 	}
 	.nav_addFriends ul li{
 		width: 24.3%;
+	}
+	.all_contacts{
+		font-size: 0.8em;
 	}
 }
 
@@ -107,6 +113,15 @@ body [data-role="content"]{
 	display: block;
 	padding: 10px 0;
 	border-bottom: 1px solid #666;
+}
+#header #cerrar{
+	border: solid 2px #333;
+	color: #333;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	width: 30px;
+	height: 30px;
+	font-size: 1.4em;
+	float: right;
 }
 #menu_icon{
 	background: url(../images/menu.png) no-repeat;
@@ -645,6 +660,9 @@ footer.salir{
 	font-size: 0.9em;
 	color: #22262b;
 }
+#custom .ui-collapsible-content{
+	padding: 0;
+}
 #field_fav{
 	clear: both;
 	overflow: hidden;
@@ -704,23 +722,23 @@ footer.salir{
 .list_fiends li{
 	display: block;
 	position: relative;
-	border-bottom: 1px solid #666;
+	border-bottom: 1px solid #999;
 	padding: 0;
 	overflow: hidden;
 	background: #fff;
 }
 .list_fiends #friend_chat{
 	background-image: url(../images/mensaje.png);
-	background-position: 10px 20px;
+	background-position: 8px 30px;
 	background-size: 30px;
 	width: 35px;
-	height: 77px;
+	height: 85px;
 	background-repeat: no-repeat;
 	border-left: solid 1px #999;
 	padding: 0 5px;
 	position: absolute;
 	right: 0;
-	top: 4px;
+	top: 0;
 }
 #friends_options{
 	background-image: url(../images/accion_amigo.png);
@@ -728,13 +746,25 @@ footer.salir{
 	background-repeat: no-repeat;
 	border-left: solid 1px #999;
 	width: 35px;
-	height: 77px;
+	height: 85px;
 	position: absolute;
-	top: 2px;
+	top: 0;
 	right: 60px;
+}
+.list_fiends #friend_chat .online{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	border-radius: 5px;
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	color: #22b473;
 }
 .filter_id{
 	text-align: center;
+	padding: 2px 0;
+	margin: -6px 0;
 }
 .find_friends #finder_f{
 	background-image: url(../images/lupa.png);
@@ -744,16 +774,16 @@ footer.salir{
 	padding: 0;
 }
 .list_fiends .add{
-	background-position: 5px 20px;
+	background-position: 10px 30px;
 }
 .list_fiends .delete{
-	background-position: 5px 180%;
+	background-position: 10px 300%;
 }
 #fiends-list{
 	background: #fdfdfd;
 	position: relative;
 	z-index: 1;
-	padding: 5px;
+	padding: 8px 5px;
 }
 ul.friend{
 
@@ -807,17 +837,65 @@ ul.friends li{
   position: relative;
 }
 .nav_addFriends{
-
+	border-top: solid 1px #999;
 }
 .nav_addFriends ul li{
 	display: inline-block;
 	padding: 10px 0;
 	text-align: center;
 }
+.nav_addFriends ul li.active{
+	border-bottom: 5px solid #22b473;
+	padding: 10px 0 5px;
+}
 .nav_addFriends ul .add{
 	background: #22b473;
 	color: #fff;
 }
+.all_contacts{
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+	text-align: center;
+	padding: 10px 0;
+	display: block;
+	background: #fff;
+}
+.all_contacts .todos{
+	background: #eee;
+	border: solid 1px #999;
+	color: #333 !important;
+	padding: 2px 5px;
+	margin: 0 10px;
+	border-radius: 3px;
+}
+.all_contacts .todos:hover{
+	color: #333;	
+}
+#agregar_amigos li{
+	border-bottom: solid 1px #999;
+	display: block;
+}
+#agregar_amigos #fiends-list .image{
+	width: 50px;
+	height: 50px;
+}
+#agregar_amigos #fiends-list .image img{
+	width: 50px;
+}
+#agregar_amigos #fiends-list .add_btn{
+	background-image: url(../images/select_filtro.png);
+	background-size: 35px 70px; 
+	background-repeat: no-repeat;
+	display: block;
+	padding: 5px 0 5px 10px;
+	float: right;
+	width: 25px;
+	height: 25px;
+	margin: 5px 10px 0 0;
+}
+ #agregar_amigos #fiends-list .selected{
+ 	background-position: 0 100%;
+ }
 /*Fin agregar amigos*/
 
 /*
