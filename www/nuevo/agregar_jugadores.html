@@ -94,7 +94,18 @@
 		<script type="text/javascript" src="js/general.js"></script>
 		<script>
 		$(document).ready(function () {
-			window.mySwipe = $('#slider').Swipe();
+			window.mySwipe = $('#slider').Swipe({
+			  startSlide: 1,
+			  speed: 400,
+			  auto: 3000,
+			  continuous: true,
+			  disableScroll: false,
+			  stopPropagation: false,
+			  callback: function(index, elem) {
+			  	console.log(elem.getPos());
+			  },
+			  transitionEnd: function(index, elem) {}
+			});
 		});
 		</script>
 	</body>
