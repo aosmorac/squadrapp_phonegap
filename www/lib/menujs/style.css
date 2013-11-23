@@ -1,0 +1,165 @@
+/* ---------------------------------------------------------------------- */
+/*	RESET SCRIPT
+/* ---------------------------------------------------------------------- */
+html, body {
+	line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+ol, ul {
+	list-style: none;
+  margin: 0;
+  padding: 0;
+}
+a { outline: 0; }
+
+a:active {color: none;}
+/* ---------------------------------------------------------------------- */
+/*	Style for animation
+/*  Careful when modifying this part
+/* ---------------------------------------------------------------------- */
+
+html, body{
+    overflow: hidden;
+}
+
+#menuWrapper {
+  position: absolute;
+  background-color: #1c1a1b;
+  height: 100%;
+  width:250px;
+  overflow: auto;
+}
+  
+#bodyWrapper {
+  position: absolute;
+  background-color: #fdfcfb;
+  height: 100%;
+  width:100%;
+  overflow: auto;
+  box-shadow: 0 0 10px  #2c2c2c;
+}
+
+.fix{
+  overflow: auto;
+  padding: 10px;
+}
+
+  .opening{
+    transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s; /* Firefox 4 */
+    -webkit-transition-duration: 0.2s; /* Safari and Chrome */
+    -o-transition-duration: 0.2s; /* Opera */
+    transform: translate3d( 250px,0,0);
+    -webkit-transform: translate3d( 250px,0,0); /* Safari and Chrome */
+    -moz-transform: translate3d( 250px,0,0); /* Firefox */
+  }
+
+  .closing{
+    transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s; /* Firefox 4 */
+    -webkit-transition-duration: 0.2s; /* Safari and Chrome */
+    -o-transition-duration: 0.2s; /* Opera */
+    transform: translate3d( 0,0,0);
+    -webkit-transform: translate3d( 0,0,0); /* Safari and Chrome */
+    -moz-transform: translate3d( 0,0,0); /* Firefox */
+  }
+
+  .qclosing{
+    transform: translate3d( 0,0,0);
+    -webkit-transform: translate3d( 0,0,0); /* Safari and Chrome */
+    -moz-transform: translate3d( 0,0,0); /* Firefox */
+  }
+
+/* ---------------------------------------------------------------------- */
+/*  Example Styling
+/* ---------------------------------------------------------------------- */
+
+h1{
+  font-size: 24px;
+  font-family: Arial;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color:#252525;
+}
+
+h2 {
+  font-family: Arial;
+  color:#018CB6;
+  font-size:16px;
+  margin-bottom:5px;
+}
+
+p{
+  margin-bottom: 20px;
+  color: #272728;
+  line-height: 20px;
+  letter-spacing: 2px;
+}
+
+#menu li a{
+  display: block;
+  height:50px;
+  line-height: 50px;
+  font-size: 24px;
+  text-decoration: none;
+  font-family: Arial;
+  color: #454848;
+  font-weight: bold;
+}
+
+#menu span{
+  font-size: 36px;
+  margin-right: 10px;
+  font-weight: normal;
+  color:#ce152c;
+}
+
+#menu li{
+  border-bottom: 1px solid #333433;
+}
+
+
+/* ---------------------------------------------------------------------- */
+/*  Error Boxex conditionals 
+/* ---------------------------------------------------------------------- */
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+.warning{
+  display: none;
+}
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+.warning{
+  display: none;
+}
+}
+
+
+
+/* ---------------------------------------------------------------------- */
+/*  Alert Boxes Style
+/* ---------------------------------------------------------------------- */
+
+.info, .warning, .error, .validation {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 10px;
+background-repeat: no-repeat;
+background-position: 10px center;
+}
+.info {
+color: #00529B;
+background-color: #BDE5F8;
+}
+.warning {
+color: #9F6000;
+background-color: #FEEFB3;
+}
+.error {
+color: #D8000C;
+background-color: #FFBABA;
+}

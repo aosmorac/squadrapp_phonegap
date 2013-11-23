@@ -42,8 +42,9 @@
 /*
  *	Variables de información de la aplicació 
  */
-var user_item;	// Variable donde se encuentra la información del usuario logueado
-var nav_item;	// Variable donde se encuentra la información de navegacion (chat y secciones)	
+var user_item;		// Variable donde se encuentra la información del usuario logueado
+var nav_item;		// Variable donde se encuentra la información de navegacion (chat y secciones)	
+var fields_item;	// Variable donde se encuentra la información de los lugares para practicar deporte.
 // end vars	----------------------
 
 
@@ -54,6 +55,7 @@ squadrapp = {
 	* Carga la información inicial
 	*/
 	load: function(){
+		fields_item = { sports: Object() };	// Revisar ubicacion para inicializar
 		if (typeof nav_item == 'undefined' || typeof nav_item.isLoad == 'undefined'){
 			if (localStorage.user){
 				user_item = JSON.parse(localStorage.getItem('user'));
@@ -128,6 +130,11 @@ squadrapp = {
 				,telephone:user.telephone
 				,address:user.address
 				,available:user.available
+				,lat:''					// Obterner de coordinates
+				,lng:''					// Obterner de coordinates
+				,city_id:2257			// Obtener en la consulta, si ciudad cambia cambiar id 
+				,sport_id:1				// Deporte por defecto, obtener de la consulta 
+				,my_sports: Object()	// Obtener por consulta
 			};
 			localStorage.setItem('user', JSON.stringify(user_item));		// Almacena la informaciÃ³n del usuario logueado
 			squadrapp.load();
@@ -509,7 +516,91 @@ squadrapp = {
 			}	
 		},
 		
+		/*
+		 * squadrapp.nav.sendMessageToUser(user_id, message);
+		 * Carga mensajes por usuario
+		 */
+		sendMessageToUser: function(user_id, message, callback){
+				nav_item.chat.talkers.newTalkers = Array();
+	            callback = callback || function(){};
+				var serv = 'http://squadrapp.com/app/chat/save-message';
+				$.ajax({
+					 type: "POST",
+					 url: serv,
+		             async: true,
+		             data: { me: user_item.id, to: user_id, msg: message},
+		             success: function(data){
+			            callback();
+					}
+	    		});
+		}
 		
+		
+		
+	},
+	
+	fields: {
+		
+		/*
+		 * squadrapp.fields.loadFields();
+		 * Carga las canchas, centro deportivos o espacios para praticar algun deporte
+		 */
+		loadFields: function(callback){
+			if ( typeof fields_item == 'undefined' || typeof fields_item.sports == 'undefined' ){
+				fields_item = { sports: Object() };
+			}
+			if ( typeof fields_item.sports[user_item.sport_id] == 'undefined' ){
+				fields_item.sports[user_item.sport_id] = Object();
+			}
+			if ( typeof fields_item.sports[user_item.sport_id].cities == 'undefined' ){
+				fields_item.sports[user_item.sport_id] = { cities: Object() };
+			}
+			if ( typeof fields_item.sports[user_item.sport_id].cities[user_item.city_id] == 'undefined' ){
+				fields_item.sports[user_item.sport_id].cities[user_item.city_id] = { places: Object() };
+			}
+			var serv = 'http://squadrapp.com/app/fields/load-fields';
+			$.ajax({
+				 type: "POST",
+				 url: serv,
+			     async: false,
+			     data: { cid: user_item.city_id, sid: user_item.sport_id },
+			     success: function(data){
+			     	var places = JSON.parse(data);
+					fields_item.sports[user_item.sport_id].cities[user_item.city_id].places = places;
+					fields_item.sports[user_item.sport_id].cities[user_item.city_id].places.lastLoad = -1;
+					callback();
+				 }
+		    });	
+		}, 
+		
+		/*
+		 * squadrapp.fields.resetPages();
+		 * Vuelve a la pagina inicial
+		 */
+		resetPages: function(){
+			fields_item.sports[user_item.sport_id].cities[user_item.city_id].places.lastLoad = -1;
+		},
+		
+		/*
+		 * squadrapp.fields.getNextFields();
+		 * retorna un arreglo por orden.
+		 */
+		getNextFields: function(){
+			var f = Array();	//	Arreglo a retornar
+			var filter = fields_item.sports[user_item.sport_id].cities[user_item.city_id].places.filter;
+			var f_index = 0;
+			var nextLoad = fields_item.sports[user_item.sport_id].cities[user_item.city_id].places.lastLoad+1;
+			for (i=nextLoad; i<nextLoad+3; i++) {
+				if ( typeof fields_item.sports[user_item.sport_id].cities[user_item.city_id].places.list[filter[i]] == 'undefined'){
+					
+				}else{
+					f[f_index] = fields_item.sports[user_item.sport_id].cities[user_item.city_id].places.list[filter[i]];
+					fields_item.sports[user_item.sport_id].cities[user_item.city_id].places.lastLoad = i;
+					f_index++;
+				}
+			}
+			return f;
+		}
 		
 	}
 	

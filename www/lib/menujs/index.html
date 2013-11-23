@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<title>Swipe Menu</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div id="menuWrapper">
+		<div class="fix">
+			<ul id="menu">
+				<li><a href="index.html"><span>01</span>Page One</a></li>
+				<li><a href="two.html"><span>02</span>Page Two</a></li>
+				<li><a href="three.html"><span>03</span>Page Three</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="bodyWrapper">
+		<div class="fix">
+			<h1>Hello from Page One</h1>
+			
+			<div class="info">To start, simply swipe to the right anywhere on the webpage.</div>
+			 
+	 		<noscript>
+	 			<div class="error">I see you don't have JavaScript enabled :(. Unfortunately for this menu animation to work you will need to activate JavaScript in your browser </div>
+	 		</noscript>
+
+	 		<div class="warning">This animation is specifically designed for mobile devices that support touch events, so in order to experience the menu at it's best, please reload this website on your mobile</div>
+		</div>
+	</div>
+<script type="text/javascript" src="menujs.min.js"></script>
+<script type="text/javascript">
+    new Menu(document.getElementById('bodyWrapper'));
+</script>
+</body>
+</html>

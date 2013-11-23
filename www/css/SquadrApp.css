@@ -4,7 +4,23 @@
  * Inicialmente para el desarrollo en phonegap
  *
  * 
+ * Lista de estilos:
+ * 
+ * JQuery Mobile	(Cambios en los estilos de jquery mobile)
+ * fonta face		()
+ * Globales			(Estilos para elementos presentes en toda la aplicacion)
+ * Menu				(Menu principal, laterla izquierdo)
+ * Chat				(Sección de chat)
+ * 	Chat List		(Lista de las conversaciones que se han tenido por usuario)
+ * 	Chat With		(Conversacion, lista de mensajes y envio de nuevos mensajes)
+ * 
+ * Botones			(Estilos para cada boton)
+ * 
+ * Libraries		(Estilos necesarios para librerias externas)
+ * 	Swipe .swipe-wrape
+ * 
  */
+
 html, body {
 	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; height:100%; 
 }
@@ -22,7 +38,9 @@ thead, tr, th, td {
 .corte { clear:both; }
 .vacio { width: 100%;}
 
-img{ display: none; }
+img{ display: none; }	/*	Se debe mostrar la imagen despues de cargarla */
+
+
 
 /*
  * ------ JQuery Mobile --------
@@ -43,6 +61,9 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
 .ui-page { -webkit-backface-visibility: hidden; }
 			
 /*---- Fin JQuery Mobile ------*/
+
+
+
 /*fonta face*/
 @font-face {
     font-family: 'swansearegular';
@@ -74,6 +95,9 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
     font-weight: normal;
     font-style: normal;
 }
+/*---- Fin fonta face ------*/
+
+
 /*Globales*/
 
 body{
@@ -86,16 +110,19 @@ body{
 	color: #22262b;
 	text-align: center;
 	display: block;
-	padding: 10px 0;
-	border-bottom: 1px solid #666;
+	padding: 11px 0;
+	border-bottom: 2px solid #e2e2e2;
 	z-index: 100;
 	position: absolute;
 	top: 0; left: 0; right: 0;
 }
+#header p{
+	font-size: 16px;
+}
 #menu_icon{
 	background: url(../img/btn/btn_menu_52x52.png) no-repeat center;
 	background-size: 23px 23px;
-	width: 40px;
+	width: 50px;
 	height: 40px;
 	position: absolute;
 	top:0;
@@ -106,6 +133,91 @@ body{
 	background: url(../img/btn/btn_menu_52x52.png) no-repeat center;
 	background-size: 23px 23px;
 }
+
+#buscar{background: url(../images/buscar_cancha.png) no-repeat 5px; background-size: 20px;}
+#reservas{background: url(../images/reservas.png) no-repeat 5px; background-size: 20px;}
+#solicitud{background: url(../images/solicitud_reserva.png) no-repeat 5px; background-size: 20px;}
+#favoritos{background: url(../images/favoritos.png) no-repeat 5px; background-size: 20px;}
+#amigos{background: url(../images/amigos_jugadores.png) no-repeat 5px; background-size: 20px;}
+#otros{background: url(../images/amigos_jugadores.png) no-repeat 5px; background-size: 20px;}
+#configuracion{background: url(../images/ajustes.png) no-repeat 5px; background-size: 20px;}
+
+#footer{
+	background: #f5f5f5;
+	color: #22262b;
+	height: 40px;
+	border-top: solid 2px #e2e2e2; 
+	position: absolute;
+	bottom: 0; left: 0; right: 0;
+}
+
+/*sin contenido*/
+.null_content{
+	display: block;
+	margin: 80px auto;
+	text-align: center;
+}
+.null_content img{
+	width: 100px;
+}
+.null_content p{
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	color: #8f8f8f;
+	margin: 10px;
+}
+
+/*	Backgraund para imagenes de usuario mientras carga la imagen correspondiente */
+.user-image-60x60{
+	background: url(../img/pic_men.png);
+	background-size: 60px;
+}
+.user-image-36x36{
+	background: url(../img/pic_men.png);
+	background-size: 36px;
+}
+.user-image-70x70{
+	background: url(../img/pic_men.png);
+	background-size: 70px;
+	height: 70px; width: 70px;
+}
+
+/*	Capa para cubrir contenido (Si es necesario para efecto de carga) */
+.overlay{
+	background: #fff;
+	filter:alpha(opacity=70); 
+	-moz-opacity:0.7; 
+	-khtml-opacity: 0.7;	
+	opacity: 0.7;
+	position: absolute;
+	top: 0; bottom: 0; left: 0; right: 0;
+	padding: 50px 0;
+	text-align: center;
+	z-index: 9999;
+}
+
+
+	#pages{
+		z-index: 101;
+	}
+	#sider{
+		background:#22262b;
+		color: #fff;
+		width: 266px;
+		height: 500px;
+		float: right;
+	}
+	#content {
+		position:absolute;
+		top:39px; bottom:40px; left:0;
+		width:100%;
+		background:#EEEEEE;
+	}
+
+	
+/*---- Fin Globales ------*/
+
+
+/* Menu */
 #menu{
 	background:#22262b;
 	color: #fff;
@@ -126,7 +238,7 @@ body{
 	margin: 40px 0 130px 0;
 }
 #nav-footer{
-	border-top: solid 1px #4d4d4d;
+	border-top: solid 2px #4d4d4d;
 	background:#22262b;
 	position: fixed;
 	bottom: 0; left: 0;
@@ -209,21 +321,12 @@ nav ul li a span{
 	position: absolute;
 	right: 20px;
 }
-#buscar{background: url(../images/buscar_cancha.png) no-repeat 5px; background-size: 20px;}
-#reservas{background: url(../images/reservas.png) no-repeat 5px; background-size: 20px;}
-#solicitud{background: url(../images/solicitud_reserva.png) no-repeat 5px; background-size: 20px;}
-#favoritos{background: url(../images/favoritos.png) no-repeat 5px; background-size: 20px;}
-#amigos{background: url(../images/amigos_jugadores.png) no-repeat 5px; background-size: 20px;}
-#otros{background: url(../images/amigos_jugadores.png) no-repeat 5px; background-size: 20px;}
-#configuracion{background: url(../images/ajustes.png) no-repeat 5px; background-size: 20px;}
-#footer{
-	background: #f5f5f5;
-	color: #22262b;
-	height: 40px;
-	border-top: solid 1px #666; 
-	position: absolute;
-	bottom: 0; left: 0; right: 0;
-}
+
+/*---- Fin Menu ------*/
+
+
+/* Chat */
+
 #chat_icon{
 	width: 50px;
 	height: 50px;
@@ -241,21 +344,7 @@ nav ul li a span{
 	background: url(../img/btn/btn_min_chat_130x130.png) no-repeat;
 	background-size: 50px;
 }
-/*sin contenido*/
-.null_content{
-	display: block;
-	margin: 80px auto;
-	text-align: center;
-}
-.null_content img{
-	width: 100px;
-}
-.null_content p{
-	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
-	color: #8f8f8f;
-	margin: 10px;
-}
-/*chat */
+
 #chat_section{
 	position: absolute;
 	background: #fff;
@@ -265,6 +354,25 @@ nav ul li a span{
 	z-index: 1001;
 	overflow: hidden;
 }
+
+/* Inicialmente solo en conversaciones 
+ * Revisar estilos Chat With
+ * */
+#new-message{
+	position: absolute;
+	background: #fff;
+	bottom: 0;
+	width: 100%;
+	z-index: 2000;
+}
+/*	----------------------------------	*/
+
+.chat{
+		overflow: hidden;
+		  visibility: hidden;
+		  position: relative;
+	}
+
 #chat-bg{
 	position: absolute;
 	background: #000;
@@ -289,7 +397,7 @@ nav ul li a span{
 	display: none;
 }
 
-
+/*	Chat List */
 #chat-list .header{
 	background: #f5f5f5;
 	height: 50px;
@@ -357,7 +465,9 @@ nav ul li a span{
 	color: #8f8f8f;
 	padding: 0 15px 0 0;
 }
+/*---	Fin Chat List	---*/
 
+/*	Chat With */
 #chat-with .header{
 	background: #f5f5f5;
 	border-bottom; #d3d3d3 1px solid;
@@ -373,16 +483,6 @@ nav ul li a span{
 	color: #8b8b8b;
 	font-weight: bold;
 	font-size: 16px;
-}
-#back_icon{
-	background: url(../img/btn/btn_back_54x54.png) no-repeat center;
-	background-size: 23px 23px;
-	width: 45px;
-	height: 45px;
-	position: absolute;
-	top:0;
-	left:0;
-	z-index: 1002;
 }
 
 #chat-with .header #match_icon{
@@ -416,7 +516,7 @@ nav ul li a span{
 
 #scroll-chatwith{
 		position:absolute;
-		top:46px; bottom:0; left:0;
+		top:46px; bottom:40px; left:0;
 		width:100%;
 		background:#fff;
 }
@@ -476,22 +576,81 @@ nav ul li a span{
 	font-size: 16px;
 }
 
-
-
-.user-image-60x60{
-	background: url(../img/pic_men.png);
-	background-size: 60px;
-}
-.user-image-36x36{
-	background: url(../img/pic_men.png);
-	background-size: 36px;
-}
-.user-image-70x70{
-	background: url(../img/pic_men.png);
-	background-size: 70px;
-	height: 70px; width: 70px;
+#message-form{
+	position: absolute;
+	bottom: 0; left: 0; right: 0;
+	background: #f7f7f7;
+	border-top: #eaeaea 1px solid;
+	padding: 5px;
 }
 
+#message-form .field{
+	background: #fff;
+	padding: 5px;
+	width: 210px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px #eaeaea solid;
+	color: #333333;
+}
+#message-form button{
+	border: 0;
+	margin: 0;
+	padding: 3px;
+	background: #f7f7f7;
+	color: #989898;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+#new-message .header{
+	background: #f5f5f5;
+	border-bottom: #ccc 1px solid;
+	height: 45px;
+}
+
+#new-message .header .cancel{
+	position: absolute;
+	top: 0; bottom: 0; left: 0;
+	padding: 16px;
+	color: #8f8f8f;
+	font-size: 10px;
+	z-index: 100;
+}
+#new-message .header .title{
+	text-align: center;
+	font-size: 16px;
+	color: #121212;
+	padding: 12px;
+	font-weight: bold;
+}
+
+#new-message .members{
+	background: #fff;
+	border-bottom: #ccc 1px solid;
+	max-height: 100px;
+}
+#new-message .members .label{
+	color: #999999;
+	font-size: 13px;
+	padding: 14px 10px;
+	float: left;
+}
+#new-message .members .members-input{
+	width: 150px;
+	max-width: 150px;
+	min-width: 150px;
+	color: #555;
+	font-size: 14px;
+	border: 0;
+	min-height: 20px;
+	max-height: 80px;
+	padding: 10px 0 0 0;
+}
+/*---	Fin Chat With	---*/
+
+/* Capa para cubrir todo el chat (Si es necesario para efecto de carga) */
 .overlay_chat{
 	background: #fff;
 	filter:alpha(opacity=70); 
@@ -504,18 +663,164 @@ nav ul li a span{
 	text-align: center;
 }
 
-.overlay{
-	background: #fff;
-	filter:alpha(opacity=70); 
-	-moz-opacity:0.7; 
-	-khtml-opacity: 0.7;	
-	opacity: 0.7;
-	position: absolute;
-	top: 0; bottom: 0; left: 0; right: 0;
-	padding: 50px 0;
-	text-align: center;
-	z-index: 9999;
+/*---	Fin Chat	---*/
+
+
+/*	Fields	*/
+
+/*	Fields List	*/
+#scroll-list-fields{
+	
 }
+#scroll-list-fields .count_result{
+	font-size: 13px;
+	padding: 3px;
+	text-align: center;
+	color: #777777;
+	background: #f5f5f5;
+	border-bottom: 1px solid #e2e2e2;
+}
+#scroll-list-fields .big_photos{
+	padding: 0 0 20px 0;
+}
+#scroll-list-fields .big_photos li{
+	background: #FFFFFF;
+	border: 1px solid #EAEAEA;
+	position: relative;
+	display: block;
+	margin: 5px 10px;
+}
+#scroll-list-fields .big_photos li .imagen{
+	overflow: hidden;
+	background: #333;
+	text-align: center;
+}
+#scroll-list-fields .big_photos li .imagen img{
+	max-width: 100%;
+	margin: 0 auto;
+}
+#scroll-list-fields .distance, .fav{
+	position: absolute;
+	color: #fff;
+	z-index: 1;
+	padding: 8px 0 5px 33px;
+	font-size: 0.85em;
+	margin: 0 5px 0;
+}
+#scroll-list-fields .distance{
+	background: url(../images/ubicacion_mapa_cancha.png) no-repeat 2px 10px;
+	background-size: 25px;
+}
+#scroll-list-fields .distance p {
+	font-size: 12px;
+	line-height: 13px;
+}
+#scroll-list-fields .fav{
+	background-image: url(../images/favoritos.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	background-size: 30px 60px;
+	width: 30px;
+	height: 30px;
+	right: 10px;
+	top: 10px;
+	opacity:0.6;
+	padding: 0;
+}
+#scroll-list-fields .fav:hover{
+	background-position: 0 100%;
+}
+#scroll-list-fields .info{
+	display: block;
+	font-size: 0.8em;
+	color: #666;
+	position: relative;
+	padding: 5px 10px 10px;
+}
+#scroll-list-fields .basic{
+	margin: 0;
+	width: 72%;
+}
+#scroll-list-fields .basic , #scroll-list-fields .cost{
+	display: inline-block;
+}
+#scroll-list-fields .basic #name{
+	font-size: 1.2em;
+}
+#scroll-list-fields .basic .location_info{
+	font-size: 12px;
+	line-height: 13px;
+	color: #999999;
+}
+#scroll-list-fields .cost{
+	text-align: right;
+	position: absolute;
+	right: 10px;
+}
+#scroll-list-fields .cost p{
+	font-size: 12px;
+	line-height: 13px;
+	color: #777777;
+}
+#scroll-list-fields .cost #value{
+	font-size: 18px;
+	line-height: 20px;
+	color: #666666;
+}
+
+/* Navegacion inferior */
+#list-fields-nav{
+	display: block;
+}
+#list-fields-nav a{
+	color: #666;
+	display: block;
+	float: left;
+	width: 49%;
+	text-align: center;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	padding: 10px 0;
+}
+#list-fields-nav a:hover{
+	color: #22b473;
+}
+#list-fields-nav a:first-child{
+	border-right: 2px #e2e2e2 solid;
+}
+
+/* buscador */
+.search-fields{
+	background: #f5f5f5;
+	color: #22262b;
+	text-align: center;
+	display: block;
+	padding: 5px 5px 0 5px;
+	border-bottom: 1px solid #e2e2e2;
+}
+.search-fields .cancel{
+	position: absolute;
+	top: 0; right: 0;
+	padding: 8px 15px;
+	font-size: 13px;
+	color: #929292;
+	font-weight: bold;
+	text-align: center;
+}
+.search-fields-input{
+	margin: 5px 27px 5px 0;
+}
+#find-fields{
+	background: #fff url(../img/search_54x54.png) no-repeat center right;
+	background-size: 25px;
+	border: solid 1px #e2e2e2;
+	border-radius: 3px;
+	margin: 0;
+	font-size: 14px;
+	padding: 5px 20px 5px 5px;
+	width: 100%;
+}
+/*---	Fin Fields List	---*/
+/*---	Fin Fields	---*/
 
 
 /*
@@ -523,6 +828,17 @@ nav ul li a span{
  * Todos los botones utilizados en la aplicacion deberan ser
  * configurados a partir de este punto (Al finalizar el archivo css)
  */
+
+#back_icon{
+	background: url(../img/btn/btn_back_54x54.png) no-repeat center;
+	background-size: 23px 23px;
+	width: 45px;
+	height: 45px;
+	position: absolute;
+	top:0;
+	left:0;
+	z-index: 1002;
+}
 
 a.btn_menu{
 	display:inline-block;
@@ -551,80 +867,12 @@ a.btn_back{
 	background-size: 23px 23px;
 }
 
-	
-	
-	#scrollbar_main_content {  }
-	#scrollbar_main_content .viewport { height: 100%; overflow: hidden; position: relative; }
-    #scrollbar_main_content .overview { list-style: none; position: absolute; left: 0; top: 0; }
-    #scrollbar_main_content .thumb .end,
-    #scrollbar_main_content .thumb { background-color: #ccc; border-radius: 5px; display: none;}
-    #scrollbar_main_content .scrollbar { position: relative; float: right; width: 13px; display: none; }
-    #scrollbar_main_content .track { height: 100%; width:10px; position: relative; padding: 0 1px; display: none; }
-    #scrollbar_main_content .thumb { height: 10px; width: 5px; cursor: pointer; overflow: hidden; position: absolute; top: 20px; }
-    #scrollbar_main_content .thumb .end { overflow: hidden; height: 5px; width: 7px; }
-    #scrollbar_main_content .disable{ display: none; }
-	
-	.scrollbar_chat_section {}
-    .scrollbar_chat_section .viewport { height: 100%; overflow: hidden; position: relative; }
-    .scrollbar_chat_section .overview { list-style: none; position: absolute; left: 0; top: 0; right: 0; }
-    .scrollbar_chat_section .thumb .end,
-    .scrollbar_chat_section .thumb { background-color: #ccc; border-radius: 5px; }
-    .scrollbar_chat_section .scrollbar { position: absolute; top: 0; bottom: 0; right:0; width: 5px; }
-    .scrollbar_chat_section .track { height: 100%; width:5px; position: relative; padding: 0; }
-    .scrollbar_chat_section .thumb { height: 10px; width: 5px; cursor: pointer; overflow: hidden; position: absolute; top: 20px; }
-    .scrollbar_chat_section .thumb .end { overflow: hidden; height: 5px; width: 5px; }
-    .scrollbar_chat_section .disable{ display: none; }
-    
-    .scrollbar_chatwith_section {}
-    .scrollbar_chatwith_section .viewport { height: 100%; overflow: hidden; position: relative; }
-    .scrollbar_chatwith_section .overview { list-style: none; position: absolute; left: 0; top: 0; right: 0; }
-    .scrollbar_chatwith_section .thumb .end,
-    .scrollbar_chatwith_section .thumb { background-color: #ccc; border-radius: 5px; }
-    .scrollbar_chatwith_section .scrollbar { position: absolute; top: 0; bottom: 0; right:0; width: 5px; }
-    .scrollbar_chatwith_section .track { height: 100%; width:5px; position: relative; padding: 0; }
-    .scrollbar_chatwith_section .thumb { height: 10px; width: 5px; cursor: pointer; overflow: hidden; position: absolute; top: 20px; }
-    .scrollbar_chatwith_section .thumb .end { overflow: hidden; height: 5px; width: 5px; }
-    .scrollbar_chatwith_section .disable{ display: none; }
-    
-    #scrollbar_menu {  }
-    #scrollbar_menu .viewport { height: 100%; overflow: hidden; position: relative; }
-    #scrollbar_menu .overview { list-style: none; position: absolute; left: 0; top: 0; right: 0; }
-    #scrollbar_menu .thumb .end,
-    #scrollbar_menu .thumb { background-color: #ccc; border-radius: 5px; display: none; }
-    #scrollbar_menu .scrollbar { position: relative; float: right; width: 13px; display: none; }
-    #scrollbar_menu .track { height: 100%; width:10px; position: relative; padding: 0 1px; display: none; }
-    #scrollbar_menu .thumb { height: 10px; width: 5px; cursor: pointer; overflow: hidden; position: absolute; top: 20px; }
-    #scrollbar_menu .thumb .end { overflow: hidden; height: 5px; width: 7px; }
-    #scrollbar_menu .disable{ display: none; }
+/*---	Fin Botones		---*/
 
 
+/* Libraries */
 
-
-	#pages{
-		z-index: 101;
-	}
-	#sider{
-		background:#22262b;
-		color: #fff;
-		width: 266px;
-		height: 500px;
-		float: right;
-	}
-	
-	#content {
-		position:absolute;
-		top:39px; bottom:40px; left:0;
-		width:100%;
-		background:#fff;
-	}
-
-
-
-	.chat{
-		overflow: hidden;
-		  visibility: hidden;
-		  position: relative;
-	}
+	/* Swipe .swipe-wrape */
 	.swipe-wrap {
 	  overflow: hidden;
 	  position: relative;
@@ -638,3 +886,6 @@ a.btn_back{
 	  margin: 0;
 	  overflow: hidden;
 	}
+	/*---	Fin Swipe	---*/
+
+/*---	Fin Libraries	---*/

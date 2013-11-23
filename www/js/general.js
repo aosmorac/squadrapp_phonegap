@@ -32,6 +32,7 @@ $(function(){
 		stage_height = $(document).height();
 	$('#chat').css({top: stage_height});
 	$('#chat-bg').css({top: stage_height});
+	$('#new-message').css({top: ($(window).height())});
 	$('#menu').height($(window).height());
 	//$( "#chat_icon" ).draggable();
 	//login();
@@ -82,7 +83,7 @@ function clickBtnChat(){
 function closeChatSection(){
 			$('#chat_section').animate({
 				top: $(window).height()
-			}, 400);
+			}, 250);
 			/*$('#chat_icon').animate({
 				top : btn_chat_position.top, left: btn_chat_position.left
 			});*/
@@ -98,11 +99,11 @@ function closeChatSection(){
 function openChatSection(callback){
 			$('#chat_section').animate({
 				top: (70)
-			}, 500, function(){
+			}, 250, function(){
 				callback();
 			});
 			$('#chat_icon').animate({
-				top: (10)},500);
+				top: (10)},250);
 			$('#chat-bg').css({top: 0});
 			$('#chat_icon').removeClass( "chat-open" );
 			$('#chat_icon').addClass( "chat-close" );
@@ -422,7 +423,7 @@ function getMoreMessages(){
 							$("#list-messages").append ('<section class="friend"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 						}
 						scrollChatWith.refresh();
-						scrollChatWith.scrollTo(0, -$('#list-messages').height(), 200);
+						scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
 					}
 					$("#list-messages").append('<section class="vacio">&nbsp;</section>');
 					scrollChatWith.refresh();
@@ -439,6 +440,40 @@ function getMoreMessages(){
 			}, 10000); 
 		}
 	}
+
+
+function sendMessageToUser(user_id, message){
+	message = $('#message-input').val();
+	$('#message-input').val('');
+	user_id = $( "#chat-with" ).attr( "user_id");
+	if (user_id > 0 && jQuery.trim(message) != ''){
+		squadrapp.nav.sendMessageToUser(user_id, jQuery.trim(message), function(){
+			$(".vacio").remove();
+			$("#list-messages").append ('<section class="vacio"><section class="me"><div class="date">Enviando</div><div class="message"><div class="user">Yo</div><div class="text">'+message+'</div></section></section>');
+			$("#list-messages").append('<section class="vacio">&nbsp;</section>');
+			scrollChatWith.refresh();
+			scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
+		});
+	}
+}
+
+
+/**
+ ** Abre seccion de envio de mensaje
+ **/
+function openNewMessage(){
+	$('#new-message').animate({top: (0)},200, function(){
+		$('#new-message').load('chat-new-message.html', function() {
+		});
+	});
+}
+function closeNewMessage(){
+	$('#new-message').animate({top: ($(window).height())},200);
+}
+
+
+
+
 
 
 
