@@ -819,6 +819,49 @@ nav ul li a span{
 	padding: 5px 20px 5px 5px;
 	width: 100%;
 }
+.fields_list{
+
+}
+.fields_list li{
+	display: block;
+	font-size: 0.9em;
+	border-bottom: solid 1px #ccc;
+	position: relative;
+	background: #fff;
+}
+.list_image{
+	width: 60px;
+	height: 60px;
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: top;
+}
+.list_image img {
+	height: 60px;
+	width: auto;
+}
+.list_info, .fields_list li .arrow{
+	display: inline-block;
+	vertical-align: middle;
+	color: #999;
+	padding: 5px;
+}
+.list_info .name{
+	font-size: 1.1em;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	color: #666;
+}
+.fields_list li .arrow{
+	background-image: url(../img/arrow_25x30.png);
+	background-size: 20px;
+	font-size: 0;
+	position: absolute;
+	right: 0;
+	top: 15px;
+	width: 15px;
+	height: 15px;
+	background-repeat: no-repeat;
+}
 /*---	Fin Fields List	---*/
 /*---	Fin Fields	---*/
 

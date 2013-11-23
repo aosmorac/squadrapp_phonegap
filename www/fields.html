@@ -16,6 +16,7 @@
 					<p class="count_result">
 						64 canchas encontradas en 18 sedes
 					</p>
+					<section id="search_results"></section>
 					<section id="list-fields">
 						<ul class="big_photos">
 							
@@ -26,8 +27,8 @@
 			<div id="pullUp-list-fields"> </div>	
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
 				<section id='list-fields-nav'>
-					<a >Lista</a>
-					<a >Mapa</a>
+					<a>Lista</a>
+					<a>Mapa</a>
 				</section>
 			</footer>
 
@@ -81,13 +82,30 @@ $(function(){
 	});
 	setTimeout(function () {
 		scrollFieldsList.refresh();
-	}, 200); 
+	}, 200);
+	//Agregar lista campos
+	$('#find-fields').focus(function(){
+		$('#search_results').load("fields_list.html", function(){
+			loadImages();
+			scrollFieldsListFinder = new iScroll( 'list-fields-finder', {
+				onBeforeScrollStart : null,
+				onScrollMove: function () {
+					
+				},
+				onScrollEnd: function () {
+				}
+			});
+			$('#list-fields').css('display','none');
+		});
+	});
 });
 
 function cancelFieldSearch(){
 	$("#find-fields").val('');
 	$(".search-fields .cancel").hide();
-	$(".search-fields .search-fields-input").css("margin-right", "27px");	
+	$(".search-fields .search-fields-input").css("margin-right", "27px");
+	$('#search_results').empty();
+	$('#list-fields').slideDown();
 }
 
 function loadFields(){
