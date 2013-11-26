@@ -881,6 +881,78 @@ nav ul li a span{
 }
 /*---	Fin Fields List	---*/
 /*---	Fin Fields	---*/
+/*--- filter ---*/
+.cancelar{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	font-size: 0.9em;
+	color: #999;
+}
+.aplicarfiltros{
+	background: #29abe2;
+	color: #fff;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	text-align: center;
+	padding: 10px 0;
+}
+.aplicarfiltros a{
+	color: #fff!important;
+}
+.filter{
+	background: #fff;
+	position: relative;
+	margin: 0 0 5px;
+}
+.filter_name, .filter_input{
+	display: inline-block;
+	vertical-align: middle;
+	max-height: 53px;
+	color: #666;
+}
+.filter_name_false{
+	display: inline-block;
+	vertical-align: middle;
+	min-height: 53px;
+}
+.filter_name{
+	width: 29%;
+	text-align: center;
+	padding: 16px 0;
+	border-right:solid 1px #eee;
+}
+.filter_input{
+	right: 0;
+	width: 68%;
+	text-align: center;
+	color: #8f8f8f;
+}
+.filter_input input, .filter_input select {
+	min-width: 95%;
+	background: transparent;
+	border: none;
+	min-height: 20px;
+}
+.filter_input .filter_action{
+	background-image: url(../img/Plus_x_filtro.png);
+	background-repeat: no-repeat;
+	background-size: 30px 60px;
+	width: 30px;
+	height: 30px;
+	top: 10px;
+	right: 10px;
+	position: absolute;
+} 
+#filtro .custom-input .ui-input-clear{
+	background-image: url(../img/Plus_x_filtro.png);
+	background-repeat: no-repeat;
+	background-size: 30px 60px;
+	width: 30px;
+	height: 30px;
+	top: 10px;
+	right: 0px;
+}
+/*--- Fin filter --*/
 
 
 /*

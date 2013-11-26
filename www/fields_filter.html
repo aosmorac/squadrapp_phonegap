@@ -1,0 +1,87 @@
+			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
+				<a onclick="loadPage('fields.html');" class="cancelar">cancelar</a>
+				<p>Filtro</p>
+			</header>
+			<section id="content" class="content">
+				<section id="root-outlet">
+
+				</section>
+				<form id="hiden-form">	
+					<section class="filter">
+						<section class="filter_name">
+							<p>Fecha</p>
+						</section>
+						<section class="filter_input">
+							<seection id="fecha-input" class="custom-input">
+								<input name="mydate" id="mydate" type="text" placeholder="Toque para seleccionar" readonly>
+							</seection>
+							<section class="filter_action">
+							</section>
+						</section>
+					</section>
+					<section class="filter">
+						<section class="filter_name">
+							<p>Hora</p>
+						</section>
+						<section class="filter_input">
+							<section id="hora-input" class="custom-input">
+								<input name="mytime" id="mytime" type="text" placeholder="Toque para seleccionar" readonly>
+							</section>
+							<section class="filter_action">
+							</section>
+						</section>
+					</section>
+					<section class="filter">
+						<section class="filter_name">
+							<p>Tipo de cancha</p>
+						</section>
+						<section class="filter_input">
+							<section id="cancha-select" class="custom-input">
+								<select name="field_type">
+									<option value="null">Toque para seleccionar</option>
+									<option value="sintetica 5">Futbol 5/6 Grama sintética</option>
+									<option value="sintetica 7">Fútbol 7 Grama sintética</option>
+									<option value="natural 11">Fútbol 11 Grama natural</option>
+								</select>
+							</section>
+							<section class="filter_action">
+							</section>
+						</section>
+					</section>
+				</form>
+			</section><!-- /content -->
+			<div id="pullUp-list-fields"> </div>	
+			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
+				<p class='aplicarfiltros'>
+					<a href="confirmar_detalles.html">Utilizar filtros</a>
+				</p>
+			</footer>
+		<!---date piker-->
+		<link rel="stylesheet" href="lib/themes/default.css" id="theme_base">
+		<link rel="stylesheet" href="lib/themes/default.date.css" id="theme_date">
+		<link rel="stylesheet" href="lib/themes/default.time.css" id="theme_time">
+		<script src="lib/picker.js"></script>
+		<script src="lib/picker.date.js"></script>
+    	<script src="lib/picker.time.js"></script>
+		<script>
+			$(function(){
+				$('#mydate').pickadate({
+					monthsFull: ['Ennero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Novimbre', 'Diciembre'],
+					monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+					weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+					weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+				});
+				$('#mytime').pickatime({
+					min: [7,00],
+    				max: [22,0],
+    				interval: 60,
+    				onStart: function() {
+				        $('hiden-form').css('display','none');
+				    },
+				    onClose: function() {
+				        $('hiden-form').css('display','block');
+				    }
+				});
+				var scrollHours = new iScroll('root-outlet');
+			});
+		</script>
