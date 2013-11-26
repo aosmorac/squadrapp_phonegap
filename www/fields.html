@@ -1,6 +1,7 @@
 			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
 				<a id="menu_icon" onclick="openMenu();"></a>
 				<p>Lista</p>
+				<a href="#" id="filter" class="fl_inactive">Filtro</a>
 			</header>
 			<div id="pullDown-list-fields"> </div>
 			<section id="content" class="content">
@@ -87,14 +88,6 @@ $(function(){
 	$('#find-fields').focus(function(){
 		$('#search_results').load("fields_list.html", function(){
 			loadImages();
-			scrollFieldsListFinder = new iScroll( 'list-fields-finder', {
-				onBeforeScrollStart : null,
-				onScrollMove: function () {
-					
-				},
-				onScrollEnd: function () {
-				}
-			});
 			$('#list-fields').css('display','none');
 		});
 	});

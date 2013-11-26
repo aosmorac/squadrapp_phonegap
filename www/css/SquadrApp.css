@@ -862,6 +862,23 @@ nav ul li a span{
 	height: 15px;
 	background-repeat: no-repeat;
 }
+#filter{
+	background-image: url(../img/filter_states.png);
+	background-size: 28px 56px;
+	color: #666;
+	background-repeat: no-repeat;
+	padding: 7px 35px 5px;
+	position: absolute;
+	right: 10px;
+	top: 6px;
+	font-size: 0.85em; 
+}
+.fl_inactive{
+	background-position: 100% 100%;
+}
+.fl_active{
+	background-position: 100% 0;
+}
 /*---	Fin Fields List	---*/
 /*---	Fin Fields	---*/
 
