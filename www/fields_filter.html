@@ -2,7 +2,7 @@
 				<a onclick="loadPage('fields.html');" class="cancelar">cancelar</a>
 				<p>Filtro</p>
 			</header>
-			<section id="content" class="content">
+			<section id="content" class="content" style="overflow:auto;">
 				<section id="root-outlet">
 
 				</section>
@@ -57,31 +57,22 @@
 				</p>
 			</footer>
 		<!---date piker-->
-		<link rel="stylesheet" href="lib/themes/default.css" id="theme_base">
-		<link rel="stylesheet" href="lib/themes/default.date.css" id="theme_date">
-		<link rel="stylesheet" href="lib/themes/default.time.css" id="theme_time">
-		<script src="lib/picker.js"></script>
-		<script src="lib/picker.date.js"></script>
-    	<script src="lib/picker.time.js"></script>
+		<link href="css/mobiscroll.custom-2.6.2.min.css" rel="stylesheet" type="text/css" />
+		<script src="lib/mobiscroll.custom-2.6.2.min.js" type="text/javascript"></script>
+		
 		<script>
 			$(function(){
-				$('#mydate').pickadate({
-					monthsFull: ['Ennero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Novimbre', 'Diciembre'],
-					monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-					weekdaysFull: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
-					weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-				});
-				$('#mytime').pickatime({
-					min: [7,00],
-    				max: [22,0],
-    				interval: 60,
-    				onStart: function() {
-				        $('hiden-form').css('display','none');
-				    },
-				    onClose: function() {
-				        $('hiden-form').css('display','block');
-				    }
-				});
-				var scrollHours = new iScroll('root-outlet');
+				$('#mydate').mobiscroll().date({ 
+					theme: 'android-ics light', 
+                    mode: 'scroller', 
+                    display: 'bottom',
+                    lang: "es"
+                });
+				$('#mytime').mobiscroll().time({ 
+					theme: 'android-ics light', 
+                    mode: 'scroller', 
+                    display: 'bottom',
+                    lang: "es"
+                });
 			});
 		</script>
