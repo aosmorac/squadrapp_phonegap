@@ -53,7 +53,7 @@
 			<div id="pullUp-list-fields"> </div>	
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
 				<p class='aplicarfiltros'>
-					<a href="confirmar_detalles.html">Utilizar filtros</a>
+					<a onclick="loadPage('confirm_details.html');">Utilizar filtros</a>
 				</p>
 			</footer>
 		<!---date piker-->
@@ -63,13 +63,13 @@
 		<script>
 			$(function(){
 				$('#mydate').mobiscroll().date({ 
-					theme: 'android-ics light', 
+					theme: 'ios', 
                     mode: 'scroller', 
                     display: 'bottom',
                     lang: "es"
                 });
 				$('#mytime').mobiscroll().time({ 
-					theme: 'android-ics light', 
+					theme: 'ios', 
                     mode: 'scroller', 
                     display: 'bottom',
                     lang: "es"
