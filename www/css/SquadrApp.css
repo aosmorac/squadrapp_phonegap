@@ -4,26 +4,9 @@
  * Inicialmente para el desarrollo en phonegap
  *
  * 
- * Lista de estilos:
- * 
- * JQuery Mobile	(Cambios en los estilos de jquery mobile)
- * fonta face		()
- * Globales			(Estilos para elementos presentes en toda la aplicacion)
- * Menu				(Menu principal, laterla izquierdo)
- * Chat				(Sección de chat)
- * 	Chat List		(Lista de las conversaciones que se han tenido por usuario)
- * 	Chat With		(Conversacion, lista de mensajes y envio de nuevos mensajes)
- * 	filter			(Manejo de lso estilos de los filtros)	
- * 
- * Botones			(Estilos para cada boton)
- * 
- * Libraries		(Estilos necesarios para librerias externas)
- * 	Swipe .swipe-wrape
- * 
  */
-
 html, body {
-	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; height:100%; 
+	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; height:100%;
 }
 div, span, applet, object, iframe, 
 h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
@@ -33,20 +16,12 @@ strike, strong, sub, sup, tt, var, b, u, i,
 center, dl, dt, dd, ol, ul, li, fieldset, form, 
 label, legend, table, caption, tbody, tfoot, 
 thead, tr, th, td { 
-	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; position:relative; 
+	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; position:relative;font-weight:normal; 
 }
-
-.corte { clear:both; }
-.vacio { width: 100%;}
-
-img{ display: none; }	/*	Se debe mostrar la imagen despues de cargarla */
-
-
-
 /*
  * ------ JQuery Mobile --------
- * Sobreescribir estilos que estan teniendo conflictos con el diseño
- * de la aplicación.
+ * Sobreescribir estilos que estan teniendo conflictos con el diseï¿½o
+ * de la aplicaciï¿½n.
  * 
  * */
   			
@@ -55,16 +30,12 @@ img{ display: none; }	/*	Se debe mostrar la imagen despues de cargarla */
 	margin: 0;
 }
 body .ui-body-a, body .ui-overlay-a, body .ui-bar-a { 
-	text-shadow:0 0 0; 
+	 
 	background: #FFFFFF;
-	background:#22262b;
 } 
 .ui-page { -webkit-backface-visibility: hidden; }
 			
 /*---- Fin JQuery Mobile ------*/
-
-
-
 /*fonta face*/
 @font-face {
     font-family: 'swansearegular';
@@ -88,7 +59,7 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
 }
 @font-face {
     font-family: 'swansea_italic';
-    src: url('../fonts/swanse_i-webfont.eot');
+        src: url('../fonts/swanse_i-webfont.eot');
     src: url('../fonts/swanse_i-webfont.eot?#iefix') format('embedded-opentype'),
          url('../fonts/swanse_i-webfont.woff') format('woff'),
          url('../fonts/swanse_i-webfont.ttf') format('truetype'),
@@ -96,62 +67,165 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
     font-weight: normal;
     font-style: normal;
 }
-/*---- Fin fonta face ------*/
-
+/*responsive*/
+@media screen and (max-width: 320px) {
+	#field_fav .list_info{
+		min-width: 50%;
+	}
+	#fiends-list{
+		min-width: 78%;
+                max-width: 90%
+	}
+	.nav_addFriends ul li{
+		font-size: 0.8em;
+		width: 24.12%;
+	}
+	.all_contacts{
+		font-size: 0.7em;
+	}
+}
+@media screen and (min-width: 361px) and (max-width: 600px) {
+	#field_fav .list_info{
+		min-width: 70%;
+	}
+	#fiends-list{
+		min-width: 85%;
+	}
+	.nav_addFriends ul li{
+		width: 24.3%;
+	}
+	.all_contacts{
+		font-size: 0.8em;
+	}
+}
 
 /*Globales*/
-
 body{
 	font-family: 'swansearegular', Helvetica, Arial, sans-serif;
-	overflow: hidden;
+}
+body [data-role="content"]{
+	background-color: #f5f5f5;
 }
 #header{
 	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+        font-size: larger;
 	background: #f5f5f5;
 	color: #22262b;
 	text-align: center;
 	display: block;
-	padding: 11px 0;
-	border-bottom: 2px solid #e2e2e2;
-	z-index: 100;
-	position: absolute;
-	top: 0; left: 0; right: 0;
+	padding: 12px 0;
+	border-bottom: 1px inset #666;
 }
-#header p{
-	font-size: 16px;
+#header #cerrar{
+	border: solid 2px #333;
+	color: #333;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	width: 30px;
+	height: 30px;
+	font-size: 1.4em;
+	float: right;
 }
 #menu_icon{
-	background: url(../img/btn/btn_menu_52x52.png) no-repeat center;
+	background: url(../images/menu.png) no-repeat;
 	background-size: 23px 23px;
-	width: 50px;
-	height: 40px;
-	position: absolute;
-	top:0;
-	left:0;
-	z-index: 1002;
+	width: 24px;
+	height: 24px;
+	margin: 5px;
+	border: none;
 }
 #menu_icon:hover{
-	background: url(../img/btn/btn_menu_52x52.png) no-repeat center;
+	background: url(../images/menu.png) no-repeat #f0f0f0;
 	background-size: 23px 23px;
 }
-
+#menu{
+	background:#22262b;
+	color: #fff;
+}
+#nav-user{
+	border-bottom: solid 1px #4d4d4d;
+}
+#nav-user #notificaciones{
+	background:url(../images/notificaciones.png) no-repeat 15px 8px;
+	background-size: 23px 23px;
+	padding: 10px  0 10px 45px;
+	display: block;
+}
+#nav-user #notificaciones a{
+	color: #fff;
+}
+#user-menu{
+	border-bottom: solid 1px #4d4d4d;
+	padding: 20px 0;
+}
+#user-menu .image, #fiends-list .image{
+	overflow: hidden;
+	border-radius: 40px;
+	border: solid 1px #fff;
+	display: inline-block;
+	max-width: 70px;
+	max-height: 70px;
+	display: inline-block;
+	vertical-align: middle;
+}
+#user-menu .info, #user-menu .arrow{
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 5px;
+}
+#user-menu .info{
+	font-size: 0.75em;
+	color: #fff;
+}
+#user-menu .info p:first-child{
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+}
+#user-menu .arrow{
+	background: url(../images/arrow_profile.png) no-repeat;
+	background-size: 15px;
+	width: 15px;
+	height: 25px;
+}
+#user-menu .image img, #fiends-list .image img{
+	width: 70px;
+}
+nav ul li a{
+	color: #fff;
+	padding: 10px 0 10px 30px;
+	display: block;
+	border-bottom: 1px solid #4d4d4d;
+	position: relative;
+	font-size: 0.85em;
+}
+nav ul li a span{
+	position: absolute;
+	right: 20px;
+        
+}
 #buscar{background: url(../images/buscar_cancha.png) no-repeat 5px; background-size: 20px;}
 #reservas{background: url(../images/reservas.png) no-repeat 5px; background-size: 20px;}
 #solicitud{background: url(../images/solicitud_reserva.png) no-repeat 5px; background-size: 20px;}
-#favoritos{background: url(../images/favoritos.png) no-repeat 5px; background-size: 20px;}
+#favoritos{background: url(../images/corazon.png) no-repeat 5px; background-size: 20px;}
 #amigos{background: url(../images/amigos_jugadores.png) no-repeat 5px; background-size: 20px;}
 #otros{background: url(../images/amigos_jugadores.png) no-repeat 5px; background-size: 20px;}
 #configuracion{background: url(../images/ajustes.png) no-repeat 5px; background-size: 20px;}
-
 #footer{
-	background: #f5f5f5;
+	
 	color: #22262b;
 	height: 40px;
-	border-top: solid 2px #e2e2e2; 
-	position: absolute;
-	bottom: 0; left: 0; right: 0;
+	border-top: outset 1px #666; 
 }
-
+.red{background-color: #ed1e79; color: #fff;}
+#chat_icon{
+	background: url(../images/maximizar_chat.png) no-repeat;
+	background-size: 60px;
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	top: -57%;
+	border: none;
+        
+}
 /*sin contenido*/
 .null_content{
 	display: block;
@@ -166,557 +240,61 @@ body{
 	color: #8f8f8f;
 	margin: 10px;
 }
-
-/*	Backgraund para imagenes de usuario mientras carga la imagen correspondiente */
-.user-image-60x60{
-	background: url(../img/pic_men.png);
-	background-size: 60px;
+/*buscador*/
+#filter{
+	background-image: url(../images/filter_states.png);
+	background-size: 28px 56px;
+	color: #666;
+	background-repeat: no-repeat;
+	padding: 0 20px 0;
 }
-.user-image-36x36{
-	background: url(../img/pic_men.png);
-	background-size: 36px;
+.fl_inactive{
+	background-position: 100% 100%;
 }
-.user-image-70x70{
-	background: url(../img/pic_men.png);
-	background-size: 70px;
-	height: 70px; width: 70px;
+.fl_active{
+	background-position: 100% 0;
 }
-
-/*	Capa para cubrir contenido (Si es necesario para efecto de carga) */
-.overlay{
-	background: #fff;
-	filter:alpha(opacity=70); 
-	-moz-opacity:0.7; 
-	-khtml-opacity: 0.7;	
-	opacity: 0.7;
-	position: absolute;
-	top: 0; bottom: 0; left: 0; right: 0;
-	padding: 50px 0;
-	text-align: center;
-	z-index: 9999;
-}
-
-
-	#pages{
-		z-index: 101;
-	}
-	#sider{
-		background:#22262b;
-		color: #fff;
-		width: 266px;
-		height: 500px;
-		float: right;
-	}
-	#content {
-		position:absolute;
-		top:39px; bottom:40px; left:0;
-		width:100%;
-		background:#EEEEEE;
-	}
-
-	
-/*---- Fin Globales ------*/
-
-
-/* Menu */
-#menu{
-	background:#22262b;
-	color: #fff;
-	width: 266px;
-	float: left;
-}
-
-#nav-user{
-	border-bottom: solid 1px #4d4d4d;
-	background:#22262b;
-	position: fixed;
-	top: 0; left: 0;
-	width: 272px;
-	height: 38px;
-	z-index: 100;
-}
-#nav-content{
-	margin: 40px 0 130px 0;
-}
-#nav-footer{
-	border-top: solid 2px #4d4d4d;
-	background:#22262b;
-	position: fixed;
-	bottom: 0; left: 0;
-	width: 272px;
-	height: 40px;
-	z-index: 100;
-}
-
-#nav-user #notificaciones_icon{
-	background: url(../img/btn/notificaciones_54x54.png) no-repeat center;
-	background-size: 24px 24px;
-	width: 40px;
-	height: 40px;
-	position: absolute;
-	top:0;
-	left:5px;
-	z-index: 1002;
-}
-#nav-user #ajustes_icon{
-	background: url(../img/btn/ajustes_54x54.png) no-repeat center;
-	background-size: 24px 24px;
-	width: 40px;
-	height: 40px;
-	position: absolute;
-	top:0;
-	right:15px;
-	z-index: 1002;
-}
-#user-menu{
-	border-bottom: solid 1px #4d4d4d;
-	padding: 20px 0 20px 10px;
-}
-#user-menu .image{
-	overflow: hidden;
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
-	border-radius: 40px;
-	border: solid 1px #fff;
-	display: inline-block;
-	max-width: 70px;
-	max-height: 70px;
-	display: inline-block;
-	vertical-align: middle;
-}
-#user-menu .image img{
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
-	border-radius: 40px;
-}
-#user-menu .info, #user-menu .arrow{
-	display: inline-block;
-	vertical-align: middle;
-	margin: 0 5px;
-}
-#user-menu .info{
-	font-size: 0.75em;
-}
-#user-menu .info p:first-child{
-	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
-	font-size: 1.2em;
-}
-#user-menu .arrow{
-	background: url(../images/arrow_profile.png) no-repeat;
-	background-size: 15px;
-	width: 15px;
-	height: 25px;
-}
-#user-menu .image img{
-	width: 70px;
-}
-nav ul li a{
-	color: #fff;
-	padding: 10px 0 10px 30px;
-	display: block;
-	border-bottom: 1px solid #4d4d4d;
-	position: relative;
-	font-size: 0.85em;
-}
-nav ul li a span{
-	position: absolute;
-	right: 20px;
-}
-
-/*---- Fin Menu ------*/
-
-
-/* Chat */
-
-#chat_icon{
-	width: 50px;
-	height: 50px;
-	position: absolute;
-	bottom: 10px;
-	left: 50%;
-	margin-left: -25px;
-	z-index: 1002;
-}
-.chat-open{
-	background: url(../img/btn/btn_max_chat_130x130.png) no-repeat;
-	background-size: 50px;
-}
-.chat-close{
-	background: url(../img/btn/btn_min_chat_130x130.png) no-repeat;
-	background-size: 50px;
-}
-
-#chat_section{
-	position: absolute;
-	background: #fff;
-	bottom: 0;
-	width: 100%;
-	overflow: auto;
-	z-index: 1001;
-	overflow: hidden;
-}
-
-/* Inicialmente solo en conversaciones 
- * Revisar estilos Chat With
- * */
-#new-message{
-	position: absolute;
-	background: #fff;
-	bottom: 0;
-	width: 100%;
-	z-index: 2000;
-}
-/*	----------------------------------	*/
-
-.chat{
-		overflow: hidden;
-		  visibility: hidden;
-		  position: relative;
-	}
-
-#chat-bg{
-	position: absolute;
-	background: #000;
-	filter:alpha(opacity=70); 
-	-moz-opacity:0.7; 
-	-khtml-opacity: 0.7;	
-	opacity: 0.7;
-	bottom: 0;
-	width: 100%;
-	z-index: 1000;
-}
-#chat_icon .arrow{
-	background: url(../img/arrow_52x52.png) no-repeat;
-	background-size: 23px;
-	width: 23px;
-	height: 23px;
-	position: absolute;
-	top: 48px;
-	left: 50%;
-	margin-left: -12px;
-	z-index: 1002;
-	display: none;
-}
-
-/*	Chat List */
-#chat-list .header{
-	background: #f5f5f5;
-	height: 50px;
-	box-shadow: 0 5px 5px -5px #333;
-	z-index: 100;
-}
-#chat-list .header ul{
-	list-style: none;
-}
-#chat-list .header ul li{
-    outline: #d3d3d3 1px solid;
-	float:left;
-	width: 50%;
-	text-align: center;
-	line-height: 50px;
-	color: #8f8f8f;
-	font-weight: bold;
-	font-size: 14px;
-}
-
-#scroll-list-chats{
-		position:absolute;
-		top:51px; bottom:0; left:0;
-		width:100%;
-		background:#fff;
-}
-
-#list-chats .talker{
-	position: relative;
-	height: 60px;
-	padding: 15px;
-	border-bottom: #ccc 1px solid;
-	font-family: Arial, Helvetica, sans-serif;
-}
-#list-chats .talker img{
-	-webkit-border-radius: 30px;
-	-moz-border-radius: 30px;
-	border-radius: 30px;
-}
-#list-chats .talker .image{
-	-webkit-border-radius: 30px;
-	-moz-border-radius: 30px;
-	border-radius: 30px;
-	float: left;
-	width: 60px;
-	height: 60px;
-}
-#list-chats .talker .content{
-	float: left;
-	margin: 0 15px;
-	color: #8f8f8f;
-	font-size: 14px;
-	line-height: 16px;
-	padding: 11px 0;
-}
-#list-chats .talker .content h3{
-	font-weight: bold;
-}
-#list-chats .talker .date{
-	background: url(../img/arrow_25x30.png) no-repeat center right;
-	background-size: 11px 13px;
-	position: absolute;
-	top: 15px; right: 15px;
-	font-size: 13px;
-	color: #8f8f8f;
-	padding: 0 15px 0 0;
-}
-/*---	Fin Chat List	---*/
-
-/*	Chat With */
-#chat-with .header{
-	background: #f5f5f5;
-	border-bottom; #d3d3d3 1px solid;
-	height: 45px;
-	box-shadow: 0 5px 5px -5px #333;
-	text-align: center;
-	z-index: 100;
-}
-
-#chat-with .header .title{
-	text-align: left;
-	padding: 14px 50px;
-	color: #8b8b8b;
-	font-weight: bold;
-	font-size: 16px;
-}
-
-#chat-with .header #match_icon{
-	background: url(../img/btn/btn_match_82x82.png) no-repeat center;
-	background-size: 36px 36px;
-	width: 45px;
-	height: 45px;
-	position: absolute;
-	top:0;
-	right: 50px;
-	z-index: 1002;
-}
-
-#chat-with .header .chat_icon{
-	width: 36px;
-	height: 36px;
-	position: absolute;
-	top:5px;
-	right: 5px;
-	-webkit-border-radius: 36px;
-	-moz-border-radius: 36px;
-	border-radius: 36px;
-	z-index: 1002;
-}
-
-#chat-with .header .chat_icon img{
-	-webkit-border-radius: 36px;
-	-moz-border-radius: 36px;
-	border-radius: 36px;
-}
-
-#scroll-chatwith{
-		position:absolute;
-		top:46px; bottom:40px; left:0;
-		width:100%;
-		background:#fff;
-}
-
-#list-messages{
-	font-size: 12px;
-}
-
-#list-messages .me{
-	text-align: right;
-	margin: 10px;
-}
-#list-messages .me .date, #list-messages .friend .date{
-	color: #a0a0a0;
-}
-#list-messages .me .message{
-	max-width: 80%;
-	min-width: 200px;
-	background: #22b573;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	display: inline-block;
-	color: #fff;
-}
-#list-messages .me .message .user{
-	padding: 3px 5px;
-	border-bottom: #6cd9a8 1px solid;
-	font-weight: bold;
-}
-#list-messages .me .message .text{
-	padding: 5px;
-	font-size: 16px;
-}
-
-#list-messages .friend{
-	text-align: left;
-	margin: 15px 10px;
-}
-#list-messages .friend .message{
-	max-width: 80%;
-	min-width: 200px;
-	background: #f5f5f5;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	display: inline-block;
-	color: #8c8c8c;
-}
-#list-messages .friend .message .user{
-	padding: 3px 5px;
-	border-bottom: #e4e4e4 1px solid;
-	font-weight: bold;
-}
-#list-messages .friend .message .text{
-	padding: 5px;
-	font-size: 16px;
-}
-
-#message-form{
-	position: absolute;
-	bottom: 0; left: 0; right: 0;
-	background: #f7f7f7;
-	border-top: #eaeaea 1px solid;
-	padding: 5px;
-}
-
-#message-form .field{
-	background: #fff;
-	padding: 5px;
-	width: 210px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+#find{
+	background: url(../images/buscador_cancha.png) no-repeat 99% 5px;
+	background-size: 25px;
+	border: solid 1px #999;
 	border-radius: 5px;
-	border: 1px #eaeaea solid;
-	color: #333333;
-}
-#message-form button{
-	border: 0;
 	margin: 0;
-	padding: 3px;
-	background: #f7f7f7;
-	color: #989898;
-	font-weight: bold;
-	font-size: 14px;
+	font-size: 0.9em;
 }
-
-#new-message .header{
+.count_result{
+	text-align: center;
+	color: #777;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
 	background: #f5f5f5;
-	border-bottom: #ccc 1px solid;
-	height: 45px;
+	font-size: 0.8em;
+	padding: 5px;
 }
-
-#new-message .header .cancel{
-	position: absolute;
-	top: 0; bottom: 0; left: 0;
-	padding: 16px;
-	color: #8f8f8f;
-	font-size: 10px;
-	z-index: 100;
-}
-#new-message .header .title{
-	text-align: center;
-	font-size: 16px;
-	color: #121212;
-	padding: 12px;
-	font-weight: bold;
-}
-
-#new-message .members{
-	background: #fff;
-	border-bottom: #ccc 1px solid;
-	max-height: 100px;
-}
-#new-message .members .label{
-	color: #999999;
-	font-size: 13px;
-	padding: 14px 10px;
-	float: left;
-}
-#new-message .members .members-input{
-	width: 150px;
-	max-width: 150px;
-	min-width: 150px;
-	color: #555;
-	font-size: 14px;
-	border: 0;
-	min-height: 20px;
-	max-height: 80px;
-	padding: 10px 0 0 0;
-}
-/*---	Fin Chat With	---*/
-
-/* Capa para cubrir todo el chat (Si es necesario para efecto de carga) */
-.overlay_chat{
-	background: #fff;
-	filter:alpha(opacity=70); 
-	-moz-opacity:0.7; 
-	-khtml-opacity: 0.7;	
-	opacity: 0.7;
-	position: absolute;
-	top: 0; bottom: 0; left: 0; right: 0;
-	padding: 50px 0;
-	text-align: center;
-}
-
-/*---	Fin Chat	---*/
-
-
-/*	Fields	*/
-
-/*	Fields List	*/
-#scroll-list-fields{
-	
-}
-#scroll-list-fields .count_result{
-	font-size: 13px;
-	padding: 3px;
-	text-align: center;
-	color: #777777;
-	background: #f5f5f5;
-	border-bottom: 1px solid #e2e2e2;
-}
-#scroll-list-fields .big_photos{
-	padding: 0 0 20px 0;
-}
-#scroll-list-fields .big_photos li{
-	background: #FFFFFF;
-	border: 1px solid #EAEAEA;
+.big_photos{}
+.big_photos li{
 	position: relative;
 	display: block;
-	margin: 5px 10px;
+	margin: 5px;
 }
-#scroll-list-fields .big_photos li .imagen{
+.big_photos li .imagen{
 	overflow: hidden;
-	background: #333;
-	text-align: center;
 }
-#scroll-list-fields .big_photos li .imagen img{
+.big_photos li .imagen img{
 	max-width: 100%;
-	margin: 0 auto;
 }
-#scroll-list-fields .distance, .fav{
+.distance, .fav{
 	position: absolute;
 	color: #fff;
 	z-index: 1;
-	padding: 8px 0 5px 33px;
+	padding: 5px 0 5px 40px;
 	font-size: 0.85em;
 	margin: 0 5px 0;
 }
-#scroll-list-fields .distance{
-	background: url(../images/ubicacion_mapa_cancha.png) no-repeat 2px 10px;
-	background-size: 25px;
+.distance{
+	background: url(../images/ubicacion_mapa_cancha.png) no-repeat 0 3px;
+	background-size: 35px;
 }
-#scroll-list-fields .distance p {
-	font-size: 12px;
-	line-height: 13px;
-}
-#scroll-list-fields .fav{
+.fav{
 	background-image: url(../images/favoritos.png);
 	background-repeat: no-repeat;
 	background-position: 0 0;
@@ -724,56 +302,39 @@ nav ul li a span{
 	width: 30px;
 	height: 30px;
 	right: 10px;
-	top: 10px;
 	opacity:0.6;
 	padding: 0;
 }
-#scroll-list-fields .fav:hover{
+.fav:hover{
 	background-position: 0 100%;
 }
-#scroll-list-fields .info{
+.info{
 	display: block;
 	font-size: 0.8em;
 	color: #666;
 	position: relative;
-	padding: 5px 10px 10px;
 }
-#scroll-list-fields .basic{
+.basic{
 	margin: 0;
-	width: 72%;
 }
-#scroll-list-fields .basic , #scroll-list-fields .cost{
+.basic , .cost{
 	display: inline-block;
 }
-#scroll-list-fields .basic #name{
+.basic #name{
 	font-size: 1.2em;
 }
-#scroll-list-fields .basic .location_info{
-	font-size: 12px;
-	line-height: 13px;
-	color: #999999;
-}
-#scroll-list-fields .cost{
+.cost{
 	text-align: right;
 	position: absolute;
-	right: 10px;
+	right: 0;
 }
-#scroll-list-fields .cost p{
-	font-size: 12px;
-	line-height: 13px;
-	color: #777777;
+.cost #value{
+	font-size: 1.4em;
 }
-#scroll-list-fields .cost #value{
-	font-size: 18px;
-	line-height: 20px;
-	color: #666666;
-}
-
-/* Navegacion inferior */
-#list-fields-nav{
+#buscar_nav{
 	display: block;
 }
-#list-fields-nav a{
+#buscar_nav a{
 	color: #666;
 	display: block;
 	float: left;
@@ -782,44 +343,13 @@ nav ul li a span{
 	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
 	padding: 10px 0;
 }
-#list-fields-nav a:hover{
+#buscar_nav a:hover{
 	color: #22b473;
 }
-#list-fields-nav a:first-child{
-	border-right: 2px #e2e2e2 solid;
+#buscar_nav a:first-child{
+	border-right: 2px #555 solid;
 }
-
-/* buscador */
-.search-fields{
-	background: #f5f5f5;
-	color: #22262b;
-	text-align: center;
-	display: block;
-	padding: 5px 5px 0 5px;
-	border-bottom: 1px solid #e2e2e2;
-}
-.search-fields .cancel{
-	position: absolute;
-	top: 0; right: 0;
-	padding: 8px 15px;
-	font-size: 13px;
-	color: #929292;
-	font-weight: bold;
-	text-align: center;
-}
-.search-fields-input{
-	margin: 5px 27px 5px 0;
-}
-#find-fields{
-	background: #fff url(../img/search_54x54.png) no-repeat center right;
-	background-size: 25px;
-	border: solid 1px #e2e2e2;
-	border-radius: 3px;
-	margin: 0;
-	font-size: 14px;
-	padding: 5px 20px 5px 5px;
-	width: 100%;
-}
+/*list_items_fields*/
 .fields_list{
 
 }
@@ -828,7 +358,6 @@ nav ul li a span{
 	font-size: 0.9em;
 	border-bottom: solid 1px #ccc;
 	position: relative;
-	background: #fff;
 }
 .list_image{
 	width: 60px;
@@ -838,58 +367,39 @@ nav ul li a span{
 	vertical-align: top;
 }
 .list_image img {
-	height: 60px;
-	width: auto;
+	max-height: 60px;
 }
 .list_info, .fields_list li .arrow{
 	display: inline-block;
 	vertical-align: middle;
-	color: #999;
+	color: #666;
 	padding: 5px;
 }
 .list_info .name{
 	font-size: 1.1em;
 	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
-	color: #666;
 }
 .fields_list li .arrow{
-	background-image: url(../img/arrow_25x30.png);
-	background-size: 20px;
-	font-size: 0;
+	font-size: 1.6em;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
 	position: absolute;
 	right: 0;
 	top: 15px;
-	width: 15px;
-	height: 15px;
-	background-repeat: no-repeat;
 }
-#filter{
-	background-image: url(../img/filter_states.png);
-	background-size: 28px 56px;
-	color: #666;
-	background-repeat: no-repeat;
-	padding: 7px 35px 5px;
+/*map*/
+#map{
 	position: absolute;
-	right: 10px;
-	top: 6px;
-	font-size: 0.85em; 
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
-.fl_inactive{
-	background-position: 100% 100%;
-}
-.fl_active{
-	background-position: 100% 0;
-}
-/*---	Fin Fields List	---*/
-/*---	Fin Fields	---*/
-/*--- filter ---*/
-.cancelar{
+#geolocation{
 	position: absolute;
-	left: 10px;
-	top: 10px;
-	font-size: 0.9em;
-	color: #999;
+	top: 10px; left: 10px;
+	font-size: 14px;
 }
+/*filtros*/
 .aplicarfiltros{
 	background: #29abe2;
 	color: #fff;
@@ -905,9 +415,16 @@ nav ul li a span{
 	position: relative;
 	margin: 0 0 5px;
 }
+header{
+	color: #23262b;
+}
+header a{
+	color: #8f8f8f;
+}
 .filter_name, .filter_input{
 	display: inline-block;
 	vertical-align: middle;
+	max-height: 53px;
 	color: #666;
 }
 .filter_name_false{
@@ -927,14 +444,11 @@ nav ul li a span{
 	text-align: center;
 	color: #8f8f8f;
 }
-.filter_input input, .filter_input select {
-	min-width: 95%;
-	background: transparent;
-	border: none;
-	min-height: 20px;
+.filter_input input{
+	max-width: 95%;
 }
 .filter_input .filter_action{
-	background-image: url(../img/Plus_x_filtro.png);
+	background-image: url(../images/Plus_x_filtro.png);
 	background-repeat: no-repeat;
 	background-size: 30px 60px;
 	width: 30px;
@@ -944,13 +458,32 @@ nav ul li a span{
 	position: absolute;
 } 
 #filtro .custom-input .ui-input-clear{
-	background-image: url(../img/Plus_x_filtro.png);
+	background-image: url(../images/Plus_x_filtro.png);
 	background-repeat: no-repeat;
 	background-size: 30px 60px;
 	width: 30px;
 	height: 30px;
 	top: 10px;
 	right: 0px;
+}
+#filtro .custom-input .ui-input-clear .ui-icon{
+	visibility: hidden;
+}
+#filtro .custom-input .ui-body-a{
+	border: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+#filtro .ui-select .ui-btn {
+	background: transparent;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border: none;
+}
+#filtro .ui-select .ui-icon{
+	visibility: hidden;
 }
 .field_filter{
 	background: #fff;
@@ -984,7 +517,7 @@ nav ul li a span{
 	padding: 0;
 }
 .horas_operdador li{
-	background-image: url(../img/horasOperadores.png);
+	background-image: url(../images/horasOperadores.png);
 	background-size: 45px 90px;
 	background-position:  0 5px;
 	width: 52px;
@@ -1002,7 +535,7 @@ nav ul li a span{
 	text-align: left;
 }
 .techo ul li{
-	background-image: url(../img/select_filtro.png);
+	background-image: url(../images/select_filtro.png);
 	background-size: 35px 70px; 
 	background-repeat: no-repeat;
 	background-position: 98% 3px;
@@ -1017,11 +550,12 @@ nav ul li a span{
 	background-position: 98% 114%;
 }
 #price{
+	position: fixed;
 	display: block;
 	text-align: justify;
 	bottom: 0;
 	padding: 10px 5px;
-	width: 100%;
+	width: 96%;
 	background:#f5f5f5;
 	color: #666;
 	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
@@ -1034,28 +568,368 @@ nav ul li a span{
 #filtro_chat .aplicarfiltros{
 	background: #ed1e79;
 }
-.transparent{
-	background: transparent;
-}
-/*--- Fin filter --*/
+.ui-datebox-container{
 
+}
+/*#filtro .ui-datebox-container h1{
+	background-color: #29abe2;
+	padding: .6em 30% .8em;
+	color: #fff;
+	margin: 0;
+}*/
+#filtro .ui-datebox-container{
+	
+}
+/*chat */
+#chat{
+	position: absolute;
+	background: #eee;
+	bottom: solid 4px #666;
+	width: 100%;
+	display: none;
+       
+}
+/*cancha*/
+.imagen{
+	text-align: center;
+}
+#reserve{
+	background: #45ff8b;
+	color: #fff;
+	display: block;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+#descripcion{}
+#descripcion h3 a, #canchas h3 a, #horario h3 a, #amenities h3 a{
+	color: #666;
+}
+#descripcion h3 a .ui-btn-inner, #canchas h3 a .ui-btn-inner, #horario h3 a .ui-btn-inner, #amenities h3 a .ui-btn-inner{
+	padding: 5px 0 5px 5px;
+}
+#descripcion h3 a .ui-btn-inner .ui-icon, #canchas h3 a .ui-btn-inner .ui-icon, #horario h3 a .ui-btn-inner .ui-icon{
+	display: block;
+	width: 25px;
+	height: 25px;
+	background-position: 0 0;
+	background-size: 25px;
+	top: 40%;
+	left: 97%;
+}
+#descripcion h3 a .ui-btn-inner .ui-icon{
+	background-image: url(../images/descripcion_cancha.png);
+}
+#canchas h3 a .ui-btn-inner .ui-icon{
+	background-image: url(../images/detalles_canchas.png);
+} 
+#horario h3 a .ui-btn-inner .ui-icon{
+	background-image: url(../images/horarios.png);
+}
+#amenities h3 a .ui-btn-inner .ui-icon{
+	top: 40%;
+	left: 97%;
+}
+#descripcion .ui-collapsible-content, #canchas .ui-collapsible-content, #horario .ui-collapsible-content, #amenities .ui-collapsible-content{
+	background: #fff;
+}
+#amenities ul li{
+	margin: 0 0 0 0 10px;
+	display: block;
+	padding: 5px 0;
+	text-transform: capitalize;
+	border-bottom: solid 1px #999;
+}
+#amenities ul li.aviable{
+	background-image: url(../images/check_amenities.png);
+	background-position: 100% 0;
+	background-size: 20px;
+	background-repeat: no-repeat;
+}
+/*footer salir*/
+footer.salir{
+	background: #ec1c24 !important;
+	text-align: center;
+}
+.salir a{
+	color: #fff;
+	font-weight: bold;
+}
+/* Fav list */
+#lista_deseos .ui-icon, #custom .ui-icon{
+        background-image: url(../images/maximizar_lista_contactos.png);
+	left: 90%;
+        background-size: 22px;
+        background-repeat: no-repeat;
+      
+       
+        
+}
+#lista_deseos .ui-btn-inner, #custom .ui-btn-inner{
+	padding-left: 10px;
+	font-size: 0.9em;
+	color: rgb(102, 102, 102);
+        text-align: center;
+        padding: 13px;
+
+  
+}
+#custom .ui-collapsible-content{
+	padding: 0;
+
+        
+}
+#field_fav{
+	clear: both;
+	overflow: hidden;
+	background: #fff;
+
+}
+#field_fav .list_image{
+	width: 120px;
+	height: 90px;
+}
+#field_fav .list_image img{
+	max-height: 90px;
+}
+#field_fav .list_info{
+	max-width: 80%;
+	font-size: 0.75em;
+	padding: 5px 0;
+}
+#field_fav .list_info .name{
+	font-size: 1.2em;
+
+}
+#field_fav .info{
+	display: block;
+	border-top: solid 1px #666;
+	padding: 5px 0;
+	margin: 5px 0 0;
+        
+}
+#field_fav .info .location{
+	background-image: url(../images/ubicacion.png);
+	background-repeat: no-repeat;
+	background-size: 23px;
+	padding: 5px 0 10px 28px;
+	display: inline-block;
+	float: left;
+	font-size: 1.2em;
+	color: #999;
+}
+#field_fav .info .fav{
+	background-image: url(../images/favorito_listadeseos.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	float: right;
+}
+#field_fav .info .active{
+	background-position: 0 100%;
+}
+/*End fav list*/
+/*Inicio lista amigos*/
+#fiends-list .image, #fiends-list .info{
+	display: inline-block; 
+	vertical-align: middle;
+}
+.list_fiends ul{
+	margin: 0;
+	padding: 0;
+        border-top: 1px outset #666666;
+}
+.list_fiends li{
+	display: block;
+	position: relative;
+	border-bottom: 1px inset #999;;
+        padding: 0;
+	overflow: hidden;
+	background: #fff;
+}
+.list_fiends #friend_chat{
+	background-image: url(../images/mensaje.png);
+	background-position: 14px 32px;
+	background-size: 22px;
+	width: 40px;
+	height: 85px;
+	background-repeat: no-repeat;
+	border-left: outset 1px #999;
+	padding: 0 5px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#friends_options{
+	background-image: url(../images/accion_amigo.png);
+	background-size: 26px 100px;
+	background-repeat: no-repeat;
+	border-left: outset 1px #999;
+	width: 35px;
+	height: 85px;
+	position: absolute;
+	top: 0;
+	right: 60px;
+}
+.list_fiends #friend_chat .online{
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	border-radius: 5px;
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	color: #22b473;
+        background-image: url(../images/icon_conected.png);
+        background-size: 10px;
+}
+.filter_id{
+	text-align: center;
+	padding: 2px 0;
+	margin: -6px 0;
+}
+.find_friends #finder_f{
+	background-image: url(../images/lupa.png);
+	background-size: 24px;
+	background-repeat: no-repeat;
+	background-position: 99%, 5%;
+	padding: 3px;
+        
+      
+        
+    
+     
+}
+.list_fiends .add{
+	background-position: 10px 30px;
+}
+.list_fiends .delete{
+	background-position: 10px 300%;
+}
+#fiends-list{
+	background: #fdfdfd;
+	position: relative;
+	z-index: 1;
+	padding: 7.5px 15px;
+}
+ul.friend{
+
+}
+ul.friends li{
+	height: 85px;
+	overflow: hidden;
+	position: relative !important;
+}
+#add_firends{
+	background-image: url(../images/agregar_jugadores.png);
+	background-size: 24px;
+	height: 25px;
+	width: 25px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 5px;
+}
+#filter_estatus{
+	background-image: url(../images/filter_friends_states.png);
+	background-size: 27px 54px;
+	background-position: 0 100%;
+	border: none;
+	height: 27px;
+	width: 27px;
+	margin: 5px 5px 0 0;
+}
+.active{
+	background-position: 0 0 !important;
+}
+.players #friends_options, .players #friend_chat{
+	z-index: 1;
+}
+.players .added{
+	
+}
+/*FIn lista de amigos*/
+/*Agregar Amigos*/
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+}
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap > section {
+  float:left;
+  width:100%;
+  position: relative;
+}
+.nav_addFriends{
+	border-top: inset 1px #999;
+}
+.nav_addFriends ul li{
+	display: inline-block;
+	padding: 10px 0;
+	text-align: center;
+}
+.nav_addFriends ul li.active{
+	border-bottom: 5px inset #22b473;
+	padding: 10px 0 5px;
+}
+.nav_addFriends ul .add{
+	background: #22b473;
+	color: #fff;
+}
+.all_contacts{
+	border-top: 1px outset #999;
+	border-bottom: 1px outset #999;
+	text-align: center;
+	padding: 10px 0;
+	display: block;
+	background: #fff;
+}
+.all_contacts .todos{
+	background: #eee;
+	border: outset 1px #999;
+	color: #333 !important;
+	padding: 2px 5px;
+	margin: 0 10px;
+	border-radius: 3px;
+}
+.all_contacts .todos:hover{
+	color: #333;	
+}
+#agregar_amigos li{
+	border-bottom: inset 1px #999;
+	display: block;
+}
+#agregar_amigos #fiends-list .image{
+	width: 50px;
+	height: 50px;
+}
+#agregar_amigos #fiends-list .image img{
+	width: 50px;
+}
+#agregar_amigos #fiends-list .add_btn{
+	background-image: url(../images/select_filtro.png);
+	background-size: 35px 70px; 
+	background-repeat: no-repeat;
+	display: block;
+	padding: 5px 0 5px 10px;
+	float: right;
+	width: 25px;
+	height: 25px;
+	margin: 5px 10px 0 0;
+}
+ #agregar_amigos #fiends-list .selected{
+ 	background-position: 0 100%;
+ }
+/*Fin agregar amigos*/
 
 /*
  * Botones
  * Todos los botones utilizados en la aplicacion deberan ser
  * configurados a partir de este punto (Al finalizar el archivo css)
  */
-
-#back_icon{
-	background: url(../img/btn/btn_back_54x54.png) no-repeat center;
-	background-size: 23px 23px;
-	width: 45px;
-	height: 45px;
-	position: absolute;
-	top:0;
-	left:0;
-	z-index: 1002;
-}
 
 a.btn_menu{
 	display:inline-block;
@@ -1074,35 +948,6 @@ a.btn_notification{
 	background: url(../img/btn/notificaciones_54x54.png) center no-repeat;
 	background-size: 24px 24px;
 }
-
-a.btn_back{
-	display:inline-block;
-	width: 23px;
-	height: 23px;
-	text-decoration: none;
-	background: url(../img/btn/btn_back_54x54.png) center no-repeat;
-	background-size: 23px 23px;
+#titulo1{
+    padding:12px;
 }
-
-/*---	Fin Botones		---*/
-
-
-/* Libraries */
-
-	/* Swipe .swipe-wrape */
-	.swipe-wrap {
-	  overflow: hidden;
-	  position: relative;
-	  padding: 0;
-	  margin: 0;
-	}
-	.swipe-wrap > div {
-	  float:left;
-	  position: relative;
-	  padding: 0;
-	  margin: 0;
-	  overflow: hidden;
-	}
-	/*---	Fin Swipe	---*/
-
-/*---	Fin Libraries	---*/

@@ -26,7 +26,7 @@ $(function(){
 						// Por ser un archivo de prueba se cargan datos por defecto
 						var userLogueado={ 
 								 login: 1
-								,facebook_id:'736187925'
+								,facebook_id:'100002008880396'
 								,name:'Abel'
 								,first_name:'Abel'
 								,last_name:'Moreno'
@@ -72,8 +72,8 @@ $(function(){
 											,address:user.use_address
 											,available:user.use_available
 											};
-										squadrapp.user.loadUser(userSquadrapp);
-										getMenu();
+										localStorage.setItem('user', JSON.stringify(userSquadrapp));		// Almacena la información del usuario logueado
+										squadrapp.user.reloadUser();	// Carga nuevamente el usuario que esta logueado
 									 }else{
 										 alert('Error en el servidor');
 									 }
@@ -88,7 +88,6 @@ $(function(){
 			
 			function logout(){
 				localStorage.removeItem('user');	// Elimina la informacion de usuario logueado
-				localStorage.removeItem('nav');	// Elimina la informacion de usuario logueado
 				alert('logout');
 			}
 			
