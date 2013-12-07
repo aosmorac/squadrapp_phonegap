@@ -1,29 +1,16 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Squadrapp :: Home</title>
-		<link rel="stylesheet" href="css/SquadrApp.css" />
-		<link rel="stylesheet" href="css/squadrapp.min.css" />
-		<link rel="stylesheet" href="lib/jquery.mobile/jquery.mobile.structure-1.3.2.css" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	</head>
-	<body>
-		<section data-role="page" data-theme="a" id="listadedeseos">
 			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
-				<a id="menu_icon" onclick="getMenu();"></a>
+				<a id="menu_icon" onclick="openMenu();"></a>
 				<p>Lista de deseos</p>
-				<a href="#" data-icon="back" data-rel="back"></a>
 			</header>
-			<section data-role="content">	
-				<div data-role="collapsible-set">
-				    <div id="lista_deseos">
-				    	<h3>Canchas locales - Bogotá, Colombia</h3>
-				    	<ul>
+			<section id="content" class="content">
+				<section class="collapsible-set">
+				    <section id="lista_deseos" data-status='open'>
+				    	<h3>Canchas locales - Bogotá, Colombia <span class='max_min_icon min'></span></h3>
+				    	<ul class='acord_content'>
 				    		<li>
 						        <section id="field_fav">
 						        	<section class="list_image">
-										<img src="images/thumb_1.jpg" alt='cancha'>
+										<img src="images/fields/thumb_1.jpg" alt='cancha'>
 									</section>
 									<section class="list_info">
 										<p class="name">
@@ -52,14 +39,14 @@
 						        </section>
 						    </li>	
 					    </ul>
-				    </div>
-				    <div id="lista_deseos">
-				    	<h3>Canchas en resto del mundo</h3>
-				    	<ul>
+				    </section>
+				    <section id="lista_deseos" data-status='close'>
+				    	<h3>Canchas en resto del mundo <span class='max_min_icon max'></span></h3>
+				    	<ul class='acord_content'>
 				    		<li>
 						        <section id="field_fav">
 						        	<section class="list_image">
-										<img src="images/thumb_1.jpg" alt='cancha'>
+										<img src="images/fields/thumb_1.jpg" alt='cancha'>
 									</section>
 									<section class="list_info">
 										<p class="name">
@@ -88,20 +75,32 @@
 						        </section>
 						    </li>	
 					    </ul>
-				    </div>
-
-			    </div>
+				    </section>
+			    </section>
 			</section><!-- /content -->
+			<div id="pullUp-list-fields"> </div>	
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
-				<a href="#" id="chat_icon" data-estado="quiet"></a>
-			</footer>
-			<section data-role="panel" data-position="left" data-display="reveal" id="menu" class="menu">
 				
-			</section>
-			<section id="chat" class="chat">
-				panel chat
-			</section>
-		</section>
+			</footer>
+		<!---date piker-->
+		<link href="css/mobiscroll.custom-2.6.2.min.css" rel="stylesheet" type="text/css" />
+		<script src="lib/mobiscroll.custom-2.6.2.min.js" type="text/javascript"></script>
 		
-	</body>
-</html>
+		<script>
+			$(function(){
+				loadImages();
+				$("img").one('load', function() {
+					scrollFields = new iScroll('content');
+				});
+				$('.collapsible-set section').bind('click touchend', function(){
+					$(this).siblings().data('status', 'close').find('.acord_content').slideUp();
+					$(this).siblings().find('span').removeClass('min');
+					$(this).data('status', 'open').find('.acord_content').slideDown();
+					
+					if($(this).data('status') == 'open'){
+						$(this).find('span').addClass('min');
+					}
+					scrollFields.refresh();
+				})
+			});
+		</script>

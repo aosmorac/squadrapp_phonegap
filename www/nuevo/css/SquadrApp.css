@@ -83,7 +83,7 @@ body .ui-body-a, body .ui-overlay-a, body .ui-bar-a {
 		font-size: 0.7em;
 	}
 }
-@media screen and (min-width: 361px) and (max-width: 600px) {
+@media screen and (min-width: 361px) {
 	#field_fav .list_info{
 		min-width: 70%;
 	}
