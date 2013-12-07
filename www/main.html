@@ -28,7 +28,6 @@
 		<section data-role="page" id="pages" data-theme="a">
 			
 		</section>
-		
 		<a href="#" id="chat_icon" onclick="clickBtnChat();" class="chat-open" data-estado="quiet"><section class="arrow"> </section></a>
 		
 		<section id="chat_section" class="chat"><div class="swipe-wrap">
@@ -38,8 +37,6 @@
 		<section onclick="clickBtnChat();" id="chat-bg" class="chat-bg"> </section>
 		
 		<section id="new-message"> </section>
-
-		<section id="map" style="display: none;"></section>
 
 		<section id="overlay" style="display: none;">
 			<input type="hidden" id="overlay_input" />
@@ -54,6 +51,7 @@
 		<script src="lib/jquery.tinyscrollbar.min.js"></script>
 		<script src="js/cdv-plugin-fb-connect.js"></script>
 		<script src="js/facebook-js-sdk.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDqPeF6eGogk2Z9w9wvH7lt750gSSQk1e8&sensor=true"></script>
 		<script src="lib/swipe/swipe.js"></script>
 		<script src="lib/snap/snap.js"></script>
 		<script type="text/javascript" src="lib/iscroll/iscroll.js"></script>
@@ -64,6 +62,9 @@
 		<script type="text/javascript" src="js/general.js"></script>
 
 <script type="text/javascript">
+var geocoder;
+var map;
+
 	document.addEventListener('deviceready', function() {
 				try {
 					FB.init({
@@ -77,7 +78,8 @@
 			}, false);
 			
 			var snapper = new Snap({
-                element: document.getElementById('pages')
+                element: document.getElementById('pages'),
+                touchToDrag: false
             });
             // 
 			UpdateDrawers = function(){
@@ -91,7 +93,7 @@
 					$('#right-drawer').hide();
 					$('#left-drawer').show();
 				}
-			};
+			}; 
 			
 			snapper.on('drag', UpdateDrawers);
 			snapper.on('animating', UpdateDrawers);
@@ -99,6 +101,7 @@
 
 
 var myScroll;
+		
 function loaded() {
 	loadPage('test.html');
 }
@@ -106,6 +109,38 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
 
 
+function initializeMap() {
+		  geocoder = new google.maps.Geocoder();
+		  var myLatlng = new google.maps.LatLng(48.856614,2.3522219000000177);
+		  var mapOptions = {
+			zoom: 16,
+			center: myLatlng,
+			mapTypeControl: false,
+			overviewMapControl: false,
+			panControl: false,
+			scrollwheel: false,
+			streetViewControl: false,
+			zoomControl: true,
+			zoomControlOptions: {
+			  style: google.maps.ZoomControlStyle.SMALL
+			},
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		  };
+		  map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		}	
+		
+		function showMap(){
+			$('#map').css({'z-index': 100});
+			$('#list-fields-nav-map').addClass('selected');
+			$('#list-fields-nav-list').removeClass('selected');
+			//initializeMap();
+		}
+		
+		function hideMap(){
+			$('#map').css({'z-index': -1});
+			$('#list-fields-nav-list').addClass('selected');
+			$('#list-fields-nav-map').removeClass('selected');
+		}
 
 </script>
 </body>

@@ -1,7 +1,6 @@
 			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
 				<a id="menu_icon" onclick="openMenu();"></a>
 				<p>Lista</p>
-				<a onclick="loadPage('fields_filter.html');" id="filter" class="fl_inactive">Filtro</a>
 			</header>
 			<div id="pullDown-list-fields"> </div>
 			<section id="content" class="content">
@@ -17,30 +16,34 @@
 					<p class="count_result">
 						64 canchas encontradas en 18 sedes
 					</p>
-					<section id="search_results"></section>
 					<section id="list-fields">
 						<ul class="big_photos">
 							
 						</ul>
 					</section>
 				</div>	
+				<div id="map" style="" ></div>
 			</section><!-- /content -->
 			<div id="pullUp-list-fields"> </div>	
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
 				<section id='list-fields-nav'>
-					<a>Lista</a>
-					<a>Mapa</a>
+					<a id="list-fields-nav-list" onclick="hideMap();" class="selected" >Lista</a>
+					<a id="list-fields-nav-map" onclick="showMap();" >Mapa</a>
 				</section>
 			</footer>
-
+			
 <script>
 var scrollFieldsList;
+
 $(function(){
 	
 	$("#find-fields").focus(function(){
 		$(".search-fields .cancel").show();
 		$(".search-fields .search-fields-input").css("margin-right", "117px");
 	});
+	
+	
+	initializeMap();
 	
 	var pullDownEl = document.getElementById('pullDown-list-fields');
 	var pullDownOffset = pullDownEl.offsetHeight;
@@ -83,22 +86,13 @@ $(function(){
 	});
 	setTimeout(function () {
 		scrollFieldsList.refresh();
-	}, 200);
-	//Agregar lista campos
-	$('#find-fields').focus(function(){
-		$('#search_results').load("fields_list.html", function(){
-			loadImages();
-			$('#list-fields').css('display','none');
-		});
-	});
+	}, 200); 
 });
 
 function cancelFieldSearch(){
 	$("#find-fields").val('');
 	$(".search-fields .cancel").hide();
-	$(".search-fields .search-fields-input").css("margin-right", "27px");
-	$('#search_results').empty();
-	$('#list-fields').slideDown();
+	$(".search-fields .search-fields-input").css("margin-right", "27px");	
 }
 
 function loadFields(){
@@ -110,4 +104,6 @@ function loadFields(){
 	$('.loader-fields-list').remove();
 	scrollFieldsList.refresh();
 }
+
+
 </script>
