@@ -11,8 +11,11 @@
  * Globales			(Estilos para elementos presentes en toda la aplicacion)
  * Menu				(Menu principal, laterla izquierdo)
  * Chat				(Sección de chat)
- * 	Chat List		(Lista de las conversaciones que se han tenido por usuario)
- * 	Chat With		(Conversacion, lista de mensajes y envio de nuevos mensajes)
+ * Chat List		(Lista de las conversaciones que se han tenido por usuario)
+ * Chat With		(Conversacion, lista de mensajes y envio de nuevos mensajes)
+ * filter			(Manejo de lso estilos de los filtros)	
+ * Cancha			(Estilos internos de la cancha)	
+ * Destalles		(detalles de la cancha)	
  * 
  * Botones			(Estilos para cada boton)
  * 
@@ -691,12 +694,12 @@ nav ul li a span{
 	display: block;
 	margin: 5px 10px;
 }
-#scroll-list-fields .big_photos li .imagen{
+#scroll-list-fields .big_photos li .imagen, .field_section .imagen{
 	overflow: hidden;
 	background: #333;
 	text-align: center;
 }
-#scroll-list-fields .big_photos li .imagen img{
+#scroll-list-fields .big_photos li .imagen img, .field_section .imagen img{
 	max-width: 100%;
 	margin: 0 auto;
 }
@@ -825,7 +828,340 @@ nav ul li a span{
 }
 /*---	Fin Fields List	---*/
 /*---	Fin Fields	---*/
+/*--- filter ---*/
+.cancelar{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	font-size: 0.9em;
+	color: #999;
+	z-index: 2;
+}
+.aplicarfiltros{
+	background: #29abe2;
+	color: #fff;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	text-align: center;
+	padding: 10px 0;
+}
+.aplicarfiltros a{
+	color: #fff!important;
+}
+.filter{
+	background: #fff;
+	position: relative;
+	margin: 0 0 5px;
+}
+.filter_name, .filter_input{
+	display: inline-block;
+	vertical-align: middle;
+	color: #666;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	font-size: 0.95em;
+}
+.filter_name_false{
+	display: inline-block;
+	vertical-align: middle;
+	min-height: 53px;
+}
+.filter_name{
+	width: 29%;
+	text-align: center;
+	padding: 16px 0;
+	border-right:solid 1px #eee;
+}
+.filter_input{
+	right: 0;
+	width: 68%;
+	text-align: center;
+	color: #8f8f8f;
+}
+.filter_input input, .filter_input select {
+	min-width: 95%;
+	background: transparent;
+	border: none;
+	min-height: 20px;
+}
+.filter_input .filter_action{
+	background-image: url(../img/Plus_x_filtro.png);
+	background-repeat: no-repeat;
+	background-size: 30px 60px;
+	width: 30px;
+	height: 30px;
+	top: 10px;
+	right: 10px;
+	position: absolute;
+} 
+#filtro .custom-input .ui-input-clear{
+	background-image: url(../img/Plus_x_filtro.png);
+	background-repeat: no-repeat;
+	background-size: 30px 60px;
+	width: 30px;
+	height: 30px;
+	top: 10px;
+	right: 0px;
+}
+.field_filter{
+	background: #fff;
+	margin: 5px 0;
+	font-size: 0.9em;
+}
+#confirmar_filtro .numerohoras{
+	text-align: left;
+}
+.horas , .horas_operdador{
+	display: inline-block;
+	vertical-align: top;
+	color: #8f8f8f;
+}
+.horas {
+	border-right: 1px #eee solid;
+	text-align: center;
+	width: 40%;/*regla para responsive*/
+}
+.horas .horafinal{
+	border-bottom: 1px solid #eee;
+	padding: 4px 0;
+	width: 100%;
+	text-align: center;
+}
+.horas .totalhoras{
+	padding: 4px 0;
+}
+.horas_operdador{
+	margin: 0;
+	padding: 0;
+}
+.horas_operdador li{
+	background-image: url(../img/horasOperadores.png);
+	background-size: 45px 90px;
+	background-position:  5px 5px;
+	width: 52px;
+	height: 52px;
+	display: inline-block;
 
+}
+.horas_operdador li[data-value="menos"]{
+	background-position: 5px 110%;
+	border-right: solid 1px #eee;
+}
+.techo ul{
+	background: #fff;
+	border-left: solid #eee 1px;
+	text-align: left;
+}
+.techo ul li{
+	background-image: url(../img/select_filtro.png);
+	background-size: 27px 54px; 
+	background-repeat: no-repeat;
+	background-position: 98% 5px;
+	display: block;
+	padding: 10px 0 10px 10px;
+}
+.techo ul li:first-child{
+	border-bottom: 1px solid #eee;
+	border-top: 1px solid #eee;
+}
+.techo ul li.selected{
+	background-position: 98% 140%;
+}
+#price{
+	position: fixed;
+	display: block;
+	text-align: justify;
+	bottom: 35px;
+	padding: 10px 5px 15px;
+	width: 100%;
+	background:#f5f5f5;
+	color: #666;
+	font-family: 'swanseabold', Helvetica, Arial, sans-serif;
+	border-top: 1px solid #999;
+}
+#price span{
+	position: absolute;
+	right: 20px;
+}
+#filtro_chat .aplicarfiltros{
+	background: #ed1e79;
+}
+.transparent{
+	background: transparent;
+}
+/*--- Fin filter --*/
+/*cancha*/
+.field_section{
+	position: relative;
+	overflow: hidden;
+	background: #fff;
+}
+.field_section .imagen{
+	margin: 0 0 -2px;
+}
+.field_section .logo{
+	display: inline-block;
+	width: 50px;
+	overflow: hidden;
+	float: right;
+	border: solid 1px #999;
+	margin: 5px;
+}
+.field_section .logo img{
+	max-width: 100%;
+}
+.field_section .info{
+	color: #999;
+	font-size: 0.8em;
+	border-bottom: solid 1px #ccc;
+	overflow: hidden;
+	padding: 5px 0;
+}
+.field_section .info .extended{
+	display: inline-block;
+}
+.field_section .info #name{
+	font-size: 1.2em;
+	color: #666;
+}
+#reserve{
+	background: #45ff8b;
+	color: #fff;
+	display: block;
+	text-align: center;
+	padding: 15px 0;
+	font-size: 1em;
+	font-weight: bold;
+}
+.detailed_info{
+	clear: both;
+}
+.detailed_info ul li{
+	background-image: url(../img/arrow_25x30.png);
+	background-size: 15px;
+	background-repeat: no-repeat;
+	background-position: 98% 10px;
+	border-bottom: solid 1px #ccc;
+}
+.detailed_info ul li a{
+	color: #999;
+	padding: 10px 5px;
+	display: block;
+}
+.detailed_info p{
+	display: block;
+	font-size: 0.8em;
+	text-align: center;
+	border-bottom: solid 1px #ccc;
+	color: #999;
+}
+#descripcion h3 a, #canchas h3 a, #horario h3 a, #amenities h3 a{
+	color: #666;
+}
+#descripcion h3 a .ui-btn-inner, #canchas h3 a .ui-btn-inner, #horario h3 a .ui-btn-inner, #amenities h3 a .ui-btn-inner{
+	padding: 5px 0 5px 5px;
+}
+#descripcion h3 a .ui-btn-inner .ui-icon, #canchas h3 a .ui-btn-inner .ui-icon, #horario h3 a .ui-btn-inner .ui-icon{
+	display: block;
+	width: 25px;
+	height: 25px;
+	background-position: 0 0;
+	background-size: 25px;
+	top: 40%;
+	left: 97%;
+}
+#descripcion h3 a .ui-btn-inner .ui-icon{
+	background-image: url(../images/descripcion_cancha.png);
+}
+#canchas h3 a .ui-btn-inner .ui-icon{
+	background-image: url(../images/detalles_canchas.png);
+} 
+#horario h3 a .ui-btn-inner .ui-icon{
+	background-image: url(../images/horarios.png);
+}
+#amenities h3 a .ui-btn-inner .ui-icon{
+	top: 40%;
+	left: 97%;
+}
+#descripcion .ui-collapsible-content, #canchas .ui-collapsible-content, #horario .ui-collapsible-content, #amenities .ui-collapsible-content{
+	background: #fff;
+}
+#amenities ul li{
+	margin: 0 0 0 0 10px;
+	display: block;
+	padding: 5px 0;
+	text-transform: capitalize;
+	border-bottom: solid 1px #999;
+}
+#amenities ul li.aviable{
+	background-image: url(../images/check_amenities.png);
+	background-position: 100% 0;
+	background-size: 20px;
+	background-repeat: no-repeat;
+}
+/*Fin cancha*/
+/*Detalles cancha*/
+.info_field{
+	margin: 15px;
+	background: #fff;
+	border: 1px #ccc solid;
+	overflow: hidden;
+}
+.info_field .extended{
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: middle;
+	color: #999;
+	padding: 10px;
+}
+.info_field .logo{
+	display: inline-block;
+	height: 50px;
+	overflow: hidden;
+	float: right;
+	padding: 5px;
+	border-left: solid 1px #ccc;
+}
+.info_field .logo img{
+	max-height: 100%;
+}
+.collapsible-set{
+	background: #fff;
+}
+.collapsible-set h3{
+	color: #666;
+	padding: 5px 0 5px 5px;
+	display: block;
+	background-position: 0 0;
+	background-size: 25px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+#descripcion h3{
+	background-image: url(../img/descripcion_cancha.png);
+}
+#canchas h3{
+	background-image: url(../img/detalles_canchas.png);
+} 
+#horario h3{
+	background-image: url(../img/horarios.png);
+}
+#amenities h3{
+	top: 40%;
+	left: 97%;
+}
+#amenities ul li{
+	margin: 0 0 0 0 10px;
+	display: block;
+	padding: 5px 0;
+	text-transform: capitalize;
+	border-bottom: solid 1px #999;
+}
+#amenities ul li.aviable{
+	background-image: url(../img/check_amenities.png);
+	background-position: 100% 0;
+	background-size: 20px;
+	background-repeat: no-repeat;
+}
+/*fin detalles cancha*/
 
 /*
  * Botones
