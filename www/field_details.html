@@ -1,0 +1,63 @@
+			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
+				<a id="menu_icon" onclick="openMenu();"></a>
+				<p>Detalles</p>
+			</header>
+			<section id="content" class="content">
+				<section id="wrap">
+					<section class="info_field">
+						<section class="extended">
+							<p id="name">
+								<strong>Futboleros</strong>
+							</p>
+							<p>Sede Alameda</p>
+						</section>
+						<section class="logo">
+							<img src="images/fields/field_logo.jpg" alt='cancha'>
+						</section>
+					</section>
+					<section class="collapsible-set">
+					    <section id="descripcion">
+					        <h3>Descripción</h3>
+					        <p>
+					        	En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lantejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.
+					        </p>
+					    </section>
+					    <section data-role="collapsible" id="canchas">
+					        <h3>Canchas <span id='numero'>3</span></h3>
+					        <p>
+					        	En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lantejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.
+					        </p>
+					    </section>
+					    <section data-role="collapsible" id="horario">
+					        <h3>Horario</h3>
+					        <p>
+					        	En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lantejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.
+					        </p>
+					    </section>
+					    <section data-role="collapsible" id="amenities">
+					        <h3>Amenities</h3>
+					        <ul>
+					        	<li id="parqueadero" class="aviable">
+					        		parqueadero
+					        	</li>
+					        	<li id="restaurante">
+					        		restaurante
+					        	</li>
+					        </ul>
+					    </section>
+				    </section>
+				</section>
+			</section><!-- /content -->
+			<div id="pullUp-list-fields"> </div>	
+			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
+				
+			</footer>
+		
+		<script>
+			$(function(){
+				loadImages();
+				$("img").one('load', function() {
+					scrollDetails = new iScroll('content');
+				});
+			});
+		</script>
