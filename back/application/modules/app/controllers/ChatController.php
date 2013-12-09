@@ -71,7 +71,18 @@ class App_ChatController extends Zend_Controller_Action
         $userChat = new Messages_Model_UserChat();
         $userChat->saveMessage($vars['me'], $vars['to'], trim($vars['msg']));
     }
-
+    
+public function createGroupAction()
+{
+	header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+	$this->_helper->layout()->disableLayout();
+	$this->_helper->viewRenderer->setNoRender(true);
+	$vars = $this->_getAllParams();
+	//Zend_Debug::dump($vars, "Controlador"); 
+	$group = new Messages_Model_UserChat();
+	$com_group_id=$group->createGroup($vars['name'],$vars['description'],$vars['ownerid']);
+    echo json_encode(array("group_id"=>$com_group_id));
+}
     
 }
 ?>

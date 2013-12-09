@@ -85,5 +85,13 @@ class Messages_Model_UserChat {
         }
     }
     
+    public function createGroup($name="",$description="", $ownerid=5)
+    {
+		//Zend_Debug::dump($name, "Modelo");
+    	$group = new Messages_Model_DbTable_CometChatGroup();
+    	$id=$group->createGroup($name,$description, $ownerid);
+    	return $id;
+     }
+    
     
 }
