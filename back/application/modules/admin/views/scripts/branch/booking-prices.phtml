@@ -1,0 +1,48 @@
+<div class="squadrapp_canvas">
+
+    <div id="branch_schedule">
+        <p>
+            <span>Sedes</span>
+            <input name="bra_name" id="bra_name" type="text" placeholder="Sede" />
+            <input name="bra_id" id="bra_id" type="hidden" />
+        </p>
+        <p id="branch_fields"></p>
+    </div>
+
+</div>
+
+
+<style>
+#branch_schedule{
+	padding:100px 0 0;
+}
+
+</style>
+
+
+<script>
+$(function() {
+	
+	
+	//autocomplete
+    $("#bra_name").autocomplete({
+        source: "/admin/branch/auto-complete-branch",
+        minLength: 1,
+        select: function (event, ui) {
+            if(ui.item) {
+                $("#bra_name").val(ui.item.bra_alias);
+                $("#bra_id").val(ui.item.id_bra);
+				$("#branch_fields").load("/admin/branch/branch-fields", {
+				   bra_id: $("#bra_id").val()
+			   }, function(){});
+            }else{
+                $("#bra_id").val(0);
+            }
+        }
+    });	
+	
+	
+	
+});
+</script>
+

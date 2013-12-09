@@ -1,0 +1,54 @@
+
+
+	.content_squadrapp_registro{
+	}
+	
+	
+	.content_squadrapp_registro h1{
+		width:440px;
+		margin:0 auto;
+		margin-bottom:10px;
+	}
+	
+	.content_squadrapp_registro h5{
+		width:440px;
+		margin:20px auto;
+	}
+	
+	.content_squadrapp_registro p{
+		width:440px;
+		margin:0 auto;
+		margin-bottom:10px;
+	}
+	
+	.content_squadrapp_registro .form{
+		padding:5px;
+	}
+	.content_squadrapp_registro .form input{
+		font-size:20px;
+		color:#400;
+	}
+	.content_squadrapp_registro .form .field {
+		padding:5px 0;
+	}
+		
+	.content_squadrapp_registro .form .field1{
+		width:400px; 
+			height:40px;
+			padding:9px 10px;
+		margin:0;
+	}
+	.content_squadrapp_registro .form .field2{
+		width:183px; 
+			height:40px;
+			padding:9px 10px;
+		margin:0;
+	}
+	.content_squadrapp_registro .form .button{
+		padding:20px 0 0 0;
+	}
+	
+	
+	
+
+

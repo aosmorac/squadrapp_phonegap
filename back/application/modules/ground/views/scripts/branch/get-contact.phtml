@@ -1,0 +1,66 @@
+<div class="field_info">
+	<div></div>
+	<p class="title">Contacta la Cancha</p>
+    <p>
+    	Próximamente podrás solicitar una reserva en línea. En esta versión Beta, contacta la cancha, consulta la disponibilidad con ellos y planea tu próximo juego.
+        
+    <div class="info">
+    	<p>
+        	Llama al Teléfono:
+        </p>
+        <p class="phon"><?php echo $this->branch['bra_phone']; ?></p>
+        <p>
+        	<?php echo $this->branch['company']; ?> <br />
+            <?php echo $this->branch['bra_name']; ?> <br />
+            <?php echo $this->branch['bra_area']; ?> <br />
+            <?php echo $this->branch['bra_address']; ?>
+        </p>
+    </div>
+</div>
+
+<style>
+.field_info{
+	background:#fcfcfc url(/img/bg_popup.png) repeat-x;
+	width:486px;
+	text-align:center;
+	color:#333;
+	border:#FFF 2px solid;
+}
+
+.field_info .title{
+	font-size:40px;
+	margin:30px;
+	padding:0 0 20px 0;
+	font-weight:lighter;
+	text-align:center;
+	border-bottom:#CCC 1px solid;
+}
+
+.field_info p{
+	margin:20px 35px;
+	text-align:left;
+	font-weight:lighter;
+	font-size:18px;
+}
+
+.field_info .info {
+	width:450px;
+	margin:20px auto;
+	box-shadow: 0px 0px 2px #000;
+	background:#f5f6f7;
+	color:#1b924a;
+}
+
+.field_info .info p{
+	font-size:17px;
+	color:#1b924a;
+	line-height:22px;
+}
+
+.field_info .info .phon{
+	font-weight:bold;
+	font-size:50px;
+	margin-top:-10px;
+}
+
+</style>

@@ -1,0 +1,15 @@
+<?php echo $this->doctype(); ?>
+<html>
+<head>
+    <?php echo $this->headMeta(); ?>
+    <?php echo $this->headTitle(); ?>
+    <?php echo $this->headStyle(); ?>
+    <?php echo $this->headScript(); ?>
+</head>
+
+<body>
+    <div><a href="<?php echo WWW_ROOT; ?>">Home</a> | <a href="<?php echo WWW_ROOT; ?>prueba">Test</a></div>
+    <br />
+    <?php echo $this->layout()->content; ?>
+</body>
+</html>

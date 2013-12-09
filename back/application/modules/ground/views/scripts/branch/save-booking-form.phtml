@@ -1,0 +1,85 @@
+<div class="cbf_case_dobble">
+	<div class="cbf_title_2">Tu solicitud ha sido enviada con éxito</div>
+    <div class="cbf_content1">
+    	<p>
+        	Recibirás respuesta de tu solicitud de reserva antes de:
+        </p>
+        <div class="clock">
+            <div class="clockBook"></div>
+            <p><div class="hrs">hrs</div><div class="hrs">min</div><div class="hrs">sec</div></p>
+        </div>
+    </div>
+    
+</div>
+<div class="cbf_case_grey">
+	<div class="cbf_title_2">&nbsp;</div>
+    <div class="cbf_content2">
+    Recuerda que puedes ver el estado de tus reservas haciendo click en reservas.
+    </div>
+</div>
+
+
+<style>
+	.cbf_case_dobble{
+		height:450px;
+		width:607px;
+		float:left;
+		border-right:#ccc 1px solid;
+		margin:0; padding:0;
+		font-weight:lighter;
+	}
+	.cbf_case_grey{
+		height:450px;
+		width:303px;
+		background:#f3f3f0;
+		float:left;
+		margin:0; padding:0;
+		font-weight:lighter;
+	}
+	.cbf_title_2{
+		text-align:center;
+		font-size:30px;
+		font-weight:lighter;
+		color:#222;
+		margin:55px 0 20px 0;
+		padding:20px 10px;
+		border-top:#CCC 1px solid;
+		border-bottom:#CCC 1px solid;
+	}
+	.cbf_content1{
+		padding:60px 180px 0 100px;
+		text-align:left;
+		font-size:24px;
+		line-height:26px;
+		font-weight:lighter;
+	}
+	.clockBook{
+		padding:30px 0 0 0;
+		color:#1b9d59;
+		font-size:40px;
+	}
+	.clock .hrs{
+		display:inline-block;
+		font-size:14px;
+		color:#333;
+		text-align:center;
+		width:52px;
+	}
+	.cbf_content2{
+		padding:60px 30px;
+		text-align:left;
+		font-size:18px;
+		font-weight:lighter;
+		line-height:22px;
+	}
+</style>
+
+<script type="text/javascript">
+	$(function(){
+		$('.clockBook').countdown({
+			until: +7200, 
+			compact: true
+		});
+	});
+	
+</script>

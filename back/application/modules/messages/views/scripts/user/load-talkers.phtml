@@ -1,0 +1,56 @@
+<?php 
+foreach ($this->talkers as $talker): 
+?>
+<div class="talker" id="user_<?php echo $talker['id_user']; ?>" user_id="<?php echo $talker['id_user']; ?>" user_name="<?php echo $talker['use_name']; ?>" user_status="<?php echo $talker['online']; ?>">
+	<div class="photo">
+    	<img src="https://graph.facebook.com/<?php echo $talker['Facebook_id']; ?>/picture?width=140&height=93" width="140" height="93" alt="<?php echo $talker['use_name']; ?>"  title="<?php echo $talker['use_name']; ?>">
+    </div>
+    <div class="info">
+        <div class="title"><?php echo $talker['use_first_name']; ?><span class="lastDate"><?php echo $talker['date']; ?></span></div>
+        <div class="message"><?php echo App_Util_StringUtil::truncate($talker['message'], 60, '...'); ?></div>
+        <div class="status">
+			<?php if ($talker['online'] == 1){ ?>
+            	<span class="online"></span>
+            <?php }else { ?>
+            	<span class="offline"></span>
+            <?php } ?>
+        </div>
+    </div>
+    <div class="corte"></div>
+    <div class="over" style="display:none;"></div>
+    <?php if ($talker['unread'] > 0){ ?>
+    <div class="unread"><?php echo $talker['unread']; ?></div>
+    <?php } ?>
+</div>
+<script>
+	if ($('#chatwith').val() == 0){
+		$('#chatwith').val(<?php echo $talker['id_user']; ?>);
+		$('#chatwith').attr( "user_name", "<?php echo $talker['use_name']; ?>" );
+		$('#chatwith').attr( "user_status", "<?php echo $talker['online']; ?>" );
+	}
+</script>
+<?php endforeach; ?>
+<script>
+	$(function(){
+		$('#user_'+$('#chatwith').val()+' .over').show();
+		$('#scrollbar_talkers').tinyscrollbar({scroll:false});
+		$('#user_'+$(this).attr('user_id')+' .over').show();
+		$('.talker').click(function(event){
+				$('#talker_name').show();
+				$('#search_talker').hide();
+				$('.unread').remove();
+			if ($(this).attr('user_id') != $('#chatwith').val()){
+				$('.talker .over').hide();
+				$('#user_'+$(this).attr('user_id')+' .over').show();
+				$('#chatwith').val($(this).attr('user_id'));
+				$('#chatwith').attr( "user_name", $(this).attr('user_name') );
+				$('#chatwith').attr( "user_status", $(this).attr('user_status') );
+				$("#chatByTalker").html('');
+				$('#talker_name').html('-');
+				$('#start_messages').val(0);
+				$('#last_message').val(0);
+				loadChat();
+			}
+		});	
+	});
+</script>

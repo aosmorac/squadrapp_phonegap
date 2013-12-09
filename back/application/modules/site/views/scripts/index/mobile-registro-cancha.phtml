@@ -1,0 +1,114 @@
+<div class="squadrapp_canvas"><div class="container1">
+
+    	<div class="twocolumns">
+            <div class="content_squadrapp_registro">
+            	<p>&nbsp;</p>
+                <p>Si eres una Cancha</p>
+                    <h1>Haz que millones de jugadores encuentren tu Cancha de fútbol disponible para jugar</h1>
+                <h5>Ingresa tus datos y te contactaremos para hacer visibles tus canchas</h5>
+            </div>
+        </div>
+        <div class="twocolumns">
+            <div class="content_squadrapp_registro">
+                <div class="form" align="center">
+                    <div class="error" id="error-registro" align="left"></div>
+                    <form method="post" name="canchas" id="canchas_form" action="javascript:void();">
+                        <div class="field">
+                            <input type="text" name="cancha" id="cancha" class="field1" placeholder="Nombre del establecimiento">
+                        </div>
+                        <div class="field">
+                            <input type="text" name="email" id="email" class="field1" placeholder="Correo electrónico">
+                        </div>
+                        <div class="field">
+                            <input type="text" name="direccion" id="direccion" class="field1" placeholder="Dirección">
+                        </div>
+                        <div class="field">
+                            <input type="text" name="telefono" id="telefono" class="field2" placeholder="Teléfono">
+                        <strong>&nbsp;</strong>
+                            <input type="text" name="celular" id="celular" class="field2" placeholder="Celular">
+                        </div>
+                        <div class="field">
+                            <input type="text" name="encargado" id="encargado" class="field1" placeholder="Nombre de persona encargada">
+                        </div>
+                        <div class="button" align="center">
+                        	<a href="javascript:void(0);" id="validaCancha" class="registrate_364x53"></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="corte"></div>
+    
+
+
+<div class="bg"></div>
+</div></div>
+
+
+<div class="squadrapp_canvas" align="center"><div class="container2">
+		<ul class="bxslider">
+              <li>
+              	<div class="icon" align="center">
+                    <img src="<?php echo $this->baseUrl("/img/icons/reserva.png"); ?>" />
+            		<p>Eleva el nivel de ocupaci&oacute;n de tus canchas</p>
+                </div>
+              </li>
+              <li>
+              	<div class="icon" align="center">
+                    <img src="<?php echo $this->baseUrl("/img/icons/fotos.png"); ?>" />
+            		<p>Adquiere visibilidad de tu centro deportivo</p>
+                </div>
+              </li>
+              <li>
+              	<div class="icon" align="center">
+                    <img src="<?php echo $this->baseUrl("/img/icons/usuarios.png"); ?>" />
+            		<p>Accede a más clientes</p>
+                </div>
+              </li>
+		</ul>
+    	
+<div class="bg"></div>
+</div></div>  
+
+
+
+<script>
+    
+    $(document).ready(function(){
+        
+        
+        
+        $("#validaCancha").click(function() {
+            patCorreo = /^(.+\@.+\..+)$/;
+	    if ($.trim($("#cancha").val()) == '') {
+                $("#error-registro").html('Ingrese nombre');
+	    }else if ($.trim($("#email").val()) == '') {
+                $("#error-registro").html('Ingrese correo');
+            }else if (!patCorreo.test($.trim($("#email").val()))){
+                $("#error-registro").html('Correo invalido');
+            }else {
+                $.colorbox({html:'<div style="width:500px; height:500px; vertical-align:middle; text-align:center; background:url(<?php echo $this->baseUrl("/img/background.png"); ?>) repeat;"><div style="padding-top:218px; text-align:center;"><img src="<?php echo $this->baseUrl("/img/loader.gif"); ?>" width:"64px" /></div></div>', width:"500px", height:"500px", scrolling:false});
+                $.ajax({
+                    type: "POST",
+                    url: '/site/site/nueva-cancha',
+                    data: $("#canchas_form").serialize(), // serializes the form's elements.
+                    success: function(data)
+                   {
+                       if (data == 'ok'){
+                            $.colorbox({html:'<div style="width:500px; height:500px; vertical-align:middle; text-align:center; background:url(<?php echo $this->baseUrl("/img/background.png"); ?>) repeat;"><div style="padding:150px 80px 0 80px; text-align:left; color:#333;"><p style="font-size:40px; color:#333; font-weight:bold; margin-bottom:20px;">Gracias!</p><p style="font-size:20px; line-height:22px; color:#333; font-weight:lighter; margin-bottom:20px;">Te notificaremos para que hagas parte de la versi&oacute;n Beta</p><p style="font-size:20px; line-height:22px; color:#333; font-weight:bold;">!Bienvenido a la comunidad SquadrApp!</p></div></div>', width:"500px", height:"500px", scrolling:false});
+                       }else {
+						   
+                        }
+                   }
+               });
+            }	 
+            
+          });
+          
+          
+          
+        
+    });
+    
+   
+</script>

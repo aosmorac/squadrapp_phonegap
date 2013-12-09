@@ -1,0 +1,159 @@
+<div id="fieldR">
+       
+
+                <div class="form" align="center">
+                    <div class="error" id="error-registro" align="left"></div>
+                    <form method="post" name="canchas" id="canchas_form" action="javascript:void();">
+                        <div class="field">
+                            <input type="text" name="cancha" id="cancha" class="field1" placeholder="Nombre del establecimiento">
+                        </div>
+                        <div class="field">
+                            <input type="text" name="email" id="email" class="field1" placeholder="Correo electrónico">
+                        </div>
+                        <div class="field">
+                            <input type="text" name="direccion" id="direccion" class="field1" placeholder="Dirección">
+                        </div>
+                        <div class="field">
+                            <input type="text" name="telefono" id="telefono" class="field2" placeholder="Teléfono">
+                        <strong>&nbsp;</strong>
+                            <input type="text" name="celular" id="celular" class="field2" placeholder="Celular">
+                        </div>
+                        <div class="field">
+                            <input type="text" name="encargado" id="encargado" class="field1" placeholder="Nombre de persona encargada">
+                        </div>
+                        <div class="button" align="center">
+                        	<a href="javascript:void(0);" id="validaCancha"><img src="/img/movil/btn_registro.png" /></a>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="texto">
+                	Registrate ingresando tus datos y te contactaremos para hacer visibles tus canchas
+                </div>
+
+
+</div>  
+
+
+<style>
+	#fieldR{
+		width:390px;
+		margin:0 auto;
+		background:url(/img/movil/bg_cancha.jpg) center top no-repeat;
+		padding:170px 0 0 0;
+	}
+	
+	#fieldR .form{
+		margin:10px;
+		padding:10px;
+		background:#f8f8f8;
+		border:#CCC 1px solid;
+		box-shadow: 0px 0px 2px #000;
+   		-webkit-box-shadow: 0px 0px 2px #000;
+   		-moz-box-shadow: 0px 0px 2px #000;
+	}
+	#fieldR .form .field1{
+		width:350px;
+		padding:15px 10px;
+		border:#FFF 1px solid;
+		box-shadow: inset 0px 0px 2px 2px #ddd;
+   		-webkit-box-shadow: inset 0px 0px 2px 2px #ddd;
+   		-moz-box-shadow: inset 0px 0px 2px 2px #ddd;
+		font-size:17px;
+		margin-bottom:5px;
+		color:#333;
+	}
+	
+	#fieldR .form .field2{
+		width:168px;
+		padding:15px 10px;
+		border:#FFF 1px solid;
+		box-shadow: inset 0px 0px 2px 2px #ddd;
+   		-webkit-box-shadow: inset 0px 0px 2px 2px #ddd;
+   		-moz-box-shadow: inset 0px 0px 2px 2px #ddd;
+		font-size:17px;
+		margin-bottom:5px;
+		color:#333;
+	}
+	
+	#fieldR .form .field3{
+		width:168px;
+		padding:15px 10px;
+		border:#FFF 1px solid;
+		box-shadow: inset 0px 0px 2px 2px #ddd;
+   		-webkit-box-shadow: inset 0px 0px 2px 2px #ddd;
+   		-moz-box-shadow: inset 0px 0px 2px 2px #ddd;
+		font-size:17px;
+		margin-bottom:5px;
+		color:#333;
+	}
+	
+	#fieldR .form input::-webkit-input-placeholder {
+		color:#CCC;
+	}
+	/* Firefox < 19 */
+	#fieldR .form input:-moz-placeholder {
+		color: #CCC;
+	}
+	/* Firefox > 19 */
+	#fieldR .form input::-moz-placeholder {
+		color: #CCC;
+	}
+	/* Internet Explorer 10 */
+	#fieldR .form input:-ms-input-placeholder {
+		color: #CCC;
+	}
+	
+	#fieldR .texto{
+		font-size:14px;
+		color:#666;
+		padding:20px 20px 40px 20px;
+		text-align:center;
+	}
+</style>
+
+
+
+
+
+
+<script>
+    
+    $(document).ready(function(){
+        
+        
+        
+        $("#validaCancha").click(function() {
+            patCorreo = /^(.+\@.+\..+)$/;
+	    if ($.trim($("#cancha").val()) == '') {
+                $("#error-registro").html('Ingrese nombre');
+	    }else if ($.trim($("#email").val()) == '') {
+                $("#error-registro").html('Ingrese correo');
+            }else if (!patCorreo.test($.trim($("#email").val()))){
+                $("#error-registro").html('Correo invalido');
+            }else {
+                $.colorbox({html:'<div style="width:500px; height:500px; vertical-align:middle; text-align:center; background:url(<?php echo $this->baseUrl("/img/background.png"); ?>) repeat;"><div style="padding-top:218px; text-align:center;"><img src="<?php echo $this->baseUrl("/img/loader.gif"); ?>" width:"64px" /></div></div>', width:"500px", height:"500px", scrolling:false});
+                $.ajax({
+                    type: "POST",
+                    url: '/site/site/nueva-cancha',
+                    data: $("#canchas_form").serialize(), // serializes the form's elements.
+                    success: function(data)
+                   {
+                       if (data == 'ok'){
+                            window.location.href = "http://squadrapp.com/site/site/message-field";
+                       }else {
+						   
+                        }
+                   }
+               });
+            }	 
+            
+          });
+          
+          
+          
+        
+    });
+    
+   
+</script>

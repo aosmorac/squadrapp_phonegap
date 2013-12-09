@@ -1,0 +1,65 @@
+<?php
+	$nElemento = 0;
+?>
+<?php foreach ($this->suggest as $sug): 
+			$nElemento++;
+			//	Id de elemento
+			$ids = explode(", ", $sug['ids_sch']);
+			if (count($ids) > 1){
+				$idElement = $ids[0];
+			}else {
+				$idElement = $sug['ids_sch'];
+			}
+			//	----------------
+			$cs = explode(",", $sug['bra_coordinates']);
+?>
+                <div class="hour_detail">
+                    <div class="dates">
+                        <?php echo App_Util_Date::getSpanishWeekday($sug['weekday']); ?> <strong><?php echo $sug['day']; ?></strong> <?php echo $sug['month']; ?>
+                    </div>
+                    <p class="hours">
+                        <strong>
+                        De: <?php echo substr($sug['hour1'],0,5); ?> <br />
+                        A: <?php echo substr($sug['hour2'],0,5); ?>
+                        </strong>
+                    </p>
+                    <p class="groundname">
+                        <?php echo $sug['company']; ?>
+                        <span><?php echo $sug['bra_name']; ?></span>
+                        <span class="features"><?php echo $sug['attributes']; ?></span>
+                    </p>
+                    <a href="javascript:void(0);" 
+                    	class="selection" 
+                        id="<?php echo $idElement; ?>" 
+                        name="<?php echo $sug['company']; ?>" 
+                        address="<?php echo $sug['bra_address']; ?>" 
+                        city="<?php echo $sug['city']; ?>" 
+                        price="<?php echo $sug['fie_sch_value']; ?>" 
+                        date="<?php echo substr($sug['fie_sch_date'],0,10); ?>" 
+                        hour="<?php echo  substr($sug['hour1'],0,5).' - '.substr($sug['hour2'],0,5); ?>" 
+                        attributes="<?php echo $sug['attributes']; ?>" 
+                        coordinate1="<?php echo $cs[0]; ?>" 
+						coordinate2="<?php echo $cs[1]; ?>">
+						<?php if ($nElemento==1) { ?><span class='select_hour'></span><?php } ?></a>
+                </div> 
+                
+                <?php if ($nElemento==1) { ?>
+                	<script>$("#elementSelected").val('<?php echo $idElement; ?>')</script>
+                <?php } ?>
+<?php endforeach; ?>
+ 
+ <script>
+ 
+ $(function() {
+ 
+    $('a.selection').click(function(event){
+        event.preventDefault();
+        $('.hour_detail').find('a.selection').empty();
+        $(this).html("<span class='select_hour'></span>");
+		$("#elementSelected").val($(this).attr('id'));
+		loadSugest($("#elementSelected").val());
+    });
+
+ });
+ 
+ </script>

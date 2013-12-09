@@ -1,0 +1,179 @@
+<form method="post" id="list_sports" name="list-sports" action="">   
+
+<div class="profile-modal">
+	<div class="header">
+    	Elige otros deportes que te gustaría tener en SquadrApp
+    </div>
+ <div class="sports">
+<div id="scrollbar1">
+<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+<div class="viewport"><div class="overview">
+
+<?php foreach ($this->sports as $sport): ?>
+	<div class="sport" sport_id="<?php echo $sport['sport_id']; ?>" <?php if ($sport['user_sport']){ ?>active="1"<?php }?>>
+        	<div class="image"><img src="/images/sports/default.png" width="105" height="105" title="<?php echo $sport['sport_name']; ?>" alt="<?php echo $sport['sport_name']; ?>" /></div>
+            <div class="name"><?php echo $sport['sport_name']; ?></div>
+            <div class="selector"><?php if ($sport['user_sport']){ ?><span class='selected'><input type="hidden" name="id_sports[]" value="<?php echo $sport['sport_id']; ?>" /></span><?php }?></div>
+    </div>
+<?php endforeach; ?>
+
+</div></div>
+</div>
+</div>
+
+
+    <div class="footer">
+    	<a href="javascript:void(0);" class="btn_confirmar_106x46" id="save-user-sports"></a>
+    </div>
+</div>
+</form>
+<style>
+.profile-modal{
+	width:100%;
+	height:100%;
+	margin:0 auto;
+	position:relative;
+}
+.profile-modal .header{
+	position:absolute;
+	top:0; left:0; right:0;
+	background:#333;
+	color:#FFF;
+	font-size:13px;
+	padding:7px;
+	text-align:center;
+	z-index:101;
+	-webkit-box-shadow: 0 8px 6px -6px #AAA;
+	-moz-box-shadow: 0 8px 6px -6px #AAA;
+	box-shadow: 0 8px 6px -6px #AAA;
+}
+
+.profile-modal .sports{
+	padding:30px 0 0 18px;
+	text-align:left;
+	background:#f8f8f8;
+}
+
+.profile-modal .sports .sport{
+	display:inline-block;
+	height:150px;
+	width:105px;
+	border:#CCC 1px solid;
+	box-shadow: 0 0 1px 0 #CCC;
+   	-webkit-box-shadow: 0 0 1px 0 #CCC;
+   	-moz-box-shadow: 0 0 1px 0 #CCC;
+	text-align:left;
+	margin: 0 15px 15px 0;
+	cursor:pointer;
+}
+.profile-modal .sports .sport:hover .image{
+	filter:alpha(opacity=60); 
+	-moz-opacity:0.4; 
+	-khtml-opacity: 0.4;	
+	opacity: 0.4;
+}
+.profile-modal .sports .sport .name{
+	padding:5px 10px;
+	font-weight:bold;
+}
+
+.profile-modal .sports .sport .locked{
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	z-index:9999;
+}
+
+.profile-modal .sports .sport .selector{
+		width: 20px;
+		height: 20px;
+		display: block;
+		margin-bottom:10px;
+		border-radius: 20px;
+		position:absolute;
+		top:76px;
+		right:9px;
+		background:#cdcdcd;
+		-webkit-box-shadow: inset 0 0 3px 0 #000;
+		-moz-box-shadow: inset 0 0 3px 0 #000;
+		box-shadow: inset 0 0 3px 0 #000;
+}
+
+.profile-modal .sports .sport .selector .selected{
+		background: #139141;
+		width: 12px;
+		height: 12px;
+		margin: 4px;
+		display: block;
+		border-radius: 15px;
+	}
+
+.profile-modal .footer{
+	position:absolute;
+	bottom:0; left:0; right:0;
+	background:#333;
+	color:#FFF;
+	font-size:13px;
+	text-align:right;
+	z-index:101;
+	-webkit-box-shadow: 0 -8px 6px -6px #AAA;
+	-moz-box-shadow: 0 -8px 6px -6px #AAA;
+	box-shadow: 0 -8px 6px -6px #AAA;
+}
+
+
+
+	/* scrolbar */
+    #scrollbar1 { clear: both;}
+    #scrollbar1 .viewport { width: 380px; height: 430px; overflow: hidden; position: relative; }
+    #scrollbar1 .overview { list-style: none; position: absolute; left: 0; top: 0; padding:15px 0; }
+    #scrollbar1 .thumb .end,
+    #scrollbar1 .thumb { background-color: #909291; border-radius: 2px;}
+    #scrollbar1 .scrollbar { position: relative; float: right; width: 10px; }
+    #scrollbar1 .track { height: 100%; width:10px; position: relative; padding: 0 1px; z-index:101; }
+    #scrollbar1 .thumb { height: 10px; width: 10px; cursor: pointer; overflow: hidden; position: absolute; top: 0; }
+    #scrollbar1 .thumb .end { overflow: hidden; height: 5px; width: 13px; }
+    #scrollbar1 .disable{ display: none; }
+</style>
+
+
+
+ <script>
+ 
+ $(function() {
+ 
+    $('#scrollbar1').tinyscrollbar();
+	
+	$('.sport').click(function(event){
+		if ($(this).attr('sport_id') != 1){
+			if ($(this).attr('active') == 1){
+				$(this).children( ".selector" ).html("");
+				$(this).attr('active', 0)
+			}
+			else{ 
+				$(this).children( ".selector" ).html("<span class='selected'><input type='hidden' name='id_sports[]' value='"+$(this).attr('sport_id')+"' /></span>");
+				$(this).attr('active', 1)
+			}
+		}
+    });
+	
+	
+	$('#save-user-sports').click(function(event){
+		$(".close-overlay").click();
+		$.ajax({
+			type: "POST",
+			url: '/user/user/save-user-sports',
+			data: $("#list_sports").serialize(), // serializes the form's elements.
+			success: function(data)
+			{
+				
+			}
+		}); 
+	});
+	
+
+ });
+ 
+ </script>

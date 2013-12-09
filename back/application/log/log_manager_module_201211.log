@@ -1,0 +1,2 @@
+2012-11-20T08:06:28-05:00 ERR (3): [Microsoft][SQL Server Native Client 10.0][SQL Server]The DELETE statement conflicted with the REFERENCE constraint "FK_GB_FIEMOD_REFERENCE_GB_MOD". The conflict occurred in database "GB_GLOBAL", table "dbo.GB_fieldModule", column 'mod_id'.
+2012-11-20T08:06:40-05:00 ERR (3): [Microsoft][SQL Server Native Client 10.0][SQL Server]The DELETE statement conflicted with the REFERENCE constraint "FK_GB_FIEMOD_REFERENCE_GB_MOD". The conflict occurred in database "GB_GLOBAL", table "dbo.GB_fieldModule", column 'mod_id'.

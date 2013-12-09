@@ -1,0 +1,184 @@
+<?php foreach ($this->branches as $branch): ?>
+<div class="element_3columns">
+    <div class="image">
+    <?php 
+	if (App_User::isLogged()) { 
+	?>
+    	<a href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>">
+        <img src="<?php 
+		if (trim($branch['image'])!=''){
+			echo $this->baseUrl("/load/images/{$branch['image']}"); 
+		}else{
+			echo $this->baseUrl("/images/thumb_default.jpg"); 
+		}
+		?>">
+        </a>
+    <?php
+	}else {
+	?>
+    	<a href="javascript:void(0);" onclick="logIn('/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>')">
+        <img src="<?php 
+		if (trim($branch['image'])!=''){
+			echo $this->baseUrl("/load/images/{$branch['image']}"); 
+		}else{
+			echo $this->baseUrl("/images/thumb_default.jpg"); 
+		}
+		?>">
+        </a>
+    <?php
+	}
+	?>
+    </div>
+    <div class="contenido">
+    	<div class="top">
+            <div class="icon_user">
+            <?php 
+            if (App_User::isLogged()) { 
+            ?>
+                <img src="<?php echo $this->baseUrl("/img/user_field.png"); ?>" alt="">
+            <?php
+            }else {
+            ?>
+            
+            <a href="javascript:void(0);" onclick="logIn('/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>')">
+                <img src="<?php echo $this->baseUrl("/img/user_field.png"); ?>" alt="Visitantes">
+            </a>
+            
+            <?php
+            }
+            ?>
+            </div>
+            <?php 
+			if (App_User::isLogged()) { 
+			?>
+                <p class="search_eTitle"><strong><a href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>"><?php echo $branch['com_name']; ?></a></strong></p>
+                <p class="search_eContent"><a href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>"><?php echo $branch['bra_name']; ?></a></p> 
+			<?php
+			}else {
+			?>
+            <p class="search_eTitle"><strong><a href="javascript:void(0);" onclick="logIn('/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>')" ><?php echo $branch['com_name']; ?></a></strong></p>
+            <p class="search_eContent"><a href="javascript:void(0);" onclick="logIn('/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>')" ><?php echo $branch['bra_name']; ?>, <?php echo $branch['bra_area']; ?></a></p> 
+			<?php
+            }
+            ?>                          
+        </div>
+        <div class="bottom">
+        	<div class="func">
+            	<p><?php /*?><a href="#" class="btn_guardar_36x36"></a></p><p><strong>Guardar</strong><?php //*/?></p>
+            </div>
+            <div class="funcCenter">
+            	<p>
+                	<?php 
+					if (App_User::isLogged()) { 
+					?>
+                    	<a href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>" class="btn_reserva_36x36"></a>
+                    <?php
+					}else {
+					?>
+                    	<a href="javascript:void(0);" onclick="logIn('/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>')" class="btn_reserva_36x36"></a>
+                    <?php
+					}
+					?>
+                </p>
+                <p><strong>Reservar</strong></p>
+            </div>
+            <div class="func">
+            	<p><a href="javascript:void(0);" onclick="shareField(<?php echo $branch['id_bra']; ?>,'<?php echo $branch['com_name']; ?>','<?php echo App_User::getFullName();?>','<?php echo App_User::getUserId();?>');" class="btn_compartir_36x36"></a></p><p><strong>Compartir</strong></p>
+            </div>
+            <div class="corte"></div>
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
+
+
+
+<div class="corte"></div>
+<style>
+	.element_3columns .contenido .top .search_eTitle{
+		font-size:18px;
+	}
+	.element_3columns .contenido .top .search_eContent{
+		font-size:16px;
+	}
+	.element_3columns{
+		width:280;
+		height:370;
+		margin:25px 18px;
+		float:left;
+		border:#FFF 2px solid;
+		box-shadow: 0 0 3px 0 #888;
+   		-webkit-box-shadow: 0 0 3px 0 #888;
+   		-moz-box-shadow: 0 0 3px 0 #888;
+                overflow: hidden;
+	}
+        
+        .element_3columns .image{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+	
+	.element_3columns .contenido{
+		position:absolute;
+		left:0; bottom:-50px;
+		height:130px;
+                width:280px;
+		background: url(/img/white_bk.png) repeat;
+                font-size: 1.5em;
+                -webkit-transition-property: top, bottom;
+                -webkit-transition-duration: 0.5s;
+                -moz-transition-property: top, bottom;
+                -moz-transition-duration: 0.5s;
+                transition-property: top, bottom;
+                transition-duration: 0.5s;
+	}
+	.element_3columns .contenido .top{
+		height:60px;
+                border-bottom:#FFF 2px solid;
+                position: relative;
+                padding: 10px;
+	}
+	.element_3columns .contenido .bottom{
+		height:48px;
+		font-size:10px;
+	}
+	.element_3columns .contenido .bottom p{
+		margin:0;
+		padding:0;
+		text-align:center;
+		line-height:9px;
+		margin-top:-2px;
+	}
+	.element_3columns .contenido .bottom .funcCenter{
+		height:48px;
+		width:92px;
+		border-right:#FFF 2px solid;
+		border-left:#FFF 2px solid;
+		float:left;
+		margin:0;
+		text-align:center;
+	}
+	.element_3columns .contenido .bottom .func{
+		height:48px;
+		width:92px;
+		float:left;
+		margin:0;
+		text-align:center;
+	}
+	.element_3columns:hover .contenido{
+		bottom: 0;
+	}
+		
+		.element_3columns .contenido .top .icon_user{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+			z-index:101;
+        }
+</style>
+<script>
+    $('img').load(function() {
+        $(this).show(); //muestra el div despues de que la imagen carga.
+    });
+</script>

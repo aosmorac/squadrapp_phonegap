@@ -1,0 +1,130 @@
+
+
+	.home{
+	}
+	
+	.home a{
+		margin:5px auto;
+	}
+
+	
+	.home .slider_home{
+		background:url(../../images/home/Jugador_720.jpg) left top no-repeat;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		min-height:620px;
+	}
+	.home .slider_home .bg{
+		position:absolute;
+		top:0; left:0; right:0; bottom:0;
+		background:#000; 
+			filter:alpha(opacity=70); 
+			-moz-opacity:0.7; 
+			-khtml-opacity: 0.7;	
+			opacity: 0.7;
+			z-index:0;
+			display:none;
+	}
+	
+	.home h1{
+		font-family: Helvetica, Arial, sans-serif; 
+		font-weight:bold;
+		font-size:50px;
+		line-height: 47px; 
+		width:400px;
+		color: #fff;
+	}
+	
+	.home h2{
+		font-family: Helvetica, Arial, sans-serif;
+		font-weight:lighter;
+		font-size:28px;
+		line-height: 28px;
+		margin:30px auto;
+		color: #fff; 
+		text-shadow: 1px 1px 2px #000;
+		width:400px;
+	}
+	.home h3{
+		font-family: Helvetica, Arial, sans-serif;
+		font-weight:bold;
+		font-size:24px;
+		line-height: 24px;
+		margin:2px auto;
+		margin-top:30px;
+		width:400px;
+		color: #fff;
+		font-style:italic;
+	}
+	
+	.home .contenido_slider{
+		width:480px;
+		text-align:left;
+		padding:50px 5px 100px 5px;
+	}
+	
+	.home .contenido_slider h1{
+		width:400px;
+		margin:30px auto;
+		margin-top:10px;
+	}
+	
+	.home .contenido_slider .email_form1{
+			font-family: Helvetica, Arial, sans-serif; 
+			vertical-align:middle; 
+			text-align:center; 
+			width:480px; 
+			position:relative;
+			padding:0;
+			margin:0 0 30px 0;
+		}
+	
+	.home .contenido_slider .email_form1 .fields{
+			font-family: Helvetica, Arial, sans-serif; 
+			margin:0;
+			z-index:201; 
+			width:480px; 
+			padding:13px 2px;
+		}
+	
+	.home .contenido_slider .email_form1 .field1{
+			font-family: Helvetica, Arial, sans-serif; 
+			margin:0;
+			width:379px; 
+			height:40px;
+			padding:9px 10px;
+			font-size:20px;
+			color:#333;
+			z-index: 1;
+			margin-bottom:5px;
+		}
+	.home .contenido_slider .email_form1 .boton{
+			font-family: Helvetica, Arial, sans-serif; 
+			width:178px;
+			height:60px;
+			margin-top:-3px;
+			display:block;
+	}
+	
+	.home .contenido_slider p{
+		font-family: Helvetica, Arial, sans-serif; 
+		font-size:26px;
+		line-height: 28px; 
+		width:440px;
+		color: #FFF;
+		font-weight:100;
+		text-shadow: 1px 1px 1px #000;
+		margin:0 auto;
+		margin-bottom:30px;
+	}
+	
+	.home .contenido_slider2{
+		margin:30px -5px;
+		padding: 30px 3px 1px 3px;
+		text-align:center;	
+	}
+	
+
+

@@ -1,0 +1,789 @@
+<?php
+	header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.js"));
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery-ui.js"));
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery-ui-timepicker-addon.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/css/custom/jquery-ui-1.10.3.custom.css"));
+	
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.tinyscrollbar.min.js"));	// Scrollbar Interno
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.number.js"));				// Formato numerico
+	
+    $this->headLink()->appendStylesheet($this->baseUrl("/css/squadrapp/application.css"));
+	
+	/***********************************************************
+	**	Widgets
+	***********************************************************/
+	//	Tolltip	----------------------------------------------
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/tiptip/jquery.tipTip.js"));
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/tiptip/jquery.tipTip.minified.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/widget/tiptip/tipTip.css"));
+	//-------------------------------------------------------
+	//	Slider	---------------------------------------------
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/bxslider/jquery.bxslider.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/widget/bxslider/jquery.bxslider.css"));
+	//-------------------------------------------------------
+	//	Colorbox	---------------------------------------------
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/colorbox/jquery.colorbox-min.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/widget/colorbox/colorbox.css"));
+	//-------------------------------------------------------
+	//	Countdown	-----------------------------------------
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/countdown/jquery.countdown.js"));
+	//$this->headLink()->appendStylesheet($this->baseUrl("/widget/countdown/jquery.countdown.css"));
+	//------------------------------------------------------------*/
+	/***********************************************************
+	**	Fin Widgets
+	***********************************************************/
+
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8')
+            ->appendHttpEquiv('expires', '0')
+            ->appendHttpEquiv('pragma', 'no-cache')
+            ->appendHttpEquiv('Cache-Control', 'no-cache');
+?>
+<html>
+    <head>
+        <script type="text/javascript">
+            var baseUrl = "<?php echo $this->baseUrl(); ?>";
+        </script><?php
+        echo $this->headMeta();
+        echo $this->headTitle();
+        echo $this->JQuery();
+        echo $this->headLink();
+        ?>
+      
+    <link rel="image_src" href="/img/thumbnail.png" />
+    <link rel="shortcut icon" href="/img/favicon.ico" >  
+	
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.5/src/markerwithlabel_packed.js"></script>
+        
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+        
+  	<script src="//connect.facebook.net/en_US/all.js"></script>    
+    
+    
+    
+    <meta name="description" content="Encuentra la cancha de fútbol y convoca a tus amigos para jugar.">
+    <meta name="keywords" content="futbol 5, futbol, canchas, capin 5, liga postobon, noticias deportivas, futbol 5 site, falcao, messi, deportes">
+    
+    
+    </head>
+    <body>
+    
+   <div id="fb-root"></div>
+	<script>
+		if( /Android|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+			window.location.href = "/site/site/mobile-index";
+		}
+		window.fbAsyncInit = function() {
+			
+			  FB.init({
+				appId      : '518581128197028', // App ID
+				status     : true, // check login status
+				cookie     : true, // enable cookies to allow the server to access the session
+				xfbml      : true, // parse XFBML
+				oauth	   : true 
+			  });
+			  
+				FB.Event.subscribe('auth.authResponseChange', function(response) {
+				// Here we specify what we do with the response anytime this event occurs. 
+				if (response.status === 'connected') {
+				  // Logueado
+				  testAPI();
+				} else if (response.status === 'not_authorized') {
+				  // Logueado facebook pero no Appi
+				  FB.login();
+				} else {
+				  // No logueado Facebook
+				  FB.login();
+				}
+			  });
+			  
+			  
+			  
+			  // Load the SDK asynchronously
+			  (function(d){
+			   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+			   if (d.getElementById(id)) {return;}
+			   js = d.createElement('script'); js.id = id; js.async = true;
+			   js.src = "//connect.facebook.net/en_US/all.js";
+			   ref.parentNode.insertBefore(js, ref);
+			  }(document));
+			
+			  // Here we run a very simple test of the Graph API after login is successful. 
+			  // This testAPI() function is only called in those cases. 
+			  
+		
+		}	
+    </script>
+    
+    
+	
+	<div id="squadrapp">
+		<div id="header">
+            <div class="squadrapp_canvas">
+                <div id="logo"><a href="<?php echo $this->baseUrl("/"); ?>" onClick="_gaq.push (['_trackEvent' ,'Home' ,'goHome' ,'Logo_Header']);"><img src="<?php echo $this->baseUrl("/img/logo.png"); ?>">&nbsp;</a></div><div style="color:#FFF; padding:10px; font-size:16px; font-weight:bold;">TEST</div>
+                <div id="nav">
+                <?php ///*?>
+                	<div class="search" style="display:none;">
+                		<input type="text" class="field" placeholder="Encuentra la cancha" id="header_search"><a href="javascript:void(0);" class="search_header"></a>
+                    </div>
+				<?php //*/?>
+                    <?php if (App_User::isLogged()){ ?>
+                     <?php /*?><div class="reservas">
+                        <p></p>
+                        <p><a href="javascript:void(0);" class="btn_reserva_42x40" id="btn-mybooking"></a></p>
+                        <p>Reservas</p>
+                    </div><?php //*/?>
+                    <div class="user_menu">
+                    			<div class="menu-link" style="background:url(https://graph.facebook.com/<?php echo App_User::getUserFacebookId(); ?>/picture?width=32&height=32) no-repeat left"><span class="photo" ></span><span class="btn_menu_32x32"></span></div>
+                                <div class="arrow-menu"></div>
+                                <ul>
+                                	<?php ///*?><li><a href="/" onClick="_gaq.push (['_trackEvent' ,'Menu' ,'goHome' ,'Home']);" ><div>Inicio</div></a></li><?php //*/?>
+                                     <?php ///*?><li><a href="/user/user/profile" onClick="_gaq.push (['_trackEvent' ,'Menu' ,'goPerfil' ,'Perfil']);" ><div>Mi perfil</div></a></li><?php //*/?>
+                                    <li><a id="log-out" href="javascript:void(0);" onClick="_gaq.push (['_trackEvent' ,'Menu' ,'logout' ,'Salir']);" ><div>Salir</div></a></li>
+                                </ul>
+                    </div>
+                    <div class="menu_messages"><a title="Mensajes" alt="Mensajes" class="btn_messages_40x40" href="/messages/user"></a><div id="unread_messages" style="display:none;"></div></div>
+                    <?php }else { ?>
+                    <div class="login-btn"><a class="text" onClick="_gaq.push (['_trackEvent' ,'Home' ,'loginFacebook' ,'botonFacebook_Header']);" href="javascript:directLogin();">¿Ya tienes una cuenta?</a> <a href="javascript:void(0);" onClick="_gaq.push (['_trackEvent' ,'Home' ,'loginFacebook' ,'botonFacebook_Header']);" class="btn_entrar_99x50" id="directlogin-facebook" ></a></div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="bg"></div>
+        </div>
+	
+		<div id="content"><!--div class="squadrapp_canvas"-->
+			<?php echo $this->layout()->content ?>
+		</div><!--/div-->
+		
+       
+        
+		<div id="footer">
+			© 2013. Todos los derechos reservados, SquadrApp.com
+            <div class="social-links">
+            <span class="texto">Siguenos en:</span> &nbsp;
+            <a href="http://www.facebook.com/SquadrApp/" target="_blank" class="btn_facebook_47x46" onClick="_gaq.push (['_trackEvent' ,'Home' ,'clicSeguirFacebook' ,'Siguenos_facebook']);"></a>
+            <a href="https://twitter.com/SquadrApp/" target="_blank" class="btn_twitter_47x46" onClick="_gaq.push (['_trackEvent' ,'Home' ,'clicSeguirTwitter' ,'Siguenos_twitter']);"></a>
+            </div>
+		</div>
+        
+    <div id="overlay" style="display:none;"></div>
+    <div id="overlayLocked" style="display:none;"></div>
+    
+    <div id="light-overlay" style="display:none;"></div>
+    <div id="light-overlayLocked" style="display:none;"></div>
+    <div class="close-overlay" style="display:none;"><a href="javascript:void(0);" class="btn_close_56x56"></a></div>
+    
+    
+    	<div id="goTop"><a href="#" class="btn_arrow_up_68x68"></a></div>
+    
+	</div>
+
+
+<?php
+/****************************************************************
+**	Modalbox Login
+****************************************************************/
+?>
+    <div id='fb_login' class="modal" style="display:none;">
+            <div>
+                <p>Ingresar a SquadrApp</p>
+            </div>
+            <div class="login_button">
+            	<a href="javascript:void(0);" next="" class="btn_login_facebook_243x66" id="login-facebook" onClick=" _gaq.push (['_trackEvent' ,'Login' ,'clickLogin' ,'modalbox_simple']);"></a>
+            </div>
+    </div>
+    <div id="loginShare" style="display:none;"></div>
+<?php
+/**********************************************************************
+**	FIN LOGIN
+***********************************************************************/
+?>
+
+
+<?php
+/****************************************************************
+**	Modalbox mis reservas
+****************************************************************/
+?>
+    <div id="myBooking" style="display:none;">
+    	<div class="mybooking_header">
+			<p>Mis Reservas</p>
+			<a href="javascript:void(0);" class="close">X</a>
+		</div>
+        <div id="mybooking_content"></div>
+    </div>
+<?php
+/**********************************************************************
+**	FIN RESERVAS
+***********************************************************************/
+?>
+    
+    
+<?php
+/****************************************************************
+**	Modalbox Bienvenida
+****************************************************************/
+?>
+    <div class="welcome modal" style="display:none;">
+    	<div>
+        	<img src="/images/mensaje_beta.jpg">
+            <a href="javascript:void(0);" class="btn_continuar_256x50" id="close_welcome"></a>
+        </div>
+	</div>
+<?php
+/**********************************************************************
+**	FIN BIENVENIDOS
+***********************************************************************/
+?>
+
+<?php 
+				/******************************************************************
+				**	Mensaje de bienvenida
+				******************************************************************/
+				$sesion = new Zend_Session_Namespace();
+				
+				if (App_User::isLogged() && $sesion->register == 1){ 
+				?>
+				<iframe name="goal_register" id="goal_register" style="display:none;" src="http://squadrapp.com/general/varios/squadrapp-registro"></iframe>		
+				<?php 
+				/******************************************************************
+				**	FIN MENSAJE
+				******************************************************************/
+				}?>
+    
+ 
+ 
+ 
+<!-------------------------------------------------------------------------------------------------
+					  __                       _       _
+					 / _\ __ _ _   _  __ _  __| |_ __ /_\  _ __  _ __
+					 \ \ / _` | | | |/ _` |/ _` | '__//_\\| '_ \| '_ \
+					 _\ \ (_| | |_| | (_| | (_| | | /  _  \ |_) | |_) |
+					 \__/\__, |\__,_|\__,_|\__,_|_| \_/ \_/ .__/| .__/
+							|_|                           |_|   |_|
+                            
+---------------------------------------------------------------------------------------------------> 
+    
+    </body>
+
+
+<script>
+		var timerNoti = null;
+		var isTimerNoti = 0;
+		$('#goTop').hide();
+			
+		$(function(){
+			/*$(".field").tipTip();*/
+			loadMessagesNoti();
+			autoLoadNotis('start');
+				$(window).scroll(function () {
+					if ($(this).scrollTop() > 100) {
+						$('#goTop').fadeIn();
+					} else {
+						$('#goTop').fadeOut();
+					}
+				});
+		
+				// scroll body to 0px on click
+				$('#goTop a').click(function () {
+					$('body,html').animate({
+						scrollTop: 0
+					}, 800);
+					return false;
+				});
+
+			
+			
+		    $('#log-in').click(function(event){
+				event.preventDefault();
+				$("body").css("overflow", "hidden"); 
+				$("#overlay").show();
+				fb_cont = $('#fb_login');
+				fb_cont.center().slideDown();
+			});
+			
+			$('#log-out').click(function(event){
+				
+				FB.getLoginStatus(function(response) {
+				  if (response.status === 'connected') {
+					FB.logout(function(response) {
+				  	window.location = "/user/user/logout";
+				});
+				  }else {
+					window.location = "/user/user/logout";
+				  }
+				 });
+			});
+			
+			
+			
+			
+			//$('#fb_login').live('mouseout',function(){ 
+				$("#overlay").click(function(){
+					$("body").css("overflow", "auto"); 
+					$("#overlay").fadeOut('slow');
+					$('.modal').fadeOut('slow');
+				});
+				
+				$("#light-overlay").click(function(){
+					$(".close-overlay").hide();
+					$("body").css("overflow", "auto"); 
+					$("#light-overlay").fadeOut('slow');
+					$('.modal').fadeOut('slow');
+				});
+				$(".close-overlay").click(function(){
+					$(".close-overlay").hide();
+					$("body").css("overflow", "auto"); 
+					$("#overlay").fadeOut('slow');
+					$("#overlayLocked").fadeOut('slow');
+					$("#light-overlay").fadeOut('slow');
+					$("#light-overlayLocked").fadeOut('slow');
+					$('.modal').fadeOut('slow');
+				});
+				
+			//});
+			
+			
+			
+			$('img').load(function() {
+				$(this).show(); //muestra el div despues de que la imagen carga.
+			});
+			
+			
+			$('#directlogin-facebook').click(function(event){//alert(1);
+				if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+					loginUsingOAUTH($(this).attr("next"));
+				}else {
+								FB.login(function(response) {
+								   $.ajax({
+										  url: "/user/user/login-facebook"
+									}).done(function() { 
+												window.location = "/user/user/profile";			
+									 });
+								 }, {scope: 'email,user_likes,publish_actions'});     
+				}
+			});	
+			
+			$('#login-facebook').click(function(event){
+				if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+					loginUsingOAUTH($(this).attr("next"));
+				}else {
+							FB.login(function(response) {
+							   $.ajax({
+									  url: "/user/user/login-facebook"
+								}).done(function() { 
+										if ($(this).attr("next")!=''){
+											window.location = $('#login-facebook').attr("next");
+										}else{
+											location.reload();	
+										}
+								 });
+							 }, {scope: 'email,user_likes,publish_actions'});     
+				}
+			});	
+			
+			
+			$("#btn-mybooking").click(function(event){
+				$("#overlayLocked").show();
+				$("body").css("overflow", "hidden"); 
+				$("#mybooking_content").load("/user/user/my-booking", {
+						   sugType: 1
+					}, function(){
+						$("#mybooking_content").css("overflow", "auto");
+						$("#myBooking").slideDown();
+					});
+			});		
+			
+			$('.mybooking_header .close').click(function(event){
+					event.preventDefault();
+					$("body").css("overflow", "auto");
+					$('#myBooking').slideUp();
+					$("#overlayLocked").hide();
+				});  
+				
+			
+			
+			
+				$("#close_welcome").click(function(event){
+					event.preventDefault();
+					event.preventDefault();
+					$("body").css("overflow", "auto"); 
+					$("#overlay").fadeOut('slow');
+					$('.modal').fadeOut('slow');
+				});  
+				
+				
+				
+				
+			$("#header_search").autocomplete({
+				source: "/ground/all/header-search",
+				focus: function() {
+				  return false;
+				},
+				minLength: 0,
+				select: function (event, ui) {
+					if(ui.item) {
+						window.location = ("/ground/branch/site/sid/" + ui.item.id_bra);
+					}
+				}
+			}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+			  return $( "<li>" )
+				.append( "<a href='/ground/branch/site/sid/" + item.id_bra + "'><div style='padding:3px; border-bottom:#CCC 1px solid; width:280px;'><div><span style='width:60px; margin-right:3px; float:left;'><img width='60' height='60' src='/load/images/facebook/"+item.id_bra+".jpg'></span><span style='font-size:13px; font-weight:bold;'>" + item.com_name + "</span><br><span style='font-size:13px;'>" + item.bra_area + ", " + item.city_name + "</span><br><span style='font-size:9px;'>" + item.bra_address + "</span><div style='clear:both;'></div></div></div></a>")
+				.appendTo( ul );
+			};
+			
+			$("#header_search").click(function() {
+				$( ".ui-autocomplete" ).removeClass( "autocomplete-site" );
+				$( ".ui-autocomplete" ).addClass( "autocomplete-header" );
+			});
+			
+					
+				
+				<?php 
+				/******************************************************************
+				**	Mensaje de bienvenida
+				******************************************************************/
+				$sesion = new Zend_Session_Namespace();
+				
+				if (App_User::isLogged() && $sesion->register == 1){ 
+					$sesion->register = 0;
+				?>
+					$("#overlay").show();
+					//$("body").css("overflow", "hidden"); 
+					$(".welcome").show();				
+				<?php 
+				/******************************************************************
+				**	FIN MENSAJE
+				******************************************************************/
+				}?>
+				
+				
+				
+				<?php 
+				/******************************************************************
+				**	Login for mobile
+				******************************************************************/				
+				if (!App_User::isLogged()){ 
+				?>
+				if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+					
+						FB.Event.subscribe('auth.authResponseChange', function(response) {
+							if (response.status === 'connected') {
+							  	$.ajax({
+										  url: "/user/user/login-facebook-mobile"
+									}).done(function(data) { 
+											if (data = 'ok'){
+												location.reload();
+											}
+									 });
+							}
+						  });
+									
+				}							
+				<?php 
+				/******************************************************************
+				**	FIN LOGIN MOBILE
+				******************************************************************/
+				}?>
+				
+				<?php 
+				/******************************************************************
+				**	Time Zone
+				******************************************************************/				
+				if (!App_User::getTimeZone()){ 
+				?>
+					$.ajax({
+						url: "/user/user/set-time-zone/hours/"+getTimeZone()
+					});				
+				<?php 
+				/******************************************************************
+				**	FIN Time Zone
+				******************************************************************/
+				}?>
+				
+				
+				
+				<?php 
+				/******************************************************************
+				**	Auto message chat
+				******************************************************************/				
+				if (App_User::isLogged()){ 
+					if ($autochat = App_User::getAutoChat()){
+				?>
+						$.ajax({
+						  url: "/user/user/update-auto-chat/",
+						  data: {
+							mid : '<?php echo $autochat['aut_cha_id']; ?>'
+						  },
+						  success: function(data) {
+					<?php if ($autochat['aut_cha_message']!=''){ ?>
+						jqcc.cometchat.sendMessage(183,'<?php echo $autochat['aut_cha_message']; ?>');
+						<?php if ($autochat['aut_cha_message_2']!=''){ ?>
+							setTimeout(jqcc.cometchat.sendMessage(183,'<?php echo $autochat['aut_cha_message_2']; ?>'), 5000);
+							<?php if ($autochat['aut_cha_message_3']!=''){ ?>
+								setTimeout(jqcc.cometchat.sendMessage(183,'<?php echo $autochat['aut_cha_message_3']; ?>'), 10000);
+								<?php if ($autochat['aut_cha_message_4']!=''){ ?>
+									setTimeout(jqcc.cometchat.sendMessage(183,'<?php echo $autochat['aut_cha_message_4']; ?>'), 15000);
+									<?php if ($autochat['aut_cha_message_5']!=''){ ?>
+										setTimeout(jqcc.cometchat.sendMessage(183,'<?php echo $autochat['aut_cha_message_5']; ?>'), 20000);
+									<?php } ?>	
+								<?php } ?>
+							<?php } ?>
+						<?php } ?>
+					<?php } ?>
+						jqcc.cometchat.chatWith('183');	
+						
+						  }
+						});	
+				<?php 
+					}
+				/******************************************************************
+				**	FIN AUTO MESSAGE
+				******************************************************************/
+				}
+				?>
+				
+			
+			
+			
+		});
+		
+		$(document).ready(
+			function(){
+				$('.bxslider').bxSlider({
+				  mode: 'fade',
+				  controls: false,
+				  pager: false,
+				  speed: 2000,
+				  pause: 10000,
+				  auto: true
+				});
+			}
+		);
+ 
+			 function testAPI() {
+				FB.api('/me', function(response) {
+				  console.log(response);
+				});
+			  }
+			  
+			
+			function directLogin(){
+				if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+					loginUsingOAUTH($(this).attr("next"));
+				}else {
+								FB.login(function(response) {
+								   $.ajax({
+										  url: "/user/user/login-facebook"
+									}).done(function() { 
+												window.location = "/user/user/profile";			
+									 });
+								 }, {scope: 'email,user_likes,publish_actions'});     
+				}
+			}
+			  
+			  
+			function logIn(urlReload){
+				if(!urlReload){var urlReload=window.location.href;}
+					$("#overlay").show();
+					$("body").css("overflow", "hidden"); 
+					fb_cont = $('#fb_login');
+					fb_cont.center().slideDown();
+					$('#login-facebook').attr("next",urlReload);				
+			}
+			
+			function logInRequiredFriend(urlReload, user_id){
+					$("#overlayLocked").show();
+					$("body").css("overflow", "hidden");
+					fb_cont = $('#loginShare');
+					fb_cont.center().slideDown();
+					$("#loginShare").load("/user/user/login-share", {
+						   user_id: user_id 
+					});
+					$('#login-facebook').attr("next",urlReload);				
+			}
+			
+			function logInRequired(urlReload){
+					$("#overlayLocked").show();
+					$("body").css("overflow", "hidden"); 
+					fb_cont = $('#fb_login');
+					fb_cont.center().slideDown();
+					$('#login-facebook').attr("next",urlReload);					
+			}
+			
+			function openOverlay(locked){
+					$("body").css("overflow", "hidden"); 
+					if (locked == 1){
+						$("#light-overlayLocked").show();
+					}else {
+						$("#light-overlay").show();
+					}
+					$(".close-overlay").show();
+				}
+        
+		
+			function validateEmail(email) {
+			  	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+			  	if( !emailReg.test( email ) || email=='' ) {
+					return false;
+			  	} else {
+					return true;
+			  	}
+			}
+			
+			function shareField(bra_id, name, user, user_id){
+				FB.ui({
+				  method: 'feed',
+				  redirect_uri: 'http://squadrapp.com/ground/branch/site/sid/'+bra_id+'/uid/'+user_id,
+				  link: 'http://squadrapp.com/ground/branch/site/sid/'+bra_id+'/uid/'+user_id,
+				  picture: 'http://squadrapp.com/load/images/facebook/'+bra_id+'.jpg',
+				  name: name,
+				  caption: user+' ha encontrado esta cancha de fútbol en SquadrApp',
+				  description: 'Encuentra tu también una cancha para jugar con tus amigos.'
+				}, function(response){});	
+			}
+			
+			function eventClick(categoria, accion, label) {
+			  pageTracker._trackEvent(categoria, accion, label);
+			  return false;
+			}
+			
+			
+			function loginUsingOAUTH(url){
+				if(!url){var url="";}
+				var redirect=window.location.href;
+				var scope ="email,user_likes,publish_actions";
+				var client_id = '518581128197028';
+				if (url != '')
+					redirect = url;
+				top.location = 'https://graph.facebook.com/oauth/authorize?client_id='+client_id+'&scope='+scope+'&redirect_uri='+redirect+'';
+			} 
+			
+			
+			function scrollTo(id)
+			{
+			  // Scroll
+			  $('html,body').animate({scrollTop: $("#"+id).offset().top},'slow');
+			}
+			
+			
+			function getTimeZone(){
+				var d = new Date()
+				var n = d.getTimezoneOffset();	/*	Resultado en segundos*/
+				return ((n/60)*(-1));
+			}
+			
+			
+			function utf8_encode(s) { 
+			 	return unescape(encodeURIComponent(s)); 
+			}
+			function utf8_decode(s) { 
+				return decodeURIComponent(escape(s)); 
+			}
+			
+			function getUrlVars() {
+				var vars = {};
+				var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+					vars[key] = value;
+				});
+				return vars;
+			}
+			
+			function loadMessagesNoti(){
+				$.ajax({
+					type: "POST",
+					url: "/messages/user/total-unread-messages",
+					success: function(data) {
+						$("#unread_messages").html(data);
+						if (data>0){
+							$("#unread_messages").show();
+						}else{
+							$("#unread_messages").hide();
+						}
+					}
+				});
+			}
+			
+			function autoLoadNotis(command){
+				if(command == 'start'){
+					isTimerNoti = 1;
+					timerNoti = setInterval(function () {
+						loadMessagesNoti();
+					}, 30000); 
+				}else {
+					isTimerChat = 0;
+					timerChat = null;
+				}
+			}
+			
+			
+			$.fn.enterKey = function (fnc) {
+				return this.each(function () {
+					$(this).keypress(function (ev) {
+						var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+						if (keycode == '13') {
+							fnc.call(this, ev);
+						}
+					})
+				})
+			}
+
+		
+
+
+    jQuery.fn.center = function () {
+        var styles = {
+            display : "block",
+            width: $(window).width(),
+            height: $(document).height()
+        };
+    this.css("position","absolute");
+    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + 
+                                                $(window).scrollTop()) + "px");
+    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + 
+                                                $(window).scrollLeft()) + "px");
+    return this;
+    }
+	
+</script>
+
+
+		<script type="text/javascript">
+                
+                  var _gaq = _gaq || [];
+                  _gaq.push(['_setAccount', 'UA-41552148-1']);
+                  _gaq.push(['_trackPageview']);
+                
+                  (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                  })();
+        
+        </script>
+
+
+
+
+
+<!-- UserVoice JavaScript SDK (only needed once on a page) -->
+<script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/1Wddd6ANsd8OG1fgKpvLQ.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>
+
+<!-- A tab to launch the Classic Widget -->
+<script>
+UserVoice = window.UserVoice || [];
+UserVoice.push(['showTab', 'classic_widget', {
+  mode: 'full',
+  primary_color: '#cc6d00',
+  link_color: '#007dbf',
+  default_mode: 'feedback',
+  forum_id: 213648,
+  tab_label: 'Comentarios y soporte',
+  tab_color: '#cc6d00',
+  tab_position: 'middle-right',
+  tab_inverted: false
+}]);
+</script>
+
+</html>

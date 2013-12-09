@@ -1,0 +1,123 @@
+<?php
+
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.min.js"));
+	
+    $this->headLink()->appendStylesheet($this->baseUrl("/css/squadrapp_mobile.css"));
+	
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/bxslider/jquery.bxslider.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/widget/bxslider/jquery.bxslider.css"));
+
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/colorbox/jquery.colorbox-min.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/widget/colorbox/colorbox.css"));
+
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8')
+            ->appendHttpEquiv('expires', '0')
+            ->appendHttpEquiv('pragma', 'no-cache')
+            ->appendHttpEquiv('Cache-Control', 'no-cache');
+    echo $this->doctype(); ?>
+<html>
+    <head>
+        <script type="text/javascript">
+            var baseUrl = "<?php echo $this->baseUrl(); ?>";
+        </script><?php
+        echo $this->headMeta();
+        echo $this->headTitle();
+        echo $this->JQuery();
+        echo $this->headLink();
+        ?>
+        <meta name="viewport" content="width=500px, maximum-scale=0.8" />
+    </head>
+    <body>
+    <div id="fb-root"></div>
+    <script>
+		window.fbAsyncInit = function() {
+			
+			  FB.init({
+				appId      : '518581128197028', // App ID
+				status     : true, // check login status
+				cookie     : true, // enable cookies to allow the server to access the session
+				xfbml      : true, // parse XFBML
+				oauth	   : true 
+			  });
+			  
+				FB.Event.subscribe('auth.authResponseChange', function(response) {
+				// Here we specify what we do with the response anytime this event occurs. 
+				if (response.status === 'connected') {
+				  // Logueado
+				  testAPI();
+				} else if (response.status === 'not_authorized') {
+				  // Logueado facebook pero no Appi
+				  FB.login();
+				} else {
+				  // No logueado Facebook
+				  FB.login();
+				}
+			  });
+			  
+			  
+			  
+			  // Load the SDK asynchronously
+			  (function(d){
+			   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+			   if (d.getElementById(id)) {return;}
+			   js = d.createElement('script'); js.id = id; js.async = true;
+			   js.src = "//connect.facebook.net/en_US/all.js";
+			   ref.parentNode.insertBefore(js, ref);
+			  }(document));
+			
+			  // Here we run a very simple test of the Graph API after login is successful. 
+			  // This testAPI() function is only called in those cases. 
+			  
+		
+		}	
+    </script>
+	
+	<div id="squadrapp">
+		<div id="header"><div class="squadrapp_canvas">
+			<div id="logo"><a href="<?php echo $this->baseUrl("/"); ?>"><img src="<?php echo $this->baseUrl("/img/mobile/logo.png"); ?>"></a></div>
+                <div id="nav"></div>
+                <div class="corte"></div>
+		</div></div>
+	
+		<div id="content"><!--div class="squadrapp_canvas"-->
+			<?php echo $this->layout()->content ?>
+		</div><!--/div-->
+		
+      
+		<div id="footer"><div class="squadrapp_canvas">
+			© 2013. Todos los derechos reservados, SquadrApp.com
+		</div></div>
+	
+	</div>
+	
+    
+    </body>
+
+<script language="javascript">
+	$(document).ready(
+	
+		function(){
+		  $('.bxslider').bxSlider({
+			  controls: false
+			});
+		}
+		
+	
+	);
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-41552148-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</html>

@@ -1,0 +1,142 @@
+<div class="search_form">
+	<div class="squadrapp_canvas"><div class="form">
+    	<input type="text" class="large_field" name="city" id="form_city" placeholder="¿En qué ciudad quieres jugar?" />
+		<input type="text" class="small_field" name="sport" id="form_sport" placeholder="Deporte" />
+        <input type="text" class="small_field" name="sport" id="form_date" placeholder="Fecha" readonly="readonly" />
+        <input type="text" class="small_field" name="sport" id="form_hour" placeholder="Hora" readonly="readonly" />
+        <span style="float:left;"><a href="javascript:void(0);" id="send_search" class="btn_search_136x33" onClick="_gaq.push (['_trackEvent' ,'Buscar' ,'clicBoton' ,'Boton_Buscador']);" ></a></span>
+    </div></div>
+</div>
+<div class="squadrapp_canvas">
+	<div class="subhead">&nbsp;</div>
+</div>
+<div class="list_fields" id="search_results">
+
+
+
+<div class="message">
+	<div>
+        	<img src="/img/icon_map_grey.png" />
+    </div>
+    <div class="message_content">Encuentra la cancha para jugar</div>
+</div>
+
+
+
+</div>
+
+
+<style>
+	.message{
+		text-align:center;
+		margin:70px 0;
+		color:#9a9a9a;
+	}
+	.message .message_content{
+		font-size:36px;
+		font-weight:lighter;
+		margin:10px 0 5px 0;
+	}
+	.message .submessage{
+		font-size:24px;
+		font-weight:lighter;
+	}
+	
+	.time_range{
+		position:absolute; 
+		z-index:1000; 
+		width:520px; 
+		display:none; 
+		background:#000; 
+		height:33px;
+	}
+	.time_range .slider-range{
+		background:#FFF; width:500px; margin:10px;
+	}
+
+
+</style>
+
+
+
+
+<script>
+
+	$(function() {
+		
+		$( "#form_date" ).datepicker({ minDate: +1, maxDate: "+2M", dateFormat: 'yy-mm-dd' });
+		
+		/*$('#form_hour').timepicker({
+			'minTime': '9:00pm',
+			'maxTime': '6:00pm'
+		});*/
+		
+		
+		//autocomplete
+		$("#form_city").autocomplete({
+			source: "/ground/all/auto-complete-city",
+			minLength: 0,
+			select: function (event, ui) {
+				if(ui.item) {
+					$("#form_city").val(ui.item.Name);
+					$("#form_city_id").val(ui.item.ID);
+				}else{
+					$("#form_city_id").val(0);
+				}
+			}
+		}).focus(function() {
+			$(this).autocomplete("search", $("#form_city").val());
+		});
+		$("#form_sport").autocomplete({
+			source: "/ground/all/auto-complete-sport",
+			minLength: 0,
+			select: function (event, ui) {
+				if(ui.item) {
+					$("#form_sport").val(ui.item.spo_name);
+					$("#form_sport_id").val(ui.item.id_spo);
+				}else{
+					$("#form_sport_id").val(0);
+				}
+			}
+		}).focus(function() {
+			$(this).autocomplete("search", $("#form_sport").val());
+		});
+		$('#form_hour').autocomplete({
+			source: "/ground/all/auto-complete-hour",
+			minLength: 0,
+			select: function (event, ui) {
+				if(ui.item) {
+					$("#form_hour").val(ui.item.hour);
+					$("#form_city").focus();
+				}
+			}
+		}).click(function() {
+			$(this).autocomplete("search", $("#form_hour").val());
+		});
+		
+		$("#send_search").click(function() {
+		   $("#search_results").load("/ground/all/search-fields", {
+			   city: $("#form_city").val(), 
+			   sport: $("#form_sport").val(),
+			   date: $("#form_date").val(), 
+			   hour: $("#form_hour").val()  
+		   }, function(){
+			   $('html,body').animate({scrollTop: $("#search_results").offset().top},'slow');
+		   });
+		});
+		
+		
+		
+	});
+	
+	
+	
+		
+	
+	
+
+
+	
+
+
+</script>

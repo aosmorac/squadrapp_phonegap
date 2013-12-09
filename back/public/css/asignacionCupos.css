@@ -1,0 +1,65 @@
+#ResultAT{
+    margin-top: 2%;
+}
+table.iceDatTblOtm {
+	width: 100%;
+	background-color: #FFFFFF;
+	border-collapse: collapse;
+	border-color: -moz-use-text-color -moz-use-text-color -moz-use-text-color #D9D9D9;
+	/*border-style: none none none solid;*/
+	border-width: medium medium medium 1px;
+	margin: 0;
+}
+.iceDatTblOtm tr, .iceDatTblOtm td {
+	border: 1px solid #D9D9D9;
+}
+.iceDatTblOtm td {
+	text-align: left;
+        font-size: 10px;
+}
+td.elementButton {
+	text-align: center;
+}
+
+.iceDatTblOtm input[type=password], .iceDatTblOtm input[type=checkbox]
+, .iceDatTblOtm input[type=file], .iceDatTblOtm input[type=radio]
+.iceDatTblOtm select, .iceDatTblOtm textarea {
+	border: 1px solid #b9b9b9;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	line-height: normal;
+	margin: 2px;
+	padding: 2px;
+}
+
+.iceDatTblOtm th {
+	-moz-background-clip: border;
+	-moz-background-inline-policy: continuous;
+	-moz-background-origin: padding;
+	background: #FFFFFF url(../img/css-images/table_col_header.gif) repeat-x scroll left bottom;
+	border: 1px solid #D9D9D9;
+	/*color: #484848;*/
+	color: #000;
+	font-family: tahoma;
+	font-size: 11px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: normal;
+	padding: 5px;
+}
+
+input.foot{
+    width: 90%;
+}
+
+div.foot{
+    width: 90%;
+}

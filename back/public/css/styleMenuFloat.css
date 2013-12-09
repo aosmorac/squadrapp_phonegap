@@ -1,0 +1,158 @@
+.dcmenu {
+    /*    background-image: url(../img/dcmenugrade.PNG);
+        background-repeat: repeat-x;*/
+    background: #000000;
+    color:#FFFFFF;
+    height: 32px;
+    filter: alpha(opacity=85);
+    opacity: .85;
+}
+
+.dcmenu.ul {
+    margin-right: 0;
+    margin-top: 2px;
+}
+
+.dcmenu.ol, .dcmenu.ul, .dcmenu.dl {
+    margin-left: 2em;
+}
+
+.dcmenu.ol li{
+    list-style:decimal outside;
+}
+
+.dcmenu.ul li{
+    list-style:disc outside;
+}
+
+
+.dcmenu.ul li {
+    list-style-type: disc;
+    margin-bottom: 2px;
+    margin-left: 6px;
+}
+
+.dcmenu.ul li {
+    list-style: disc outside none;
+}
+
+.dcmenu img.icon {
+	margin-top: -4px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.dcmenu img.icon:hover {
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+
+.dcmenuFloat {
+    padding: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 20;
+}
+
+.dcmenuDivider {
+    background-image: url(../img/dcmenugrade.PNG);
+    background-repeat: no-repeat;
+    float: left;
+    margin-left: 0px;
+    height: 32px;
+    margin: 0 10px 0 0;
+    width: 31%;
+}
+
+.dcmenu.highlight {
+    background-color:#EDF4FB;
+    color:navy;
+}
+
+.dcmenu.overRow:hover{
+    background-color:lightcyan;
+    font-weight: bold;
+    color:navy;
+}
+.dcmenu.panel {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    display: none;
+    background:#EDF4FB;
+    border:1px solid #111111;
+    border-radius-topright: 20px;
+    border-top-right-radius: 20px;
+    border-radius-bottomright: 20px;
+    border-bottom-right-radius: 20px;
+    width: 330px;
+    height: auto;
+    padding: 30px 30px 30px 130px;
+    filter: alpha(opacity=85);
+    opacity: .85;
+}
+
+.dcmenu.panel p{
+    margin: 0 0 15px 0;
+    padding: 0;
+    color: #cccccc;
+}
+
+.dcmenu.panel a, .panel a:visited{
+    margin: 0;
+    padding: 0;
+    color: #9FC54E;
+    text-decoration: none;
+    border-bottom: 1px solid #9FC54E;
+}
+
+.dcmenu.panel a:hover, .panel a:visited:hover{
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid #ffffff;
+}
+
+#dcmenutop {
+    height: 32px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+#dcmenuSearchDiv {
+    float: right;
+    height: 26px;
+    margin-top: 8px;
+    display: none;
+}
+
+#dcmenuBlueCube {
+    float: left;
+    margin: 0 0 0 0px;
+}
+
+#dcmenuContainer {
+    margin-left: 24%;
+    float: left;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+}
+
+#glblSearchBtn {
+    float: right;
+    margin-right: 10px;
+    margin-top: 8px;
+    display:none;
+}
+
+#dcmenuSearchDiv {
+    float: right;
+    height: 26px;
+    margin-top: 8px;
+}

@@ -1,0 +1,435 @@
+	@charset "utf-8";
+	/* CSS Document */
+	
+	html, body {
+		margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; height:100%;
+	}
+	
+	div, span, applet, object, iframe, 
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+	abbr, acronym, address, big, cite, code, del, 
+	dfn, em, font, img, ins, kbd, q, s, samp, small, 
+	strike, strong, sub, sup, tt, var, b, u, i, 
+	center, dl, dt, dd, ol, ul, li, fieldset, form, 
+	label, legend, table, caption, tbody, tfoot, 
+	thead, tr, th, td { 
+		margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; position:relative; 
+	}
+	
+	img{
+		vertical-align:middle;
+	}
+	
+	.corte{
+		clear:both;	
+	}
+	.izquierda{
+	}
+	
+	p{
+		font-family:Helvetica;
+		color:#262424;
+		font-size:18px;
+		line-height: 18px; 
+		font-weight:bold;
+	}
+		
+	h1{
+		font-family:Helvetica;
+		color:#ffffff;
+		font-size:36px;
+		line-height: 36px; 
+		font-weight:100;
+	}
+		
+	h5{
+		font-family:Helvetica;
+		color:#262424;
+		font-size:22px;
+		line-height: 24px; 
+		font-weight:100;
+	}
+	
+	body{
+		background-color:#FFF;
+		font-family:Helvetica, Arial, sans-serif;
+		font-size:14px;
+	}
+	
+
+	.squadrapp_canvas{
+		width:500px;
+		margin:0 auto;
+		position:relative;
+	   z-index: 1;
+	}
+	
+	.content_squadrapp{
+		padding:0 5px;
+		text-align:left;
+		vertical-align:middle;
+	}
+	.content_squadrapp .form{
+		padding:5px;
+	}
+	.content_squadrapp .form input{
+		font-size:20px;
+		color:#400;
+	}
+	.content_squadrapp .form .field {
+		padding:5px 0;
+	}
+		
+	.content_squadrapp .form .field1{
+		width:360px;
+		padding:5px;
+		margin:0;
+	}
+	.content_squadrapp .form .field2{
+		width:162px;
+		padding:5px;
+		margin:0;
+	}
+	.content_squadrapp .form .button{
+		padding:20px 0 0 0;
+	}
+	.content_squadrapp .form p{
+		font-size:14px; 
+		margin:10px 0 0 0;
+		padding:0;
+	}
+	.content_squadrapp .bg2 {
+		background:#333;
+		text-align:center;
+		vertical-align:middle;
+		filter:alpha(opacity=30); 
+		-moz-opacity:0.3; 
+		-khtml-opacity: 0.3;	
+		opacity: 0.3;
+		position:absolute;
+		top:0;
+		right:0;
+		left:0;
+		bottom:0;
+		z-index:-1;
+		padding:10px 0;
+		/*para Firefox*/
+		-moz-border-radius: 7px 7px 7px 7px;
+		/*para Safari y Chrome*/
+		-webkit-border-radius: 7px 7px 7px 7px;
+		/* para Opera */
+		border-radius: 7px 7px 7px 7px;
+		/* para IE */
+		/*behavior:url(/css/border.htc);*/
+		box-shadow:0 1px 5px 2px #000;
+	   -webkit-box-shadow:0 1px 5px 2px #000;
+	   -moz-box-shadow:0 1px 5px 2px #000;
+	}
+	.content_squadrapp p{
+		color:#5e5c5c;
+		font-size:18px;
+		font-weight:100;
+		margin-bottom:20px;
+	}
+	.content_squadrapp h1{
+		color:#ffffff;
+		font-weight:5;
+		line-height: 38px;
+		text-shadow: 1px 1px 2px #555;
+		margin-bottom:20px;
+	}
+	.content_squadrapp h5{
+		font-style:italic;
+		font-weight:20;
+		margin-bottom:20px;
+	}
+	
+	.twocolumns{
+		width:500px;
+		margin:0 0 60px 0;
+	}
+	
+	.container1{
+		padding:60px 0 20px 0;
+		margin-top:-30px;
+		margin-bottom:30px;
+	}
+	.container1 .bg{
+		background:#fff;
+		text-align:center;
+		vertical-align:middle;
+		filter:alpha(opacity=20); 
+		-moz-opacity:0.2; 
+		-khtml-opacity: 0.2;	
+		opacity: 0.2;
+		position:absolute;
+		top:0;
+		right:0;
+		left:0;
+		bottom:0;
+		z-index:-1;
+		padding:10px 0;
+		/*para Firefox*/
+		-moz-border-radius: 7px 7px 7px 7px;
+		/*para Safari y Chrome*/
+		-webkit-border-radius: 7px 7px 7px 7px;
+		/* para Opera */
+		border-radius: 7px 7px 7px 7px;
+		/* para IE */
+		/*behavior:url(/css/border.htc);*/
+		box-shadow:inset 1px 1px 10px 2px #000;
+	   -webkit-box-shadow:inset 1px 1px 10px 2px #000;
+	   -moz-box-shadow:inset 1px 1px 10px 2px #000;
+	}
+	
+	
+	.container2{
+		margin-bottom:30px;
+	}
+	.container2 .bg{
+		background:#fff;
+		text-align:center;
+		vertical-align:middle;
+		filter:alpha(opacity=20); 
+		-moz-opacity:0.2; 
+		-khtml-opacity: 0.2;	
+		opacity: 0.2;
+		position:absolute;
+		top:0;
+		right:0;
+		left:0;
+		bottom:0;
+		z-index:-1;
+		padding:10px 0;
+		/*para Firefox*/
+		-moz-border-radius: 7px 7px 7px 7px;
+		/*para Safari y Chrome*/
+		-webkit-border-radius: 7px 7px 7px 7px;
+		/* para Opera */
+		border-radius: 7px 7px 7px 7px;
+		/* para IE */
+		/*behavior:url(/css/border.htc);*/
+		box-shadow:inset 1px 1px 10px 2px #000;
+	   -webkit-box-shadow:inset 1px 1px 10px 2px #000;
+	   -moz-box-shadow:inset 1px 1px 10px 2px #000;
+	}
+	
+	#squadrapp{
+		width:100%;
+		min-height:700px;
+		position:relative;
+		background:url(../img/background.png) repeat;
+	}
+	
+	#squadrapp .grey{
+		text-align:left;
+		width:400px;
+		padding:100px 20px;
+	}
+	#squadrapp .grey h1 {
+		color:#363636;
+		font-size:35px;
+		line-height:35px;
+		margin-bottom:20px;
+		width:360px;
+	}
+	#squadrapp .grey p {
+		color:#363636;
+		font-size:22px;
+		font-weight:100;
+		line-height:24px;
+		width:340px;
+	}
+	
+	#squadrapp .icons{
+		background:#FFF;
+		margin:0;
+		padding:10px 0;
+		vertical-align:top;
+		text-align:center;
+		box-shadow: 0 4px 10px 1px #888;
+	   -webkit-box-shadow: 0 4px 10px 1px #888;
+	   -moz-box-shadow: 0 4px 10px 1px #888;
+	   z-index: 101;
+	}
+	#squadrapp .icon{
+		text-align:center;
+		vertical-align:top;
+		margin:50px;;
+	}
+	#squadrapp .icon p{
+		font-size:28px;
+		line-height:30px;
+		font-weight:lighter;
+		margin:10px 0 0 0;
+		padding:0 70px;
+	}
+	#squadrapp .icon img{
+		margin:0 auto;
+	}
+	
+	#squadrapp .slider1{
+		background:#fff;
+		text-align:center;
+		vertical-align:middle;
+		filter:alpha(opacity=20); 
+		-moz-opacity:0.2; 
+		-khtml-opacity: 0.2;	
+		opacity: 0.2;
+		position:absolute;
+		top:0;
+		right:0;
+		left:0;
+		bottom:0;
+		z-index:1;
+		padding:10px 0;
+		/*para Firefox*/
+		-moz-border-radius: 7px 7px 7px 7px;
+		/*para Safari y Chrome*/
+		-webkit-border-radius: 7px 7px 7px 7px;
+		/* para Opera */
+		border-radius: 7px 7px 7px 7px;
+		/* para IE */
+		/*behavior:url(/css/border.htc);*/
+		box-shadow:inset 0 0 10px 2px #000;
+	   -webkit-box-shadow:inset 0 0 10px 2px #000;
+	   -moz-box-shadow:inset 0 0 10px 2px #000;
+	}
+	
+	#header{
+		background:#000 url(../img/mobile/header.png) center top no-repeat;
+		height:76px;
+		position:relative;
+		vertical-align:middle;
+		box-shadow: 0 0 10px 2px #000;
+	   -webkit-box-shadow: 0 0 10px 2px #000;
+	   -moz-box-shadow: 0 0 10px 2px #000;
+	   z-index: 101;
+	   behavior: url(/PIE.htc);
+	}
+	
+	#logo{
+		width:260px;
+		padding:7px 1px;
+	}
+	
+	#nav{
+		vertical-align:middle;
+		text-align:right;
+	}
+	
+	#content{
+	}
+	
+	#pre_footer{
+		padding:60px 0 30px 0;
+		text-align:center;
+		
+	}
+	#pre_footer .logoHubBog1{
+		margin: 20px 0;
+	}
+	
+	#footer{
+		text-align:center;
+		border-top:#333 solid 1px;
+		color:#474646;
+		font-size:12px;
+		font-weight:lighter;
+		padding:15px 0;	
+	}
+	
+	
+	
+	
+	
+	
+	
+	.number1{
+	position:absolute;
+	width:54px;
+	height:54px;
+	top:0;
+	right:120px;
+	background:url(../img/numbers/1.png) no-repeat center;
+}
+.number2{
+	position:absolute;
+	width:54px;
+	height:54px;
+	top:0;
+	right:120px;
+	background:url(../img/numbers/2.png) no-repeat center;
+}
+.number3{
+	position:absolute;
+	width:54px;
+	height:54px;
+	top:0;
+	right:120px;
+	background:url(../img/numbers/3.png) no-repeat center;
+}
+
+
+
+
+a.btn_facebook{
+	display:inline-block;
+	width: 58px;
+	height: 58px;
+	text-decoration: none;
+	background: url(../img/btn/btn_facebook.png);
+}
+a.btn_facebook:hover {
+	background-position: -58px 0;
+	}
+
+a.btn_twitter{
+	display: inline-block;
+	width: 58px;
+	height: 58px;
+	text-decoration: none;
+	background: url(../img/btn/btn_twitter.png);
+}
+a.btn_twitter:hover {
+	background-position: -58px 0;
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	a.ingresarcanchas{
+		display: block;
+		width: 399px;
+		height: 68px;
+		text-decoration: none;
+		background: url(../img/mobile/btn/btn_cancha_reg.png);
+	}
+	
+	a.inscribete_178x60{
+		display: block;
+		width: 399px;
+		height: 68px;
+		text-decoration: none;
+		background: url(../img/mobile/btn/btn_inscribete.png);
+	}
+	
+	a.registrate_364x53{
+		display: block;
+		width: 399px;
+		height: 68px;
+		text-decoration: none;
+		background: url(../img/mobile/btn/btn_registrate.png);
+	}
+
+
+
+
+

@@ -1,0 +1,1074 @@
+<div class="slider_top">
+	<div class="squadrapp_canvas">
+		<div class="slider_text" >
+			<h4>Nunca fue tan f&aacute;cil ponerse de acuerdo</h4>
+            <h1>Encuentra la cancha de <?php echo $this->type; ?> y convoca a tus amigos para jugar.</h1>
+            <div align="center">
+            	<div class="subtitle">¡Comienza ahora!<br /></div>
+                <?php if (!App_User::isLogged()){ ?><a class="btn_registro_facebook_284x60 "onClick="_gaq.push (['_trackEvent' ,'Home' ,'loginFacebook' ,'botonFacebook_Banner']);" href="javascript:directLogin();"></a> <?php } ?><a onclick="_gaq.push (['_trackEvent' ,'CentroDeportivo' ,'goRegistro' ,'link_busqueda']);" target="_blank" href="/site/site/registro-cancha" class="btn_registro_cancha_284x60"></a>
+            </div>
+		</div>
+	</div>
+    <div class="bg_slider_new">
+    	<ul class="bxslider">
+        	<li>
+            	<div class="bg_slider_bg" style="background:url(<?php echo $this->baseUrl("/images/ground/banner_home_city.jpg"); ?>) top center no-repeat"></div>
+            </li>
+            <li>
+            	<div class="bg_slider_bg" style="background:url(<?php echo $this->baseUrl("/images/ground/banner-home_zoccer_plaza.jpg"); ?>) top center no-repeat"></div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="sticky-anchor"></div>    
+<div id="sticky">
+	<div class="black_sports"><div class="squadrapp_canvas">
+    	<div class="user_sports">
+        	<div class="separator">
+                <div class="my-select">
+                    <div class="label">Mis Deportes</div>
+                    <div class="sport-select">Fútbol</div>
+                    <div class="add-button"></div>
+                </div>
+            </div>
+            <input type="hidden" id="user_id" value="<?php echo App_User::getUserId(); ?>" />
+            <input type="hidden" id="user_location" value="<?php echo App_User::getCity(); ?>" />
+            <input type="hidden" id="friends_ids" value="<?php echo App_User::getFriendsIds(); ?>" />
+            <div class="my-sports">
+            	
+            </div>
+            	<div class="my-select-location">
+                	<div class="label">Mi Locación</div>
+                    <div class="sport-select" id="location-user">&nbsp;</div>
+                    <div class="search-button"><a href="javascript:void(0);" class="btn_search_map_64x64" id="search-map"></a></div>
+                    <div class="geoloc-button"><a href="javascript:void(0);" class="btn_georef_50x50" id="get-geoLoc"></a></div>
+                </div>
+            
+            <div class="corte"></div>
+        </div>
+    </div></div>
+    
+	<div class="map" id="location-map">
+        <div id="user-map-link"></div>
+        <div id="user-map"></div>
+        <div id="tooltip-location">
+        	<?php if (App_User::isLogged()){ ?>
+            <img src="https://graph.facebook.com/<?php echo App_User::getUserFacebookId(); ?>/picture?width=24&height=24" height="24" width="24" />
+            <?php }else{ ?>
+            <img src="/img/user_32x32.png" height="24" width="24" />
+            <?php } ?>
+        </div>
+    </div>
+
+	<div class="white_players"><div class="squadrapp_canvas"><div class="items">
+    		<div class="item selected" id="fields_item"><strong>Canchas locales de Fútbol</strong></div>
+        	<div class="item " id="other_players_item"><strong>Jugadores locales en Fútbol</strong></div>
+            <div class="arrow"></div>
+    </div></div></div>
+    
+</div>
+
+
+<div class="players">
+	<div class="list_fields users">
+    	<div id="field_filters">
+        	<div id="branch_total">&nbsp;</div>
+        	<input type="text" class="field" placeholder="Buscar centros deportivos" id="fields_search"><a href="javascript:void(0);" class="btn_search_players"></a>
+        </div>
+        <div id="search_results">
+        </div>
+    </div>
+     <div class="squadrapp_canvas"><div class="users" id="players_others">
+            		<div class="search_players" >
+                		<input type="text" class="field" placeholder="Buscar jugadores locales" id="players_others_search"><a href="javascript:void(0);" class="btn_search_players"></a>
+                        <input type="hidden" id="players_others_start" value="0" />
+                    </div>
+                    <div id="local_players">
+                    	
+                    </div>
+                    <p align="center" style="padding:5px; display:none;" class="load_players"><img src="/img/loader_32x32.gif" /></p>
+     </div></div>
+</div>
+
+
+
+<?php
+/****************************************************************
+**	Caja de busqueda de lugar
+****************************************************************/
+?>
+    <div id="search-location-form" style="display:none;" class="modal">
+    	<div class="form-search">
+        	<div><input type="text" class="search-field" name="city_search" id="city-search" value="<?php echo App_User::getCity(); ?>" placeholder="¿Dónde te encuentras?" /></div>
+            <div>
+            	<a href="javascript:void(0);" class="btn_buscar_148x42" id="btn-search-location"></a> <a href="javascript:void(0);" class="btn_confirmar_148x42" id="save-location"></a>
+            </div>
+        </div>
+        <div class="close"><strong><a href="javascript:void(0);" id="close-search">x</a></strong></div>
+    </div>
+<?php
+/**********************************************************************
+**	FIN CAJA DE BUSQUEDA
+***********************************************************************/
+?>
+
+
+
+
+<style>
+
+	.slider_text h4{
+		width:450px;
+		font-size:46px;
+		line-height:38px;
+		margin:0 auto;
+		display:block;
+		margin-bottom:15px;
+	}
+	.slider_text h1{
+		width:450px;
+		font-size:24px;
+		line-height:24px;
+		margin:0 auto;
+		display:block;
+		margin-bottom:30px;
+		font-weight:lighter;
+	}
+	
+	.message{
+		text-align:center;
+		margin:70px 0;
+		color:#9a9a9a;
+	}
+	.message .message_content{
+		font-size:36px;
+		font-weight:lighter;
+		margin:10px 0 5px 0;
+	}
+	.message .submessage{
+		font-size:24px;
+		font-weight:lighter;
+	}
+	
+	.filtro_canchas_1 .field_name{
+		position:absolute;
+		padding:2px 0;
+		font-size:12px;
+		color:#DDD;
+	}
+	
+	
+	#field_filters{
+		background: url(/img/barra_filtros.png) center no-repeat;
+		height:24px;
+		width:910px;
+		margin:0 auto;
+		margin-bottom:10px;
+		text-align:right;
+		padding:15px 15px;
+	}
+	
+	#branch_total{
+		float:left;
+		padding:7px 20px 7px 10px;
+		margin-top:-2px;
+		border-right:#CCC 1px solid;
+		font-size:12px;
+	}
+	
+	#field_filters .btn_search_players{
+		position:absolute;
+		top:15px; right:15px;
+	}
+	
+	#field_filters .field{ 
+		display:inline-block;
+		background:#fff;
+		border:#CCC 1px solid;
+		padding:0 28px 0 4px;
+		width:210px;
+		height:24px;
+		font-size:12px;
+		color:#333333;
+		text-align:left;
+	}
+	#field_filters .field::-webkit-input-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	/* Firefox < 19 */
+	#field_filters .field:-moz-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	/* Firefox > 19 */
+	#field_filters .field::-moz-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	/* Internet Explorer 10 */
+	#field_filters .field:-ms-input-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+
+
+
+
+	/**
+	**************************************************	
+	**/
+	
+.black_sports{
+	background:#333;
+	-webkit-box-shadow: 0 8px 6px -6px #AAA;
+	-moz-box-shadow: 0 8px 6px -6px #AAA;
+	box-shadow: 0 8px 6px -6px #AAA;
+   z-index:10;
+}
+.black_sports .user_sports{
+	height:66px;
+}
+
+.black_sports .separator{
+	float:left;
+	padding:0 10px 0 60px;
+	border-left:#222 1px solid;
+	border-right:#222 1px solid;
+	height:66px;
+	-webkit-box-shadow: 0 0 3px 0 #111;
+	-moz-box-shadow: 0 0 3px 0 #111;
+	box-shadow: 0 0 3px 0 #111;
+}
+
+.black_sports .my-select{
+	margin:6px 0 0 0;
+	border-radius:3px;
+	-webkit-box-shadow: 0 0 3px 0 #000;
+	-moz-box-shadow: 0 0 3px 0 #000;
+	box-shadow: 0 0 3px 0 #000;
+	width:220px;
+}
+.black_sports .my-select .label{
+	border-bottom:#000 1px solid;
+	padding:3px 10px;
+	font-weight:bold;
+	font-size:16px;
+	text-align:left;
+	color:#FFF;
+}
+.black_sports .my-select .sport-select{
+	border-top:#404040 1px solid;
+	padding:3px 10px;
+	font-size:16px;
+	text-align:left;
+	color:#FFF;
+}
+.black_sports .my-select .add-button{
+	position:absolute;
+	top:0; right:0;
+	background:#333 url(/img/plus_disable.png) left center no-repeat;
+	height:52px; width:40px;
+}
+
+.black_sports .my-select-location{
+	margin:6px 0 0 0;
+	padding:0 50px;
+	border-radius:3px;
+	-webkit-box-shadow: 0 0 3px 0 #000;
+	-moz-box-shadow: 0 0 3px 0 #000;
+	box-shadow: 0 0 3px 0 #000;
+	width:215px;
+	float:right;
+}
+.black_sports .my-select-location .label{
+	border-bottom:#000 1px solid;
+	padding:3px 10px;
+	font-weight:bold;
+	font-size:16px;
+	text-align:left;
+	color:#FFF;
+}
+.black_sports .my-select-location .sport-select{
+	border-top:#404040 1px solid;
+	padding:3px 10px;
+	font-size:16px;
+	text-align:left;
+	color:#FFF;
+}
+.black_sports .my-select-location .search-button{
+	position:absolute;
+	top:-6px; left:-10px;
+}
+.black_sports .my-select-location .geoloc-button{
+	position:absolute;
+	top:1px; right:1px;
+}
+
+.black_sports .my-sports{
+	margin-left:6px;
+	width:300px;
+	height:66px;
+	float:left;
+}
+.black_sports .my-sports .sport{
+	-moz-border-radius: 4px;
+	/*para Safari y Chrome*/
+	-webkit-border-radius: 4px;
+	/* para Opera */
+	border-radius: 4px;
+	-webkit-box-shadow: 0 0 3px 0 #000;
+	-moz-box-shadow: 0 0 3px 0 #000;
+	box-shadow: 0 0 3px 0 #000;
+	border:#222 1px solid;
+	margin:5px 0 0 7px;
+	width:54px;
+	height:54px;
+}
+
+.black_sports .invite{
+	padding:3px 35px;
+	border-right:#CCC 1px solid;
+	height:64px;
+	float:left;
+}
+
+
+.map{ 
+	border:#e0e0e0 1px solid;
+	border-top:0; border-bottom:0;
+	height:145px;
+	z-index:5;
+}
+.map #user-map{
+	height:150px;
+	z-index:5;
+}
+.map #user-map-link{
+	position:absolute;
+	top:0; left:0; right:0;
+	height:145px;
+	z-index:6;
+}
+.map #tooltip-location{
+	position:absolute;
+	z-index:7;
+	top:75px; left:50%;
+	height:56px;
+	width:40px;
+	margin-left:-20px;
+	margin-top:-50px;
+	background:url(/img/icon_me_map.png) top center no-repeat;
+	color:#FFF;
+	text-align:center;
+	padding:8px;
+}
+
+.map #tooltip-location img{
+	-moz-border-radius: 4px;
+	/*para Safari y Chrome*/
+	-webkit-border-radius: 4px;
+	/* para Opera */
+	border-radius: 4px;
+}
+
+
+
+#search-location-form{
+	position:absolute;
+	top:445px; right:50%;
+	margin-right:-470px;
+	width:336px; height:104px;
+	background:url(/img/bg_search_map.png) top center no-repeat;
+	z-index:7;
+}
+#search-location-form .form-search{
+	float:left;
+	height:72px;
+	width:294px;
+	padding:16px 0 16px 10px;
+}
+#search-location-form .form-search .search-field{
+	width:280px;
+	border:0;
+	font-size:18px;
+	padding:5px 10px;
+	margin-bottom:3px;
+	color:#333;
+}
+#search-location-form .form-search .search-field::-webkit-input-placeholder {
+    color: #aaa;
+}
+/* Firefox < 19 */
+#search-location-form .form-search .search-field:-moz-placeholder {
+    color: #aaa;
+}
+/* Firefox > 19 */
+#search-location-form .form-search .search-field::-moz-placeholder {
+    color: #aaa;
+}
+/* Internet Explorer 10 */
+#search-location-form .form-search .search-field:-ms-input-placeholder {
+    color: #aaa;
+}
+
+#search-location-form .close{
+	float:right;
+	padding:38px 16px 0 0;
+	vertical-align:middle;
+	text-align:left;
+}
+#search-location-form .close a{
+	color:#FFF;
+	font-size:18px;
+}
+#search-location-form .close a:hover{
+	color:#CCC;
+}
+
+
+.white_players{
+	box-shadow: 0 0 3px 0 #888;
+   	-webkit-box-shadow: 0 0 3px 0 #888;
+   	-moz-box-shadow: 0 0 3px 0 #888;
+	height:42px;
+    z-index:10;
+	background:#FFF;
+}
+.white_players .arrow_content_left{
+	background:url(/img/arrow_30x22.png) top center no-repeat;
+	position:absolute;
+	left:36px; bottom:-24px;
+	height:30px; width:22px;
+	z-index:11;
+}
+.white_players .arrow_content_right{
+	background:url(/img/arrow_30x22.png) top center no-repeat;
+	position:absolute;
+	left:497px; bottom:-24px;
+	height:30px; width:22px;
+	z-index:11;
+}
+.white_players .title_left{
+	font-size:18px;
+	color:#363636;
+	width:461px;
+	border-left:#CCC 1px solid;
+	text-align:center;
+	height:42px;
+	display:table-cell;
+	vertical-align:middle;
+}
+.white_players .title_right{
+	font-size:18px;
+	color:#363636;
+	width:461px;
+	border-right:#CCC 1px solid;
+	text-align:center;
+	height:42px;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.white_players .items{
+	border-left:#CCC 1px solid;
+}
+
+.white_players .items .arrow{
+	background:url(/img/arrow_33x20.png) top center no-repeat;
+	position:absolute;
+	bottom:-18px; left:215px;
+	height:20px; width:33px;
+	z-index:11;
+}
+
+.white_players .items .item{
+	background:#fff;
+	font-size:15px;
+	color:#363636;
+	width:464px;
+	border-right:#CCC 1px solid;
+	text-align:center;
+	height:42px;
+	display:table-cell;
+	position:relative;
+	vertical-align:middle;
+	cursor:pointer;
+}
+.white_players .items a{
+	margin:0;
+	padding:0;
+}
+
+.white_players .items .selected{
+	background:#363636;
+	font-size:15px;
+	color:#fff;
+	width:462px;
+	border-right:#CCC 1px solid;
+	text-align:center;
+	height:42px;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+
+.players{
+	padding:40px 0;
+}
+
+
+.players_stick{
+	padding-top:320px;
+}
+
+.players .friends{
+	width:462px;
+	float:left;
+	text-align:right;
+	padding:15px 0 15px 0;
+}
+.players .users{
+	text-align:left;
+	display:none;
+}
+
+.search_players {
+	margin:0 15px 15px 15px;
+	text-align:right;
+}
+
+.search_players .btn_search_players{
+	position:absolute;
+	top:0; right:0;
+}
+
+.search_players .field{ 
+	display:inline-block;
+	background:#fff;
+	border:#CCC 1px solid;
+	padding:0 28px 0 4px;
+	width:210px;
+	height:24px;
+	font-size:12px;
+	color:#333333;
+	text-align:left;
+}
+.search_players .field::-webkit-input-placeholder {
+    color: #999;
+	font-size:12px;
+	text-align:left;
+}
+/* Firefox < 19 */
+.search_players .field:-moz-placeholder {
+    color: #999;
+	font-size:12px;
+	text-align:left;
+}
+/* Firefox > 19 */
+.search_players .field::-moz-placeholder {
+    color: #999;
+	font-size:12px;
+	text-align:left;
+}
+/* Internet Explorer 10 */
+.search_players .field:-ms-input-placeholder {
+    color: #999;
+	font-size:12px;
+	text-align:left;
+}
+
+
+a.btn_search_players{
+	width: 30px;
+	height: 25px;
+	text-decoration: none;
+	background: url(/img/btn/btn_search_30x25.png);
+}
+a.btn_search_players:hover {
+	background-position: -30px 0;
+	}
+
+
+.local_player{
+	background-color:#FFF;
+	display:inline-block;
+	width:132px;
+	border:#CCC 1px solid;
+	box-shadow: 0 0 1px 0 #CCC;
+   	-webkit-box-shadow: 0 0 1px 0 #CCC;
+   	-moz-box-shadow: 0 0 1px 0 #CCC;
+	margin-left:15px;
+	margin-bottom:15px;
+}
+.local_player .image{
+	height:94px;
+	z-index:6;
+}
+.local_player .name{
+	height:17px;
+	font-size:12px;
+	padding:4px 5px;
+	background:#FFF;
+	z-index:7;
+}
+.local_player .options{
+	background-color:#f8f8f8;
+	border-top:#CCC 1px solid;
+	height:25px;
+	z-index:7;
+}
+
+
+
+
+.stick {
+  position: fixed;
+  top: 0; left:0; right:0;
+  z-index: 999;
+}
+
+</style>
+
+
+
+
+<script type="text/javascript">
+
+	var geocoder;
+	var map;
+	
+	var street_number = '';
+	var route = '';
+	var locality = '';
+	var city = '';
+	var administrative_area_level_2 = '';
+	var administrative_area_level_1 = '';
+	var country = '';
+	var postal_code = '';
+	
+	var formatted_address = '';
+	var lat = '';
+	var lng = '';
+
+$(function() {
+	
+	initializeMap();
+	codeAddress();
+	
+	$('#user-map-link').click(function(event){
+		$('#location-map').animate({height:300},200);
+		$('#user-map').animate({height:300},200);
+		$('#user-map-link').hide();
+		$('#location-map').one('mouseleave',function() {
+			$('#location-map').animate({height:150},200);
+			$('#user-map').animate({height:150},200);
+		    $('#user-map-link').show();
+		});
+    });	
+	
+	$('#location-map').mouseup(function(event){
+		getThisPosition();
+	});	
+	
+	$('#save-location').click(function(){
+		getThisPosition();
+		$(".close-overlay").click();
+		$.ajax({
+			type: "POST",
+			url: '/user/user/save-user-location',
+			dataType: "json",
+			data: {
+					use_street_number : ''+street_number,
+					use_route : ''+route,
+					use_locality : ''+locality,
+					use_city : ''+city,
+					use_administrative_area_level_2 : ''+administrative_area_level_2,
+					use_administrative_area_level_1 : ''+administrative_area_level_1,
+					use_country : ''+country,
+					use_postal_code : ''+postal_code,
+					use_formatted_address : ''+formatted_address ,
+					use_lat : ''+lat,
+					use_lng : ''+lng
+				  },
+			success: function(data)
+			{
+			}
+		}); 
+	});
+	
+	$('#search-map').click(function(){
+		$('#search-location-form').show();
+	});
+	
+	$('#close-search').click(function(){
+		$('#search-location-form').hide();
+	});
+	
+	$('#btn-search-location').click(function(){
+		$('#user_location').val($('#city-search').val());
+		codeAddress();
+	});
+	
+	$("#city-search").enterKey(function () {
+		$('#user_location').val($('#city-search').val());
+		codeAddress();
+	});
+	
+	$('#get-geoLoc').click(function(){
+		getGeolocation();
+	});
+	
+	$('#find-location').click(function(){
+		$('#user_location').val($('#place-location').val());
+		codeAddress();
+	});
+	
+	/**
+	**	Carga al iniciar
+	**/
+
+	
+
+	
+	$('#players_others_search').keyup(function(event){
+		$('#players_others_start').val(0);
+		loadLocalPlayers($('#user_id').val());
+	});	
+	
+	$('#fields_search').keyup(function(event){
+		findFields();
+	})
+	
+	$("#other_players_item").click(function(event){
+        $('.selected').removeClass('selected');
+		$('.users').hide();
+		$('#other_players_item').addClass('selected');
+		arrowSelectPosition("other_players_item");
+		$('#players_others').show();
+		loadLocalPlayers($('#user_id').val());
+    });
+	
+	$("#fields_item").click(function(event){
+        $('.selected').removeClass('selected');
+		$('.users').hide();
+		$('#fields_item').addClass('selected');
+		arrowSelectPosition("fields_item");
+		$('.list_fields').show();
+		findFields();
+    });
+	
+	
+	$("#fields_item").click();
+	
+	
+	$(window).scroll(function() {
+		sticky_relocate();
+	});
+         
+ 
+});
+
+
+
+function initializeMap() {
+	  geocoder = new google.maps.Geocoder();
+	  var myLatlng = new google.maps.LatLng(0,0);
+	  var mapOptions = {
+		zoom: 13,
+		center: myLatlng,
+		mapTypeControl: false,
+		overviewMapControl: false,
+		panControl: false,
+		scrollwheel: false,
+		streetViewControl: false,
+		zoomControl: true,
+		zoomControlOptions: {
+		  style: google.maps.ZoomControlStyle.SMALL
+		},
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	  }
+	  map = new google.maps.Map(document.getElementById('user-map'), mapOptions);
+	}	
+
+
+function codeAddress() {
+	  var address = $("#user_location").val();
+	  geocoder.geocode( { 'address': address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+		  map.setCenter(results[0].geometry.location);
+		  //alert(results[0].address_components[0].long_name+', '+results[0].address_components[2].long_name);
+		  		  
+		  street_number = '';
+		  route = '';
+		  locality = '';
+		  city = '';
+		  administrative_area_level_2 = '';
+		  administrative_area_level_1 = '';
+		  country = '';
+		  postal_code = '';
+		  formatted_address = results[0].formatted_address;
+		  lat = results[0].geometry.location.lat();
+		  lng = results[0].geometry.location.lng();
+		  
+		  var arrAddress = results[0].address_components;
+			// iterate through address_component array
+		  $.each(arrAddress, function (i, address_component) {
+				if (address_component.types[0] == "street_number") 
+					street_number = address_component.long_name; 
+				if (address_component.types[0] == "route") 
+					route = address_component.long_name; 
+				if (address_component.types[0] == "locality") 
+					locality = address_component.long_name; 
+				if (address_component.types[0] == "administrative_area_level_2") 
+					administrative_area_level_2 = address_component.long_name; 
+				if (address_component.types[0] == "administrative_area_level_1") 
+					administrative_area_level_1 = address_component.long_name; 
+				if (address_component.types[0] == "country") 
+					country = address_component.long_name; 
+				if (address_component.types[0] == "postal_code") 
+					postal_code = address_component.long_name; 
+		  });	 
+		  city = locality;
+		  if (locality==''){
+			  city = administrative_area_level_2;
+			  if (administrative_area_level_2==''){
+				  city = administrative_area_level_1;
+			  }
+		  }
+		  $('#place-location').val(city+', '+country);
+		  $("#city-search").val(city+', '+country);
+		  $("#location-user").html((city+', '+country).substr(0,24));
+		  if ((city+', '+country).length > 24 ) { $("#location-user").append('...'); } 
+		  
+		  $.ajax({
+				type: "POST",
+				url: '/user/user/change-user-location',
+				dataType: "json",
+				data: {
+						use_street_number : ''+street_number,
+						use_route : ''+route,
+						use_locality : ''+locality,
+						use_city : ''+city,
+						use_administrative_area_level_2 : ''+administrative_area_level_2,
+						use_administrative_area_level_1 : ''+administrative_area_level_1,
+						use_country : ''+country,
+						use_postal_code : ''+postal_code,
+						use_formatted_address : ''+formatted_address ,
+						use_lat : ''+lat,
+						use_lng : ''+lng
+					  },
+				success: function(data)
+				{
+					 findFields();
+					 $('#players_others_start').val(0);
+					 loadLocalPlayers($('#user_id').val());
+				}
+			}); 
+		  
+		} else {
+		  alert('Geocode was not successful for the following reason: ' + status);
+		}
+	  });
+	}
+	
+	function getGeolocation(){
+		if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+			  var pos = new google.maps.LatLng(position.coords.latitude,
+											   position.coords.longitude);
+		
+			  
+			  map.setCenter(pos);
+			  getThisPosition();
+			}, function() {
+			});
+		}
+	}
+	
+	function getThisPosition() {
+		var lat = map.getCenter().lat();
+		var lng = map.getCenter().lng();
+	 	var latlng = new google.maps.LatLng(lat, lng);
+  		geocoder.geocode({'latLng': latlng}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+		  map.setCenter(results[0].geometry.location);
+		  
+		  street_number = '';
+		  route = '';
+		  locality = '';
+		  city = '';
+		  administrative_area_level_2 = '';
+		  administrative_area_level_1 = '';
+		  country = '';
+		  postal_code = '';
+		  formatted_address = results[0].formatted_address;
+		  lat = results[0].geometry.location.lat();
+		  lng = results[0].geometry.location.lng();
+		  
+		  var arrAddress = results[0].address_components;
+			// iterate through address_component array
+		  $.each(arrAddress, function (i, address_component) {
+				if (address_component.types[0] == "street_number") 
+					street_number = address_component.long_name; 
+				if (address_component.types[0] == "route") 
+					route = address_component.long_name; 
+				if (address_component.types[0] == "locality") 
+					locality = address_component.long_name; 
+				if (address_component.types[0] == "administrative_area_level_2") 
+					administrative_area_level_2 = address_component.long_name; 
+				if (address_component.types[0] == "administrative_area_level_1") 
+					administrative_area_level_1 = address_component.long_name; 
+				if (address_component.types[0] == "country") 
+					country = address_component.long_name; 
+				if (address_component.types[0] == "postal_code") 
+					postal_code = address_component.long_name; 
+		  });	 
+		  city = locality;
+		  if (locality==''){
+			  city = administrative_area_level_2;
+			  if (administrative_area_level_2==''){
+				  city = administrative_area_level_1;
+			  }
+		  }
+		  $('#place-location').val(city+', '+country);
+		  $("#city-search").val(city+', '+country);
+		  $("#location-user").html((city+', '+country).substr(0,24));
+		  if ((city+', '+country).length > 24 ) { $("#location-user").append('...'); } 
+		 
+		  $.ajax({
+				type: "POST",
+				url: '/user/user/change-user-location',
+				dataType: "json",
+				data: {
+						use_street_number : ''+street_number,
+						use_route : ''+route,
+						use_locality : ''+locality,
+						use_city : ''+city,
+						use_administrative_area_level_2 : ''+administrative_area_level_2,
+						use_administrative_area_level_1 : ''+administrative_area_level_1,
+						use_country : ''+country,
+						use_postal_code : ''+postal_code,
+						use_formatted_address : ''+formatted_address ,
+						use_lat : ''+lat,
+						use_lng : ''+lng
+					  },
+				success: function(data)
+				{
+					 findFields();
+					 $('#players_others_start').val(0);
+					 loadLocalPlayers($('#user_id').val());
+				}
+			}); 
+		  
+		} else {
+		  alert('Geocode was not successful for the following reason: ' + status);
+		}
+	  });
+	}
+	
+	function moveToLocation(){
+		var pos = new google.maps.LatLng(lat, lng);
+		map.setCenter(pos);
+	}
+
+
+
+
+function arrowSelectPosition(id){
+		$( ".arrow" ).position({
+			  at: "center bottom+8",
+			  of: "#"+id+"",
+			  collision: "none"
+		  });
+	}
+
+
+
+
+function sticky_relocate() {
+		  var window_top = $(window).scrollTop();
+		  var div_top = $('#sticky-anchor').offset().top;
+		  if (window_top > div_top) {
+			$('#sticky').addClass('stick');
+			$('.players').addClass('players_stick');
+		  } else {
+			$('#sticky').removeClass('stick');
+			$('.players').removeClass('players_stick');
+		  }
+	}
+
+
+
+function findFields(){
+	$("#search_results").load("/ground/index/search-fields", {
+			  ini : $.trim($('#fields_search').val())
+		   }, function(){});
+}
+
+function loadLocalPlayers(uidParam){
+		//$("#local_players").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+		$('#players_others_start').val(0);
+		$.ajax({
+			type: "POST",
+			url: "/user/user/get-local-players/",
+			data: {
+				uid : uidParam,
+				start : $('#players_others_start').val(),
+				ini : $.trim($('#players_others_search').val())
+			},
+			success: function(data) {
+				$("#local_players").html(data);
+				$('#players_others_start').val((Number($('#players_others_start').val())+18));
+			}
+		});
+		$(window).unbind("scroll");
+		$(window).on("scroll", function(event) {
+			sticky_relocate();
+			if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+				loadMoreLocalPlayers($('#user_id').val());
+			}
+		});
+	}
+	
+	
+function loadMoreLocalPlayers(uidParam){
+		//$("#local_players").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+		
+		$(".load_players").show();
+		$(window).off("scroll");
+		$.ajax({
+			type: "POST",
+			url: "/user/user/get-local-players/",
+			data: {
+				uid : uidParam,
+				start : $('#players_others_start').val(),
+				ini : $.trim($('#players_others_search').val())
+			},
+			success: function(data) {
+				$("#local_players").append(data);
+				$('#players_others_start').val((Number($('#players_others_start').val())+18));
+				$(".load_players").hide();
+				$(window).unbind("scroll");
+				$(window).on("scroll", function(event) {
+					sticky_relocate();
+					if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+						loadMoreLocalPlayers($('#user_id').val());
+					}
+				});
+			}
+		});
+	}
+	
+	
+
+
+    $('img').load(function() {
+        $(this).show(); //muestra el div despues de que la imagen carga.
+    });
+</script>

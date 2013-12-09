@@ -1,0 +1,342 @@
+<div class="mybooking_content">
+			<div class="black_block">
+			</div>
+			<div class="bloque_reservas">
+				<div class="bloque_principal">
+					<div class="bloque_filtro">
+						<ul>
+							<li data-id="pasados">Pasados</li>
+							<li data-id="proximos" class="active">Proximos</li>
+						</ul>
+						<div class="filtro_reservas">
+							<ul class="estados">
+								<li>Todos Estados</li>
+								<li>Reserva Solicitada</li>
+								<li>Reserva Confirmada</li>
+								<li>Reserva Pagada</li>
+								<li>Reserva Cancelada</li>
+								<li>Reserva No disponible</li>
+							</ul>
+						</div>
+					</div>
+                    
+          
+          			<?php foreach ($this->booking as $book): ?>
+					<div class="bloque_reserva_info">
+						<div class="reserva_left">
+							<div class="reserva_fecha">
+								<?php echo App_Util_Date::getSpanishWeekday($book['weekday']).' '.$book['day'].' de '.$book['month']; ?>
+							</div>
+							<div class="reserva_hora">
+                            	<?php echo 'De '.substr($book['hour1'],0,5).' A '.substr($book['hour2'],0,5); ?>
+							</div>
+							<div class="info_cancha">
+								<p class="nombre"><?php echo $book['company']; ?></p>
+								<a href="#" class="mapa"><?php echo $book['bra_address']; ?></a>
+								<span><?php echo $book['bra_area'].', '.$book['city']; ?></span>
+							</div>
+						</div>
+						<div class="reserva_center">
+							<div class="respuesta_tiempo">
+								<p>
+									Recibirás respuesta de tu solicitud  antes de:<?php echo 7200-$book['seconds']; ?> <?php echo $book['seconds']; ?>
+								</p>
+								<p class="tiempo" id="time<?php echo $book['id_sch']; ?>">
+								</p>
+                                <script>
+										$("#time<?php echo $book['id_sch']; ?>").countdown({
+											until: <?php echo 7200-$book['seconds']; ?>, 
+											compact: true
+										});
+								</script>
+                                
+							</div>
+							<div class="mapa" id="#map<?php echo $book['id_sch']; ?>"></div>
+                           		 <script>
+											var myLatlng = new google.maps.LatLng(<?php echo $book['bra_coordinates']; ?>);
+											  var mapOptions = {
+												zoom: 17,
+												center: myLatlng,
+												mapTypeId: google.maps.MapTypeId.ROADMAP
+											  }
+											  var map = new google.maps.Map(document.getElementById("#map<?php echo $book['id_sch']; ?>"), mapOptions);
+									
+								</script>
+						</div>
+						<div class="reserva_rigth">
+							<div class="precio">
+								<p>
+									<span>precio:</span>$<?php echo number_format($book['fie_sch_value'],0,",","."); ?></p>
+							</div>
+							<div class="abono">
+								<p><span>Pagado:</span>$0</p>
+							</div>
+							<div class="saldo">
+								<p><span>Pendiente por pagar:</span>$<?php echo number_format($book['fie_sch_value'],0,",","."); ?></p>
+							</div>
+							<dic class="cancelar">
+								<a href="#">Cancelar reserva</a>
+							</dic>
+							<div class="estado solicitado">Reserva Solicitada</div>
+							
+						</div>
+					</div>
+					<?php endforeach; ?>
+					
+					
+				</div>
+			</div>
+
+
+		</div>
+        
+        
+<style>
+	.mybooking_content{
+				background:#eeefee;
+				width: 869px;
+				margin: 0 auto;
+			}
+			.white .hour_info_reserve, .white p {
+				background: #fff;
+		    }
+		    .orange .hour_info_reserve , .orange p, .solicitado{
+		    	background: #ffa000;
+		    }
+		    .yellow .hour_info_reserve , .yellow p, .pendiente{
+		    	background: #f8ed00;
+		    }
+		    .blue .hour_info_reserve , .blue p, .parcial{
+		    	background: #00d3f2;
+		    }
+		    .geen .hour_info_reserve , .geen p , .total{
+		    	background: #01f455;
+		    }
+		    .red .hour_info_reserve , .red p, .cancelado{
+		    	background: #ff2968;
+		    }
+		    .purple .hour_info_reserve , .purple p, .no_aviable{
+		    	background: #5e87f9;
+		    }
+		    .filtro_reservas{
+				background:#FFF;
+				font-size: 0.9em;
+				position: relative;
+				z-index: 1;
+				margin: 10px 0;
+				margin-right:-10px;
+			}
+			.filtro_reservas ul{
+				padding: 0;
+				margin: 0;
+				background: #fff;
+				display: inline-block;
+				font-size: 0.85em;
+				border-left: solid #ccc 1px;
+				border-right: solid #ccc 1px;
+				border-bottom: solid #ccc 1px;
+				position: absolute;
+				top: 10px;
+				right: 20px;
+			}
+			.filtro_reservas ul li{
+				background: #fff;
+				list-style:none;
+				border-top: 1px solid #ccc;
+				padding: 3px;
+				z-index: 1;
+				display: none;
+				min-width: 180px;
+				cursor: pointer;
+			}
+			.filtro_reservas ul li:hover{
+				background: #ddd;
+			}
+			.filtro_reservas ul li:first-child{
+				background: transparent;
+				display: block;
+			}
+			.black_block{
+				color: #fff;
+				position: relative;
+				font-weight: bold;
+				padding: 10px 20px;
+				font-size: 0.9em;
+			}
+			.black_block a.close{
+				position: absolute;
+				top: 10px;
+				right: 20px;
+				color: #fff;
+			}
+			.bloque_reservas{
+				margin: 20px 0 0;
+			}
+			#day{
+				background: #00e268;
+				color: #fff;
+				border-radius: 25px;
+				padding: 10px 5px;
+				font-size: 0.8em;
+				font-weight: bold;
+				display: inline-block;
+				vertical-align: top;
+				position: relative;
+				z-index: 1;
+			}
+			.bloque_principal{
+				padding: 0 0 10px ;
+				margin: 0 15px;
+			}
+			.bloque_reservas .date{
+				display: block;
+				margin: -10px 0 0 0;
+			}
+			.bloque_filtro{
+				display: block;
+				border: solid 1px #ccc;
+				height: 30px;
+				margin: 5px 0;
+				position: relative;
+			}
+			.bloque_filtro > ul{
+				display: inline-block;
+			}
+			.bloque_filtro > ul li{
+				display: inline-block;
+				padding: 7px 20px 15px;
+
+			}
+			.bloque_filtro > ul li.active{
+				background: url(/img/otros/tooltip.png) no-repeat;
+				color: #fff;
+			}
+			.bloque_filtro .filtro_reservas{
+				position: absolute;
+				top: -16px;
+				right: -5px;
+			}
+			.bloque_reserva_info{
+				display: block;
+				background:#FFF;
+				margin: 15px 0;
+				border: solid 1px #ccc;
+				clear: both;
+				overflow: hidden;
+				color: #4A4A4A;
+				box-shadow: 0px 0px 1px #ccc;
+			}
+			.bloque_reserva_info>div{
+				height: 185px;
+				float: left;
+				display: inline-block;
+			}
+			.reserva_left{
+				display: inline-block;
+				border-right: 1px solid #ccc;
+				display: inline-block;
+				float: left;
+				width: 200px;
+				text-align: center;
+			}
+			.reserva_center{
+				width: 400px;
+			}
+			.reserva_rigth{
+				border-left: 1px solid #ccc;
+				width: 235px;
+			}
+			.reserva_fecha{
+				background: url(/img/otros/titulo_reservas_bk.jpg) repeat-x;
+				font-size: 1.05em;
+				padding: 10px 0;
+				border-bottom: 1px solid #ccc;
+			}
+			.reserva_hora{
+				font-size: 1.2em;
+				font-weight: bold;
+				width: 100px;
+				margin: 10px auto;
+			}
+			.info_cancha{
+				border-top: 1px solid #ccc;
+				padding: 10px 0;
+			}
+			.info_cancha p.nombre{
+				color: #1B9D59;
+				font-weight: bold;
+				font-size: 1.02em;
+			}
+			.info_cancha a.mapa{
+				display: block;
+				text-align: center;
+				color: inherit;
+				font-size: 0.8em;
+				text-decoration: underline;
+			}
+			.info_cancha span{
+				font-size: 0.8em;
+			}
+
+			.respuesta_tiempo{
+				border-bottom: solid 1px #ccc;
+			}
+			.respuesta_tiempo p{	
+				font-size: 1.05em;
+				display: inline-block;
+				max-width: 210px;
+				margin: 5px 10px;
+			}
+			.respuesta_tiempo p.tiempo{
+				font-size: 1.6em;
+				color: #1B9D59;
+				padding:  0 0 0 20px;
+			}
+			.reserva_rigth p{
+				padding: 5px 10px;
+			}
+			.reserva_rigth p span{
+				font-size: 0.9em;
+				min-width: 150px;
+				display: inline-block;
+			}
+			.reserva_rigth .precio, .reserva_rigth .abono, .reserva_rigth .saldo, .reserva_rigth .cancelar{
+				border-bottom: 1px solid #ccc;
+				display: block;
+			}
+			.reserva_rigth .cancelar{
+				text-align: center;
+			}
+			.reserva_rigth .cancelar a{
+				color: #FB2B6A;
+				font-size: 0.7em;
+				padding: 20px 0;
+				display: inline-block;
+				text-decoration: underline;
+			}
+			.reserva_rigth .estado{
+				text-align: center;
+				padding: 10px;
+				font-weight: bold;
+				font-size: 1.1em;
+			}
+
+</style>
+		<script type="text/javascript">
+			var actual_estado = false;
+			$(function(){
+				$(".filtro_reservas ul li").click(function(){
+					if (actual_estado == false) {
+						$(this).siblings().slideDown(function(){
+							actual_estado = true;
+						});
+					}else{
+						$(this).siblings().slideUp(function(){
+							actual_estado = false;
+						});
+					}
+
+				})
+				
+			});
+		</script>

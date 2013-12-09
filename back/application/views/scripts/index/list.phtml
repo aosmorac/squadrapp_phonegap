@@ -1,0 +1,126 @@
+<div class="slider_top">
+	<div class="squadrapp_canvas">
+		<div class="slider_text">
+			<h1>Nunca fue tan f&aacute;cil ponerse de acuerdo</h1>
+            <h4>Encuentra la cancha de fútbol y convoca a tus amigos para jugar</h4>
+		</div>
+        <div class="who_in"><div class="fb-facepile" data-app-id="518581128197028" data-max-rows="1" data-size="small" data-width="500" data-colorscheme="dark"></div></div>
+        <div class="filtro_canchas_1">
+            	<input type="text" class="city_field" name="city" id="form_city" placeholder="¿En qué ciudad quieres jugar?" />
+                <input type="hidden" id="form_city_id" value="0" />
+                <input type="text" class="sport_field" name="sport" id="form_sport" placeholder="Deporte" />
+                <input type="hidden" id="form_sport_id" value="0" />
+                <span style="padding-top:20px; position:absolute; top:-20px; right:-190px;"><a href="javascript:void(0);" id="send_search" class="btn_search_186x59"></a></span>
+        </div>
+	</div>
+    <div class="bg_slider">
+    	<ul class="bxslider">
+        	<li>
+            	<div class="bg_slider_bg" style="background:url(<?php echo $this->baseUrl("/images/ground/banner_home_city.jpg"); ?>) top center no-repeat"></div>
+            </li>
+            <li>
+            	<div class="bg_slider_bg" style="background:url(<?php echo $this->baseUrl("/images/ground/banner-home_zoccer_plaza.jpg"); ?>) top center no-repeat"></div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="squadrapp_canvas">
+	<div class="subhead">
+    <a href="/site/site/registro-cancha" target="_blank">¿Eres un centro deportivo?, Ingresa aqu&iacute;!</a>
+    </div>
+</div>
+<div class="list_fields" id="search_results">
+
+
+
+<div class="message">
+	<div>
+        	<img src="/img/icon_map_grey.png" />
+    </div>
+    <div class="message_content">Encuentra la cancha para jugar</div>
+</div>
+
+
+
+</div>
+
+
+
+
+<style>
+	.message{
+		text-align:center;
+		margin:70px 0;
+		color:#9a9a9a;
+	}
+	.message .message_content{
+		font-size:36px;
+		font-weight:lighter;
+		margin:10px 0 5px 0;
+	}
+	.message .submessage{
+		font-size:24px;
+		font-weight:lighter;
+	}
+
+</style>
+
+
+
+
+<script type="text/javascript">
+$(function() {
+    
+    //autocomplete
+    $(".city_field").autocomplete({
+        source: "/ground/all/auto-complete-city",
+        minLength: 0,
+        select: function (event, ui) {
+            if(ui.item) {
+                $("#form_city").val(ui.item.Name);
+                $("#form_city_id").val(ui.item.ID);
+            }else{
+                $("#form_city_id").val(0);
+            }
+        }
+    }).focus(function() {
+			$(this).autocomplete("search", $("#form_city").val());
+		});
+    $(".sport_field").autocomplete({
+        source: "/ground/all/auto-complete-sport",
+        minLength: 0,
+        select: function (event, ui) {
+            if(ui.item) {
+                $("#form_sport").val(ui.item.spo_name);
+                $("#form_sport_id").val(ui.item.id_spo);
+            }else{
+                $("#form_sport_id").val(0);
+            }
+        }
+    }).focus(function() {
+			$(this).autocomplete("search", $("#form_sport").val());
+		});
+
+    
+    $("#send_search").click(function() {
+       $("#search_results").load("/ground/all/search-fields", {
+           city_id: $("#form_city_id").val(), 
+           sport_id: $("#form_sport_id").val(),
+           city: $("#form_city").val(), 
+           sport: $("#form_sport").val() 
+       }, function(){
+           $('html,body').animate({scrollTop: $("#search_results").offset().top},'slow');
+       });
+    });
+    
+
+	
+	          
+ 
+});
+
+
+    $('img').load(function() {
+        $(this).show(); //muestra el div despues de que la imagen carga.
+    });
+</script>

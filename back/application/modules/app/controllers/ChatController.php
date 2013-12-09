@@ -1,0 +1,77 @@
+<?php
+/**
+ * class UserController
+ * 
+ */
+class App_ChatController extends Zend_Controller_Action
+{
+	
+    private $user;
+	
+    public function init(){
+        $this->user = new User_Model_User();
+    }
+    
+    /**
+     * Action index
+     * 
+     * Action de inicio por defecto
+     */
+    public function indexAction ()
+    {
+    }
+
+
+	
+	public function getLastTalkersAction(){
+        header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $vars = $this->_getAllParams();
+        $userChat = new Messages_Model_UserChat();
+        $talkers = $userChat->getLastTalkersByUserApp($vars['uid'], $vars['start'], $vars['timezone']);
+        echo json_encode($talkers);
+    }
+	
+	public function getNewTalkersAction(){
+        header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $vars = $this->_getAllParams();
+        $userChat = new Messages_Model_UserChat();
+        $talkers = $userChat->getNewTalkersByUserApp($vars['uid'], $vars['nid'], $vars['timezone']);
+        echo json_encode($talkers);
+    }
+	
+	public function loadChatAction(){
+        header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $vars = $this->_getAllParams();
+        $userChat = new Messages_Model_UserChat();
+        $messages = $userChat->getMessagesChatApp($vars['uid'], $vars['fid'], $vars['timezone'], $vars['start']);
+        echo json_encode($messages);
+    }
+	
+	public function getNewMessagesAction(){
+        header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $vars = $this->_getAllParams();
+        $userChat = new Messages_Model_UserChat();
+        $messages = $userChat->getMessagesChatApp($vars['uid'], $vars['fid'], $vars['timezone'], 0, $vars['nid']);
+        echo json_encode($messages);
+    }
+	
+	public function saveMessageAction(){
+		header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $vars = $this->_getAllParams();
+        $userChat = new Messages_Model_UserChat();
+        $userChat->saveMessage($vars['me'], $vars['to'], trim($vars['msg']));
+    }
+
+    
+}
+?>

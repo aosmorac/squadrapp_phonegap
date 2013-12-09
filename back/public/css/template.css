@@ -1,0 +1,31 @@
+input{
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.button_unchecked{
+    background-image: url('../img/success_disable.png');
+     margin-left: 37px;
+     width: 20px;
+}
+.button_checked{
+    background-image: url('../img/success.png');
+    margin-left: 37px;
+    width: 20px;
+}
+.deleteTemplate{
+    background-image: url('../img/minus.png');
+    width: 20px;
+}
+.deleteTemplate_disable{
+    background-image: url('../img/minus_disable.png');
+    width: 20px;
+}
+.shareTemplate{
+    background-image: url('../img/share.png');
+    width: 20px;
+    
+}
+.chargeTemplate{
+    background-image: url('../img/get.png');
+    width: 20px;
+}

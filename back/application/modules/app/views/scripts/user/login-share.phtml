@@ -1,0 +1,103 @@
+<div class="login-share">
+	<div class="head">
+    	<?php if (isset($this->friend['Facebook_id'])){ ?>
+    	<img src="https://graph.facebook.com/<?php echo $this->friend['Facebook_id']; ?>/picture?width=54&height=54" alt="<?php echo $this->friend['use_name']; ?>"  title="<?php echo $this->friend['use_name']; ?>">
+        <?php 
+		}else {
+		?>
+        	<img src="<?php echo $this->baseUrl("/img/user_field.png"); ?>" alt="Un Amigo"  title="Un Amigo">
+        <?php 
+			}
+		?>
+        <p>
+        <?php if (isset($this->friend['use_name'])){ 
+			echo $this->friend['use_name'];
+		}else {
+			echo 'Un Amigo';
+			}
+		?>
+        </p>
+        <p>utiliza SquadrApp</p>
+    </div>
+	<div class="content">
+    	<p>
+        	Ingresa, encuentra la cancha de fútbol y convoca a tus amigos para jugar.
+        </p>
+        <p>
+        	<a href="#" class="btn_conectate_243x66" id="login-facebook-fromface" onClick=" _gaq.push (['_trackEvent' ,'Login' ,'clickLogin' ,'modalbox_recomendado']);"></a>
+        </p>
+    </div>
+</div>
+
+<style>
+.login-share{
+	background:#FFF;
+	height:375px;
+	width:375px;
+	box-shadow: 0px 0px 3px #000;
+}
+.login-share .head{
+	background:url(/img/fondo_popup_login.jpg);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height:155px;
+	text-align:center;
+}
+.login-share .head img{
+	border-radius:30px;
+	margin:25px 0 5px 0;
+	vertical-align:middle;
+}
+.login-share .head p{
+	color:#FFF;
+	font-weight:lighter;
+	font-size:24px;
+}
+.login-share .content{
+	text-align:center;
+}
+.login-share .content p{
+	margin:20px;
+	color:#333;
+	font-weight:lighter;
+	font-size:22px;
+}
+.login-share .content a{
+	margin:0 auto;
+	z-index:1002;
+}
+</style>
+
+<script>
+	$('#login-facebook-fromface').click(function(event){
+				FB.getLoginStatus(function(response) {
+					  if (response.status === 'connected') {
+						  FB.login(function(response) {
+							   $.ajax({
+									  url: "/user/user/login-facebook"
+								}).done(function() { 
+											location.reload();	
+								 });
+							 }, {scope: 'email,user_likes,publish_actions'});     
+					  } else if (response.status === 'not_authorized') {
+						  	FB.login(function(response) {
+							   $.ajax({
+									  url: "/user/user/login-facebook"
+								}).done(function() { 
+											location.reload();			
+								 });
+							 }, {scope: 'email,user_likes,publish_actions'});     
+					  } else {
+							FB.login(function(response) {
+							   $.ajax({
+									  url: "/user/user/login-facebook"
+								}).done(function() { 
+											location.reload();			
+								 });
+							 }, {scope: 'email,user_likes,publish_actions'});     
+					  }
+				 });
+			});	
+</script>

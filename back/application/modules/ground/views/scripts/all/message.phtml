@@ -1,0 +1,95 @@
+<div class="message">
+	<div>
+    	<?php if ($this->image_type == 'color'){ ?>
+        	<img src="/img/icon_map_color.png" />
+        <?php }elseif ($this->image_type == 'grey'){ ?>
+        	<img src="/img/icon_map_grey.png" />
+        <?php } ?>
+    </div>
+    <div class="message_content"><?php echo $this->message; ?></div>
+    <div class="submessage">
+    	<?php if ($this->subContent == 'again'){ ?>
+        	<span class="submessage_texto">Intenta otra b&uacute;squeda</span>
+        <?php }elseif ($this->subContent == 'sport'){ ?>
+        	<span class="submessage_texto">Cu&eacute;ntanos que otro deporte quieres encontrar en SquadrApp.</span>
+     	<p>
+     	<input type="text" class="single_field" id="other_sport" placeholder="Deporte" /> <a href="javascript:void(0);" class="btn_enviar_118x44" id="save_sport"></a>
+        </p>
+     
+        <?php }elseif ($this->subContent == 'city'){ ?>
+        	<span class="submessage_texto">Cu&eacute;ntanos que otra ciudad quieres encontrar en SquadrApp.</span>
+     	<p>
+     	<input type="text" class="single_field" id="other_city" placeholder="Ciudad" /> <a href="javascript:void(0);" class="btn_enviar_118x44" id="save_city"></a>
+        </p>
+     
+        <?php }elseif ($this->subContent == 'suggest'){ ?>if ($this->subContent == 'suggest'){ ?>
+        	<a href="javascript:void(0);" class="btn_suggest"></a>
+        <?php } ?>
+    </div>
+</div>
+
+<style>
+	.submessage p{
+		margin:20px 0;
+	}
+	.single_field{
+		border:#CCC 1px solid;
+		-moz-border-radius: 6px 6px 6px 6px;
+		/*para Safari y Chrome*/
+		-webkit-border-radius: 6px 6px 6px 6px;
+		/* para Opera */
+		border-radius: 6px 6px 6px 6px;
+		font-size:14px;
+		padding:5px 10px;
+		width:200px;
+		vertical-align:top;
+		margin-top:9px;
+	}
+</style>
+
+
+<script type="text/javascript">
+$(function() {
+
+	$("#save_sport").click(function() {
+		$('#save_sport').removeClass('btn_enviar_118x44');
+		$('#save_sport').addClass('btn_enviar_118x44_sent'); 
+		$.ajax({
+			type: "POST",
+			url: '/ground/index/save-suggest-sport',
+			data: { sport: $("#other_sport").val() }, // serializes the form's elements.
+			success: function(data)
+			{
+				$('#save_sport').off('click');
+				$('#save_sport').removeAttr("href");
+				$('.message_content').html('Hemos recibido tu sugerencia');
+				$('.submessage_texto').html('');
+				$("#other_sport").val('Gracias');
+			}
+		}); 
+	});
+	
+	$("#save_city").click(function() {
+		$('#save_city').removeClass('btn_enviar_118x44');
+		$('#save_city').addClass('btn_enviar_118x44_sent'); 
+		$.ajax({
+			type: "POST",
+			url: '/ground/index/save-suggest-city',
+			data: { city: $("#other_city").val() }, // serializes the form's elements.
+			success: function(data)
+			{
+				$('#save_city').off('click');
+				$('#save_city').removeAttr("href");
+				$('.message_content').html('Hemos recibido tu sugerencia');
+				$('.submessage_texto').html('');
+				$("#other_city").val('Gracias');
+			}
+		}); 
+	});
+
+});
+
+    $('img').load(function() {
+        $(this).show(); //muestra el div despues de que la imagen carga.
+    });
+</script>

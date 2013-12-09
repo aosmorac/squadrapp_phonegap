@@ -1,0 +1,1464 @@
+<div class="profile">
+
+	<div class="head"><div class="squadrapp_canvas">
+        <div align="center">
+            <img src="https://graph.facebook.com/<?php echo $this->user['Facebook_id']; ?>/picture?width=180&height=180" alt="<?php echo $this->user['use_name']; ?>"  title="<?php echo $this->user['use_name']; ?>" width="180" height="180">
+            <div class="user_name"><?php echo $this->user['use_name']; ?></div>
+            <input type="hidden" id="user_id" value="<?php echo $this->user['id_user']; ?>" />
+            <input type="hidden" id="user_location" value="<?php echo App_User::getCity(); ?>" />
+            <input type="hidden" id="friends_ids" value="<?php echo $this->friends_ids; ?>" />
+        </div>
+    </div></div>
+    
+<div id="sticky-anchor"></div>    
+<div id="sticky">
+	<div class="black_sports"><div class="squadrapp_canvas">
+    	<div class="user_sports">
+        	<div class="separator">
+                <div class="my-select">
+                    <div class="label">Mis Deportes</div>
+                    <div class="sport-select">Fútbol</div>
+                    <div class="add-button"><a href="javascript:void(0);" class="btn_black_plus_63x64" id="user-sports"></a></div>
+                </div>
+            </div>
+            <div class="my-sports">
+            	<div class="sport"><img src="/images/sports/default.png" height="54" width="54" alt="Fútbol" title="Fútbol" /></div>
+            </div>
+            	<div class="my-select-location">
+                	<div class="label">Mi Locación</div>
+                    <div class="sport-select" id="location-user"><?php echo App_User::getCity(); ?></div>
+                    <div class="search-button"><a href="javascript:void(0);" class="btn_search_map_64x64" id="search-map"></a></div>
+                    <div class="geoloc-button"><a href="javascript:void(0);" class="btn_georef_50x50" id="get-geoLoc"></a></div>
+                </div>
+            
+            <div class="corte"></div>
+        </div>
+    </div></div>
+    
+	<div class="map" id="location-map">
+    <div id="user-map"></div>
+        <div id="expand-map"><a href="javascript:void(0);" class="expand_map"></a></div>
+        <div id="contract-map" style="display:none;"><a href="javascript:void(0);" class="contract_map"></a></div>
+    <div id="tooltip-location">
+    	<img src="https://graph.facebook.com/<?php echo App_User::getUserFacebookId(); ?>/picture?width=24&height=24" height="24" width="24" />
+    </div>
+    </div>
+    
+    <div class="white_players"><div class="squadrapp_canvas"><div class="items">
+    		<div class="item" id="fields_item"><strong>Canchas locales</strong></div>
+        	<div class="item selected" id="friends_players_item"><strong>Amigos locales en Fútbol</strong></div>
+            <div class="item" id="other_players_item"><strong>Jugadores locales en Fútbol</strong></div>
+            <div class="arrow"></div>
+    </div></div></div>
+</div>
+    
+    
+	<div class="players">
+        <div class="list_fields users">
+            <div id="field_filters">
+                <div id="branch_total">&nbsp;</div>
+                <div class="search">
+                    <input type="text" class="field" placeholder="Buscar centros deportivos" id="fields_search"><a href="javascript:void(0);" class="btn_search_players"></a>
+                    <input type="hidden" id="likes" value="0" />
+                </div>
+                <div class="see_likes" id="likes_filter"><a class="btn_likes_22x26"></a> <span class="texto">Me gustan</span></div>
+                <div class="selected_see_likes" id="all_filter"><span class="texto">Todas</span></div>
+            </div>
+            <div id="search_results">
+            </div>
+        </div>     
+        	<div class="squadrapp_canvas"><div class="users" id="players_friends">
+            		<div class="search_players" >
+                    	<div id="friends_total">&nbsp;</div>
+                        <div class="search">
+                            <input type="text" class="field" placeholder="Buscar a tus amigos" id="players_friends_search"><a href="javascript:void(0);" class="btn_search_players"></a>
+                        <input type="hidden" id="players_friends_start" value="0" />
+                        </div>
+                        <div class="invitar_amigos"><a class="btn_invitar_amigos_26x23"></a> <span class="texto">Invitar amigos</span></div>
+                    </div>
+                    <div id="local_friends">
+                    
+                    </div>
+                    <p align="center" style="padding:5px; display:none;" class="load_players"><img src="/img/loader_32x32.gif" /></p>
+            </div></div>
+            <div class="squadrapp_canvas"><div class="users" id="players_others">
+            		<div class="search_players" >
+                    	<div id="players_total">&nbsp;</div>
+                        <div class="search">
+                            <input type="text" class="field" placeholder="Buscar jugadores locales" id="players_others_search"><a href="javascript:void(0);" class="btn_search_players"></a>
+                            <input type="hidden" id="players_others_start" value="0" />
+                        </div>
+                        <div class="invitar_amigos"><a class="btn_invitar_amigos_26x23"></a> <span class="texto">Invitar amigos</span></div>
+                    </div>
+                    <div id="local_players">
+                    	
+                    </div>
+                    <p align="center" style="padding:5px; display:none;" class="load_players"><img src="/img/loader_32x32.gif" /></p>
+            </div></div>
+	</div>
+
+    
+</div>
+
+
+
+<?php
+/****************************************************************
+**	Modalbox lista deportes
+****************************************************************/
+?>
+    <div id="list-sports" style="display:none;" class="modal">
+    	Sports
+    </div>
+<?php
+/**********************************************************************
+**	FIN DEPORTES
+***********************************************************************/
+?>
+
+<?php
+/****************************************************************
+**	Modalbox lista deportes
+****************************************************************/
+?>
+    <div id="search-location" style="display:none;" class="modal">
+    	
+    </div>
+<?php
+/**********************************************************************
+**	FIN DEPORTES
+***********************************************************************/
+?>
+
+
+<?php
+/****************************************************************
+**	Caja de busqueda de lugar
+****************************************************************/
+?>
+    <div id="search-location-form" style="display:none;" class="modal">
+    	<div class="form-search">
+        	<div><input type="text" class="search-field" name="city_search" id="city-search" value="<?php echo App_User::getCity(); ?>" placeholder="¿Dónde te encuentras?" /></div>
+            <div>
+            	<a href="javascript:void(0);" class="btn_buscar_148x42" id="btn-search-location"></a> <a href="javascript:void(0);" class="btn_confirmar_148x42" id="save-location"></a>
+            </div>
+        </div>
+        <div class="close"><strong><a href="javascript:void(0);" id="close-search">x</a></strong></div>
+    </div>
+<?php
+/**********************************************************************
+**	FIN CAJA DE BUSQUEDA
+***********************************************************************/
+?>
+
+
+<style>
+
+#search-location-form{
+	position:absolute;
+	top:445px; right:50%;
+	margin-right:-470px;
+	width:336px; height:104px;
+	background:url(/img/bg_search_map.png) top center no-repeat;
+	z-index:7;
+}
+#search-location-form .form-search{
+	float:left;
+	height:72px;
+	width:294px;
+	padding:16px 0 16px 10px;
+}
+#search-location-form .form-search .search-field{
+	width:280px;
+	border:0;
+	font-size:18px;
+	padding:5px 10px;
+	margin-bottom:3px;
+	color:#333;
+}
+#search-location-form .form-search .search-field::-webkit-input-placeholder {
+    color: #aaa;
+}
+/* Firefox < 19 */
+#search-location-form .form-search .search-field:-moz-placeholder {
+    color: #aaa;
+}
+/* Firefox > 19 */
+#search-location-form .form-search .search-field::-moz-placeholder {
+    color: #aaa;
+}
+/* Internet Explorer 10 */
+#search-location-form .form-search .search-field:-ms-input-placeholder {
+    color: #aaa;
+}
+
+#search-location-form .close{
+	float:right;
+	padding:38px 16px 0 0;
+	vertical-align:middle;
+	text-align:left;
+}
+#search-location-form .close a{
+	color:#FFF;
+	font-size:18px;
+}
+#search-location-form .close a:hover{
+	color:#CCC;
+}
+
+.profile{
+}
+.profile .head{
+	background:#000 url(/img/bg_profile.jpg) top center no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height:325px;
+	text-align:center;
+	padding:50px 0 0 0;
+}
+.profile .head img{
+	border-radius:100px;
+	margin:50px 0 15px 0;
+	vertical-align:middle;
+	-webkit-box-shadow: 0 0 0 5px #fff;
+	-moz-box-shadow: 0 0 0 5px #fff;
+	box-shadow: 0 0 0 5px #fff;
+}
+.profile .head p{
+	color:#FFF;
+	font-size:30px;
+	line-height:24px;
+}
+
+.profile .head .user_name{
+	color:#FFF;
+	font-size:30px;
+	line-height:24px;
+	font-weight:bold;
+	text-shadow: 1px 1px 2px #000;
+}
+
+.profile .head p.location{
+	font-size:20px;
+	font-weight:lighter;
+}
+.profile .white_sports{
+	background:#FFF;
+	-webkit-box-shadow: 0 8px 6px -6px #AAA;
+	-moz-box-shadow: 0 8px 6px -6px #AAA;
+	box-shadow: 0 8px 6px -6px #AAA;
+   z-index:10;
+}
+.profile .white_sports .user_sports{
+	height:70px;
+}
+
+.profile .white_sports .my-select{
+	margin:7px 0 0 0;
+	border-radius:3px;
+	-webkit-box-shadow: 0 0 3px 0 #888;
+	-moz-box-shadow: 0 0 3px 0 #888;
+	box-shadow: 0 0 3px 0 #888;
+	float:left;
+	width:220px;
+}
+.profile .white_sports .my-select .label{
+	border-bottom:#CCC 1px solid;
+	padding:3px 10px;
+	font-weight:bold;
+	font-size:18px;
+	text-align:left;
+}
+.profile .white_sports .my-select .sport-select{
+	padding:2px 10px;
+	font-weight:bold;
+	font-size:18px;
+	text-align:left;
+}
+.profile .white_sports .my-select .add-button{
+	position:absolute;
+	top:-7px; right:-7px;
+}
+
+.profile .white_sports .my-sports{
+	margin-left:6px;
+	border-left:#eee 1px solid;
+	border-right:#CCC 1px solid;
+	width:450px;
+	height:70px;
+	float:left;
+}
+.profile .white_sports .my-sports .sport{
+	border-radius:2px;
+	-webkit-box-shadow: 0 0 3px 0 #ccc;
+	-moz-box-shadow: 0 0 3px 0 #ccc;
+	box-shadow: 0 0 3px 0 #ccc;
+	border:#CCC 1px solid;
+	margin:7px 0 0 7px;
+	width:54px;
+	height:54px;
+}
+
+.profile .white_sports .invite{
+	padding:3px 35px;
+	border-right:#CCC 1px solid;
+	height:64px;
+	float:left;
+}
+
+
+.profile .black_sports{
+	background:#333;
+	-webkit-box-shadow: 0 8px 6px -6px #AAA;
+	-moz-box-shadow: 0 8px 6px -6px #AAA;
+	box-shadow: 0 8px 6px -6px #AAA;
+   z-index:10;
+}
+.profile .black_sports .user_sports{
+	height:66px;
+}
+
+.profile .black_sports .separator{
+	float:left;
+	padding:0 10px 0 60px;
+	border-left:#222 1px solid;
+	border-right:#222 1px solid;
+	height:66px;
+	-webkit-box-shadow: 0 0 3px 0 #111;
+	-moz-box-shadow: 0 0 3px 0 #111;
+	box-shadow: 0 0 3px 0 #111;
+}
+
+.profile .black_sports .my-select{
+	margin:6px 0 0 0;
+	border-radius:3px;
+	-webkit-box-shadow: 0 0 3px 0 #000;
+	-moz-box-shadow: 0 0 3px 0 #000;
+	box-shadow: 0 0 3px 0 #000;
+	width:220px;
+}
+.profile .black_sports .my-select .label{
+	border-bottom:#000 1px solid;
+	padding:3px 10px;
+	font-weight:bold;
+	font-size:16px;
+	text-align:left;
+	color:#FFF;
+}
+.profile .black_sports .my-select .sport-select{
+	border-top:#404040 1px solid;
+	padding:3px 10px;
+	font-size:16px;
+	text-align:left;
+	color:#FFF;
+}
+.profile .black_sports .my-select .add-button{
+	position:absolute;
+	top:-6px; right:-6px;
+}
+
+.profile .black_sports .my-select-location{
+	margin:6px 0 0 0;
+	padding:0 50px;
+	border-radius:3px;
+	-webkit-box-shadow: 0 0 3px 0 #000;
+	-moz-box-shadow: 0 0 3px 0 #000;
+	box-shadow: 0 0 3px 0 #000;
+	width:215px;
+	float:right;
+}
+.profile .black_sports .my-select-location .label{
+	border-bottom:#000 1px solid;
+	padding:3px 10px;
+	font-weight:bold;
+	font-size:16px;
+	text-align:left;
+	color:#FFF;
+}
+.profile .black_sports .my-select-location .sport-select{
+	border-top:#404040 1px solid;
+	padding:3px 10px;
+	font-size:16px;
+	text-align:left;
+	color:#FFF;
+}
+.profile .black_sports .my-select-location .search-button{
+	position:absolute;
+	top:-6px; left:-10px;
+}
+.profile .black_sports .my-select-location .geoloc-button{
+	position:absolute;
+	top:1px; right:1px;
+}
+
+.profile .black_sports .my-sports{
+	margin-left:6px;
+	width:300px;
+	height:66px;
+	float:left;
+}
+.profile .black_sports .my-sports .sport{
+	border-radius:2px;
+	-webkit-box-shadow: 0 0 3px 0 #000;
+	-moz-box-shadow: 0 0 3px 0 #000;
+	box-shadow: 0 0 3px 0 #000;
+	border:#222 1px solid;
+	margin:5px 0 0 7px;
+	width:54px;
+	height:54px;
+}
+
+.profile .black_sports .my-sports .sport img{
+	border-radius:2px;
+}
+
+.profile .black_sports .invite{
+	padding:3px 35px;
+	border-right:#CCC 1px solid;
+	height:64px;
+	float:left;
+}
+
+
+
+.profile .map{ 
+	border:#e0e0e0 1px solid;
+	border-top:0; border-bottom:0;
+	height:145px;
+	z-index:5;
+}
+.profile .map #user-map{
+	height:100%;
+	z-index:5;
+}
+.profile .map #expand-map{
+	position:absolute;
+	bottom:5px; right:50%;
+	margin-right:-460px;
+	height:44px;
+	width:44px;
+	z-index:7;
+}
+.profile .map #contract-map{
+	position:absolute;
+	bottom:5px; right:50%;
+	margin-right:-460px;
+	height:44px;
+	width:44px;
+	z-index:7;
+}
+.profile .map #tooltip-location{
+	position:absolute;
+	z-index:7;
+	top:75px; left:50%;
+	height:56px;
+	width:40px;
+	margin-left:-20px;
+	margin-top:-50px;
+	background:url(/img/icon_me_map.png) top center no-repeat;
+	color:#FFF;
+	text-align:center;
+	padding:8px;
+}
+
+.profile .map #tooltip-location img{
+	-moz-border-radius: 4px;
+	/*para Safari y Chrome*/
+	-webkit-border-radius: 4px;
+	/* para Opera */
+	border-radius: 4px;
+}
+
+.profile .white_players{
+	box-shadow: 0 0 3px 0 #888;
+   	-webkit-box-shadow: 0 0 3px 0 #888;
+   	-moz-box-shadow: 0 0 3px 0 #888;
+	height:42px;
+    z-index:10;
+	background:#FFF;
+}
+.profile .white_players .arrow_content_left{
+	background:url(/img/arrow_30x22.png) top center no-repeat;
+	position:absolute;
+	left:36px; bottom:-24px;
+	height:30px; width:22px;
+	z-index:11;
+}
+.profile .white_players .arrow_content_right{
+	background:url(/img/arrow_30x22.png) top center no-repeat;
+	position:absolute;
+	left:497px; bottom:-24px;
+	height:30px; width:22px;
+	z-index:11;
+}
+.profile .white_players .title_left{
+	font-size:18px;
+	color:#363636;
+	width:461px;
+	border-left:#CCC 1px solid;
+	text-align:center;
+	height:42px;
+	display:table-cell;
+	vertical-align:middle;
+}
+.profile .white_players .title_right{
+	font-size:18px;
+	color:#363636;
+	width:461px;
+	border-right:#CCC 1px solid;
+	text-align:center;
+	height:42px;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.profile .white_players .items{
+	border-left:#CCC 1px solid;
+}
+
+.profile .white_players .items .arrow{
+	background:url(/img/arrow_33x20.png) top center no-repeat;
+	position:absolute;
+	bottom:-30px; left:143px;
+	height:20px; width:33px;
+	z-index:11;
+}
+
+.profile .white_players .items .item{
+	background:#fff;
+	font-size:15px;
+	color:#363636;
+	width:308px;
+	border-right:#CCC 1px solid;
+	text-align:center;
+	height:42px;
+	display:table-cell;
+	position:relative;
+	vertical-align:middle;
+	cursor:pointer;
+}
+.profile .white_players .items a{
+	margin:0;
+	padding:0;
+}
+
+.profile .white_players .items .selected{
+	background:#363636;
+	font-size:15px;
+	color:#fff;
+	width:308px;
+	border-right:#CCC 1px solid;
+	text-align:center;
+	height:42px;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.profile .players{
+	padding:40px 0;
+}
+
+
+.profile .players_stick{
+	padding-top:320px;
+}
+
+.profile .players .friends{
+	width:462px;
+	float:left;
+	text-align:right;
+	padding:15px 0 15px 0;
+}
+.profile .players .users{
+	text-align:left;
+	display:none;
+}
+
+
+.search_players {
+		background: url(/img/barra_filtros.png) center no-repeat;
+		height:24px;
+		width:910px;
+		margin:0 auto;
+		margin-bottom:10px;
+		margin-left:-8px;
+		text-align:right;
+		padding:15px 15px;
+}
+
+#players_total{
+		float:left;
+		padding:7px 20px 7px 10px;
+		margin-top:-2px;
+		border-right:#CCC 1px solid;
+		font-size:12px;
+	}
+
+#friends_total{
+		float:left;
+		padding:7px 20px 7px 10px;
+		margin-top:-2px;
+		border-right:#CCC 1px solid;
+		font-size:12px;
+	}
+	
+.search_players .invitar_amigos{
+	float:right;
+	padding:0 20px;
+	font-size:14px;
+	font-weight:bold;
+	border-left:#CCC 1px solid;
+	cursor:pointer;
+}
+.search_players .invitar_amigos .texto{
+	display:inline-block;
+	padding:5px 0 0 5px;
+}
+.search_players .invitar_amigos:hover{
+	color:#00923d;
+}
+.search_players .invitar_amigos:hover .btn_invitar_amigos_26x23{
+	background-position: -26px 0;
+}
+
+.search_players .search{
+	float:right;
+	padding-left:20px;
+	border-left:#CCC 1px solid;
+}
+
+.search_players .btn_search_players{
+	position:absolute;
+	top:0; right:0;
+}
+
+.search_players .field{ 
+	display:inline-block;
+		background:#fff;
+		border:#CCC 1px solid;
+		padding:0 28px 0 4px;
+		width:210px;
+		height:24px;
+		font-size:12px;
+		color:#333333;
+		text-align:left;
+}
+.search_players .field::-webkit-input-placeholder {
+    color: #999;
+	font-size:12px;
+	text-align:left;
+}
+/* Firefox < 19 */
+.search_players .field:-moz-placeholder {
+    color: #999;
+	font-size:12px;
+	text-align:left;
+}
+/* Firefox > 19 */
+.search_players .field::-moz-placeholder {
+    color: #999;
+	font-size:12px;
+	text-align:left;
+}
+/* Internet Explorer 10 */
+.search_players .field:-ms-input-placeholder {
+    color: #999;
+	font-size:12px;
+	text-align:left;
+}
+
+
+a.btn_search_players{
+	width: 30px;
+	height: 25px;
+	text-decoration: none;
+	background: url(/img/btn/btn_search_30x25.png);
+}
+a.btn_search_players:hover {
+	background-position: -30px 0;
+	}
+
+
+.local_player{
+	background-color:#FFF;
+	display:inline-block;
+	width:132px;
+	border:#CCC 1px solid;
+	box-shadow: 0 0 1px 0 #CCC;
+   	-webkit-box-shadow: 0 0 1px 0 #CCC;
+   	-moz-box-shadow: 0 0 1px 0 #CCC;
+	margin-left:15px;
+	margin-bottom:15px;
+}
+.local_player .image{
+	height:94px;
+	z-index:6;
+}
+.local_player .name{
+	height:30px;
+	font-size:12px;
+	padding:4px 5px;
+	background:#FFF;
+	z-index:7;
+	vertical-align:top;
+}
+.local_player .options{
+	background-color:#f1f1f1;
+	height:25px;
+	z-index:7;
+}
+
+.local_player .options .goChatUser{
+	position:absolute;
+	right:5px; top:-17px;
+}
+
+
+
+#list-sports{
+	width:400px;
+	height:500px;
+	box-shadow: 0 0 3px 2px #888;
+   	-webkit-box-shadow: 0 0 3px 2px #888;
+   	-moz-box-shadow: 0 0 3px 2px #888;
+	z-index:1001;
+	background:#FFF;
+	position:fixed;
+	top:100px;
+	left:50%;
+	margin-left:-200px;
+}
+
+
+#search-location{
+	width:570px;
+	height:500px;
+	box-shadow: 0 0 3px 2px #888;
+   	-webkit-box-shadow: 0 0 3px 2px #888;
+   	-moz-box-shadow: 0 0 3px 2px #888;
+	z-index:1001;
+	background:#FFF;
+	position:fixed;
+	top:100px;
+	left:50%;
+	margin-left:-285px;
+}
+
+
+
+.message{
+		text-align:center;
+		margin:70px 0;
+		color:#9a9a9a;
+	}
+	.message .message_content{
+		font-size:36px;
+		font-weight:lighter;
+		margin:10px 0 5px 0;
+	}
+	.message .submessage{
+		font-size:24px;
+		font-weight:lighter;
+	}
+	
+	.filtro_canchas_1 .field_name{
+		position:absolute;
+		padding:2px 0;
+		font-size:12px;
+		color:#DDD;
+	}
+
+#field_filters{
+		background: url(/img/barra_filtros.png) center no-repeat;
+		height:24px;
+		width:910px;
+		margin:0 auto;
+		margin-bottom:10px;
+		text-align:right;
+		padding:15px 15px;
+	}
+	
+	#branch_total{
+		float:left;
+		padding:7px 20px 7px 10px;
+		margin-top:-2px;
+		border-right:#CCC 1px solid;
+		font-size:12px;
+	}
+	
+	
+	#field_filters .search{
+		float:right;
+		padding-left:20px;
+		border-left:#CCC 1px solid;
+	}
+	
+	#field_filters .btn_search_players{
+		position:absolute;
+		top:0; right:0;
+	}
+	
+	#field_filters .field{ 
+		display:inline-block;
+		background:#fff;
+		border:#CCC 1px solid;
+		padding:0 28px 0 4px;
+		width:210px;
+		height:24px;
+		font-size:12px;
+		color:#333333;
+		text-align:left;
+	}
+	#field_filters .field::-webkit-input-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	/* Firefox < 19 */
+	#field_filters .field:-moz-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	/* Firefox > 19 */
+	#field_filters .field::-moz-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	/* Internet Explorer 10 */
+	#field_filters .field:-ms-input-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	
+	
+	#field_filters .see_likes{
+		float:right;
+		padding:0 20px;
+		font-size:14px;
+		font-weight:bold;
+		border-left:#CCC 1px solid;
+		cursor:pointer;
+	}
+	#field_filters .see_likes .texto{
+		display:inline-block;
+		padding:5px 0 0 5px;
+	}
+	#field_filters .see_likes:hover{
+		color:#00923d;
+	}
+	#field_filters .see_likes:hover .btn_likes_22x26{
+		background-position: -22px 0;
+	}
+	
+	.selected_see_likes{
+		float:right;
+		padding:0 20px;
+		font-size:14px;
+		font-weight:bold;
+		border-left:#CCC 1px solid;
+		cursor:pointer;
+		color:#00923d;
+	}
+	.selected_see_likes .texto{
+		display:inline-block;
+		padding:5px 0 0 5px;
+	}
+	.selected_see_likes a.btn_likes_22x26{
+		background-position: -22px 0;
+	}
+
+
+.stick {
+  position: fixed;
+  top: 0; left:0; right:0;
+  z-index: 999;
+}
+
+
+</style>
+
+<script>
+	var geocoder;
+	var map;
+	
+	var street_number = '';
+	var route = '';
+	var locality = '';
+	var city = '';
+	var administrative_area_level_2 = '';
+	var administrative_area_level_1 = '';
+	var country = '';
+	var postal_code = '';
+	
+	var formatted_address = '';
+	var lat = '';
+	var lng = '';
+	
+$(function(){
+	
+
+	initializeMap();
+	
+	
+	codeAddress();
+	
+	loadLocalFriends($('#user_id').val());
+	loadLocalPlayers($('#user_id').val());
+	
+
+	
+	$('#players_others_search').keyup(function(event){
+		$('#players_others_start').val(0);
+		loadLocalPlayers($('#user_id').val());
+	});	
+	
+	
+	$('#players_friends_search').keyup(function(event){
+		$('#players_friends_start').val(0);
+		loadLocalFriends($('#user_id').val());
+	});	
+	
+/*
+	$('#user-map-link').click(function(event){
+		$('#location-map').animate({height:300},200);
+		$('#user-map-link').hide();
+		$('#location-map').one('mouseleave',function() {
+			$('#location-map').animate({height:150},200);
+		    $('#user-map-link').show();
+		});
+    });	*/
+	
+	$('.expand_map').click(function(event){
+		$('#contract-map').show();
+		$('#expand-map').hide();
+		$('#location-map').animate({height:300},200);
+		$('#user-map').animate({height:300},200);
+    });	
+	$('.contract_map').click(function(event){
+		$('#expand-map').show();
+		$('#contract-map').hide();
+		$('#location-map').animate({height:150},200);
+		$('#user-map').animate({height:150},200);
+    });	
+	
+	$('#location-map').mouseup(function(event){
+		getThisPosition();
+	});	
+
+
+	$('#facebook-invite').click(function(event){
+				FB.ui({method: 'apprequests',
+				  message: 'SquadrApp.com, tu vida deportiva a otro nivel.',
+				  redirect_uri: 'http://squadrapp.com/'
+				}, function(response){});
+			});	
+	
+	
+	
+	
+	$("#show_friends").click(function(event){
+        event.preventDefault();
+		$("body").css("overflow", "hidden"); 
+		$("#overlay").show();
+        $('#scrollbar1').center().fadeIn('slow').tinyscrollbar().tinyscrollbar_update();
+    });
+    $('.fb_friends_list .close').click(function(event){
+        event.preventDefault();
+		$("body").css("overflow", "auto"); 
+		$("#overlay").fadeOut('slow');
+		$('.modal').fadeOut('slow');
+    })
+	
+	
+	
+	function arrowSelectPosition(id){
+		$( ".arrow" ).position({
+			  at: "center bottom+8",
+			  of: "#"+id+"",
+			  collision: "none"
+		  });
+	}
+	  
+	
+	$("#fields_item").click(function(event){
+        $('.selected').removeClass('selected');
+		$('.users').hide();
+		$('#fields_item').addClass('selected');
+		arrowSelectPosition("fields_item");
+		$('.list_fields').show();
+		findFields();
+    });
+	$("#friends_players_item").click(function(event){
+        $('.selected').removeClass('selected');
+		$('.users').hide();
+		$('#friends_players_item').addClass('selected');
+		arrowSelectPosition("friends_players_item");
+		$('#players_friends').show();
+		loadLocalFriends($('#user_id').val());
+    });
+	$("#other_players_item").click(function(event){
+        $('.selected').removeClass('selected');
+		$('.users').hide();
+		$('#other_players_item').addClass('selected');
+		arrowSelectPosition("other_players_item");
+		$('#players_others').show();
+		loadLocalPlayers($('#user_id').val());
+    });
+	
+	$("#friends_players_item").click();
+	
+	
+	
+	$("#user-sports").click(function(event){
+		openOverlay(0);
+		$("#list-sports").load("/user/user/list-sports", {
+			   uid: $('#user_id').val()
+		   }, function(){
+			   
+		   });
+		$("#list-sports").slideDown();
+    });
+	
+	$("#user-location").click(function(event){
+		openOverlay(0);
+		$("#search-location").load("/user/user/search-location", {
+			   uid: $('#user_id').val()
+		   }, function(){
+			   
+		   });
+		$("#search-location").show();
+    });
+	
+	$('#save-location').click(function(){
+		getThisPosition();
+	});
+	
+	
+	
+	$('#search-map').click(function(){
+		$('#search-location-form').show();
+	});
+	
+	$('#close-search').click(function(){
+		$('#search-location-form').hide();
+	});
+	
+	$('#btn-search-location').click(function(){
+		$('#user_location').val($('#city-search').val());
+		codeAddress();
+	});
+	
+	$("#city-search").enterKey(function () {
+		$('#user_location').val($('#city-search').val());
+		codeAddress();
+	});
+	
+	$('#get-geoLoc').click(function(){
+		getGeolocation();
+	});
+	
+	$('#find-location').click(function(){
+		$('#user_location').val($('#place-location').val());
+		codeAddress();
+	});
+	
+	
+	$('.invitar_amigos').click(function(event){
+				FB.ui({method: 'apprequests',
+				  message: 'SquadrApp.com, tu vida deportiva a otro nivel.',
+				  redirect_uri: 'http://squadrapp.com/'
+				}, function(response){});
+			});
+	
+	
+	$('#likes_filter').click(function(event){
+		if ($('#likes').val() == 0) {
+			$("#search_results").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+			$('#likes_filter').removeClass('see_likes').addClass('selected_see_likes');
+			$('#all_filter').removeClass('selected_see_likes').addClass('see_likes');
+			$('#likes').val(1);
+			findFields();
+		}
+	});
+	
+	$('#all_filter').click(function(event){
+		if ($('#likes').val() == 1) {
+			$("#search_results").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+			$('#all_filter').removeClass('see_likes').addClass('selected_see_likes');
+			$('#likes_filter').removeClass('selected_see_likes').addClass('see_likes');
+			$('#likes').val(0);
+			findFields();
+		}
+	});
+	
+	
+
+	
+	
+		
+			
+});
+
+
+
+
+function initializeMap() {
+	  geocoder = new google.maps.Geocoder();
+	  var myLatlng = new google.maps.LatLng(0,0);
+	  var mapOptions = {
+		zoom: 13,
+		center: myLatlng,
+		mapTypeControl: false,
+		overviewMapControl: false,
+		panControl: false,
+		scrollwheel: false,
+		streetViewControl: false,
+		zoomControl: true,
+		zoomControlOptions: {
+		  style: google.maps.ZoomControlStyle.SMALL
+		},
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	  }
+	  map = new google.maps.Map(document.getElementById('user-map'), mapOptions);
+	}	
+
+
+function codeAddress() {
+	  var address = $("#user_location").val();
+	  geocoder.geocode( { 'address': address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+		  map.setCenter(results[0].geometry.location);
+		  //alert(results[0].address_components[0].long_name+', '+results[0].address_components[2].long_name);
+		  		  
+		  street_number = '';
+		  route = '';
+		  locality = '';
+		  city = '';
+		  administrative_area_level_2 = '';
+		  administrative_area_level_1 = '';
+		  country = '';
+		  postal_code = '';
+		  formatted_address = results[0].formatted_address;
+		  lat = results[0].geometry.location.lat();
+		  lng = results[0].geometry.location.lng();
+		  
+		  var arrAddress = results[0].address_components;
+			// iterate through address_component array
+		  $.each(arrAddress, function (i, address_component) {
+				if (address_component.types[0] == "street_number") 
+					street_number = address_component.long_name; 
+				if (address_component.types[0] == "route") 
+					route = address_component.long_name; 
+				if (address_component.types[0] == "locality") 
+					locality = address_component.long_name; 
+				if (address_component.types[0] == "administrative_area_level_2") 
+					administrative_area_level_2 = address_component.long_name; 
+				if (address_component.types[0] == "administrative_area_level_1") 
+					administrative_area_level_1 = address_component.long_name; 
+				if (address_component.types[0] == "country") 
+					country = address_component.long_name; 
+				if (address_component.types[0] == "postal_code") 
+					postal_code = address_component.long_name; 
+		  });	 
+		  city = locality;
+		  if (locality==''){
+			  city = administrative_area_level_2;
+			  if (administrative_area_level_2==''){
+				  city = administrative_area_level_1;
+			  }
+		  }
+		  $('#place-location').val(city+', '+country);
+		  $("#location_tooltip").html(city+', '+country);
+		  $("#city-search").val(city+', '+country);
+		  $("#location-user").html(city+', '+country);
+		  
+		  $.ajax({
+				type: "POST",
+				url: '/user/user/change-user-location',
+				dataType: "json",
+				data: {
+						use_street_number : ''+street_number,
+						use_route : ''+route,
+						use_locality : ''+locality,
+						use_city : ''+city,
+						use_administrative_area_level_2 : ''+administrative_area_level_2,
+						use_administrative_area_level_1 : ''+administrative_area_level_1,
+						use_country : ''+country,
+						use_postal_code : ''+postal_code,
+						use_formatted_address : ''+formatted_address ,
+						use_lat : ''+lat,
+						use_lng : ''+lng
+					  },
+				success: function(data)
+				{
+					  findFields();
+					  $('#players_others_start').val(0);
+					  loadLocalPlayers($('#user_id').val());
+					  $('#players_friends_start').val(0);
+					  loadLocalFriends($('#user_id').val());
+				}
+			}); 
+		  
+		} else {
+		  alert('Geocode was not successful for the following reason: ' + status);
+		}
+	  });
+	}
+	
+	function getGeolocation(){
+		if(navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+			  var pos = new google.maps.LatLng(position.coords.latitude,
+											   position.coords.longitude);
+		
+			  
+			  map.setCenter(pos);
+			  getThisPosition();
+			}, function() {
+			});
+		}
+	}
+	
+	function getThisPosition() {
+		var lat = map.getCenter().lat();
+		var lng = map.getCenter().lng();
+	 	var latlng = new google.maps.LatLng(lat, lng);
+  		geocoder.geocode({'latLng': latlng}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+		  map.setCenter(results[0].geometry.location);
+		  
+		  street_number = '';
+		  route = '';
+		  locality = '';
+		  city = '';
+		  administrative_area_level_2 = '';
+		  administrative_area_level_1 = '';
+		  country = '';
+		  postal_code = '';
+		  formatted_address = results[0].formatted_address;
+		  lat = results[0].geometry.location.lat();
+		  lng = results[0].geometry.location.lng();
+		  
+		  var arrAddress = results[0].address_components;
+			// iterate through address_component array
+		  $.each(arrAddress, function (i, address_component) {
+				if (address_component.types[0] == "street_number") 
+					street_number = address_component.long_name; 
+				if (address_component.types[0] == "route") 
+					route = address_component.long_name; 
+				if (address_component.types[0] == "locality") 
+					locality = address_component.long_name; 
+				if (address_component.types[0] == "administrative_area_level_2") 
+					administrative_area_level_2 = address_component.long_name; 
+				if (address_component.types[0] == "administrative_area_level_1") 
+					administrative_area_level_1 = address_component.long_name; 
+				if (address_component.types[0] == "country") 
+					country = address_component.long_name; 
+				if (address_component.types[0] == "postal_code") 
+					postal_code = address_component.long_name; 
+		  });	
+		  city = locality;  
+		  if (locality==''){
+			  city = administrative_area_level_2;
+			  if (administrative_area_level_2==''){
+				  city = administrative_area_level_1;
+			  }
+		  }
+		  $('#place-location').val(city+', '+country);
+		  $("#location_tooltip").html(city+', '+country);
+		  $("#city-search").val(city+', '+country);
+		  $("#location-user").html(city+', '+country);
+		  
+		  $.ajax({
+				type: "POST",
+				url: '/user/user/change-user-location',
+				dataType: "json",
+				data: {
+						use_street_number : ''+street_number,
+						use_route : ''+route,
+						use_locality : ''+locality,
+						use_city : ''+city,
+						use_administrative_area_level_2 : ''+administrative_area_level_2,
+						use_administrative_area_level_1 : ''+administrative_area_level_1,
+						use_country : ''+country,
+						use_postal_code : ''+postal_code,
+						use_formatted_address : ''+formatted_address ,
+						use_lat : ''+lat,
+						use_lng : ''+lng
+					  },
+				success: function(data)
+				{
+					  findFields();
+					  $('#players_others_start').val(0);
+					  loadLocalPlayers($('#user_id').val());
+					  $('#players_friends_start').val(0);
+					  loadLocalFriends($('#user_id').val());
+				}
+			}); 
+		  
+		} else {
+		  alert('Geocode was not successful for the following reason: ' + status);
+		}
+	  });
+	}
+	
+	
+
+
+	function loadLocalPlayers(uidParam){
+		//$("#local_players").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+		$(window).unbind("scroll");
+		$('#players_others_start').val(0);
+		$.ajax({
+			type: "POST",
+			url: "/user/user/get-local-players/",
+			data: {
+				uid : uidParam,
+				start : $('#players_others_start').val(),
+				ini : $.trim($('#players_others_search').val())
+			},
+			success: function(data) {
+				$("#local_players").html(data);
+				$('#players_others_start').val((Number($('#players_others_start').val())+18));
+			}
+		});
+		$(window).on("scroll", function(event) {
+					if ($(this).scrollTop() > 100) {
+						$('#goTop').fadeIn();
+					} else {
+						$('#goTop').fadeOut();
+					}
+			if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+				loadMoreLocalPlayers($('#user_id').val());
+			}
+		});
+	}
+	
+	function loadLocalFriends(uidParam){
+		//$("#local_players").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+		$(window).unbind("scroll");
+		$('#players_friends_start').val(0);
+		$.ajax({
+			type: "POST",
+			url: "/user/user/get-local-friends/",
+			data: {
+				uid : uidParam,
+				start : $('#players_friends_start').val(),
+				ini : $.trim($('#players_friends_search').val())
+			},
+			success: function(data) {
+				$("#local_friends").html(data);
+				$('#players_friends_start').val((Number($('#players_friends_start').val())+18));
+			}
+		});
+		$(window).on("scroll", function(event) {
+					if ($(this).scrollTop() > 100) {
+						$('#goTop').fadeIn();
+					} else {
+						$('#goTop').fadeOut();
+					}
+			if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+				loadMoreLocalFriends($('#user_id').val());
+			}
+		});
+	}
+	
+	function loadMoreLocalPlayers(uidParam){
+		//$("#local_players").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+		
+		$(".load_players").show();
+		$(window).off("scroll");
+		$.ajax({
+			type: "POST",
+			url: "/user/user/get-local-players/",
+			data: {
+				uid : uidParam,
+				start : $('#players_others_start').val(),
+				ini : $.trim($('#players_others_search').val())
+			},
+			success: function(data) {
+				$("#local_players").append(data);
+				$('#players_others_start').val((Number($('#players_others_start').val())+18));
+				$(".load_players").hide();
+				$(window).unbind("scroll");
+				$(window).on("scroll", function(event) {
+					if ($(this).scrollTop() > 100) {
+						$('#goTop').fadeIn();
+					} else {
+						$('#goTop').fadeOut();
+					}
+					if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+						loadMoreLocalPlayers($('#user_id').val());
+					}
+				});
+			}
+		});
+	}
+	
+	
+	function loadMoreLocalFriends(uidParam){
+		//$("#local_players").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+		
+		$(".load_players").show();
+		$(window).off("scroll");
+		$.ajax({
+			type: "POST",
+			url: "/user/user/get-local-friends/",
+			data: {
+				uid : uidParam,
+				start : $('#players_friends_start').val(),
+				ini : $.trim($('#players_friends_search').val())
+			},
+			success: function(data) {
+				$("#local_friends").append(data);
+				$('#players_friends_start').val((Number($('#players_friends_start').val())+18));
+				$(".load_players").hide();
+				$(window).unbind("scroll");
+				$(window).on("scroll", function(event) {
+					if ($(this).scrollTop() > 100) {
+						$('#goTop').fadeIn();
+					} else {
+						$('#goTop').fadeOut();
+					}
+					if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+						loadMoreLocalFriends($('#user_id').val());
+					}
+				});
+			}
+		});
+	}
+
+
+function findFields(){
+	$("#branch_total").html('&nbsp;');
+	$("#search_results").load("/ground/index/search-fields", {
+			  ini : $.trim($('#fields_search').val()), 
+			  likes : $('#likes').val()
+		   }, function(){});
+}
+
+
+
+function sticky_relocate() {
+		  var window_top = $(window).scrollTop();
+		  var div_top = $('#sticky-anchor').offset().top;
+		  if (window_top > div_top) {
+			$('#sticky').addClass('stick');
+			$('.players').addClass('players_stick');
+		  } else {
+			$('#sticky').removeClass('stick');
+			$('.players').removeClass('players_stick');
+		  }
+	}
+
+	
+
+
+</script>
+
+

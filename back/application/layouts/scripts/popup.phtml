@@ -1,0 +1,67 @@
+<?php
+    $this->doctype('XHTML1_STRICT');
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.ui.datepicker-es.js"));
+    $this->JQuery()->addJavascriptFile($this->baseUrl("/widget/menu/menu.js"));
+    $this->JQuery()->addJavascriptFile($this->baseUrl("/js/global.js"));
+    $this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.DataTables.min.js"));
+    $this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.validate.js"));
+    
+    $this->JQuery()->addStylesheet($this->baseUrl("/widget/menu/menu.css"));
+    $this->JQuery()->addStylesheet($this->baseUrl("/widget/xbreadcrumb/xbreadcrumbs.css"));
+    $this->JQuery()->addStylesheet($this->baseUrl("/css/demo_table.css"));
+ 
+    
+    $this->headLink()->appendStylesheet($this->baseUrl("/css/styleMenuFloat.css"));
+    $this->headLink()->appendStylesheet($this->baseUrl("/css/style.css"));
+
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8')
+            ->appendHttpEquiv('expires', '0')
+            ->appendHttpEquiv('pragma', 'no-cache')
+            ->appendHttpEquiv('Cache-Control', 'no-cache');
+    echo $this->doctype(); ?>
+<html>
+    <head>
+        <script type="text/javascript">
+            var baseUrl = "<?php echo $this->baseUrl(); ?>";
+        </script><?php
+        echo $this->headMeta();
+        echo $this->headTitle();
+        echo $this->JQuery();
+        echo $this->headLink();
+        ?>
+        <link rel="shortcut icon" href="<?php echo $this->baseUrl("/img/company_logo_orb_14x14.png"); ?>" />
+    </head>
+    <body class="bgbody">
+        <?php
+        echo $this->header("globalbluenet_popup");
+        //echo $this->menuPrincipal();
+        ?>
+        <div align="center" style="width: 100%">
+            <div align="left" style="width: 98%">
+                <h2 class="titulo"><?php echo $this->placeholder("title"); ?></h2>
+                <?php 
+                echo $this->placeholder("navigation"); 
+                $priorityMsg = $this->priorityMessenger();
+                if (count($priorityMsg) > 0) {
+                    echo '<div id="priority_messages"><ul>';
+                    foreach ($priorityMsg as $label => $messages) {
+                        foreach ($messages as $message) {
+                            echo '<li class="' . $label . '_message">' . $message . '</li>';
+                        }
+                    }
+                    echo '</ul></div>';
+                }
+                ?>
+                <?php echo $this->layout()->content ?>
+            </div>
+        </div>
+        <div style="display:none">
+            <a href="http://apycom.com/">Apycom jQuery Menus</a>
+        </div>
+        <div id="confirmation_delete" title="Eliminar registro" style="display: none">
+            ¿Esta seguro que desea eliminar
+            <strong><span id="confirmation_delete_msg"></span></strong>?
+        </div>
+        <?php echo $this->footer('globalbluenet_popup') ?>
+    </body>
+</html>

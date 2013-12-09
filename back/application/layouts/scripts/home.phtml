@@ -1,0 +1,97 @@
+<?php
+
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.min.js"));
+	
+    $this->headLink()->appendStylesheet($this->baseUrl("/css/squadrapp.css"));
+	
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/bxslider/jquery.bxslider.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/widget/bxslider/jquery.bxslider.css"));
+
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/colorbox/jquery.colorbox-min.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/widget/colorbox/colorbox.css"));
+
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8')
+            ->appendHttpEquiv('expires', '0')
+            ->appendHttpEquiv('pragma', 'no-cache')
+            ->appendHttpEquiv('Cache-Control', 'no-cache');
+    echo $this->doctype(); ?>
+<html>
+    <head>
+        <script type="text/javascript">
+            var baseUrl = "<?php echo $this->baseUrl(); ?>";
+        </script><?php
+        echo $this->headMeta();
+        echo $this->headTitle();
+        echo $this->JQuery();
+        echo $this->headLink();
+        ?>
+    </head>
+    <body>
+	
+	<div id="squadrapp">
+		<div id="header"><div class="squadrapp_canvas">
+			<div id="logo"><a href="<?php echo $this->baseUrl("/"); ?>"><img src="<?php echo $this->baseUrl("/img/logo.png"); ?>"></a></div>
+            <div id="nav"><a href="/site/site/registro-cancha" class="ingresarcanchas"></a></div>
+            <div class="corte"></div>
+		</div></div>
+	
+		<div id="content"><!--div class="squadrapp_canvas"-->
+			<?php echo $this->layout()->content ?>
+		</div><!--/div-->
+		
+        <div id="pre_footer"><div class="squadrapp_canvas">
+            <div class="logoHubBog1">
+            	<a href="http://apps.co" target="_blank"><img src="<?php echo $this->baseUrl("/img/otros/logo_hubbog.png"); ?>"></a>
+                <a href="http://hubbog.com" target="_blank"><img src="<?php echo $this->baseUrl("/img/otros/logo_appsco.png"); ?>"></a>
+                <div class="con">"Seleccionados Consolidaci&oacute;n"</div>
+            </div>
+            <img src="<?php echo $this->baseUrl("/img/otros/home_publicados.png"); ?>">
+            <img src="<?php echo $this->baseUrl("/img/otros/home_logo_eltiempo.png"); ?>">
+            <img src="<?php echo $this->baseUrl("/img/otros/home_logo_portafolio.png"); ?>">
+            <img src="<?php echo $this->baseUrl("/img/otros/home_logo_enter.png"); ?>">
+            <img src="<?php echo $this->baseUrl("/img/otros/home_logo_mprende.png"); ?>">
+		</div></div>
+        
+		<div id="footer">
+			© 2013. Todos los derechos reservados, SquadrApp.com
+		</div>
+	
+	</div>
+	
+    
+    </body>
+
+<script language="javascript">
+	$(document).ready(
+	
+		function(){
+		  $('.bxslider').bxSlider({
+			  controls: false
+			});
+			
+			var isMobile = /android|iphone|ipod/i.test(navigator.userAgent.toLowerCase())
+			if (isMobile)
+			{
+			  $(location).attr('href',"/index/mobile-index");
+			}
+		
+		}
+	
+	);
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-41552148-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</html>

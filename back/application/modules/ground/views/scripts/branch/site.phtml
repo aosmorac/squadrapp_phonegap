@@ -1,0 +1,1070 @@
+<div class="slider_top">
+	<div class="squadrapp_canvas">
+        <div class="result_text">
+                <h2><?php echo $this->branch['company']; ?></h2>
+                <h5><?php echo $this->branch['bra_name']; ?></h5>
+                <ul>
+                    <li><?php echo $this->branch['bra_address']; ?>,</li>
+                    <li><?php echo $this->branch['bra_area']; ?>,</li>
+                    <li><?php echo $this->branch['city']; ?>,</li>
+                    <li><?php echo $this->branch['country']; ?></li>
+                </ul>
+                <a href="" class="btn_map_126x62" id='map_ico' onClick=" _gaq.push (['_trackEvent' ,'Site' ,'clicMapa' ,'ver_mapa']);"></a>
+        </div>
+        <div class="reservation">
+                <p>Precio por Hora</p>
+                <h3 id="field_value">$<?php echo number_format($this->fields['fie_sch_value'],0,",","."); ?></h3>
+                <form action="#" name="availability-form" id="availability-form">
+                    <fieldset>
+                    	<input type="hidden" id="bra_name" value="<?php echo $this->branch['company']; ?>" />
+                    	<input type="hidden" id="bra_address" value="<?php echo $this->branch['bra_address']; ?>" />
+                        <input type="hidden" id="bra_prices" value="<?php echo $this->fields['fie_sch_value']; ?>" />
+                        <p class="dates">
+                        	<span class="field_name" id="datepicker_label">Fecha</span>
+                            <input type="text" name="date" id="datepicker" readonly="readonly" value="<?php echo substr($this->fields['fie_sch_date'],0,10); ?>" onClick=" _gaq.push (['_trackEvent' ,'Site' ,'selectFecha' ,'Fecha']);">
+                            <span class="field_name" id="hours_label">Hora</span>
+                            <input type="text" name="hour" id="hours" readonly="readonly" value="<?php echo substr($this->fields['fie_sch_hour'],0,5); ?>" onClick=" _gaq.push (['_trackEvent' ,'Site' ,'selectHora' ,'Hora']);">
+                            <input type="hidden" name="bra_id" id="bra_id" value="<?php echo $this->branch['id_bra']; ?>" />
+                        </p>
+                        <p>
+                        	<span class="field_name" id="field_kind_label">Tipo de cancha</span>
+                        	<input type="text" name="field_kind" readonly="readonly" class="field_kind" id="field_kind" value="<?php echo $this->fields['attributes']; ?>" onClick=" _gaq.push (['_trackEvent' ,'Site' ,'selectTipo' ,'Tipo_cancha']);">
+                            <input type="hidden" name="ids_field" id="ids_field" value="<?php echo $this->fields['ids_fie']; ?>" />
+                            <input type="hidden" name="ids_sch" id="ids_sch" value="<?php echo $this->fields['ids_sch']; ?>" />
+                        </p>
+                        <div class="sold">
+                        <?php if ($this->fields['sta_id']==1){ ?>
+                        	&nbsp;
+                        <?php }else{ ?>     
+                        	<strong>Esta hora no esta disponible</strong>  
+                        <?php } ?>   
+                        </div>                 
+                        <p class="btn_res">
+                        <?php /*if ($this->fields['sta_id']==1){ ?>
+                        	<a href="javascript:void(0);" class="btn_reserva_258x57" id="btn_reservar"></a>
+                        <?php }else { ?>
+                        	<a href="javascript:void(0);" class="btn_sugerencias_258x56" id="btn_sugerencias"></a>
+                        <?php } */?>
+                        	<a href="javascript:void(0);" class="btn_contactar_cancha_258x57" id="btn_contact_field" onClick=" _gaq.push (['_trackEvent' ,'Site' ,'clicCancha' ,'contactar_cancha']);"></a>
+                        </p>
+                        
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <div class="corte"></div>
+	</div>
+
+
+    <div class="bg_slider">
+    	<ul class="branch_slider">
+        <?php 
+		if (isset($this->header) && count($this->header)>0):
+		foreach ($this->header as $hImage): 
+		?>
+        	<li>
+            	<div class="bg_slider_bg" style="background:url(<?php echo $this->baseUrl("/load/images/".$hImage['url_image']); ?>) top no-repeat;"></div>
+            </li>
+        <?php 
+		endforeach;
+		else:
+		?>
+        	<li>
+            	<div class="bg_slider_bg" style="background:#333;"></div>
+            </li>
+        <?php
+		endif; 
+		if (!isset($this->header) || count($this->header)<2):
+		?>
+        <script>
+			  $('.branch_slider').bxSlider({
+				  mode: 'fade',
+				  controls: false,
+				  pager: false,
+				  auto: false
+				});
+        </script>
+        <?php
+		else:
+		?>
+        <script>
+			  $('.branch_slider').bxSlider({
+				  mode: 'fade',
+				  controls: false,
+				  pager: false,
+				  speed: 2000,
+				  pause: 10000,
+				  auto: true
+				});
+        </script>
+        <?php
+		endif; 
+		?>
+        </ul>
+    </div>
+    
+    
+</div>
+
+<div class="squadrapp_canvas">
+
+    <div class="visits">
+    	<p>
+        <strong>Jugadores que han visto este sitio.</strong> <a href="#" id="show_allVisitors" onClick=" _gaq.push (['_trackEvent' ,'Site' ,'clicAmigos' ,'ver_amigos']);">Mis amigos</a>
+        </p>
+        <div class="bloker">
+            <div class="profile_image">
+                 <?php 
+				if (isset($this->visitors) && count($this->visitors)>0):
+				foreach ($this->visitors as $visitor): 
+				?>
+					<img class="profile_img" width="54" height="54" src="https://graph.facebook.com/<?php echo $visitor['Facebook_id']; ?>/picture?width=54&height=54" alt="<?php echo $visitor['use_name']; ?>"  title="<?php echo $visitor['use_name']; ?>">
+				<?php 
+				endforeach;
+				else:
+				?>
+					<img src="/img/user_field.png" alt="">
+				<?php
+				endif; 
+				?>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<div class="squadrapp_canvas">
+	<div class="site_content">
+    
+    </div>
+</div>
+
+
+<?php
+/****************************************************************
+**	Modalbox mapa
+****************************************************************/
+?>
+    <div class="map modal">
+    	<a href="#" class="close" title="Cerrar">x</a>
+    	<div id="map-canvas"></div>
+        <div class="footer">&nbsp;</div>
+	</div>
+<?php
+/**********************************************************************
+**	FIN MAPA
+***********************************************************************/
+?>
+
+<?php
+/****************************************************************
+**	Modalbox Amigos visitaron
+****************************************************************/
+?>
+<div id="scrollbar1" class="fb_friends_list modal">
+        <p class="head_friends">Amigos que han visto este sitio <a href="#" class="close">x</a></p>
+        <div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+            <div class="viewport">
+                <div class="overview">
+                    <ul>
+                         		<?php 
+								foreach ($this->visitors as $visitor): 
+								?>
+                                <li>
+                            		<div class="profile_image">
+										<img class="profile_img" width="54" height="54" src="https://graph.facebook.com/<?php echo $visitor['Facebook_id']; ?>/picture?width=54&height=54" alt="<?php echo $visitor['use_name']; ?>"  title="<?php echo $visitor['use_name']; ?>">
+                                    </div>
+                                    <p><?php echo $visitor['use_name']; ?></p>
+                                </li>
+								<?php 
+								endforeach;
+								?>
+                    </ul>
+                </div>
+            </div>
+        <div class="footer">&nbsp;</div>
+    </div>
+<?php
+/**********************************************************************
+**	FIN AMIGOS
+***********************************************************************/
+?>
+
+
+<?php
+/****************************************************************
+**	Modalbox con sugerencias
+****************************************************************/
+?>
+<div class="hour_options modal" >
+    <a href="#" class="close"></a>    
+    <div class="options">
+            <ul>
+                <li><a href="#" class="active" id="sameSuggest" data-info="uno">En <?php echo $this->branch['company'].' - '.$this->branch['bra_name']; ?></a></li>
+                <li><a href="#" data-info="dos">En otras canchas</a></li>
+            </ul>
+        
+        <div class="fields_grounds">
+            <div class="aviables"></div>
+            <div class="alternative_gound"></div>
+        </div>
+        
+    </div>
+        <div class="info">
+            <p class="ground_name">
+                <strong id="suggest_name">
+                </strong>
+            </p>
+            <p class="gound_addrees" id="suggest_addrees"></p>
+            <p class="gound_value"><strong id="suggest_value"></strong></p>
+            <p class="date_selected">Fecha: <span id="suggest_date"></span></p>
+            <p class="date_selected">Hora: <span id="suggest_hour"></span></p>
+            <p class="date_selected">Tipo de cancha: <span id="suggest_feature"></span></p>
+            <p class="btn_suggest_res" align="center"><a href="javascript:void(0);" class="btn_reserva_258x57" id="btn_reservar_suggest"></a></p>
+            <div class="map_info" id="map-suggest">
+            </div>
+        </div> 
+        <input type="hidden" id="elementSelected" value="0" />
+</div>
+<div class="corte"></div>
+<?php
+/**********************************************************************
+**	FIN SUGERENCIAS
+***********************************************************************/
+?>
+<?php
+/****************************************************************
+**	Modalbox confirmar reserva
+****************************************************************/
+?>
+<div class="confirm_booking modal" >
+	<a href="#" class="close"></a>    
+    <div id="confirm_booking">&nbsp;</div>
+</div>
+<div class="corte"></div>
+<?php
+/**********************************************************************
+**	FIN SUGERENCIAS
+***********************************************************************/
+?>
+
+
+<?php
+/****************************************************************
+**	Modalbox Contactar Cancha
+****************************************************************/
+?>
+    <div class="cancha modal">
+    	<a href="#" class="close" title="Cerrar">x</a>
+    	<div id="contactarcancha-canvas"></div>
+    </div>
+<?php
+/**********************************************************************
+**	FIN CONTACTAR CANCHA
+***********************************************************************/
+?>
+
+
+<style>
+	.sold{
+		text-align:center;
+		font-size:12px;
+		color:#6489f6;
+		margin:2px 0 3px 0;
+	}
+	.result_text{
+		position:absolute;
+		bottom:-550px;
+		vertical-align:text-bottom;
+		padding:100px 0 10px 0;
+		text-align:left;
+		width:600px;
+    }
+    .result_text h2{
+        font-size: 60px;
+        color: #fff;
+        text-shadow: 1px 1px 3px #000;
+        text-transform: uppercase;
+		margin:5px 0;
+		line-height:57px;
+		font-family: 'Fjalla One', sans-serif;
+    }
+	.result_text h5{
+        font-size: 40px;
+        color: #fff;
+		font-weight:lighter;
+        text-transform: uppercase;
+		margin:5px 0;
+		line-height:40px;
+    }
+    .result_text ul{
+        color: #fff;
+        margin: 0 0 10px;
+        padding: 0;
+    }
+    .result_text ul li{
+        display: inline-block;
+		font-size:22px;
+		text-shadow: 1px 1px 3px #000;
+    }
+	
+	.reservation{
+		float:right;
+        background: #eeefee;
+        border: 1px solid #fff;
+        box-shadow: 0px 0px 2px #000;
+        color: #333333;
+        padding: 20px 0 0;
+        width: 280px;
+        margin: 312px 0 0 0;
+        vertical-align: top;
+		z-index:100;
+    }
+	.reservation .field_name{
+		position:absolute;
+		padding:0 5px;
+	}
+    .reservation p, .reservation h3{ padding: 0 30px; text-align:left;}
+    .reservation h3{
+        font-size: 36px;
+        border-bottom: 1px solid #fff;
+        padding: 5px 30px 20px 30px;
+    }
+	.reservation p{
+		font-size:12px;
+		font-weight:bold;
+	}
+    .reservation form{
+        margin: 10px 0 0;        
+    }
+    .reservation form input[type="submit"]{
+       /* background: url(images/res-slice.jpg);*/
+        border: solid 1px #fff;
+        color: #fff;
+        text-transform: uppercase;
+        border-radius: 10px;
+        width: 240px;
+        font-weight: bold;
+        padding: 8px 0;
+        font-size: 1.3em;
+        margin: 0 auto;
+        display: inline-block; 
+        margin: 10px;
+    }
+    .reservation form p{
+        padding: 0 10px;
+		text-align:center;
+    }
+    .reservation form p.dates input{
+        width: 100px;
+        border-radius: 5px; 
+        border: solid 1px #fff;
+		box-shadow: inset 0px 0px 2px #000;
+		padding:5px 5px;
+		font-size:14px;
+		text-align:center;
+        margin: 20px 3px 10px 5px;
+    }
+    .reservation .field_kind{
+        border-radius: 5px; 
+        border: solid 1px #fff;
+		box-shadow: inset 0px 0px 2px #000;
+		padding:5px 13px;
+        width: 212px;
+        margin: 10px 5px 5px 5px;
+    }
+    .reservation form p.btn_res{
+        border-top: 1px solid #fff;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    .bloker{
+        margin: 10px 0 0;
+        display: block;
+    }
+	
+	.hour_options .close, .confirm_booking .close{
+        background: url(/img/close.png);
+        display: block;
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        width: 20px;
+        height: 20px;
+		z-index:101;
+    }
+    .map{
+        width: 400px;
+		background-color:#FFF;
+        display: none;
+        position: absolute;
+        z-index: 99999;
+		box-shadow: 0px 0px 2px #000;
+    }
+    .map .close{
+        background: #ccc;
+        display: block;
+        position: relative;
+        border: 3px solid #fff;
+        top: 0;
+        right: 0;
+        text-align: right;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+	.cancha{
+        width: 490px;
+		min-height:400px;
+		background-color:#FFF;
+        display: none;
+        position: absolute;
+        z-index: 99999;
+		box-shadow: 0px 0px 2px #000;
+    }
+	.cancha .close{
+        background: #ccc;
+        display: block;
+        position: relative;
+        border: 2px solid #fff;
+        top: 0;
+        right: 0;
+        text-align: right;
+        padding: 5px 10px;
+        font-weight: bold;
+		color:#FFF;
+		font-weight:bold;
+    }
+	.head_friends, .map .footer{
+		background: #ccc;
+        display: block;
+        position: relative;
+        border: 3px solid #fff;
+        text-align: center;
+        color: #333;
+        padding: 5px 0;
+    }
+	.fb_friends_list .close{
+		display: block;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        color: #fff;
+        font-weight: bold;
+	}.fb_friends_list .footer {
+		background: #eeefee;
+        display: block;
+        position: relative;
+        border: 3px solid #fff;
+        text-align: center;
+        color: #333;
+        padding: 5px 0;
+	}
+	#map-canvas, #map_canvas {
+		width:394px;
+		height:450px;
+		margin:0 auto;
+	}
+	.visits{
+		margin:50px 0 20px 0;
+		padding:15px 0;
+		border-bottom:#FFF 2px solid;
+	}
+	.visits p{
+		font-size:12px;
+	}
+	.visits a{
+	text-decoration:underline;
+	color:#4b524e;
+	}
+	.visits a:hover{
+		text-decoration:underline;
+		color:#6e7b74;
+	}
+	
+	
+	
+	/* scrolbar */
+    #scrollbar1 { width: 345px; clear: both; margin: 20px 0 10px; }
+    #scrollbar1 .viewport { width: 330px; height: 400px; overflow: hidden; position: relative; }
+    #scrollbar1 .overview { list-style: none; position: absolute; left: 0; top: 0; }
+    #scrollbar1 .thumb .end,
+    #scrollbar1 .thumb { background-color: #909291; border-radius: 5px;}
+    #scrollbar1 .scrollbar { position: relative; float: right; width: 10px; }
+    #scrollbar1 .track { height: 100%; width:10px; position: relative; padding: 0 1px; }
+    #scrollbar1 .thumb { height: 10px; width: 10px; cursor: pointer; overflow: hidden; position: absolute; top: 0; }
+    #scrollbar1 .thumb .end { overflow: hidden; height: 5px; width: 13px; }
+    #scrollbar1 .disable{ display: none; }
+	
+	.fb_friends_list{
+        width: 345px;
+		background-color:#FFF;
+		display:none;
+        z-index: 99999;
+		box-shadow: 0px 0px 2px #000;
+    }
+	.fb_friends_list .profile_image{
+        display: inline-block;
+        border-radius:30px; 
+    }
+    .fb_friends_list .profile_image img{
+       border-radius:30px; 
+    }
+    .fb_friends_list ul{
+        display: block;
+        width: 330px;
+        padding: 0;
+    }
+    .fb_friends_list ul li{
+        background: #fff;
+        padding: 10px;
+        border: solid 1px #B3B3B3;
+        margin: 5px 2px 5px 10px;
+        box-shadow: 0 0 2px #888;
+		list-style:none;
+		text-align:left;
+    }
+    .fb_friends_list ul li p{
+        display: inline-block;
+        color: #666;
+        margin: 0 10px;
+		text-align:left;
+    }
+    .fb_friends_list .overview>p{
+        border-bottom: solid 1px #fff;
+        text-align: center;
+        color: #666;
+        padding: 5px;
+    }
+	
+	.site_content{
+		min-height:400px;
+	}
+	
+	
+	
+	/* pop-up calendario */
+	.hour_options{
+		background: #fff;
+		width: 905px;
+		z-index:100;
+	}
+	.options{
+		overflow: hidden;
+		height: 470px;
+	}
+	.options{
+		display: inline-block;
+		vertical-align: top;
+		text-align:left;
+		clear: both;
+	}
+	.info{
+		display: inline-block;
+		vertical-align: top;
+		text-align:left;
+		color:#333;
+		clear: both;
+	}
+	.options ul{
+		display: block;
+	}
+	.options ul li{
+		display: inline-block;
+		width: 317px;
+		float: left;
+		text-align: center; 
+	}
+	.options ul li:first-child{
+		border-right: 1px solid #999;
+	}
+	.options ul li a{
+		color: #555;
+		display: block;
+		border-top: #f3f3f0 solid 10px;
+		padding: 20px 0 30px 0;
+		background: #f3f3f0;
+		font-size:18px;
+		border-bottom:solid 1px #999;
+		margin:0;
+	}
+	.options ul li a.active{
+		border-top: #01d566 solid 10px;  
+	}
+	.aviables{
+		clear: both;
+	}
+	.aviables , .alternative_gound{
+		margin:0;
+		width: 640px;
+		height: 370px;
+		float: left;
+	}
+	.hour_detail{
+		display: inline-block;
+		width: 126px;
+		float: left;
+		border-left:solid 1px #ddd;
+		border-bottom:solid 1px #999;
+		text-align: center;
+		padding: 5px 0;
+	}
+	.hour_detail .dates{
+		border-bottom: 1px solid #ddd;
+		padding-bottom:3px;
+		font-size: 15px;
+	}
+	.hour_detail .hours{
+		width: 80px;
+		margin: 0 auto;
+		padding: 15px 0;
+		font-size:16px;
+		line-height:15px;
+	}
+	.hour_detail .groundname{
+		padding:0 10px;
+		font-size:12px;
+		color:#666;
+		height:50px;
+	}
+	.hour_detail .groundname span{
+		display: block;
+	}
+	.hour_detail .groundname .features{
+		font-size:10px;
+	}
+	.hour_detail a.selection{
+		width: 24px;
+		height: 24px;
+		display: block;
+		margin: 15px auto;
+		margin-bottom:10px;
+		border: solid 1px #AAA;
+		border-radius: 20px;
+	}
+	.alternative_gound, .main_ground, .options {
+		width: 635px;
+	}
+	.info{
+		width: 270px;
+		border-left: 1px solid #999;
+		margin: 0 0 0 -5px;
+		line-height: 140%;
+	}
+	.info p.ground_name{
+		font-size: 2em;
+		padding: 20px 15px 10px;
+	}
+	.info .gound_addrees{
+		padding: 0 0 0 15px;
+		line-height:12px;
+		font-size:14px;
+	}
+	.info .gound_value{
+		font-size: 34px;
+		padding: 31px 15px 28px 15px;
+	}
+	.info .date_selected{
+		padding: 0 0 0 15px;
+		font-size: 0.85em;
+	}
+	.info .ground_type{
+		padding: 5px 0 0 15px;
+	}
+	.info .btn_suggest_res{
+		padding:10px 0;
+	}
+	.info .map_info{
+		width:270px;
+		height:195px;
+	}
+	.fields_grounds{
+		position: absolute;
+		clear: both;
+		width: 1280px;
+		top: 83px;
+		left: 0;
+		height: 300px;
+	}
+	.hour_options{
+		display: none;
+		z-index: 9999;
+		position: absolute;
+	}
+	.bg_black{
+			background: url(images/black_bk.png);
+			display: none;
+			position: absolute;
+			z-index: 20;
+		}
+	.select_hour{
+		background: #01d566;
+		width: 20px;
+		height: 20px;
+		margin: 2px;
+		display: block;
+		border-radius: 15px;
+	}
+	
+	
+	/* pop-up calendario */
+	.confirm_booking{
+		display: none;
+		z-index: 9999;
+		position: absolute;
+		background:#FFF;
+		width:912px;
+		height:450px;
+	}
+	#confirm_booking{
+		position:relative;
+		max-width:912px;
+		max-height:450px;
+	}
+	
+	
+	
+
+
+	
+</style>
+
+
+
+
+
+<script>
+
+function initialize() {
+  var myLatlng = new google.maps.LatLng(<?php echo $this->branch['bra_coordinates']; ?>);
+  var mapOptions = {
+    zoom: 17,
+    center: myLatlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Hello World!'
+  });
+}
+
+
+function mapSuggest(coordinate1,coordinate2) { 
+  var myLatlng = new google.maps.LatLng(coordinate1,coordinate2);
+  var mapOptions = {
+    zoom: 15,
+    center: myLatlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  var map = new google.maps.Map(document.getElementById('map-suggest'), mapOptions);
+
+  var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Hello World!'
+  });
+}
+//google.maps.event.addDomListener(window, 'load', initialize);
+
+$(function() {
+
+	$('#map_ico').click(function(event){
+        event.preventDefault();
+		$("body").css("overflow", "hidden"); 
+		$("#overlay").show();
+        $('.map').center().show();
+		initialize();
+    });
+    $('.map .close').click(function(event){
+        event.preventDefault();
+		$("body").css("overflow", "auto"); 
+		$("#overlay").fadeOut('slow');
+		$('.modal').fadeOut('slow');
+    });
+	
+	
+	$( "#datepicker_label" ).position({
+          my: "left bottom",
+		  at: "left top",
+		  of: "#datepicker",
+		  collision: "none"
+      });
+	  $( "#hours_label" ).position({
+          my: "left bottom",
+		  at: "left top",
+		  of: "#hours",
+		  collision: "none"
+      });
+	  $( "#field_kind_label" ).position({
+          my: "left bottom",
+		  at: "left top",
+		  of: "#field_kind",
+		  collision: "none"
+      });
+	  
+	
+	$('#field_kind').autocomplete({
+			source: "/ground/branch/auto-complete-attributes/sid/<?php echo $this->branch['id_bra']; ?>",
+			minLength: 0,
+			select: function (event, ui) {
+				if(ui.item) {
+					$("#field_kind").val(ui.item.attributes);
+					$("#ids_field").val(ui.item.ids_fie);
+					$("#hours").focus();
+					loadAvailabilityField();
+				}
+			}
+		}).click(function() {
+			$( ".ui-autocomplete" ).removeClass( "autocomplete-header" );
+			$( ".ui-autocomplete" ).addClass( "autocomplete-site" );
+			$(this).autocomplete("search", $("#field_kind").val());
+		});
+	
+	$('#hours').autocomplete({
+			source:function(request, response) {
+				$.ajax({
+				  url: "/ground/branch/auto-complete-hours/",
+			      dataType: "json",
+				  data: {
+					term : request.term,
+					sid : <?php echo $this->branch['id_bra']; ?>, 
+					date : $('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' }).val()
+				  },
+				  success: function(data) {
+					response(data);
+				  }
+				});
+			  },
+			minLength: 0,
+			select: function (event, ui) {
+				if(ui.item) {
+					$("#hours").val(ui.item.hour);
+					$("#field_kind").focus();
+					loadAvailabilityField();
+				}
+			}
+		}).click(function() {
+			$( ".ui-autocomplete" ).removeClass( "autocomplete-header" );
+			$( ".ui-autocomplete" ).addClass( "autocomplete-site" );
+			$('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+			$(this).autocomplete("search", $("#hours").val());
+		});
+	
+	
+	$('#datepicker').change(function() {
+	  //date_selected = $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
+	  loadAvailabilityField();
+	});
+	
+	$( "#datepicker" ).datepicker({ minDate: +0, maxDate: "+2M", dateFormat: 'yy-mm-dd' });
+	
+	
+	<?php if (isset($this->moreVisitors) && count($this->moreVisitors)>0): ?>
+	$("#show_allVisitors").click(function(event){
+        event.preventDefault();
+		$("body").css("overflow", "hidden"); 
+		$("#overlay").show();
+        $('#scrollbar1').center().fadeIn('slow').tinyscrollbar().tinyscrollbar_update();
+    });
+    $('.fb_friends_list .close').click(function(event){
+        event.preventDefault();
+		$("body").css("overflow", "auto"); 
+		$("#overlay").fadeOut('slow');
+		$('.modal').fadeOut('slow');
+    })
+	<?php endif; ?>
+	
+	
+	<?php 
+	//	Solicita login	------------------------------------
+	if (!App_User::isLogged()) { 
+	?>
+		
+		$("#btn_contact_field").live("click",function(event){
+       		event.preventDefault();
+			logIn($(location).attr('href'));
+		});
+	<?php
+	}else{
+	?>
+	
+	$("#btn_contact_field").live("click",function(event){
+        event.preventDefault();
+		$("body").css("overflow", "hidden"); 
+		$("#overlay").show();
+        $('.cancha').center().show();
+		$("#contactarcancha-canvas").load("/ground/branch/get-contact", {
+			   bra_id: $("#bra_id").val()
+		   }, function(){});
+    });
+	
+	<?php
+	}
+	//	----------------------------------------------------
+	?>
+	
+	$('.cancha .close').click(function(event){
+        event.preventDefault();
+		$("body").css("overflow", "auto"); 
+		$("#overlay").fadeOut('slow');
+		$('.modal').fadeOut('slow');
+    })
+	
+	
+	
+	 $('.options ul li a').click(function(event){
+        event.preventDefault();
+        var posicion = $(this).attr('data-info');
+        $('.options ul li a').removeClass('active');
+        $(this).addClass('active');
+        switch(posicion){
+            case "uno":
+                $('.fields_grounds').animate({
+                    left: 0
+                });
+				$(".aviables").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+					$(".aviables").load("/ground/branch/get-suggestions", {
+						   bra_id: $("#bra_id").val(), 
+						   date: $("#datepicker").val(),
+						   hour: $("#hours").val(),
+						   sugType: 1
+					}, function(){
+						loadSugest($("#elementSelected").val());
+					});
+            break;
+            case "dos":
+                $('.fields_grounds').animate({
+                    left: -640
+                });
+				$(".alternative_gound").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+					$(".alternative_gound").load("/ground/branch/get-suggestions", {
+						   bra_id: $("#bra_id").val(), 
+						   date: $("#datepicker").val(),
+						   hour: $("#hours").val(),
+						   sugType: 2
+				   }, function(){
+						loadSugest($("#elementSelected").val());
+					});
+            break;
+        }
+    })
+	 $('#btn_sugerencias').live("click",function(event){
+		 $("body").css("overflow", "hidden"); 
+		 $("#overlay").show();
+        event.preventDefault();
+        $('.hour_options').center().slideDown();
+		$(".aviables").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+		$(".aviables").load("/ground/branch/get-suggestions", {
+			   bra_id: $("#bra_id").val(), 
+			   date: $("#datepicker").val(),
+			   hour: $("#hours").val(),
+			   sugType: 1
+		   }, function(){
+				$('#sameSuggest').click();
+			});
+    })
+    $('.hour_options .close').click(function(event){
+        event.preventDefault();
+		$("body").css("overflow", "auto"); 
+        $('.hour_options').slideUp();
+		$("#overlay").hide();
+    })   
+	
+	
+	
+	$('#btn_reservar').live("click",function(event){
+		$("body").css("overflow", "hidden"); 
+		$("#overlay").show();
+        event.preventDefault();
+        $('.confirm_booking').center().slideDown();
+		$("#confirm_booking").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+		$("#confirm_booking").load("/ground/branch/confirm-booking-form", {
+			   name: $("#bra_name").val(),
+			   address: $("#bra_address").val(),
+			   price: $("#bra_prices").val(),
+			   date: $("#datepicker").val(),
+			   hour: $("#hours").val(),
+			   bra_id: $("#bra_id").val(),
+			   field_kind: $("#field_kind").val(),
+			   ids_field: $("#ids_field").val(), 
+			   ids_sch: $("#ids_sch").val() 
+		   }, function(){
+			    $(".btn_res").html('<a href="javascript:void(0);" onclick="loadAvailabilityField();" class="btn_nueva_reserva_258x57"></a>');
+				$('#sameSuggest').click();
+			});
+    })
+	$('#btn_reservar_suggest').live("click",function(event){
+		$("body").css("overflow", "hidden"); 
+		$("#overlay").show();
+        event.preventDefault();
+        $('.confirm_booking').center().slideDown();
+		$("#confirm_booking").html('<p align="center" style="padding:100px;"><img src="/img/loader_32x32.gif" /></p>');
+		$("#confirm_booking").load("/ground/branch/confirm-booking-form", {
+			   ids_sch: $("#elementSelected").val() 
+		   }, function(){
+			    $('.hour_options').hide();
+				$('#sameSuggest').click();
+			});
+    })
+
+    $('.confirm_booking .close').click(function(event){
+        event.preventDefault();
+		$("body").css("overflow", "auto"); 
+        $('.confirm_booking').slideUp();
+		$("#overlay").hide();
+    })   
+	
+	
+});
+
+
+function loadAvailabilityField(){
+	$(".btn_res").html('<img src="/img/loader_32x32.gif" />');
+	$.ajax({
+		type: "POST",
+		url: '/ground/branch/load-availability-field',
+		data: $("#availability-form").serialize(), // serializes the form's elements.
+		success: function(data)
+		{
+			var field = JSON.parse(data);
+			$("#field_value").html("$"+$.number(field.fie_sch_value,0,'','.'));
+			$("#bra_prices").val(field.fie_sch_value);
+			$("#ids_sch").val(field.id_fie_sch);
+			if (field.sta_id == 1) {
+				$(".btn_res").html('<a href="javascript:void(0);" class="btn_reserva_258x57" id="btn_reservar"></a>');
+				$(".sold").html('&nbsp;');
+			}else {
+				$(".btn_res").html('<a href="javascript:void(0);" class="btn_sugerencias_258x56" id="btn_sugerencias"></a>');
+				$(".sold").html('<strong>Esta hora no esta disponible</strong>');
+			}
+			$(".btn_res").html('<a href="javascript:void(0);" class="btn_contactar_cancha_258x57" id="btn_contact_field"></a>');
+		}
+	}); 
+}
+
+
+
+function loadSugest(idSg){ 
+	element = $("#"+idSg+"");
+	suggest_name = element.attr('name');
+	suggest_addrees = element.attr('address')+', '+element.attr('city');
+	suggest_value = "$"+$.number(element.attr('price'),0,'','.');
+	suggest_date = element.attr('date');
+	suggest_hour = element.attr('hour');
+	suggest_feature = element.attr('attributes');
+	suggest_coordinate1 = element.attr('coordinate1');
+	suggest_coordinate2 = element.attr('coordinate2');
+	$("#suggest_name").html(suggest_name);
+	$("#suggest_addrees").html(suggest_addrees);
+	$("#suggest_value").html(suggest_value);
+	$("#bra_prices").val($("#"+idSg+"").attr('price'));
+	$("#suggest_date").html(suggest_date);
+	$("#suggest_hour").html(suggest_hour);
+	$("#suggest_feature").html(suggest_feature);
+	mapSuggest(suggest_coordinate1, suggest_coordinate2);
+}
+
+</script>
+

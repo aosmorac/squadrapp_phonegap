@@ -1,0 +1,102 @@
+<div class="nologin_players">
+    <p>Encuentra jugadores locales con quien hacer deporte</p>
+    <p><a class="btn_entrar_ahora_130x40"></a></p>
+</div>
+<div class="other_players">
+	<div class="title">
+    	Jugadores de otras ciudades
+    </div>
+</div>
+<?php 
+foreach ($this->players as $player): ?>
+<div class="local_player">
+    <div class="image">
+    	<img src="https://graph.facebook.com/<?php echo $player['Facebook_id']; ?>/picture?width=132&height=94" width="132" alt="<?php echo $player['use_name']; ?>"  title="<?php echo $player['use_name']; ?>">
+    </div>
+    <div class="name">
+    	<?php echo App_Util_StringUtil::truncate($player['use_name'], 20); ?>
+    </div>
+    <div class="options">
+    	<div class="location_player"><?php echo App_Util_StringUtil::truncate($player['use_location_name'], 22); ?></div>
+    	<div class="goChatUser" id="goChatUser<?php echo $player['id_user']; ?>">
+        <?php 
+		if ($player['online'] == 1){
+			if (App_User::isLogged()){ 
+		?>
+				<a class="btn_gochat_user_34x34" title="Conversa en linea"  onclick="jqcc.cometchat.chatWith('<?php echo $player['id_user']; ?>');"></a>
+		<?php }else { ?>
+				<a class="btn_gochat_user_34x34" title="Conversa en linea"  onclick="logIn();"></a>
+		<?php 
+			}      
+    	}else {
+		?>
+			<a class="btn_gochat_nouser_34x34" title="Usuario desconectado" ></a>
+		<?php 
+        }
+	 	?> 
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
+
+
+<style>
+	.nologin_players {
+		text-align:center;
+		background:url(/images/players_list_nologin.jpg) center top no-repeat;
+		padding:410px 0 0 0;
+	}
+	.nologin_players p{
+		font-size:28px;
+		font-weight:lighter;
+		color:#7c7c7c;
+		text-align:center;
+		margin:25px;
+	}
+	.nologin_players img{
+		display:none;
+	}
+	
+	.other_players {
+		margin:20px 0 20px 0;
+	}
+	
+	.other_players .title{
+		background: url(/img/barra_filtros.png) center no-repeat;
+		height:14px;
+		margin:0 auto;
+		margin-bottom:10px;
+		text-align:right;
+		padding:20px 30px;
+		text-align:left;
+		font-weight:bold;
+	}
+	
+	.local_player .image img{
+		vertical-align:middle;
+		display:none;
+	}
+	
+	.local_player .options .location_player{
+		font-size:11px;
+		padding:10px 5px;
+	}
+</style>
+
+
+<script type="text/javascript">
+$(function() {
+	$('.search_players').hide();
+	
+	$('.btn_entrar_ahora_130x40').click(function(event){
+			directLogin();
+	});
+	
+
+});
+
+    $('img').load(function() {
+        $(this).show(); //muestra el div despues de que la imagen carga.
+    });
+
+</script>

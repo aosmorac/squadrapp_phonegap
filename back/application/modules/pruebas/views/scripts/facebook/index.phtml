@@ -1,0 +1,11 @@
+<a style="position:absolute; top:50%; left:50%;" href="javascript:void(0)" onclick="loginFacebook();">Facebook</a>
+<div style="position:absolute; top:50%; left:50%; margin-top:-50px;"><fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button></div>
+<script>
+	function loginFacebook(){
+
+						FB.login(function(response) {
+							   // handle the response
+							 }, {scope: 'email,user_likes'});
+
+	}
+</script>

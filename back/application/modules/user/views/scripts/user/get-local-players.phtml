@@ -1,0 +1,50 @@
+<?php 
+foreach ($this->players as $player): ?>
+<div class="local_player">
+    <div class="image">
+    	<img src="https://graph.facebook.com/<?php echo $player['Facebook_id']; ?>/picture?width=132&height=94" width="132" alt="<?php echo $player['use_name']; ?>"  title="<?php echo $player['use_name']; ?>">
+    </div>
+    <div class="name">
+    	<?php echo App_Util_StringUtil::truncate($player['use_name'], 20); ?>
+    </div>
+    <div class="options">
+    	<div class="goChatUser" id="goChatUser<?php echo $player['id_user']; ?>">
+        <?php 
+		if ($player['online'] == 1){
+			if (App_User::isLogged()){ 
+		?>
+				<a class="btn_gochat_user_34x34" title="Conversa en linea"  onclick="jqcc.cometchat.chatWith('<?php echo $player['id_user']; ?>');"></a>
+		<?php }else { ?>
+				<a class="btn_gochat_user_34x34" title="Conversa en linea"  onclick="logIn();"></a>
+		<?php 
+			}      
+    	}else {
+		?>
+			<a class="btn_gochat_nouser_34x34" title="Usuario desconectado" href="/messages/user/index/uid/<?php echo $player['id_user']; ?>" ></a>
+		<?php 
+        }
+	 	?> 
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
+
+<style>
+.local_player .image img{
+	vertical-align:middle;
+	display:none;
+}
+</style>
+
+
+<script>
+		$(function(){
+			showImages();
+			$('#players_total').html(<?php echo $this->totalPlayers; ?>+' jugadores encontrados');
+		});
+		function showImages(){
+			$('img').load(function() {
+				$(this).show(); //muestra el div despues de que la imagen carga.
+			});
+		}
+</script>

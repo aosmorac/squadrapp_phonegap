@@ -1,0 +1,32 @@
+<div class="default_content_players">
+    <p><a class="btn_invite_friends_240x255"></a></p>
+	<p>Invita a tus amigos para empezar</p>
+</div>
+
+<style>
+	.default_content_players {
+		text-align:center;
+		padding:50px 0 0 0;
+	}
+	.default_content_players p{
+		font-size:28px;
+		font-weight:lighter;
+		color:#7c7c7c;
+		text-align:center;
+		margin:0;
+	}
+	.default_content_players img{
+		display:none;
+	}
+</style>
+
+<script>
+$(function(){	
+	$('.btn_invite_friends_240x255').click(function(event){
+				FB.ui({method: 'apprequests',
+				  message: 'SquadrApp.com, tu vida deportiva a otro nivel.',
+				  redirect_uri: 'http://squadrapp.com/'
+				}, function(response){});
+			});
+});
+</script>

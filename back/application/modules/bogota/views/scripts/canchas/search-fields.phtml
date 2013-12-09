@@ -1,0 +1,298 @@
+<?php foreach ($this->branches as $branch): ?>
+<div class="element_3columns">
+	<div class="header">
+    	# de canchas: <?php echo $branch['n_fields']; ?>
+        <div class="kinds"><a class="ver_tipo_69x24 selected" bra_id="<?php echo $branch['id_bra']; ?>" id="show_kinds_<?php echo $branch['id_bra']; ?>"></a></div>
+    </div>
+    <div class="image" id="image_list_<?php echo $branch['id_bra']; ?>">
+    	<a onClick="_gaq.push (['_trackEvent' ,'Busqueda' ,'goCancha' ,'link_cancha']);" href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>">
+        <img src="<?php 
+		if (trim($branch['image'])!=''){
+			echo $this->baseUrl("/load/images/{$branch['image']}"); 
+		}else{
+			echo $this->baseUrl("/images/thumb_default.jpg"); 
+		}
+		?>">
+        </a>
+    </div>
+    <div class="kinds-list" id="kind_list_<?php echo $branch['id_bra']; ?>" style="display:none;">
+    	<div align="right"><strong><a class="close_kinds" bra_id="<?php echo $branch['id_bra']; ?>">x</a></strong></div>
+        <div id="list_of_kinds_<?php echo $branch['id_bra']; ?>">
+        </div>
+    </div>
+    <div class="contenido">
+    	<div class="top">
+        	<div class="info">
+                <div class="distance">
+               		<div class="icon"></div>
+                    <div class="corte"></div>
+                </div>            
+                <p class="search_eTitle"><strong><a href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>" onclick=" _gaq.push (['_trackEvent' ,'Busqueda' ,'goCancha' ,'link_cancha']);"><?php echo $branch['com_name']; ?></a></strong></p>
+                <p class="search_eContent"><a href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>" onclick=" _gaq.push (['_trackEvent' ,'Busqueda' ,'goCancha' ,'link_cancha']);"><?php if ($branch['bra_name']!=''){ echo $branch['bra_name'];}else{ echo $branch['com_name']; } ?></a></p> 
+                <p class="search_eSubContent"><a href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>" onclick=" _gaq.push (['_trackEvent' ,'Busqueda' ,'goCancha' ,'link_cancha']);"><?php echo $branch['bra_address'].', '.$branch['city_name']; ?></a></p>
+                <p class="search_eContent"><a href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>" onclick=" _gaq.push (['_trackEvent' ,'Busqueda' ,'goCancha' ,'link_cancha']);"><?php echo $branch['bra_area']; ?></a></p> 
+        	</div>
+            <div class="amount">
+            	<div class="title">
+                	Desde
+                </div>
+                <div class="price">
+                	<div class="value">
+                	$<?php echo number_format($branch['low_price'],0,",","."); ?>
+                	</div>
+                    <div class="unit">por hora</div>
+                </div>
+                <div class="corte"></div>
+            </div>			          
+        </div>
+        <div class="bottom">
+        	<div class="func">
+            	<p>
+                	<a href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>" class="btn_me_gusta_92x53" onclick=" _gaq.push (['_trackEvent' ,'Busqueda' ,'goCancha' ,'link_reservar']);"></a>
+                </p>
+            </div>
+            <div class="funcCenter">
+            	<p>
+                	<a href="/ground/branch/site/sid/<?php echo $branch['id_bra']; ?>" class="btn_solicitar_reserva_92x53" onclick=" _gaq.push (['_trackEvent' ,'Busqueda' ,'goCancha' ,'link_reservar']);"></a>
+                </p>
+            </div>
+            <div class="func">
+            	<p>
+                	<a href="javascript:void(0);" onclick="shareField(<?php echo $branch['id_bra']; ?>,'<?php echo $branch['com_name']; ?>','<?php echo App_User::getFullName();?>','<?php echo App_User::getUserId();?>');  _gaq.push (['_trackEvent' ,'Busqueda' ,'CompartirFacebook' ,'link_compartir']);" class="btn_compartir_92x53"></a>
+                </p>
+            </div>
+            <div class="corte"></div>
+        </div>
+    </div>
+</div>
+<script>
+		 
+	marker = new google.maps.Marker({
+        position: new google.maps.LatLng(<?php echo $branch['bra_coordinates']; ?>),
+        map: map,
+  		icon: '/img/icon_sqbranch_map.png', 
+		title: '<?php echo $branch['com_name']; ?>'
+	});
+
+</script>
+<?php endforeach; ?>
+
+
+
+<div class="corte"></div>
+<style>
+	
+	.element_3columns .contenido .top .info{
+		padding-bottom:5px;
+		border-bottom:#CCC 1px solid;
+	}
+	
+	.element_3columns .contenido .top .info .search_eTitle{
+		font-size:16px;
+	}
+	.element_3columns .contenido .top .info .search_eContent{
+		font-size:12px;
+	}
+	.element_3columns .contenido .top .info .search_eSubContent{
+		font-size:12px;
+		line-height:14px;
+	}
+	.element_3columns .contenido .top .amount{
+		padding:5px 0;
+	}	
+	.element_3columns .contenido .top .amount .title{
+		font-size:14px;
+		font-weight:bold;
+		text-align:left;
+		width:110px;
+		float:left;
+	}
+	.element_3columns .contenido .top .amount .price{
+		text-align:right;
+		width:130px;
+		float:right;
+	}
+	.element_3columns .contenido .top .amount .price .value{
+		font-size:20px;
+		color:#f78b46;
+		line-height:18px;
+		font-weight:bold;
+	}
+	.element_3columns .contenido .top .amount .price .unit{
+		font-size:11px;
+	}
+	.element_3columns{
+		width:278;
+		height:400;
+		margin:25px 0 25px 32px;
+		float:left;
+		box-shadow: 0 0 3px 0 #888;
+   		-webkit-box-shadow: 0 0 3px 0 #888;
+   		-moz-box-shadow: 0 0 3px 0 #888;
+        overflow: hidden;
+	}
+	
+	.element_3columns .header{
+		background:#333;
+		color:#FFF;
+		font-weight:bold;
+		height:18px;
+		border-bottom:#666 1px solid;
+		font-size:14px;
+		z-index:7;
+		padding:3px 5px;
+	}
+	
+	.element_3columns .header .kinds{
+		margin:-3px -5px 0 0;
+		float:right;
+		z-index:7;
+	}
+        
+        .element_3columns .image{
+        }
+		
+		
+		.element_3columns .image_white{
+			filter:alpha(opacity=0); 
+			-moz-opacity:0; 
+			-khtml-opacity: 0;	
+			opacity: 0;
+		}
+		
+		.element_3columns .image:hover{
+			filter:alpha(opacity=40); 
+			-moz-opacity:0.4; 
+			-khtml-opacity: 0.4;	
+			opacity: 0.4;
+		}
+		
+		.element_3columns .kinds-list{
+			background: url(/img/bg_banner_kinds_262x182.png) center no-repeat;
+			width:227px;
+			height:157px;
+			position:absolute;
+			top:22px; left:8px;
+			padding:5px 15px 20px 20px;
+			
+		}
+		.element_3columns .kinds-list p{
+			font-size:12px;
+			font-weight:bold;
+			margin-bottom:10px;	
+		}
+	
+	.element_3columns .contenido{
+		position:absolute;
+		left:0; bottom:0;
+		height:175px;
+		width:280px;
+		background:#FFF;
+		border-top:#CCC 1px solid;
+	}
+	.element_3columns .contenido .top{
+		height:106px;
+                border-bottom:#FFF 2px solid;
+                position: relative;
+                padding: 7px 13px;
+	}
+	.element_3columns .contenido .bottom{
+		height:48px;
+		font-size:10px;
+	}
+	.element_3columns .contenido .bottom p{
+		margin:0;
+		padding:0;
+		text-align:center;
+		line-height:9px;
+		margin-top:0;
+	}
+	.element_3columns .contenido .bottom .funcCenter{
+		height:53px;
+		width:92px;
+		border-top:#CCC 1px solid;
+		border-right:#CCC 1px solid;
+		border-left:#CCC 1px solid;
+		float:left;
+		margin:0;
+		text-align:center;
+	}
+	.element_3columns .contenido .bottom .func{
+		height:53px;
+		width:92px;
+		float:left;
+		margin:0;
+		text-align:center;
+		border-top:#CCC 1px solid;
+	}
+		
+		.element_3columns .contenido .top .info .distance{
+            position: absolute;
+            right: 0;
+            top: 0;
+			z-index:101;
+			text-align:right;
+			width:200px;
+			height:106px;
+        }
+		.element_3columns .contenido .top .info .distance .icon{
+			background: url(/img/icon_branch_position.png) right no-repeat;
+			text-align:center;
+			width:30px;
+			height:28px;
+			padding:9px 0;
+			white-space:normal;
+			float:right;
+			margin-right:-5px;
+		}
+		
+		
+		a.ver_tipo_69x24{
+			display:inline-block;
+			width: 69px;
+			height: 24px;
+			text-decoration: none;
+			background: url(../../img/btn/ver_tipo_69x24.png);
+			cursor:pointer;
+		}
+		a.ver_tipo_69x24_selected {
+			background-position: -69px 0;
+			}
+		
+</style>
+<script>
+
+$(function() {
+
+	
+	$('.ver_tipo_69x24').click(function(event){
+		bra_id = $(this).attr('bra_id');
+        $('#kind_list_'+bra_id).show();
+		$('#image_list_'+bra_id).addClass('image_white');
+		$('#show_kinds_'+bra_id).addClass('ver_tipo_69x24_selected');
+		getFieldsKinds(bra_id);
+    });    
+	
+	$('.close_kinds').click(function(event){
+		bra_id = $(this).attr('bra_id');
+        $('#kind_list_'+bra_id).hide();
+		$('#image_list_'+bra_id).removeClass('image_white');
+		$('#show_kinds_'+bra_id).removeClass('ver_tipo_69x24_selected');
+    });
+	
+    $('img').load(function() {
+        $(this).show(); //muestra el div despues de que la imagen carga.
+    });
+
+	
+	$('#branch_total').html(<?php echo count($this->branches); ?>+' sedes encontradas');
+
+});
+
+	function getFieldsKinds(branch_id){
+		$("#list_of_kinds_"+branch_id).load("/ground/branch/get-kinds", {
+			bra_id: branch_id 
+		});
+	}
+
+</script>

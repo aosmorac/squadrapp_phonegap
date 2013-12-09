@@ -1,0 +1,668 @@
+<div class="squadrapp_canvas">
+    <div id="messages">
+        <div class="header">
+            <div class="title"><strong>Buzón de mensajes</strong></div>
+            <div class="search">
+            	<input type="text" class="field" placeholder="Buscar mensajes" id="ini_talkers"><a href="javascript:void(0);" class="btn_search_players"></a><?php /* Buscador */ ?>
+                <input type="hidden" id="start_talkers" value="0" />	<?php /* Inicio para el limit */ ?>
+                <input type="hidden" id="chatwith" user_name="<?php echo $this->chatWith['user_name'];?>" user_status="0" value="<?php echo $this->chatWith['user_id'];?>" />
+            </div>
+            <div class="new_message">
+            	Nuevo mensaje <a class="btn_plus_24x23"></a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="users">
+            	<div id="scrollbar_talkers">
+                	<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+                    <div class="viewport">
+                        <div class="overview">
+                        <div id="talkers"></div>
+                        <div style="margin:20px 0 0 90px; width:170px; display:none;" align="center" class="load_talkers"><img src="/img/loader_32x32.gif" /></div>
+                    	</div>
+            		</div>
+                </div>
+            </div>
+            <div class="chat">
+            	<input type="hidden" id="start_messages" value="0" /><?php /* Inicio para el limit mensajes por usuario */ ?>
+                <input type="hidden" id="last_message" value="0" />
+                <div class="header_chat">
+                	<div id="talker_name">&nbsp;</div>
+                    <div id="search_talker" style="display:none;">
+                    	<div class="label">Para:</div>
+                        <div class="field"><input type="text" id="search_talker_field" /></div>
+                        <div class="corte"></div>
+                    </div>
+                </div>
+                <div class="sender">
+                	<textarea id="new_message"></textarea>
+                    <div class="btn_send" align="right"><a class="btn_enviar_93x45" id="send_message"></a></div>
+                </div>
+            	<div class="messages">
+                	<div id="scrollbar_chat">
+                	<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+                    <div class="viewport">
+                        <div class="overview">
+                            <div style="margin:20px 0 0 130px; width:170px; display:none;" align="center" class="load_messages"><img src="/img/loader_32x32.gif" /></div>
+                            <div id="chatByTalker"></div>
+                    	</div>
+            		</div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+	#messages{
+		height:100%;
+		min-height:500px;
+	}
+	
+	#messages .header{
+		background:url(/img/barra_filtros.png) top center no-repeat;
+		height:30px;
+		width:940px;
+		position:absolute;
+		top:80px; left:-5px;
+		padding:12px 0;
+	}
+	#messages .header .title{
+		float:left;
+		height:20px;
+		padding:5px 15px 5px 22px;
+		font-size:16px;
+		border-right:#ddd 1px solid;
+	}
+	#messages .search{
+		float:left;
+		padding:3px 15px;
+		border-right:#ddd 1px solid;
+	}
+	
+	#messages .search .field{ 
+		display:inline-block;
+		background:#fff;
+		border:#CCC 1px solid;
+		padding:0 28px 0 4px;
+		width:181px;
+		height:24px;
+		font-size:12px;
+		color:#333333;
+		text-align:left;
+	}
+	#messages .search .field::-webkit-input-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	/* Firefox < 19 */
+	#messages .search .field:-moz-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	/* Firefox > 19 */
+	#messages .search .field::-moz-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	/* Internet Explorer 10 */
+	#messages .search .field:-ms-input-placeholder {
+		color: #999;
+		font-size:12px;
+		text-align:left;
+	}
+	#messages .search a.btn_search_players{
+		width: 30px;
+		height: 25px;
+		text-decoration: none;
+		background: url(/img/btn/btn_search_30x25.png);
+		position:absolute;
+		top:2px; right:15px;
+	}
+	#messages .search a.btn_search_players:hover {
+		background-position: -30px 0;
+		}
+	
+	#messages .header .new_message{
+		float:right;
+		height:20px;
+		padding:5px 15px;
+		font-size:16px;
+		font-weight:bold;
+		cursor:pointer;
+	}
+	#messages .header .new_message .btn_plus_24x23{
+		display:inline-block;
+		width: 24px;
+		height: 23px;
+		text-decoration: none;
+		background: url(/img/btn/btn_plus_24x23.png);
+		margin-bottom:-5px;
+	}
+	#messages .header .new_message:hover{
+		color:#00923d;
+	}
+	#messages .header .new_message:hover .btn_plus_24x23{
+		background-position: -24px 0;
+	}
+	
+	#messages .content{
+		width:900px;
+		position:absolute;
+		top:129px; bottom:0; left:15px; right:15px;
+		border-left:#ddd 1px solid;
+		border-right:#ddd 1px solid;
+	}
+	#messages .content .users{
+		width:380px;
+		height:100%;
+		border-right:#ddd 1px solid;
+		float:left;
+		background:#FFF;
+	}
+	#messages .content .users .list{
+		max-height:80%;
+		position:absolute;
+		bottom:360px;
+	}
+	#messages .content .chat{
+		width:510px;
+		height:100%;
+		float:left;	
+	}
+	#messages .content .chat .header_chat{
+		position:absolute;
+		top:20px; left:20px; right:12px;
+		height:62px;
+		background:#CCC;
+		-moz-border-radius: 6px 6px 0px 0px;
+		-webkit-border-radius: 6px 6px 0px 0px;
+		border-radius: 6px 6px 0px 0px;
+		box-shadow: 0 0 3px 0 #888;
+		-webkit-box-shadow: 0 0 3px 0 #888;
+		-moz-box-shadow: 0 0 3px 0 #888;
+		z-index:6;
+	}
+	
+	#messages .content .chat .header_chat #search_talker{
+		margin:12px 12px 10px 12px;
+		padding:0;
+		background:#333;
+		color:#FFF;
+		font-weight:bold;
+	}
+	#messages .content .chat .header_chat #search_talker .label{
+		float:left;
+		font-size:12px;
+		padding:12px 0 10px 10px;
+	}
+	#messages .content .chat .header_chat #search_talker .field{
+		float:right;
+	}
+	#messages .content .chat .header_chat #search_talker .field input{
+		float:right;
+		height:40px;
+		width:400px;
+		border:0;
+		padding:5px;
+		font-size:14px;
+	}
+	
+	#messages .content .chat .header_chat #talker_name{
+		margin:12px 12px 10px 12px;
+		padding:10px;
+		background:#333;
+		color:#FFF;
+		font-size:16px;
+		font-weight:bold;
+	}
+	#messages .content .chat .sender{
+		position:absolute;
+		bottom:0; left:20px; right:12px;
+		height:160px;
+		background:#e6e6e6;
+		z-index:6;
+		box-shadow: 0 0 3px 0 #888;
+		-webkit-box-shadow: 0 0 3px 0 #888;
+		-moz-box-shadow: 0 0 3px 0 #888;
+	}
+	#messages .content .chat .sender #new_message{
+		margin:10px;
+		width:456px;
+		height:70px;
+		border:0;
+		resize: none;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:12px;
+		padding:10px;
+	}
+	#messages .content .chat .sender .btn_send{
+		margin:0 6px;
+	}
+	#messages .content .chat .messages{
+		position:absolute;
+		top:82px; bottom:160; left:20px; right:12px;
+		background:#f8f8f8;
+		z-index:5;
+		box-shadow: 0 0 3px 0 #888;
+		-webkit-box-shadow: 0 0 3px 0 #888;
+		-moz-box-shadow: 0 0 3px 0 #888;
+	}
+	
+	
+	.talker{
+		margin:20px 7px 20px 20px;
+		border:#CCC 1px solid;
+		cursor:pointer;
+	}
+	
+	.talker .over{
+		position:absolute;
+		z-index:11;
+		background:#999;
+		top:0; left:0; bottom:0; right:0;
+		filter:alpha(opacity=40); 
+		-moz-opacity:0.4; 
+		-khtml-opacity: 0.4;	
+		opacity: 0.4;
+	}
+	.talker .unread{
+		position:absolute;
+		top:-8px; right:-8px;
+		z-index:12;
+		background:#d60858;
+		text-align:center;
+		width:20px;
+		height:16px;
+		padding:2px 0;
+		border-radius: 20px;
+		color:#FFF;
+		font-size:10px;
+		font-weight:bold;
+	}
+	.talker .photo{
+		width:140px;
+		height:93px;
+		float:left;
+	}
+	.talker .info{
+		width:198px;
+		height:93px;
+		font-size:11px;
+		float:left;
+	}
+	.talker .info .title{
+		padding:8px 15px 5px 15px;
+		font-weight:bold;
+		color:#333;
+		border-bottom:#CCC 1px solid;
+	}
+	.talker .info .title .lastDate{
+		position:absolute;
+		top:3px; right:2px;
+		font-size:10px;
+		font-weight:lighter;
+		color:#666;
+	}
+	.talker .info .message{
+		padding:8px 15px 5px 15px;
+		height:30px;
+	}
+	.talker .info .status{
+		background:#eeeeee;
+		height:22px;
+	}
+	.talker .info .status .online{
+		width:15px; height:15px;
+		border-radius: 15px;
+		position:absolute;
+		top:-8px; right:10px;
+		background:#37bc00;
+		border:#FFF 2px solid;
+	}
+	.talker .info .status .offline{
+		width:15px; height:15px;
+		border-radius: 15px;
+		position:absolute;
+		top:-8px; right:10px;
+		background:#ccc;
+		border:#FFF 2px solid;
+	}
+	
+	
+	.message_talker{
+		margin:20px 10px 20px 20px;
+	}
+	
+	.message_talker .photo{
+		float:left;
+	}
+	.message_talker .photo img{
+		border-radius: 50px;
+		box-shadow: 0px 0px 1px 1px #CCC;
+		-webkit-box-shadow: 0px 0px 1px 1px #CCC;
+		-moz-box-shadow: 0px 0px 1px 1px #CCC;
+		border:#FFF 3px solid;
+	}
+	
+	.message_talker .message_content{
+		float:left;
+		margin:0 0 0 20px;
+		width:350px;
+	}
+	.message_talker .message_content .message_text{
+		-moz-border-radius: 4px 4px 4px 4px;
+		-webkit-border-radius: 4px 4px 4px 4px;
+		border-radius: 4px 4px 4px 4px;
+		box-shadow: 0 0 3px 0 #888;
+		-webkit-box-shadow: 0 0 3px 0 #888;
+		-moz-box-shadow: 0 0 3px 0 #888;
+		background:#FFF;
+		padding:15px 20px;
+		font-size:14px;
+		color:#666;
+		min-height:30px;
+	}
+	
+	.message_talker .message_content .message_user{
+		font-size:11px;
+		color:#009338;
+		font-weight:bold;
+		margin-bottom:6px;
+		float:left;
+	}
+	.message_talker .message_content .message_date{
+		font-size:11px;
+		color:#666;
+		font-weight:bold;
+		margin-bottom:6px;
+		float:right;
+	}
+	
+	#scrollbar_talkers {clear: both;}
+    #scrollbar_talkers .viewport { height: 100%; overflow: hidden; position: relative; }
+    #scrollbar_talkers .overview { list-style: none; position: absolute; left: 0; top: 0; }
+    #scrollbar_talkers .thumb .end,
+    #scrollbar_talkers .thumb { background-color: #ccc; border-radius: 5px;}
+    #scrollbar_talkers .scrollbar { position: relative; float: right; width: 13px; }
+    #scrollbar_talkers .track { height: 100%; width:10px; position: relative; padding: 0 1px; }
+    #scrollbar_talkers .thumb { height: 10px; width: 5px; cursor: pointer; overflow: hidden; position: absolute; top: 20px; }
+    #scrollbar_talkers .thumb .end { overflow: hidden; height: 5px; width: 7px; }
+    #scrollbar_talkers .disable{ display: none; }
+	
+	#scrollbar_chat {clear: both;}
+    #scrollbar_chat .viewport { height: 100%; overflow: hidden; position: relative; }
+    #scrollbar_chat .overview { list-style: none; position: absolute; left: 0; top: 0; }
+    #scrollbar_chat .thumb .end,
+    #scrollbar_chat .thumb { background-color: #ccc; border-radius: 5px;}
+    #scrollbar_chat .scrollbar { position: relative; float: right; width: 18px; }
+    #scrollbar_chat .track { height: 100%; width:10px; position: relative; padding: 0 1px; }
+    #scrollbar_chat .thumb { height: 10px; width: 5px; cursor: pointer; overflow: hidden; position: absolute; top: 20px; }
+    #scrollbar_chat .thumb .end { overflow: hidden; height: 5px; width: 7px; }
+    #scrollbar_chat .disable{ display: none; }
+
+</style>
+<script>
+var timerChat = null;
+var isTimerChat = 0;
+	$(function(){
+		
+		 $('#footer').hide();
+		 //$("body").css("overflow", "hidden"); 
+		 $('#scrollbar_talkers').tinyscrollbar({scroll: true});
+		 $('#scrollbar_chat').tinyscrollbar({scroll: true}); 
+		 
+		 
+		 loadTalkers();
+		  
+		 $(window).resize(function() {
+		 	$('#scrollbar_talkers').tinyscrollbar_update('relative');
+			$('#scrollbar_chat').tinyscrollbar_update('relative');
+		 });
+
+		  $("#scrollbar_talkers .thumb").on('mouseup', function() {
+		     scrollTalkers();
+		 });
+		 $("#scrollbar_talkers").on('mousewheel DOMMouseScroll', function() {
+		     scrollTalkers();
+		 });
+		 
+		 $("#scrollbar_chat .thumb").on('mouseup', function() {
+		     scrollChat();
+		 });
+		 $("#scrollbar_chat").on('mousewheel DOMMouseScroll', function() {
+		     scrollChat();
+		 });
+		 
+		 $("#send_message").click(function(event){
+			 var message = $.trim($("#new_message").val());
+			 if (message != ''){
+					$.ajax({
+							type: "POST",
+							url: "/messages/user/save-message",
+							data: {
+								to : $.trim($('#chatwith').val()), 
+								msg : message
+							},
+							success: function(data) {
+								$.each(last_talkers, function(k,v){
+								   last_talkers_id += ', '+v.id_user;
+								   $('#user_'+v.id_user).remove();
+								});
+								$("#talkers").prepend(data);
+								$('#scrollbar_chat').tinyscrollbar_update('relative');
+							}
+						});
+			 }
+			 loadLastMessages();
+			 loadLastTalkers();
+			 $("#new_message").val('');
+	     });
+		 
+		 $('#ini_talkers').keyup(function(event){
+			$('#start_talkers').val(0);
+			$("#talkers").html('');
+			$("#ini_talkers").attr('disabled','disabled');
+			loadTalkers();
+		});	
+		
+		$('.new_message').click(function(event){
+			$('#talker_name').hide();
+			$('#search_talker').show();
+		});
+		
+		$("#search_talker_field").autocomplete({
+				source: "/messages/user/player-search/",
+				focus: function() {
+				  return false;
+				},
+				minLength: 0,
+				select: function (event, ui) {
+					if(ui.item) {
+						//window.location = ("/ground/branch/site/sid/" + ui.item.id_bra);
+						startChat(ui.item.id_user, ui.item.use_name, ui.item.online);
+					}
+				}
+			}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+				var itemHtml = "<a href='javascript:startChat(" + item.id_user + ", \"" + item.use_name + "\", " + item.online + ");'><div style='padding:3px;'><div><span style='width:60px;float:left;'><img style='border-radius: 50px; box-shadow: 0px 0px 1px 1px #CCC; -webkit-box-shadow: 0px 0px 1px 1px #CCC; -moz-box-shadow: 0px 0px 1px 1px #CCC; border:#FFF 3px solid;' width='50' height='50' src='https://graph.facebook.com/" + item.Facebook_id + "/picture?width=50&amp;height=50'></span><div style='float:left; width:280px;'><div style='font-size:13px; font-weight:bold; border-bottom:#AAA 1px solid; padding:7px 5px 0;'>" + item.use_name + "</div><div style='font-size:11px; padding:0 5px 7px;'>" + item.use_location_name + "</div></div>";
+				if (item.online == 1){
+					itemHtml += "<div style='float:left; width:15px; height:15px; border-radius: 15px;  background:#37bc00; border:#FFF 2px solid; margin:16px 3px;'></div>";
+				}else {
+					itemHtml += "<div style='float:left; width:15px; height:15px; border-radius: 15px;  background:#ccc; border:#FFF 2px solid; margin:16px 3px;'></div>";
+				}
+				itemHtml += "<div style='clear:both;'></div></div></div></a>";
+			  return $( "<li>" )
+				.append( itemHtml)
+				.appendTo( ul );
+			};
+
+		 
+		 autoLoadChats('start');
+
+	});
+	
+	
+		function startChat(user_id, user_name, user_status){
+				$('#talker_name').show();
+				$('#search_talker').hide();
+				$('.talker .over').hide();
+				$('#user_'+user_id+' .over').show();
+				$('#chatwith').val(user_id);
+				$('#chatwith').attr( "user_name", user_name );
+				$('#chatwith').attr( "user_status", user_status );
+				$("#chatByTalker").html('');
+				$('#talker_name').html('-');
+				$('#start_messages').val(0);
+				$('#last_message').val(0);
+				loadChat();	
+		}
+	
+		function loadTalkers(){
+				var start_talkers = $('#start_talkers').val();
+				$('#start_talkers').val((Number($('#start_talkers').val())+10));
+				$("#scrollbar_talkers .thumb").off('mouseup');
+				$("#scrollbar_talkers").off('mousewheel DOMMouseScroll');
+				$('.load_talkers').show();
+				$('#scrollbar_talkers').tinyscrollbar_update('bottom');
+				$.ajax({
+					type: "POST",
+					url: "/messages/user/load-talkers",
+					data: {
+						ini : $.trim($('#ini_talkers').val()), 
+						start : start_talkers
+					},
+					success: function(data) {
+						$(".load_talkers").hide();
+						$("#talkers").append(data);
+						$("#ini_talkers").removeAttr('disabled');
+						if($.trim($('#ini_talkers').val()) == ''){
+							if (start_talkers>0){
+								$('#scrollbar_talkers').tinyscrollbar_update('bottom');
+							}else{
+								loadChat();
+							}
+						}
+						$("#scrollbar_talkers .thumb").on('mouseup', function() {
+							 scrollTalkers();
+						 });
+						 $("#scrollbar_talkers").on('mousewheel DOMMouseScroll', function() {
+							 scrollTalkers();
+						 });
+					}
+				});
+			}
+			
+			function scrollTalkers(){
+				if ( ($('#scrollbar_talkers .track').height()) <= ($("#scrollbar_talkers .thumb").position().top+$("#scrollbar_talkers .thumb").height()+10) ){
+					 $('.load_talkers').show();
+					 $('#scrollbar_talkers').tinyscrollbar_update("bottom");
+					 loadTalkers();
+				 }
+			}
+			
+			function loadChat(){
+				var start_messages = $('#start_messages').val();
+				$('#start_messages').val((Number($('#start_messages').val())+10));
+				$("#scrollbar_chat .thumb").off('mouseup');
+				$("#scrollbar_chat").off('mousewheel DOMMouseScroll');
+				$('.load_messages').show();
+				$('#scrollbar_chat').tinyscrollbar_update();
+				$.ajax({
+					type: "POST",
+					url: "/messages/user/load-chat",
+					data: {
+						fid : $.trim($('#chatwith').val()), 
+						start : start_messages
+					},
+					success: function(data) {
+						$('#talker_name').html($('#chatwith').attr("user_name"));
+						$(".load_messages").hide();
+						$("#chatByTalker").prepend(data);
+						if (start_messages>0){
+							$('#scrollbar_chat').tinyscrollbar_update('relative');
+						}else{
+							$('#scrollbar_chat').tinyscrollbar_update('bottom');
+						}
+						$("#scrollbar_chat .thumb").on('mouseup', function() {
+							 scrollChat();
+						 });
+						 $("#scrollbar_chat").on('mousewheel DOMMouseScroll', function() {
+							 scrollChat();
+						 });
+					}
+				});
+			}
+			
+			function scrollChat(){
+				if ( ($("#scrollbar_chat .thumb").position().top) < 5 ){
+					 $('.load_messages').show();
+					 $('#scrollbar_chat').tinyscrollbar_update();
+					 loadChat();
+				 }
+			}
+			
+			function loadLastMessages(){
+				$.ajax({
+					type: "POST",
+					url: "/messages/user/load-last-messages",
+					data: {
+						fid : $.trim($('#chatwith').val()), 
+						lid : $('#last_message').val()
+					},
+					success: function(data) {
+						$("#chatByTalker").append(data);
+						$('#scrollbar_chat').tinyscrollbar_update('relative');
+					}
+				});
+			}
+			
+			function loadLastTalkers(){
+				var last_talkers = '';
+				var last_talkers_id = '0';
+				$.ajax({
+					type: "POST",
+					url: "/messages/user/get-last-talkers",
+					data: {
+						ini : '', 
+						start : 0
+					},
+					success: function(data) {
+						last_talkers = $.parseJSON(data);
+						//alert(last_talkers_id);
+						$.ajax({
+							type: "POST",
+							url: "/messages/user/load-talkers",
+							data: {
+								ini : $.trim($('#ini_talkers').val()), 
+								start : 0
+							},
+							success: function(data) {
+								$.each(last_talkers, function(k,v){
+								   last_talkers_id += ', '+v.id_user;
+								   $('#user_'+v.id_user).remove();
+								});
+								$("#talkers").prepend(data);
+								$('#scrollbar_chat').tinyscrollbar_update('relative');
+							}
+						});
+					}
+				});
+			}
+			
+			function autoLoadChats(command){
+				if(command == 'start'){
+					isTimerChat = 1;
+					timerChat = setInterval(function () {
+						loadLastMessages();
+						loadLastTalkers();
+					}, 10000); 
+				}else {
+					isTimerChat = 0;
+					timerChat = null;
+				}
+			}
+	
+</script>

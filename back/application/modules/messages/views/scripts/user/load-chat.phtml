@@ -1,0 +1,34 @@
+<?php 
+$lid = 0;
+if (isset($this->messages[0]['mid']) && $this->messages[0]['mid'] > 0){
+	$lid = $this->messages[0]['mid'];	
+}
+$fin = count($this->messages);
+for ($i=$fin-1; $i>=0; $i--) {
+	$message = $this->messages[$i];
+?>	
+	<div class="message_talker">
+    	<div class="photo">
+            <img src="https://graph.facebook.com/<?php echo $message['Facebook_id']; ?>/picture?width=50&height=50" width="50" height="50" alt="<?php echo $message['user_name']; ?>"  title="<?php echo $message['user_name']; ?>">
+        </div>
+        <div class="message_content">
+        	<div class="message_user"><?php echo $message['user_name']; ?></div>
+        	<div class="message_date"><?php echo $message['date']; ?></div>
+            <div class="corte"></div>
+            <div class="message_text"><?php echo $message['message']; ?></div>
+        </div>
+        <div class="corte"></div>
+    </div>
+<?php
+}
+?>
+
+<script>
+	$(function(){
+		var last_message = <?php echo $lid;?>;
+		if (last_message > $('#last_message').val()){
+			$('#last_message').val(last_message);
+			$('#scrollbar_chat').tinyscrollbar_update('bottom');
+		}
+	});
+</script>

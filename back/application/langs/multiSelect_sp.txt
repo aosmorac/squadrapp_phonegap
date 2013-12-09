@@ -1,0 +1,3 @@
+addAll:"&nbsp;&nbsp;&nbsp;&nbsp;Todos",
+removeAll:"&nbsp;&nbsp;&nbsp;&nbsp;Todos",
+itemsCount:"Seleccionados"

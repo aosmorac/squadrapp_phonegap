@@ -1,0 +1,148 @@
+<?php
+	header('P3P: CP="NOI ADM DEV COM NAV OUR STP"');
+
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.js"));
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery-ui.js"));
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery-ui-timepicker-addon.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/css/custom/jquery-ui-1.10.3.custom.css"));
+	
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.tinyscrollbar.min.js"));	// Scrollbar Interno
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/js/jquery/jquery.number.js"));				// Formato numerico
+	
+    $this->headLink()->appendStylesheet($this->baseUrl("/css/squadrapp/application.css"));
+	
+	/***********************************************************
+	**	Widgets
+	***********************************************************/
+	//	Tolltip	----------------------------------------------
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/tiptip/jquery.tipTip.js"));
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/tiptip/jquery.tipTip.minified.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/widget/tiptip/tipTip.css"));
+	//-------------------------------------------------------
+	//	Slider	---------------------------------------------
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/bxslider/jquery.bxslider.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/widget/bxslider/jquery.bxslider.css"));
+	//-------------------------------------------------------
+	//	Colorbox	---------------------------------------------
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/colorbox/jquery.colorbox-min.js"));
+	$this->headLink()->appendStylesheet($this->baseUrl("/widget/colorbox/colorbox.css"));
+	//-------------------------------------------------------
+	//	Countdown	-----------------------------------------
+	$this->JQuery()->addJavascriptFile($this->baseUrl("/widget/countdown/jquery.countdown.js"));
+	//$this->headLink()->appendStylesheet($this->baseUrl("/widget/countdown/jquery.countdown.css"));
+	//------------------------------------------------------------*/
+	/***********************************************************
+	**	Fin Widgets
+	***********************************************************/
+
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8')
+            ->appendHttpEquiv('expires', '0')
+            ->appendHttpEquiv('pragma', 'no-cache')
+            ->appendHttpEquiv('Cache-Control', 'no-cache');
+?>
+<html>
+    <head>
+    	<link type="text/css" href="/squadrapp/public/cometchat/cometchatcss.php" rel="stylesheet" charset="utf-8">
+		<script type="text/javascript" src="/squadrapp/public/cometchat/cometchatjs.php" charset="utf-8"></script>
+        <script type="text/javascript">
+            var baseUrl = "<?php echo $this->baseUrl(); ?>";
+        </script><?php
+        echo $this->headMeta();
+        echo $this->headTitle();
+        echo $this->JQuery();
+        echo $this->headLink();
+        ?>
+      
+    <link rel="image_src" href="/img/thumbnail.png" />
+    <link rel="shortcut icon" href="/img/favicon.ico" >  
+	
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.5/src/markerwithlabel_packed.js"></script>
+        
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+        
+  	<script src="//connect.facebook.net/en_US/all.js"></script>    
+    
+    
+    
+    <meta name="description" content="Encuentra la cancha de fútbol y convoca a tus amigos para jugar.">
+    <meta name="keywords" content="futbol 5, futbol, canchas, capin 5, liga postobon, noticias deportivas, futbol 5 site, falcao, messi, deportes">
+    
+    <meta name="viewport" content="width=390px, maximum-scale=2.0" />
+    </head>
+    <body>
+    
+   <div id="fb-root"></div>
+	<script>
+		window.fbAsyncInit = function() {
+			
+			  FB.init({
+				appId      : '518581128197028', // App ID
+				status     : true, // check login status
+				cookie     : true, // enable cookies to allow the server to access the session
+				xfbml      : true, // parse XFBML
+				oauth	   : true 
+			  });
+			  
+				FB.Event.subscribe('auth.authResponseChange', function(response) {
+				// Here we specify what we do with the response anytime this event occurs. 
+				if (response.status === 'connected') {
+				  // Logueado
+				  //testAPI();
+				} else if (response.status === 'not_authorized') {
+				  // Logueado facebook pero no Appi
+				  FB.login();
+				} else {
+				  // No logueado Facebook
+				  FB.login();
+				}
+			  });
+			  
+			  
+			  
+			  // Load the SDK asynchronously
+			  (function(d){
+			   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+			   if (d.getElementById(id)) {return;}
+			   js = d.createElement('script'); js.id = id; js.async = true;
+			   js.src = "//connect.facebook.net/en_US/all.js";
+			   ref.parentNode.insertBefore(js, ref);
+			  }(document));
+			
+			  // Here we run a very simple test of the Graph API after login is successful. 
+			  // This testAPI() function is only called in those cases. 
+			  
+		
+		}	
+    </script>
+    
+    
+    
+    
+    <?php echo $this->layout()->content ?>
+
+
+<!-------------------------------------------------------------------------------------------------
+					  __                       _       _
+					 / _\ __ _ _   _  __ _  __| |_ __ /_\  _ __  _ __
+					 \ \ / _` | | | |/ _` |/ _` | '__//_\\| '_ \| '_ \
+					 _\ \ (_| | |_| | (_| | (_| | | /  _  \ |_) | |_) |
+					 \__/\__, |\__,_|\__,_|\__,_|_| \_/ \_/ .__/| .__/
+							|_|                           |_|   |_|
+                            
+---------------------------------------------------------------------------------------------------> 
+    
+    </body>
+
+
+<script>
+		$(function(){
+			
+			
+			
+		});
+		
+		function loginUsingOAUTH(){
+				top.location = '<?php echo App_Util_Facebook::getLoginUrl('http://squadrapp.com/user/user/login-facebook-mobile'); ?>';
+			} 
+</script>
