@@ -85,8 +85,6 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
     }
 
     
-    
-    
 	/**
      * 
      * @param type $uid
@@ -104,51 +102,115 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
                         (SELECT 
                                 MAX(A.mid) AS mid, 
                                 A.uid AS uid, 
+								A.gid AS gid, 
+								A.isgroup AS isgroup, 
                                 MAX(A.date) AS date , 
                                 A.message, 
                                 A.unread AS unread, 
-                                U.*
+                                U.*, 
+								CG.*
                         FROM ( 
                                 SELECT DISTINCT 
                                         MAX(C.id) AS mid, 
                                         MAX(C.date) AS date,
-                                        C.from AS uid, 
+										C.from AS uid, 
+										IF (C.isgroup = 1, C.to, 0) AS gid, 
                                         C.message, 
+										C.isgroup,
                                         (count(C.read)-SUM(case when C.read = 1 then 1 else 0 end)) AS unread
                                 FROM cometchat AS C 
-                                WHERE C.to = {$uid} 
-                                GROUP BY uid  
+                                WHERE 
+									C.isgroup = 0 AND C.to = {$uid}  									
+                                GROUP BY gid, uid  
+
+                                UNION 
+
+								SELECT DISTINCT 
+                                        MAX(C.id) AS mid, 
+                                        MAX(C.date) AS date,
+										IF (C.isgroup = 1, C.to, 0) AS uid, 
+										IF (C.isgroup = 1, C.to, 0) AS gid, 
+                                        C.message, 
+										C.isgroup,
+                                        (count(C.read)-SUM(case when C.read = 1 then 1 else 0 end)) AS unread
+                                FROM cometchat AS C 
+                                WHERE 
+									C.isgroup = 1 AND C.from != {$uid}  AND 
+										C.to IN 
+										(SELECT 
+											UG.com_group_id AS id 
+										FROM 
+											cometchat_group AS G 
+										INNER JOIN 
+											userxgroup AS UG 
+											ON UG.com_group_id = G.com_group_id AND UG.user_id = {$uid} 
+										)
+                                GROUP BY gid, uid  
 
                                 UNION 
 
                                 SELECT DISTINCT 
                                         MAX(C.id) AS mid, 
-                                        MAX(C.date) AS date,
-                                        C.to AS uid,  
+                                        MAX(C.date) AS date, 
+										IF (C.isgroup = 0, C.to, 0) AS uid, 
+										0 AS gid, 
                                         C.message, 
+										C.isgroup,
                                         0 AS unread 
                                 FROM cometchat AS C 
-                                WHERE C.from = {$uid} 
-                                GROUP BY uid 
-                        ) AS A 
-                        INNER JOIN user AS U 
-                                ON U.id_user = A.uid AND A.uid != {$uid} 
-                        GROUP BY uid 
-                        ORDER BY mid DESC ) 
+                                WHERE C.from = {$uid}  AND C.isgroup = 0
+                                GROUP BY gid, uid 
+
+								 UNION 
+
+                                SELECT DISTINCT 
+                                        MAX(C.id) AS mid, 
+                                        MAX(C.date) AS date, 
+										IF (C.isgroup = 1, C.to, 0) AS uid, 
+										IF (C.isgroup = 1, C.to, 0) AS gid, 
+                                        C.message, 
+										C.isgroup,
+                                        0 AS unread 
+                                FROM cometchat AS C 
+                                WHERE C.from = {$uid}  AND C.isgroup = 1
+                                GROUP BY gid, uid  
+						)AS A 
+                        LEFT JOIN user AS U 
+                                ON U.id_user = A.uid AND A.uid != {$uid}  
+						LEFT JOIN cometchat_group AS CG 
+                                ON CG.com_group_id = A.gid 
+                        GROUP BY uid, gid 
+                        ORDER BY mid DESC) 
                     "))
                   ,array(
-                      "mid","unread"
-                      ,"date"=>new Zend_Db_Expr("date + INTERVAL ".$timezone." HOUR")
-                      ,"message"=>new Zend_Db_Expr("(SELECT message FROM cometchat WHERE id = T.mid LIMIT 1)")
-                      ,"id_user","Facebook_id","use_name","use_first_name"
-                      ,"use_last_name","Facebook_link","Facebook_username"
-                      ,"use_hometown_id","use_hometown_name","use_location_id"
-                      ,"use_location_name","use_location_coordinates"
-                      ,"use_gener","use_email","use_locale","use_visit"
+                      "T.mid",
+                  	  "unread" => new Zend_Db_Expr("IF(`T`.`isgroup`=0,`T`.`unread`,(SELECT DISTINCT count(*) 
+										FROM 
+											cometchat AS G 
+										INNER JOIN 
+											userxgroup AS UG 
+											ON UG.com_group_id = G.to 
+										LEFT JOIN 
+											userxgroupxcometchat AS UGC
+										ON 	UG.com_group_id=UGC.com_group_id and UG.user_id={$uid} 
+										WHERE UGC.user_group_com_read  IS NULL AND UG.com_group_id = T.gid))")
+					  ,"T.isgroup"
+                      ,"date"=>new Zend_Db_Expr("date + INTERVAL".$timezone." HOUR")
+                      ,"message"=>new Zend_Db_Expr("(SELECT message  FROM   cometchat WHERE  id = T.mid LIMIT 1)")
+                      ,"T.id_user"
+                      ,"T.Facebook_id"
+                      ,"T.use_name"
+                      ,"T.use_first_name"
+                      ,"T.use_last_name"
+                      ,"T.Facebook_link","T.Facebook_username"
+                      ,"T.use_hometown_id","T.use_hometown_name","T.use_location_id"
+                      ,"T.use_location_name","T.use_location_coordinates"
+                      ,"T.use_gener","T.use_email","T.use_locale","T.use_visit"
                       ,"use_date"=>new Zend_Db_Expr("use_date + INTERVAL ".$timezone." HOUR")
                       ,"lastactivity"
                       //,'online' => new Zend_Db_Expr("IF((UNIX_TIMESTAMP()-T.lastactivity) < 240 AND (S.status = 'busy' OR S.status = 'away' OR S.status = 'available'), 1, 0)")
                       ,'online' => new Zend_Db_Expr("IF(((UNIX_TIMESTAMP()-T.lastactivity) < 400 ), 1, 0)")
+                      ,"T.com_group_name"
                     )
                   )
                 ->setIntegrityCheck(false)
@@ -163,9 +225,6 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
          $users = $row->toArray();
          return $users;
     }
-    
-    
-    
     /**
      * 
      * @param type $uid

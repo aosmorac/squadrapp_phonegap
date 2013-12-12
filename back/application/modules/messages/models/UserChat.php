@@ -19,7 +19,7 @@ class Messages_Model_UserChat {
     }
 	
 	public function getLastTalkersByUserApp($uid, $start=0, $timezone=-5, $ini = ''){
-        $users = $this->registroDataTable->getLastTalkersByUserApp($uid, $start, $timezone, $ini);
+        $users = $this->registroDataTable->getLastTalkersByUserApp($uid,$start, $timezone, $ini);
         if (count($users)>0){
             return $users;
         }else{
