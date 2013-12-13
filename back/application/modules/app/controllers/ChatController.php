@@ -94,11 +94,7 @@ public function getUserxGroupAction()
 	$users=$usersgroup->getUsersxGroup($vars['gid'], $vars['timezone']);
 	$userxgroup = array('gid'=>$vars['gid'],'data'=>$users);
 	echo json_encode($userxgroup);
-
-  //echo json_encode(array("id"=>$gid,"data"=>$id_user,$Facebook_id,$use_name,$use_first_name
-                //     ,$use_last_name,$Facebook_link,$Facebook_username,$use_hometown_id,$use_hometown_name,$use_location_id
-                 //    ,$use_location_name,$use_location_coordinates,$use_gener,$use_email,$use_locale,$use_visit,$use_date
-                   //  ,$lastactivity));
+ 
 }
     
 }
