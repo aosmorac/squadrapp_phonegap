@@ -93,5 +93,4 @@ class Messages_Model_UserChat {
     	return $id;
      }
     
-    
 }
