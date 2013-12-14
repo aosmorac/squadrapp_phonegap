@@ -59,16 +59,16 @@
 				$("img").one('load', function() {
 					scrollDetails = new iScroll('content');
 				});
-				
 				$('.collapsible-set section').bind('click touchend', function(){
-					$(this).siblings().data('status', 'close').find('.acord_content').slideUp();
-					$(this).siblings().find('span').removeClass('min');
-					$(this).data('status', 'open').find('.acord_content').slideDown();
-					
 					if($(this).data('status') == 'open'){
+						$(this).find('span').removeClass('min');
+						$(this).data('status', 'close').find('.acord_content').slideUp();
+					}else{
+						$(this).siblings().data('status', 'close').find('.acord_content').slideUp();
+						$(this).data('status', 'open').find('.acord_content').slideDown();
 						$(this).find('span').addClass('min');
 					}
 					scrollDetails.refresh();
-				})
+				});
 			});
 		</script>
