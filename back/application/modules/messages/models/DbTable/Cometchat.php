@@ -171,12 +171,12 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
                                         C.message, 
 										C.isgroup,
                                         0 AS unread 
-                                FROM cometchat AS C 
-                                WHERE C.from = {$uid}  AND C.isgroup = 1 AND C.isavailable = 1
+                                FROM cometchat AS C , userxgroupxcometchat AS UGC 
+                                WHERE C.from = {$uid}  AND C.isgroup = 1 AND UGC.user_group_com_isavailable = 1 
                                 GROUP BY gid, uid  
 						)AS A 
                         LEFT JOIN user AS U 
-                                ON U.id_user = A.uid AND A.uid != {$uid}  
+                                ON U.id_user = A.uid AND A.uid != {$uid} 
 						LEFT JOIN cometchat_group AS CG 
                                 ON CG.com_group_id = A.gid 
                         GROUP BY uid, gid 
@@ -189,10 +189,10 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
 											cometchat AS G 
 										INNER JOIN 
 											userxgroup AS UG 
-											ON UG.com_group_id = G.to 
+											ON UG.com_group_id = G.to  
 										LEFT JOIN 
 											userxgroupxcometchat AS UGC
-										ON 	UG.com_group_id=UGC.com_group_id and UG.user_id={$uid} 
+										ON 	UG.com_group_id=UGC.com_group_id and UG.user_id={$uid}  
 										WHERE UGC.user_group_com_read  IS NULL AND UG.com_group_id = T.gid AND G.isavailable = 1))")
 					  ,"T.isgroup"
                       ,"date"=>new Zend_Db_Expr("date + INTERVAL".$timezone." HOUR")
