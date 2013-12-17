@@ -4,7 +4,7 @@ defined('APPLICATION_DUMP')
         || define('APPLICATION_DUMP', false);
 // Define path to application directory
 defined('APPLICATION_PATH')
-        || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../../back/application'));
+        || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../../squadrapp_desar/application'));
 // Define application environment
 defined('APPLICATION_ENV')
         || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
