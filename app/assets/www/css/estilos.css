@@ -1,0 +1,162 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body {
+	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; height:100%;
+}
+
+div, span, applet, object, iframe, 
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+abbr, acronym, address, big, cite, code, del, 
+dfn, em, font, img, ins, kbd, q, s, samp, small, 
+strike, strong, sub, sup, tt, var, b, u, i, 
+center, dl, dt, dd, ol, ul, li, fieldset, form, 
+label, legend, table, caption, tbody, tfoot, 
+thead, tr, th, td { 
+	margin: 0; padding: 0; border: 0; outline: 0; text-decoration:none; position:relative; 
+}
+
+body{
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+img{ display: none; }
+
+.corte { clear:both; }
+
+#overlay{
+	position:absolute;
+	top:0; bottom:0; right:0; left:0;
+	background:#000;
+	text-align:center;
+	padding:150px 0;
+	filter:alpha(opacity=70); 
+	opacity:0.70; 
+	-moz-opacity: 0.70;
+	z-index:99999;
+}
+
+#page{
+	background:#1d1f23;
+}
+
+.header{
+	background:#1d1f23;
+	padding:0;
+	margin:0;
+	border:0;
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:200;
+}
+
+.content{
+	background:#1d1f23;
+	padding:0;
+}
+
+
+.footer{
+	background:#23262b;
+	margin:0;
+	padding:0;
+	position:fixed;
+	bottom:0;
+	width:100%;
+	z-index:200;
+}
+
+/*	Movil-1	Moviles con un ancho maximo de 400px */
+/** /@media screen and (max-width:400px){/**/
+	.squadrapp {
+		/*width:320px;*/
+		margin:0 auto;
+	}
+
+	.header .search_home{
+		width: 18px;
+		height: 18px;
+		text-decoration: none;
+		border:0;
+		padding:0;
+		margin:25px;
+		background: url(../img/btn/search_home_35x35.png) center no-repeat;
+		background-size:18px 18px;
+		cursor:pointer;
+		float:right;
+	}  
+	
+	.logo_home {
+		background: url(../img/L_720.png) top center no-repeat;
+		background-size:192px 39px;
+		height:40px;
+	}
+	
+	.footer .start{
+		background:#23262b;
+		color:#FFF;
+		font-size:12px;
+		margin:0;
+		padding:10px 0;
+		border-top:#292b2e 2px solid;
+		-moz-box-shadow: 0 0 1px 1px #000;
+		-webkit-box-shadow: 0 0 1px 1px#000;
+		box-shadow: 0 0 1px 1px #000;
+	}
+	.footer .start .ui-btn-inner{
+		font-size:18px;
+		font-weight:lighter;
+		border:0;
+		margin:0;
+	}
+	
+	
+	/*
+	**	HOME
+	*/
+	/* Swipe 2 required styles */
+			.swipe {
+			  overflow: hidden;
+			  visibility: hidden;
+			  position: relative;
+			}
+			.swipe-wrap {
+			  overflow: hidden;
+			  position: relative;
+			}
+			.swipe-wrap > div {
+			  float:left;
+			  width:100%;
+			  position: relative;
+			  text-align:center;
+			  color:#FFF;
+			}
+			#slider_counter{
+				position:absolute;
+				top:22px;
+				left:20px;
+				z-index:2000;
+			}
+			#position_slider li{
+				width:8px;
+				height:8px;
+				display:inline-block;
+				border-radius:8px;
+				background:#666;
+			}
+			#position_slider .on{
+				background:#FFF;
+			}
+			.logo_home{
+				margin:0 0 15px 0;
+			}
+			.squadrapp .home{
+				padding:100px 0 0 0;
+				font-size:12px;
+			}
+		/* END required styles */
+	
+/** /
+}
+/**/  

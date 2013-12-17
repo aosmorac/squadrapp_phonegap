@@ -1,0 +1,109 @@
+			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
+				<a id="menu_icon" onclick="openMenu();"></a>
+				<p>Lista</p>
+			</header>
+			<div id="pullDown-list-fields"> </div>
+			<section id="content" class="content">
+				<div id="scroll-list-fields">
+					<section class="search-fields">
+						<form>
+							<div class="search-fields-input">
+								<input type="text" onblur="cancelFieldSearch();" name="find" id="find-fields" placeholder="Buscar cancha">
+							</div>
+							<div class="cancel" onclick="cancelFieldSearch();" style="display: none;">Cancelar</div>
+						</form>
+					</section>	
+					<p class="count_result">
+						64 canchas encontradas en 18 sedes
+					</p>
+					<section id="list-fields">
+						<ul class="big_photos">
+							
+						</ul>
+					</section>
+				</div>	
+				<div id="map" style="" ></div>
+			</section><!-- /content -->
+			<div id="pullUp-list-fields"> </div>	
+			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
+				<section id='list-fields-nav'>
+					<a id="list-fields-nav-list" onclick="hideMap();" class="selected" >Lista</a>
+					<a id="list-fields-nav-map" onclick="showMap();" >Mapa</a>
+				</section>
+			</footer>
+			
+<script>
+var scrollFieldsList;
+
+$(function(){
+	
+	$("#find-fields").focus(function(){
+		$(".search-fields .cancel").show();
+		$(".search-fields .search-fields-input").css("margin-right", "117px");
+	});
+	
+	
+	initializeMap();
+	
+	var pullDownEl = document.getElementById('pullDown-list-fields');
+	var pullDownOffset = pullDownEl.offsetHeight;
+	var pullUpEl = document.getElementById('pullUp-list-fields');	
+	var pullUpOffset = pullUpEl.offsetHeight;
+	scrollFieldsList = new iScroll('content', {
+			onBeforeScrollStart : null,
+			onScrollMove: function () {
+				if (this.y > 5 && !pullDownEl.className.match('flip')) {
+					pullDownEl.className = 'flip';
+					this.minScrollY = 0;
+				} else if (this.y < 5 && pullDownEl.className.match('flip')) {
+					pullDownEl.className = '';
+					this.minScrollY = -pullDownOffset;
+				} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+					$('.loader-fields-list').remove();
+					$('#list-fields .big_photos').append('<div class="loader-fields-list" style="width: 100%; padding: 20px 0; text-align: center; color: #999999;">Soltar para cargar ...</div>');
+					pullUpEl.className = 'flip';
+				} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+					$('.loader-fields-list').remove();
+					pullUpEl.className = '';
+				}
+			},
+			onScrollEnd: function () {
+				if (pullDownEl.className.match('flip')) {
+					pullDownEl.className = '';
+				} else if (pullUpEl.className.match('flip')) {
+					$('.loader-fields-list').remove();
+					pullUpEl.className = 'flip';
+					$('#list-fields .big_photos').append('<div class="loader-fields-list" style="width: 100%; padding: 20px 0; text-align: center; color: #999999;">Cargando ...</div>');
+					scrollFieldsList.refresh();
+				    //scrollFieldsList.scrollTo(0,-$('.search-fields').height(), 0);
+				    loadFields();
+				}
+			}
+		});
+	squadrapp.fields.loadFields(function(){
+		loadImages();
+		loadFields();
+	});
+	setTimeout(function () {
+		scrollFieldsList.refresh();
+	}, 200); 
+});
+
+function cancelFieldSearch(){
+	$("#find-fields").val('');
+	$(".search-fields .cancel").hide();
+	$(".search-fields .search-fields-input").css("margin-right", "27px");	
+}
+
+function loadFields(){
+	f = squadrapp.fields.getNextFields();
+	$.each(f, function( i, a ) {
+		$("#list-fields .big_photos").append('<li><section class="distance"><p class="km"><strong>1,4Km</strong></p><p class="canchas">'+a.n_fields+' cancha(s)</p></section><section class="fav"><a href="#"> </a></section><section class="imagen"><img src="images/fields/test.jpg" style="display: block;" alt="cancha"></section><section class="info"><section class="basic"><p id="name"><strong>'+a.company+'</strong></p><p class="location_info">'+a.address+', '+a.city+'</p><p class="location_info">'+a.country+'</p></section><section class="cost"><p>Desde</p><p id="value">$120.000</p><p id="time">por hora</p></section></section></li>');
+		scrollFieldsList.refresh();
+	});	
+	$('.loader-fields-list').remove();
+	scrollFieldsList.refresh();
+}
+
+
+</script>

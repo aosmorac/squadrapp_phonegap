@@ -1,0 +1,67 @@
+
+		<section class="header">
+			<a class="cancel" onclick="closeNewMessage();"> Cancelar </a>
+			<div class="title">Nuevo Mensaje</div>
+		</section>
+		<section class="members">
+			<div class="label">Participantes (0/30)</div> <textarea class="members-input"></textarea>
+		</section>
+		<div class="corte"> </div>
+		<section class="local-list"> 
+			<section class="header">
+				Amigos Locales - Bogotá Colombia
+			</section>
+			<ul>
+				<li class="friend">
+					<div class="image">
+						<img width="35" height="35" style="display: block;" src="https://graph.facebook.com/100002008880396/picture?width=35&height=35">
+					</div>
+					<div class="name">
+						Abel Moreno
+					</div>
+					<div class="check">
+					</div>
+					<div class="corte"> </div>
+				</li>
+				<li class="friend">
+					<div class="image">
+						<img width="35" height="35" style="display: block;" src="https://graph.facebook.com/100002008880396/picture?width=35&height=35">
+					</div>
+					<div class="name">
+						Abel Moreno
+					</div>
+					<div class="check">
+					</div>
+					<div class="corte"> </div>
+				</li>
+			</ul>
+		</section>
+		<section class="world-list"> 
+			<section class="header">
+				Amigos en el resto del mundo
+			</section>
+			<ul>
+				<li class="friend">
+					<div class="image">
+						<img width="35" height="35" style="display: block;" src="https://graph.facebook.com/100002008880396/picture?width=35&height=35">
+					</div>
+					<div class="name">
+						Abel Moreno
+					</div>
+					<div class="check">
+					</div>
+					<div class="corte"> </div>
+				</li>
+			</ul>
+		</section>
+		
+
+<script>
+	$('.check').bind('click' , function(){
+				if ($(this).attr('class') == 'check selected') {
+					$(this).removeClass('selected');
+				}else{
+					$(this).addClass('selected');
+				};
+			});
+</script>

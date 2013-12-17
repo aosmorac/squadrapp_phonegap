@@ -1,0 +1,52 @@
+<section id="chat-list">
+	<section class="header">
+		<ul>
+			<li onclick="openNewMessage();">Nuevo Mensaje</li>
+			<li>Crear Grupo</li>
+		</ul>
+		<div class="corte"> </div>
+	</section>
+	<div id="pullDown-list-chats"> </div>
+	<div id="scroll-list-chats">
+		
+		<div id="list-chats">
+			<div style="text-align: center; padding: 20px;"><img src="img/loader.gif" /></div>
+		</div>   
+		<li class="loader-fields-list" align="center">
+	</div>
+	<div id="pullUp-list-chats"> </div>	         
+</section>
+<script>
+
+function loadDrawersTalkers(id){
+	var elemento = $('#'+id);
+	var obj_pos, obj_final;
+			elemento.pep({
+				axis: 'x',
+				constrainTo: [0, 100, 0, -90], 
+				useCSSTranslation: false,
+				shouldEase: false,
+				drag:function(ev,obj){
+					obj_pos = elemento.offset();
+					obj_final = obj_pos.left;
+				},
+				stop: function(ev,obj){
+					if (obj_final > 0) {
+						elemento.animate({
+							left: "0px"
+						});
+					}else{
+						elemento.animate({
+							left: "-56px"
+						});
+					}
+				}
+			});
+	 $('.talker-info').width($('#'+id).width());	
+	 $('.talker').width(($('#'+id).width())+56);
+}
+
+
+</script>
+				
+				
