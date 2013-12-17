@@ -363,5 +363,17 @@ class User_Model_User {
 	 	$user = new User_Model_DbTable_User();
 		$user->updateLastActivity($userId);
 	 }
+	 
+	 
+	 /**
+	 * Actualiza ultima actividad para mantener en estado conectado
+	 * 
+	 */
+	 public function getUserFriendsMobile($userId){
+	 	$user = new User_Model_DbTable_User();
+		$friends = $user->getUserFriends($userId);
+		return $friends;
+	 }
+	 
 
 }

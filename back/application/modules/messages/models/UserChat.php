@@ -19,7 +19,7 @@ class Messages_Model_UserChat {
     }
 	
 	public function getLastTalkersByUserApp($uid, $start=0, $timezone=-5, $ini = ''){
-        $users = $this->registroDataTable->getLastTalkersByUserApp($uid,$start, $timezone, $ini);
+        $users = $this->registroDataTable->getLastTalkersByUserApp($uid, $start, $timezone, $ini);
         if (count($users)>0){
             return $users;
         }else{
@@ -84,21 +84,11 @@ class Messages_Model_UserChat {
             return 0;
         }
     }
+	
+	
+	public function updateReadMessages($id_from, $id_to){
+		$this->registroDataTable->updateReadMessages($id_from, $id_to);
+	}
     
-    public function createGroup($name="",$description="", $ownerid=5)
-    {
-		//Zend_Debug::dump($name, "Modelo");
-    	$group = new Messages_Model_DbTable_CometChatGroup();
-    	$id=$group->createGroup($name,$description, $ownerid);
-    	return $id;
-     }
-     public function removeChat($id_from,$id_to,$isgroup=0)
-     {
-     	$remchat = new Messages_Model_DbTable_Cometchat();
-     	if ($remchat->removeChat($id_from,$id_to,$isgroup)){
-     		return 1;
-     	}else return 0;	
-     	
-     }
     
 }

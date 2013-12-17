@@ -369,6 +369,40 @@ class User_Model_DbTable_User extends Zend_Db_Table_Abstract {
 		return $this->update($data, "id_user={$uid}");
 	}
     
+	
+	public function getUserFriends($uid=0){
+		$select = $this->select()
+                  ->from(array("U"=>$this->_name)
+                          ,array(
+                                 'id'=>'id_user'
+                                ,'Faacebook_id'=>'Facebook_id'
+                                ,'name'=>'use_name'
+                                ,'first_name'=>'use_first_name'
+                                ,'last_name'=>'use_last_name'
+                                ,'Facebook_link'
+                                ,'Facebook_username'
+                                ,'hometown_name'=>'use_hometown_name'
+								,'location_name'=>'use_location_name'
+								,'location_coordinates'=>'use_location_coordinates'
+                                ,'gener'=>'use_gener'
+                                ,'email'=>'use_email'
+                                ,'locale'=>'use_locale'
+                                ,'visit'=>'use_visit'
+                                ,'date'=>'use_date'
+                                ,'lastactivity'
+                                ,'online' => new Zend_Db_Expr("IF(((UNIX_TIMESTAMP()-U.lastactivity) < 62 ), 1, 0)")
+                              )
+                          )
+                  ->setIntegrityCheck(false)
+                  ->join(array('UF' => 'user_friends')
+                  		, "UF.friend2 = U.id_user AND UF.friend1 = {$uid}"
+                        , array());
+                ;
+		//Zend_Debug::dump($select.''); die;
+		$row = $this->fetchAll($select);
+        $friends = $row->toArray();
+        return $friends;
+	}
     
     
     
