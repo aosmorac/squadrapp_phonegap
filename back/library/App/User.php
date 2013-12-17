@@ -153,14 +153,14 @@ class App_User {
     
     
     public static function getCityByIp(){
-        $ip=$_SERVER['REMOTE_ADDR'];
+        /*$ip=$_SERVER['REMOTE_ADDR'];
         $addr_details = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip));
         $city = stripslashes(ucfirst($addr_details['geoplugin_city']));
         //$countrycode = stripslashes(ucfirst($addr_details[geoplugin_countryCode]));
-        $country = stripslashes(ucfirst($addr_details['geoplugin_countryName']));
-        if ($city == ''){
+        $country = stripslashes(ucfirst($addr_details['geoplugin_countryName']));*/
+        //if ($city == ''){
             $city = 'Bogotá'; $country = 'Colombia';
-        }
+        //}
         return $city.', '.$country;
     }
 
