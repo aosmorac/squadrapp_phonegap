@@ -120,7 +120,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
                                         (count(C.read)-SUM(case when C.read = 1 then 1 else 0 end)) AS unread
                                 FROM cometchat AS C 
                                 WHERE 
-									C.isgroup = 0 AND C.to = {$uid}  									
+									C.isgroup = 0 AND C.to = {$uid}  AND C.isavailable = 1									
                                 GROUP BY gid, uid  
 
                                 UNION 
@@ -135,7 +135,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
                                         (count(C.read)-SUM(case when C.read = 1 then 1 else 0 end)) AS unread
                                 FROM cometchat AS C 
                                 WHERE 
-									C.isgroup = 1 AND C.from != {$uid}  AND 
+									C.isgroup = 1 AND C.from != {$uid}  AND C.isavailable = 1 AND 
 										C.to IN 
 										(SELECT 
 											UG.com_group_id AS id 
@@ -158,7 +158,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
 										C.isgroup,
                                         0 AS unread 
                                 FROM cometchat AS C 
-                                WHERE C.from = {$uid}  AND C.isgroup = 0
+                                WHERE C.from = {$uid}  AND C.isgroup = 0 AND C.isavailable= 1
                                 GROUP BY gid, uid 
 
 								 UNION 
@@ -172,7 +172,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
 										C.isgroup,
                                         0 AS unread 
                                 FROM cometchat AS C 
-                                WHERE C.from = {$uid}  AND C.isgroup = 1
+                                WHERE C.from = {$uid}  AND C.isgroup = 1 AND C.isavailable = 1
                                 GROUP BY gid, uid  
 						)AS A 
                         LEFT JOIN user AS U 
@@ -182,7 +182,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
                         GROUP BY uid, gid 
                         ORDER BY mid DESC) 
                     "))
-                  ,array(
+                    ,array(
                       "T.mid",
                   	  "unread" => new Zend_Db_Expr("IF(`T`.`isgroup`=0,`T`.`unread`,(SELECT DISTINCT count(*) 
 										FROM 
@@ -193,10 +193,10 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
 										LEFT JOIN 
 											userxgroupxcometchat AS UGC
 										ON 	UG.com_group_id=UGC.com_group_id and UG.user_id={$uid} 
-										WHERE UGC.user_group_com_read  IS NULL AND UG.com_group_id = T.gid))")
+										WHERE UGC.user_group_com_read  IS NULL AND UG.com_group_id = T.gid AND G.isavailable = 1))")
 					  ,"T.isgroup"
                       ,"date"=>new Zend_Db_Expr("date + INTERVAL".$timezone." HOUR")
-                      ,"message"=>new Zend_Db_Expr("(SELECT message  FROM   cometchat WHERE  id = T.mid LIMIT 1)")
+                      ,"message"=>new Zend_Db_Expr("(SELECT message  FROM   cometchat WHERE  id = T.mid AND  isavailable = 1 LIMIT 1)")
                       ,"T.id_user"
                       ,"T.Facebook_id"
                       ,"T.use_name"
@@ -422,7 +422,31 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
          $users = $row->toArray();
          return $users;
     }
+    public function removeChat($id_from,$id_to,$isgroup)
+    {
+    $db = Zend_Db_Table::getDefaultAdapter();
+    $dataupdate = array('isavailable'=>'0');	
+    $where = new Zend_Db_Expr("(`from`={$id_from} AND `to`={$id_to}) OR ( `from`={$id_to} AND `to`={$id_from})");
+    $db->query("INSERT INTO `userxgroupxcometchat` (`com_group_id`, `user_id`, `chat_id`, `user_group_com_read`, `user_group_com_date`, `user_group_com_isavailable`)
+    		     SELECT    C.to AS com_group_id,
+				    		{$id_from} AS user_id
+				    		, C.ID AS chat_id
+				    		, C.read AS user_group_com_read
+				    		, C.date AS user_group_com_date
+				    		, C.isavailable AS isavailable
+				    		from cometchat AS C
+				    		left JOIN userxgroupxcometchat AS G
+				    		ON G.com_group_id = C.to AND G.user_id={$id_from} AND C.isgroup = 1
+				    		WHERE
+				    		G.com_group_id IS NULL AND C.isgroup = 1 AND C.to={$id_to} AND C.from={$id_from}");
+    		
+    //Zend_Debug::dump($select.''); die;
 
-
+    $result=$this->update($dataupdate,$where);
+    return $result;
+  }
 }
+
+
+
 

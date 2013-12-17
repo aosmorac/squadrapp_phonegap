@@ -96,6 +96,17 @@ public function getUserxGroupAction()
 	echo json_encode($userxgroup);
  
 }
-    
+public function  removeChatAction()
+{
+	header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+	$this->_helper->layout()->disableLayout();
+	$this->_helper->viewRenderer->setNoRender(true);
+	$vars = $this->_getAllParams();
+	//Zend_Debug::dump($vars, "Controlador");
+	$remchat = new Messages_Model_UserChat();
+	$result=$remchat->removeChat($vars['id_from'], $vars['id_to'],$vars['isgroup']);
+	echo json_encode(array('success'=>$result));
+}
+
 }
 ?>
