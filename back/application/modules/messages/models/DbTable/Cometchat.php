@@ -106,9 +106,33 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
 								A.isgroup AS isgroup, 
                                 MAX(A.date) AS date , 
                                 A.message, 
-                                A.unread AS unread, 
-                                U.*, 
-								CG.*
+                                A.unread AS unread 
+                                ,IF( U.id_user IS NULL , '' , id_user ) AS id_user
+								,IF( U.Facebook_id IS NULL , '' , Facebook_id ) AS Facebook_id
+								,IF( U.use_name IS NULL , '' , use_name ) AS use_name
+								,IF( U.use_first_name IS NULL , '' , use_first_name ) AS use_first_name
+								,IF( U.use_last_name IS NULL , '' , use_last_name ) AS use_last_name
+								,IF( U.Facebook_link IS NULL , '' , Facebook_link ) AS Facebook_link
+								,IF( U.Facebook_username IS NULL , '' , Facebook_username ) AS Facebook_username
+								,IF( U.use_hometown_id IS NULL , '' , use_hometown_id ) AS use_hometown_id
+								,IF( U.use_hometown_name IS NULL , '' , use_hometown_name ) AS use_hometown_name
+								,IF( U.use_location_id IS NULL , '' , use_location_id ) AS use_location_id
+								,IF( U.use_location_name IS NULL , '' , use_location_name ) AS use_location_name
+								,IF( U.use_location_coordinates IS NULL , '' , use_location_coordinates ) AS use_location_coordinates
+								,IF( U.use_gener IS NULL , '' , use_gener ) AS use_gener
+								,IF( U.use_email IS NULL , '' , use_email ) AS use_email
+								,IF( U.timezone IS NULL , '' , timezone ) AS timezone
+								,IF( U.use_locale IS NULL , '' , use_locale ) AS use_locale
+								,IF( U.use_visit IS NULL , '' , use_visit ) AS use_visit
+								,IF( U.use_date IS NULL , '' , use_date ) AS use_date
+								,IF( U.use_birthday IS NULL , '' , use_birthday ) AS use_birthday
+								,IF( U.use_document_id IS NULL , '' , use_document_id ) AS use_document_id
+								,IF( U.use_mobile IS NULL , '' , use_mobile ) AS use_mobile
+								,IF( U.use_telephone IS NULL , '' , use_telephone ) AS use_telephone
+								,IF( U.use_address IS NULL , '' , use_address ) AS use_address
+								,IF( U.use_available IS NULL , '' , use_available ) AS use_available
+								,IF( U.lastactivity IS NULL , '' , lastactivity ) AS lastactivity 
+								,CG.*
                         FROM ( 
                                 SELECT DISTINCT 
                                         MAX(C.id) AS mid, 
@@ -172,11 +196,11 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
 										C.isgroup,
                                         0 AS unread 
                                 FROM cometchat AS C , userxgroupxcometchat AS UGC 
-                                WHERE C.from = {$uid}  AND C.isgroup = 1 AND UGC.user_group_com_isavailable = 1 
+                                WHERE C.from = {$uid}  AND C.isgroup = 1  
                                 GROUP BY gid, uid  
 						)AS A 
                         LEFT JOIN user AS U 
-                                ON U.id_user = A.uid AND A.uid != {$uid} 
+                                ON U.id_user = A.uid AND A.uid != {$uid} AND A.isgroup = 0
 						LEFT JOIN cometchat_group AS CG 
                                 ON CG.com_group_id = A.gid 
                         GROUP BY uid, gid 
