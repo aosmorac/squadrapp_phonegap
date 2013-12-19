@@ -126,5 +126,19 @@ public function  removeChatAction()
 	echo json_encode(array('success'=>$result));
 }
 
+	
+/*
+ * 
+ */
+	public function  newChatAction(){
+		header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		$vars = $this->_getAllParams();		
+		$ids = explode(',', $vars['to']);
+		Zend_Debug::dump($ids);
+	}
+
+
 }
 ?>
