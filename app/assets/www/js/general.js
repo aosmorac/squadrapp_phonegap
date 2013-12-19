@@ -586,3 +586,26 @@ function formatChatDate(fecha){
 				return '';
 			}
 }
+
+
+
+
+
+/* chat-new-message.html */
+function loadLocalContacts(){
+		var localIds = squadrapp.user.getLocalContactsIds();
+		$('#local-contacts').html('');
+		$.each( localIds, function( key, id ) {
+			var m = squadrapp.user.getContact(id);
+			$('#local-contacts').append('<li class="friend"><div class="image"><img style="display: block;" width="35" height="35" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="name">'+truncate(m.name,20,"...")+'</div><div class="check" id="contact_'+id+'" onclick="CheckClick('+id+')"></div><div class="corte"></div></li>');
+		});
+	}
+
+function loadForeignContacts(){
+		var localIds = squadrapp.user.getForeignContactsIds();
+		$('#foreign-contacts').html('');
+		$.each( localIds, function( key, id ) {
+			var m = squadrapp.user.getContact(id);
+			$('#foreign-contacts').append('<li class="friend"><div class="image"><img style="display: block;" width="35" height="35" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info"><div class="name">'+truncate(m.name,20,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div><div class="check" id="contact_'+id+'" onclick="CheckClick('+id+')"></div><div class="corte"></div></li>');
+		});
+	}

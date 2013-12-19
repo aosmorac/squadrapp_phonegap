@@ -3,60 +3,39 @@
 			<a class="cancel" onclick="closeNewMessage();"> Cancelar </a>
 			<div class="title">Nuevo Mensaje</div>
 		</section>
-		<section class="members">
-			<div class="label">Participantes (0/30)</div> <textarea class="members-input"></textarea>
-		</section>
+		
+			<section class="members">
+				<div class="label">Participantes (0/30)</div> 
+				<div contenteditable="true" class="members-input"></div>
+			</section>
 		<div class="corte"> </div>
-		<section class="local-list"> 
-			<section class="header">
-				Amigos Locales - Bogotá Colombia
-			</section>
-			<ul>
-				<li class="friend">
-					<div class="image">
-						<img width="35" height="35" style="display: block;" src="https://graph.facebook.com/100002008880396/picture?width=35&height=35">
-					</div>
-					<div class="name">
-						Abel Moreno
-					</div>
-					<div class="check">
-					</div>
-					<div class="corte"> </div>
-				</li>
-				<li class="friend">
-					<div class="image">
-						<img width="35" height="35" style="display: block;" src="https://graph.facebook.com/100002008880396/picture?width=35&height=35">
-					</div>
-					<div class="name">
-						Abel Moreno
-					</div>
-					<div class="check">
-					</div>
-					<div class="corte"> </div>
-				</li>
-			</ul>
+		<section class="header header-list">
+					Amigos Locales - <span class="user-location"></span>
 		</section>
-		<section class="world-list"> 
-			<section class="header">
-				Amigos en el resto del mundo
+		<div id="list-contacts"><div>
+			<section class="local-list"> 
+				<div id="local-list-start"></div>
+				<ul id="local-contacts"> </ul>
 			</section>
-			<ul>
-				<li class="friend">
-					<div class="image">
-						<img width="35" height="35" style="display: block;" src="https://graph.facebook.com/100002008880396/picture?width=35&height=35">
-					</div>
-					<div class="name">
-						Abel Moreno
-					</div>
-					<div class="check">
-					</div>
-					<div class="corte"> </div>
-				</li>
-			</ul>
-		</section>
+			<section class="world-list"> 
+				<div id="world-list-start"></div>
+				<section class="header">
+					Amigos en el resto del mundo
+				</section>
+				<ul id="foreign-contacts"> </ul>
+			</section>
+		</diV></div>
+		
+		<div id="message-form"><form action="javascript:newChat();">
+			<input type="text" placeholder="Mensaje" name="message" class="field" id="message-input">
+			<button>Enviar</button>
+		</form></div>		 
 		
 
 <script>
+
+	var group_contacts = Object;
+
 	$('.check').bind('click' , function(){
 				if ($(this).attr('class') == 'check selected') {
 					$(this).removeClass('selected');
@@ -64,4 +43,61 @@
 					$(this).addClass('selected');
 				};
 			});
+			
+	
+		$('.user-location').html(squadrapp.user.getUserCity());
+	loadLocalContacts();
+	loadForeignContacts();
+	
+	contactsScroll = new iScroll('list-contacts');
+	
+	$('#list-contacts').height($(window).height()-167);
+	$('.members-input').width($(window).width()-133);
+	
+	contactsScroll.refresh();
+	
+	function CheckClick(uid){
+		if ($('#contact_'+uid).attr('class') == 'check selected') {
+			$('#contact_'+uid).removeClass('selected');
+			$('#contactbygroup_'+uid).remove();
+			delete group_contacts[uid];
+		}else{
+			group_contacts[uid] = squadrapp.user.getContact(uid);
+			$('.input-span').remove();
+			$(".members-input").append('<div contenteditable="false" id="contactbygroup_'+uid+'" class="selected">'+group_contacts[uid].name+'</div><span contenteditable="true" class="input-span">,</span>');
+			$('#contact_'+uid).addClass('selected');
+			$(".members-input").scrollTop($(".members-input")[0].scrollHeight);
+		};
+	}
+	
+	function removeSelected(){
+		$('.selected').remove();
+	}
+	
+	function newChat(){
+		var message = $('#message-input').val();
+		$('#message-input').val('');
+		var user_ids = getObjectKeys(group_contacts);
+		if (user_ids != '' && jQuery.trim(message) != ''){
+			squadrapp.nav.newChat(user_ids, jQuery.trim(message));
+		}
+	}
+
+	
+	/*
+	 * Devuelve las llaves de un objeto separadas por comas.
+	 * Return String
+	 */
+	function getObjectKeys(obj){
+		var result = '';
+		$.each( obj, function( key, element ) {
+			if (result != '') {
+				result += ',';
+			}
+			result += key;
+		});
+		return result;
+	}
+	
+	
 </script>

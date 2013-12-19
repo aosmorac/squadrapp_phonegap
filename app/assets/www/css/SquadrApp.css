@@ -664,15 +664,31 @@ nav ul li a span{
 	float: left;
 }
 #new-message .members .members-input{
-	width: 150px;
-	max-width: 150px;
-	min-width: 150px;
 	color: #555;
 	font-size: 14px;
 	border: 0;
-	min-height: 20px;
+	min-height: 30px;
+	height: 30px;
 	max-height: 80px;
 	padding: 10px 0 0 0;
+	overflow:auto;
+	float: left;
+}
+#new-message .members .members-input .selected{
+	display: inline-block;
+	background: #a7e1c7;
+	color: #58605c;
+	padding: 5px 10px;
+	margin: 2px 5px;
+}
+
+
+#new-message .header-list{
+	color: #777777;
+    font-size: 13px;
+    height: 20px;
+    padding: 10px;
+    text-align: center
 }
 #new-message .local-list{
 	
@@ -684,6 +700,14 @@ nav ul li a span{
     padding: 10px;
     text-align: center
 }
+
+#new-message .local-list .current-list{
+	position: fixed;
+	top: 85px;
+	left: 0;
+	width: 100%;
+}
+
 #new-message .local-list ul{
 	
 }
@@ -720,7 +744,7 @@ nav ul li a span{
 	float: right;
 	width: 25px;
 	height: 25px;
-	margin: 0 10px 0 0;
+	margin: 0 5px 0 0;
 	cursor: pointer;
 }
 #new-message .local-list .friend .selected{
@@ -736,6 +760,12 @@ nav ul li a span{
     height: 20px;
     padding: 10px;
     text-align: center
+}
+#new-message .world-list .current-list{
+	position: fixed;
+	top: 85px;
+	left: 0;
+	width: 100%;
 }
 #new-message .world-list ul{
 	
@@ -758,11 +788,19 @@ nav ul li a span{
 	-moz-border-radius: 20px;
 	border-radius: 20px;
 }
-#new-message .world-list .friend .name{
+#new-message .world-list .friend .info{
 	color: #888888;
     float: left;
+    margin: 0 15px;
+}
+#new-message .world-list .friend .info .name{
+	color: #888888;
     font-weight: bold;
-    margin: 8px 15px;
+}
+#new-message .world-list .friend .info .location{
+	color: #888888;
+	font-size: 12px;
+	font-weight: lighter;
 }
 #new-message .world-list .friend .check{
 	background-image: url(../img/select_filtro.png);
@@ -773,12 +811,14 @@ nav ul li a span{
 	float: right;
 	width: 25px;
 	height: 25px;
-	margin: 0 10px 0 0;
+	margin: 0 5px 0 0;
 	cursor: pointer;
 }
 #new-message .world-list .friend .selected{
  	background-position: 0 100%;
  }
+ 
+
 
 /*---	Fin Chat With	---*/
 
