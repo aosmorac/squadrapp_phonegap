@@ -145,7 +145,7 @@ public function  removeChatAction()
 			$group_id = $group->createGroup('', '', $vars['me']);
 			$userxgroup_rows = Array();
 			foreach($ids as $uid){
-				$userxgroup_rows = Array('user_id'=>$uid, 'com_group_id'=>$group_id);
+				$userxgroup_rows[] = Array('user_id'=>$uid, 'com_group_id'=>$group_id);
 			}
 			$group->addUserByGroup($userxgroup_rows);
 			$group->saveMessage($vars['me'], $group_id, trim($vars['msg']), 1);
