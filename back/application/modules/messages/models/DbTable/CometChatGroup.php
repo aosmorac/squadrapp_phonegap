@@ -15,5 +15,6 @@ class Messages_Model_DbTable_CometChatGroup extends Zend_Db_Table_Abstract {
 		$id=$this->insert($data);
 		return $id;
 	}
+	
 }
 ?>

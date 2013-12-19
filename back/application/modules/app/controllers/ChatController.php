@@ -136,7 +136,20 @@ public function  removeChatAction()
 		$this->_helper->viewRenderer->setNoRender(true);
 		$vars = $this->_getAllParams();		
 		$ids = explode(',', $vars['to']);
-		Zend_Debug::dump($ids);
+		if (count($ids) == 1) {
+			$userChat = new Messages_Model_UserChat();
+        	$userChat->saveMessage($vars['me'], $ids[0], trim($vars['msg']));
+			echo 1;
+		}elseif (count($ids) > 1) {
+			$group = new Messages_Model_UserChat();
+			$group_id = $group->createGroup('', '', $vars['me']);
+			$userxgroup_rows = Array();
+			foreach($ids as $uid){
+				$userxgroup_rows = Array('user_id'=>$uid, 'com_group_id'=>$group_id);
+			}
+			$group->addUserByGroup($userxgroup_rows);
+			$group->saveMessage($vars['me'], $group_id, trim($vars['msg']), 1);
+		} 
 	}
 
 

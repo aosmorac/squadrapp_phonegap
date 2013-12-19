@@ -7,6 +7,13 @@ class Messages_Model_DbTable_UserxGroup extends Zend_Db_Table_Abstract {
 	public function __construct() {
 		$this->_setAdapter('APP');
 	}
+	
+	public function addUserByGroup($rows){
+		foreach($rows as $r){
+			$this->insert($r);
+		}
+	}
+	
 	public function getUsersxGroup($gid,$timezone=-5)
 	{
 		$where="UG.com_group_id = {$gid}";
