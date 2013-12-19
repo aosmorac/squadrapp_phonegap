@@ -75,6 +75,17 @@ class App_UserController extends Zend_Controller_Action
 			$user = new User_Model_User();
 			$user->updateLastActivityMobile($vars['uid']);
 	}
+	
+	public function getContactsAction ()
+    {
+            header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+            $this->_helper->layout()->disableLayout ();
+            $this->_helper->viewRenderer->setNoRender(true);
+            $vars = $this->_getAllParams(); 
+			$user = new User_Model_User();
+			$friends = $user->getUserFriendsMobile($vars['uid']);
+            echo json_encode($friends);
+	}
 
     
 }
