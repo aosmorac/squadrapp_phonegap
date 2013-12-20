@@ -54,6 +54,12 @@ class Messages_Model_UserChat {
         }else{
             return array();
         }
+    } 
+    public function getMessagesChatGroup()
+    {
+    	
+    	
+    	
     }
 
     public function getLastMessagesChat($id_talker1=0, $id_talker2=0, $lid=0){

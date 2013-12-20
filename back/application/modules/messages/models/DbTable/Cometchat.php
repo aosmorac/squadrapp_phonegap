@@ -235,6 +235,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
                       //,'online' => new Zend_Db_Expr("IF((UNIX_TIMESTAMP()-T.lastactivity) < 240 AND (S.status = 'busy' OR S.status = 'away' OR S.status = 'available'), 1, 0)")
                       ,'online' => new Zend_Db_Expr("IF(((UNIX_TIMESTAMP()-T.lastactivity) < 400 ), 1, 0)")
                       ,"T.com_group_name"
+                      ,"T.com_group_id"
                     )
                   )
                 ->setIntegrityCheck(false)
@@ -399,6 +400,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
                       //,'online' => new Zend_Db_Expr("IF((UNIX_TIMESTAMP()-T.lastactivity) < 240 AND (S.status = 'busy' OR S.status = 'away' OR S.status = 'available'), 1, 0)")
                       ,'online' => new Zend_Db_Expr("IF(((UNIX_TIMESTAMP()-T.lastactivity) < 400 ), 1, 0)")
                       ,"T.com_group_name"
+                      ,"T.com_group_id"
                     )
                   )
                 ->setIntegrityCheck(false)
@@ -476,6 +478,14 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
          $row = $this->fetchAll($select);
          $messages = $row->toArray();
          return $messages;
+    }
+    // db table para cargar los msjes escritos por el grupo
+    
+    public function getMessagesChatGroup()
+    {
+    	
+    	
+    	
     }
     
     public function getLastMessagesChat($id_talker1=0, $id_talker2=0, $lid=0){
