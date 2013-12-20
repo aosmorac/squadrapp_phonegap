@@ -47,7 +47,7 @@ class Messages_Model_UserChat {
     }
 	
 	public function getMessagesChatApp($id_talker1=0, $id_talker2=0, $timezone=-5, $start=0, $lid=0){
-        $messages = $this->registroDataTable->getMessagesChatApp($id_talker1, $id_talker2, $timezone=-5, $start, $lid);
+        $messages = $this->registroDataTable->getMessagesChatApp($id_talker1, $id_talker2, $timezone, $start, $lid);
         if (count($messages)>0){
             //$this->registroDataTable->updateReadMessages($id_talker2, $id_talker1);
             return $messages;
@@ -55,11 +55,15 @@ class Messages_Model_UserChat {
             return array();
         }
     } 
-    public function getMessagesChatGroup()
+    public function getMessagesChatGroup($uid=0, $gid=0, $timezone=-5, $start=0, $lid=0)
     {
-    	
-    	
-    	
+    	$messages = $this->registroDataTable->getMessagesChatGroup($uid, $gid, $timezone, $start, $lid);
+		if (count($messages)>0){
+            //$this->registroDataTable->updateReadMessages($id_talker2, $id_talker1);
+            return $messages;
+        }else{
+            return array();
+        }    	
     }
 
     public function getLastMessagesChat($id_talker1=0, $id_talker2=0, $lid=0){

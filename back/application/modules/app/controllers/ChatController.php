@@ -53,6 +53,16 @@ class App_ChatController extends Zend_Controller_Action
         echo json_encode($messages);
     }
 	
+	public function loadChatGroupAction(){
+        header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $vars = $this->_getAllParams();
+        $userChat = new Messages_Model_UserChat();
+        $messages = $userChat->getMessagesChatGroup($vars['uid'], $vars['gid'], $vars['timezone'], $vars['start']);
+        echo json_encode($messages);
+    }
+	
 	public function getNewMessagesAction(){
         header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
         $this->_helper->layout()->disableLayout();
@@ -139,7 +149,7 @@ public function  removeChatAction()
 		if (count($ids) == 1) {
 			$userChat = new Messages_Model_UserChat();
         	$userChat->saveMessage($vars['me'], $ids[0], trim($vars['msg']));
-			echo 1;
+			echo 0;
 		}elseif (count($ids) > 1) {
 			$group = new Messages_Model_UserChat();
 			$group_id = $group->createGroup('', '', $vars['me']);
@@ -149,6 +159,7 @@ public function  removeChatAction()
 			}
 			$group->addUserByGroup($userxgroup_rows);
 			$group->saveMessage($vars['me'], $group_id, trim($vars['msg']), 1);
+			echo $group_id;
 		} 
 	}
 

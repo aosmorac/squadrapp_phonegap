@@ -481,11 +481,33 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
     }
     // db table para cargar los msjes escritos por el grupo
     
-    public function getMessagesChatGroup()
+    public function getMessagesChatGroup($uid=0, $gid=0, $timezone=-5, $start=0, $lid=0)
     {
-    	
-    	
-    	
+    	$where = "CHAT.id > 0 AND CHAT.to = {$gid} AND CHAT.isgroup = 1";
+        $select = $this->select()
+                ->from(
+                        array("CHAT"=>$this->_name) 
+                        ,array('mid'=>'id'
+                            ,'message'=>'message'
+                            ,'date'=>new Zend_Db_Expr("(CHAT.date + INTERVAL ".$timezone." HOUR)"))
+                    )
+                ->setIntegrityCheck(false)
+                ->join(
+                        array('USER' => 'user'), "USER.id_user = CHAT.from "
+                        , array('user_id'=>'id_user','user_name'=>'use_name'
+                            ,'user_first_name'=>'use_first_name'
+                            ,'user_last_name'=>'use_last_name'
+                            ,'Facebook_id'=>'Facebook_id'
+                            ,'Facebook_link'=>'Facebook_link')
+                    )
+                ->where($where)
+                ->order("CHAT.id DESC")
+                ->limit(10,$start)
+            ;
+         //Zend_Debug::dump($select.''); die;
+         $row = $this->fetchAll($select);
+         $messages = $row->toArray();
+         return $messages;   	
     }
     
     public function getLastMessagesChat($id_talker1=0, $id_talker2=0, $lid=0){
