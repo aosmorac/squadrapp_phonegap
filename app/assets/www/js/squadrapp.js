@@ -45,8 +45,8 @@
 var user_item;		// Variable donde se encuentra la información del usuario logueado
 var nav_item;		// Variable donde se encuentra la información de navegacion (chat y secciones)	
 var fields_item;	// Variable donde se encuentra la información de los lugares para practicar deporte.
-//var url_base = 'http://127.0.0.1:8080';	// Servidor Local Abel
-var url_base = 'http://desar.squadrapp.com';	// Servidor de desarrollo
+var url_base = 'http://localhost:8080';	// Servidor Local Abel
+//var url_base = 'http://desar.squadrapp.com';	// Servidor de desarrollo
 // end vars	----------------------
 
 
@@ -423,7 +423,11 @@ squadrapp = {
 		             		allArray = nav_item.chat.talkers.listArray;
 		             		var ot = 0;
 		             		$.each(list, function( index, value ) {
-		             			all[value.id_user] = value;
+		             			if(value.isgroup==1){
+		             				all['g'+value.com_group_id] = value;
+		             			}else{
+		             				all[value.id_user] = value;
+		             			}
 		             			allArray[a] = value; a++;
 		             			olders[ot] = value; ot++;
 								if (value.mid > nav_item.chat.idNewerMessage) {
@@ -465,7 +469,13 @@ squadrapp = {
 							var li=0;
 							$.each(list, function( index, value ) {
 								loads[li] = value.id_user; li++;
-								all[value.id_user] = value;
+								if(value.isgroup==1)
+									{
+										all['g'+value.com_group_id] = value;
+									}else {
+										all[value.id_user] = value;
+									}
+							
 								newers[a] = value;
 								allArray[a] = value; a++;
 								if (value.mid > nav_item.chat.idNewerMessage) {
@@ -476,10 +486,20 @@ squadrapp = {
 							li=0;
 							$.each(nav_item.chat.talkers.list, function( index, value ) {
 								if ($.inArray( value.id_user, loads ) == -1) {
-									all[value.id_user] = value; 
+									if(value.isgroup==1){
+										all['g'+value.com_group_id] = value; 
+									}else{
+										all[value.id_user] = value; 
+									}
+									
 									allArray[a] = value; a++;
 								}else {
-									all[value.id_user].chat = value.chat; 
+									if(value.isgroup==1)
+										{
+											all['g'+value.com_group_id].chat = value.chat; 
+										}else{
+											all[value.id_user].chat = value.chat; 
+										}
 								}
 							});								
 				             	nav_item.chat.talkers.list = all;
