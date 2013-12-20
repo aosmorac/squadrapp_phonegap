@@ -79,7 +79,15 @@
 		$('#message-input').val('');
 		var user_ids = getObjectKeys(group_contacts);
 		if (user_ids != '' && jQuery.trim(message) != ''){
-			squadrapp.nav.newChat(user_ids, jQuery.trim(message));
+			squadrapp.nav.newChat(user_ids, jQuery.trim(message), function(){
+				if (group_contacts.length == 1){
+					closeNewMessage();
+					goChatEvent(user_ids);
+				}else if (group_contacts.length > 1){
+					closeNewMessage();alert(2);
+					goChatEvent(group_id, 1);	/*group_id var creada en squadrapp.nav.newChat*/
+				}
+			});
 		}
 	}
 

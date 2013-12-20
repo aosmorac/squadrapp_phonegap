@@ -468,7 +468,11 @@ squadrapp = {
 							var newers = new Array(); 
 							var li=0;
 							$.each(list, function( index, value ) {
-								loads[li] = value.id_user; li++;
+								if(value.isgroup==1){
+									loads[li] = 'g'+value.com_group_id; li++;
+								}else{
+									loads[li] = value.id_user; li++;	
+								}
 								if(value.isgroup==1)
 									{
 										all['g'+value.com_group_id] = value;
@@ -485,22 +489,24 @@ squadrapp = {
 							nav_item.chat.talkers.newTalkers = newers;
 							li=0;
 							$.each(nav_item.chat.talkers.list, function( index, value ) {
-								if ($.inArray( value.id_user, loads ) == -1) {
-									if(value.isgroup==1){
+								
+								
+								if(value.isgroup==1){
+									if ($.inArray( 'g'+value.id_user, loads ) == -1) {
 										all['g'+value.com_group_id] = value; 
-									}else{
-										all[value.id_user] = value; 
+										allArray[a] = value; a++;
+									}else {
+										all['g'+value.com_group_id].chat = value.chat; 
 									}
-									
-									allArray[a] = value; a++;
-								}else {
-									if(value.isgroup==1)
-										{
-											all['g'+value.com_group_id].chat = value.chat; 
-										}else{
-											all[value.id_user].chat = value.chat; 
-										}
+								}else{
+									if ($.inArray( value.id_user, loads ) == -1) {
+										all[value.id_user] = value; 
+										allArray[a] = value; a++;
+									}else {
+										all[value.id_user].chat = value.chat; 
+									}
 								}
+								
 							});								
 				             	nav_item.chat.talkers.list = all;
 			             		nav_item.chat.talkers.listArray = allArray;
@@ -516,22 +522,41 @@ squadrapp = {
 		 * squadrapp.nav.getChatWithUser(user_id);
 		 * Carga información de los usuarios que ha tenido conversaciones de la mas reciente a la mas antigua.
 		 */
-		getChatWithUser: function(user_id){
-			if (Object.keys(nav_item.chat.talkers.list[user_id]).length){
-				var chat = nav_item.chat.talkers.list[user_id].chat;
-				if (chat == undefined){
-					squadrapp.nav.loadChatByUser(user_id);
-				}
-				chat = nav_item.chat.talkers.list[user_id].chat;
-				if ((chat.messages).length > 0){
-					return nav_item.chat.talkers.list[user_id];
+		getChatWithUser: function(talker_id, isgroup){
+			isgroup = typeof(isgroup) != 'undefined' ? isgroup : 0;
+			if (isgroup == 1){
+				if (Object.keys(nav_item.chat.talkers.list['g'+talker_id]).length){
+					var chat = nav_item.chat.talkers.list['g'+talker_id].chat;
+					if (chat == undefined){
+						squadrapp.nav.loadChatByGroup(talker_id);
+					}
+					chat = nav_item.chat.talkers.list['g'+talker_id].chat;
+					if ((chat.messages).length > 0){
+						return nav_item.chat.talkers.list['g'+talker_id];
+					}else{
+						squadrapp.nav.loadChatByGroup(talker_id);
+						return nav_item.chat.talkers.list['g'+talker_id];
+					}
 				}else{
-					squadrapp.nav.loadChatByUser(user_id);
-					return nav_item.chat.talkers.list[user_id];
-				}
-			}else{
-				return 'User error';	
-			}	
+					return 'Group error';	
+				}	
+			}else {
+				if (Object.keys(nav_item.chat.talkers.list[talker_id]).length){
+					var chat = nav_item.chat.talkers.list[talker_id].chat;
+					if (chat == undefined){
+						squadrapp.nav.loadChatByUser(talker_id);
+					}
+					chat = nav_item.chat.talkers.list[talker_id].chat;
+					if ((chat.messages).length > 0){
+						return nav_item.chat.talkers.list[talker_id];
+					}else{
+						squadrapp.nav.loadChatByUser(talker_id);
+						return nav_item.chat.talkers.list[talker_id];
+					}
+				}else{
+					return 'User error';	
+				}	
+			}
 		},
 		
 		/*
@@ -567,6 +592,49 @@ squadrapp = {
 			             	nav_item.chat.talkers.list[user_id].chat.totalMessagesLoaded = all.length;
 			             	if ( typeof nav_item.chat.talkers.list[user_id].chat.messages[0] !== 'undefined' ) {
 			             		nav_item.chat.talkers.list[user_id].chat.idNewerMessage = nav_item.chat.talkers.list[user_id].chat.messages[0].mid;
+			             	}
+			             	localStorage.setItem('nav', JSON.stringify(nav_item));
+						 }
+		    		});	
+				}
+	    		
+			}
+			
+		}, 
+		
+		/*
+		 * squadrapp.nav.loadChatByGroup(group_id);
+		 * Carga mensajes por usuario
+		 */
+		loadChatByGroup: function(group_id){
+			squadrapp.nav.chattingOn();
+			if (Object.keys(nav_item.chat.talkers.list['g'+group_id]).length){
+				var chat = nav_item.chat.talkers.list['g'+group_id].chat;
+				if (chat == undefined){
+					// Creo el objeto de chat por usuario si no existe
+					chat = { 
+							messages: Array()
+							, olders: Array()
+							, newers: Array() 
+							, idNewerMessage: 0
+							, totalMessagesLoaded: 0
+					};
+					nav_item.chat.talkers.list['g'+group_id].chat = chat;
+				}
+				if (nav_item.chat.talkers.list['g'+group_id].chat.totalMessagesLoaded <= 0){	// Si no se ha cargado ningun mensaje por ese usuario 
+					var serv = url_base+'/app/chat/load-chat-group';
+					$.ajax({
+						 type: "POST",
+						 url: serv,
+			             async: false,
+			             data: { uid: user_item.id, gid: group_id, timezone: user_item.timezone,  start: nav_item.chat.talkers.list['g'+group_id].chat.totalMessagesLoaded },
+			             success: function(data){
+			             	var all = JSON.parse(data);
+			             	all = all.concat(nav_item.chat.talkers.list['g'+group_id].chat.messages);
+			             	nav_item.chat.talkers.list['g'+group_id].chat.messages = all;
+			             	nav_item.chat.talkers.list['g'+group_id].chat.totalMessagesLoaded = all.length;
+			             	if ( typeof nav_item.chat.talkers.list['g'+group_id].chat.messages[0] !== 'undefined' ) {
+			             		nav_item.chat.talkers.list['g'+group_id].chat.idNewerMessage = nav_item.chat.talkers.list['g'+group_id].chat.messages[0].mid;
 			             	}
 			             	localStorage.setItem('nav', JSON.stringify(nav_item));
 						 }
@@ -699,13 +767,15 @@ squadrapp = {
 		newChat: function(user_ids, message, callback){
 	            callback = callback || function(){};
 				var serv = url_base+'/app/chat/new-chat';
+				var group_id = 0;
 				$.ajax({
 					 type: "POST",
 					 url: serv,
 			         async: true,
 			         data: { me: user_item.id, to: user_ids, msg: message},
 			         success: function(data){
-			         	$('#new-message').html(data);
+			         	group_id = data;
+			         	/*$('#new-message').html(data);*/
 				     	callback();
 					 }
 		    	});
