@@ -18,33 +18,7 @@
 </section>
 <script>
 
-function loadDrawersTalkers(id){
-	var elemento = $('#'+id);
-	var obj_pos, obj_final;
-			elemento.pep({
-				axis: 'x',
-				constrainTo: [0, 100, 0, -90], 
-				useCSSTranslation: false,
-				shouldEase: false,
-				drag:function(ev,obj){
-					obj_pos = elemento.offset();
-					obj_final = obj_pos.left;
-				},
-				stop: function(ev,obj){
-					if (obj_final > 0) {
-						elemento.animate({
-							left: "0px"
-						});
-					}else{
-						elemento.animate({
-							left: "-56px"
-						});
-					}
-				}
-			});
-	 $('.talker-info').width($('#'+id).width());	
-	 $('.talker').width(($('#'+id).width())+56);
-}
+
 
 
 </script>

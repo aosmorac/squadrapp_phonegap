@@ -35,7 +35,7 @@
 <script>
 
 	var group_contacts = Object;
-
+$(function(){
 	$('.check').bind('click' , function(){
 				if ($(this).attr('class') == 'check selected') {
 					$(this).removeClass('selected');
@@ -55,6 +55,7 @@
 	$('.members-input').width($(window).width()-133);
 	
 	contactsScroll.refresh();
+});
 	
 	function CheckClick(uid){
 		if ($('#contact_'+uid).attr('class') == 'check selected') {
