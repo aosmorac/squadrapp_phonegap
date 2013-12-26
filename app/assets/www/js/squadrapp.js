@@ -782,8 +782,8 @@ squadrapp = {
 		},
 		
 		/*
-		 * squadrapp.nav.updateReadMessages(user_id);
-		 * Devuelve el Id del chat que esta activo en ese momento.
+		 * squadrapp.nav.getActiveChatId();
+		 * 
 		 */
 		getActiveChatId: function(){
 			if (nav_item.chat.isWork == 1){
