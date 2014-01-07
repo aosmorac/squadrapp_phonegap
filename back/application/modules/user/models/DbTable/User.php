@@ -29,7 +29,7 @@ class User_Model_DbTable_User extends Zend_Db_Table_Abstract {
     }
     
     public function saveUserFacebook($infoUser){
-    	Zend_Debug::dump($infoUser, 'loginFacebookMobile'); die;
+    	Zend_Debug::dump($infoUser, 'saveUserFacebook'); die;
         $idUser = $this->insert($infoUser);
         $row = $this->fetchAll(
             $this->select()

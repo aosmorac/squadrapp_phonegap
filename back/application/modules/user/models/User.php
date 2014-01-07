@@ -145,6 +145,7 @@ class User_Model_User {
     
 
     public function loginFacebookMobile($infoUser){
+    	Zend_Debug::dump($infoUser, 'loginFacebookMobile'); die;
         $user = $this->registroDataTable->getUserFacebook($infoUser['Facebook_id']);
         if ($user) {
             return $user;
