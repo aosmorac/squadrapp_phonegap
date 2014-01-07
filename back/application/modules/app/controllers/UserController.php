@@ -35,7 +35,6 @@ class App_UserController extends Zend_Controller_Action
             $this->_helper->viewRenderer->setNoRender(true);
             $vars = $this->_getAllParams();
             $user = json_decode($vars['user']);
-    		echo json_encode($user); die;
             $userSquadrapp = array();
             if (isset($user->login) && $user->login == 1){
                 $userInfo = array();
