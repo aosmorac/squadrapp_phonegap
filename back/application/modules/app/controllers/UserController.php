@@ -63,7 +63,7 @@ class App_UserController extends Zend_Controller_Action
                     $userSquadrapp['login'] = 0;
                 }
             }            
-            echo json_encode($userInfo);
+            echo json_encode($userInfo).'<br>1234';
     }
 
 	public function setUserOnlineAction ()
