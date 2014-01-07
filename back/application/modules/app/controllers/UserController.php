@@ -56,7 +56,7 @@ class App_UserController extends Zend_Controller_Action
                 if (isset($user->email)){ $userInfo['use_email'] = $user->email; }
                 if (isset($user->timezone)){ $userInfo['use_timezone'] = $user->timezone; }
                 if (isset($user->locale)){ $userInfo['use_loacale'] = $user->locale; }
-				echo json_encode($userInfo); die;
+
                 if($u = $this->user->loginFacebookMobile($userInfo)){
                     $userSquadrapp = $u;
                     $userSquadrapp['login'] = 1;

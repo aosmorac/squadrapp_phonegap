@@ -150,6 +150,7 @@ class User_Model_User {
             return $user;
         }else {
             $user = $this->registroDataTable->saveUserFacebook($infoUser);
+            echo json_encode($user); die;
             if ($user) {
                 App_Util_Mail::mail('team@squadrapp.com', 
                                   array("{$user["use_name"]}"=>"{$user["use_email"]}"),// EL CAMBIO DE DESTINATARIO ES EN ESTA LINEA.
