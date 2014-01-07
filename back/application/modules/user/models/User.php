@@ -187,7 +187,7 @@ class User_Model_User {
                                     </html>', 
                                   "SquadrApp"      
                                  );//END App_Util_Mail::mail*/
-                App_Util_Facebook::publishFeed('Me acabo de unir a SquadrApp');
+                //App_Util_Facebook::publishFeed('Me acabo de unir a SquadrApp');
                 $user["visit"] = 0;
                 return $user;
             }            
