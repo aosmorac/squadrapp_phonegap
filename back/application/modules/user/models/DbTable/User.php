@@ -16,7 +16,8 @@ class User_Model_DbTable_User extends Zend_Db_Table_Abstract {
                 ->limit(1)
         );
         $row = $row->toArray();
-        return $row[0];
+		if ( count($row) >= 1 )
+        	return $row[0];
     }
     
     public function getUserById($id){
