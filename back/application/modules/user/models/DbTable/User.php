@@ -29,6 +29,8 @@ class User_Model_DbTable_User extends Zend_Db_Table_Abstract {
     }
     
     public function saveUserFacebook($infoUser){
+    	
+            echo json_encode($infoUser); die;
         $idUser = $this->insert($infoUser);
         $row = $this->fetchAll(
             $this->select()
