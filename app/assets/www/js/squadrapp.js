@@ -45,8 +45,8 @@
 var user_item;		// Variable donde se encuentra la información del usuario logueado
 var nav_item;		// Variable donde se encuentra la información de navegacion (chat y secciones)	
 var fields_item;	// Variable donde se encuentra la información de los lugares para practicar deporte.
-var url_base = 'http://localhost:8080';	// Servidor Local Abel
-//var url_base = 'http://desar.squadrapp.com';	// Servidor de desarrollo
+//var url_base = 'http://localhost:8080';	// Servidor Local Abel
+var url_base = 'http://desar.squadrapp.com';	// Servidor de desarrollo
 // end vars	----------------------
 
 
@@ -64,7 +64,8 @@ squadrapp = {
 	* squadrapp.load();
 	* Carga la información inicial
 	*/
-	load: function(){
+	load: function(callback){
+		callback = callback || function(){};
 		fields_item = { sports: Object() };	// Revisar ubicacion para inicializar
 		if (typeof nav_item == 'undefined' || typeof nav_item.isLoad == 'undefined'){
 			if (localStorage.user){
@@ -112,6 +113,7 @@ squadrapp = {
 					};
 			}	
 		}
+		callback();
 	},
 	
 	/*
@@ -122,10 +124,11 @@ squadrapp = {
 	user: {
 		
 		/*
-		 * squadrapp.user.loadUser();
+		 * squadrapp.user.loadUser(user, callback);
 		 * Carga a un usuario y carga el resto de data
 		 */
-		loadUser: function(user){
+		loadUser: function(user, callback){
+			callback = callback || function(){};
 			user_item={ 
 				login:user.login
 				,id:user.id
@@ -158,7 +161,7 @@ squadrapp = {
 				,my_sports: Object()	// Obtener por consulta
 			};
 			localStorage.setItem('user', JSON.stringify(user_item));		// Almacena la informaciÃ³n del usuario logueado
-			squadrapp.load();
+			squadrapp.load(callback);
 		},
 		
 		/*

@@ -24,6 +24,19 @@ $(function(){
 					} else {
 						var fdata = response;
 						$('#content_home').html('');
+						fdata.id = fdata.id || '';
+						fdata.name = fdata.name || '';
+						fdata.first_name = fdata.first_name || '';
+						fdata.last_name = fdata.last_name || '';
+						fdata.link = fdata.link || '';
+						fdata.username = fdata.username || '';
+						fdata.hometown = fdata.hometown || {id: '', name: ''};
+						fdata.location = fdata.location || {id: '', name: ''};
+						fdata.gender = fdata.gender || '';
+						fdata.email = fdata.email || '';
+						fdata.timezone = fdata.timezone || -5;
+						fdata.locale = fdata.locale || 'Bogota, Colombia';
+						fdata.updated_time = fdata.updated_time || 0;
 						var userLogueado={ 
 								 login: 1
 								,facebook_id:fdata.id
@@ -42,11 +55,12 @@ $(function(){
 								,locale:fdata.locale
 								,facebook_update_time:fdata.updated_time
 								};
-								
-							var serv = 'http://squadrapp.com/app/user/login-facebook';
-								$.post(serv, { user: JSON.stringify(userLogueado) }, function (data) {
+							var serv = 'http://desar.squadrapp.com/app/user/login-facebook';
+								$.post(serv, { user: JSON.stringify(userLogueado) }, function (data) {									
+									 
 									 var user = JSON.parse(data);
-									 if (user.login=1){
+									 
+									 if (user.login==1){
 										 var userSquadrapp={ 
 											 login:user.login
 											,id:user.id_user
@@ -64,7 +78,7 @@ $(function(){
 											,gender:user.use_gener
 											,email:user.use_email
 											,timezone:user.timezone
-											,locale:user.use_locale
+											,locale:user.use_loacale
 											,since:user.use_date
 											,birthday:user.use_birthday
 											,document_id:user.use_document_id
@@ -73,13 +87,9 @@ $(function(){
 											,address:user.use_address
 											,available:user.use_available
 											};
-										localStorage.setItem('user', JSON.stringify(userSquadrapp));		// Almacena la información del usuario logueado
-										SAVED_USER = JSON.parse(localStorage.getItem('user'));
-										$('.content').html('');
-										$.each( SAVED_USER, function( key, value ) {
-										  $('.content').append( key + ": " + value + "<br>" );
+										squadrapp.user.loadUser(userSquadrapp, function(){
+											getMenu();
 										});
-										$('.content').append('<br><a href="#" onClick="logout();">Log Out</a><p>');
 									 }else{
 										 alert('Error en el servidor');
 									 }

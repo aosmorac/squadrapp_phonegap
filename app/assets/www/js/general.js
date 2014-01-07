@@ -19,9 +19,7 @@ var scrollChatWith;	// Scroll chat con otro usuario
 
 
 $(function(){
-
-					login();
-				
+	
 	$('.overlay').hide();
 	$('img').load(function() {
 		$(this).show(); //muestra el div despues de que la imagen carga.
