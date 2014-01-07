@@ -3,6 +3,7 @@
 class User_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
     protected $_name = "user";
+    protected $_primary = 'id_user';
 
     public function __construct() {
         $this->_setAdapter('APP');
@@ -31,8 +32,7 @@ class User_Model_DbTable_User extends Zend_Db_Table_Abstract {
     public function saveUserFacebook($infoUser){
     	
         //echo json_encode($infoUser); die;
-        echo $idUser = $this->insert($infoUser);
-        die;
+        $idUser = $this->insert($infoUser);
         $row = $this->fetchAll(
             $this->select()
                 ->where("id_user={$idUser}")
