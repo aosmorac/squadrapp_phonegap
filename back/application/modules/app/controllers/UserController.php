@@ -54,8 +54,8 @@ class App_UserController extends Zend_Controller_Action
                 }
                 if (isset($user->gender)){ $userInfo['use_gener'] = $user->gender; }
                 if (isset($user->email)){ $userInfo['use_email'] = $user->email; }
-                if (isset($user->timezone)){ $userInfo['use_timezone'] = $user->timezone; }
-                if (isset($user->locale)){ $userInfo['use_loacale'] = $user->locale; }
+                if (isset($user->timezone)){ $userInfo['timezone'] = $user->timezone; }
+                if (isset($user->locale)){ $userInfo['use_locale'] = $user->locale; }
 
                 if($u = $this->user->loginFacebookMobile($userInfo)){
                     $userSquadrapp = $u;

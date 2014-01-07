@@ -51,7 +51,7 @@ class User_UserController extends Zend_Controller_Action
                 }
                 if (isset($profile['gender'])){ $userInfo['use_gener'] = $profile['gender']; }
                 if (isset($profile['email'])){ $userInfo['use_email'] = $profile['email']; }
-                if (isset($profile['locale'])){ $userInfo['use_loacale'] = $profile['locale']; }
+                if (isset($profile['locale'])){ $userInfo['use_locale'] = $profile['locale']; }
  
                 $this->user->loginFacebook($userInfo);
             }
