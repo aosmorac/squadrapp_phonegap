@@ -19,7 +19,7 @@ var scrollChatWith;	// Scroll chat con otro usuario
 
 
 $(function(){
-	
+	//login();
 	$('.overlay').hide();
 	$('img').load(function() {
 		$(this).show(); //muestra el div despues de que la imagen carga.
@@ -186,16 +186,19 @@ function getChatList(callback){
 				if (value != undefined && value != null){
 					if (value.isgroup == 1){
 						if (!$('#talker-g'+value.com_group_id).length){
-								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
+								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+								//$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
 							}
 					}else{
 						if (!$('#talker-'+value.id_user).length){
 							if (value.online == 1) {
-								$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+								$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
+								//$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
 							}else {
-								$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+								$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
+								//$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
 							}
-							loadDrawersTalkers("swipe-"+value.id_user);
+							//loadDrawersTalkers("swipe-"+value.id_user);
 						}
 					}
 				}
@@ -220,16 +223,19 @@ function scrollChatListEvent(action){
 					if (value != undefined && value != null){
 						if (value.isgroup == 1){
 							if (!$('#talker-g'+value.com_group_id).length){
-								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
+								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+								//$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
 							}
 						}else{
 							if (!$('#talker-'+value.id_user).length){
 								if (value.online == 1) {
-									$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+									$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
+									//$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
 								}else {
-									$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+									$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
+									//$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
 								}
-								loadDrawersTalkers("swipe-"+value.id_user);
+								//loadDrawersTalkers("swipe-"+value.id_user);
 							}
 						}
 					}
@@ -259,11 +265,13 @@ function scrollChatListEvent(action){
 					if (value != undefined && value != null){
 						if (!$('#talker-'+value.id_user).length){
 							if (value.online == 1) {
-								$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+								$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
+								//$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
 							}else {
-								$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+								$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
+								//$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
 							}
-							loadDrawersTalkers("swipe-"+value.id_user);
+							//loadDrawersTalkers("swipe-"+value.id_user);
 						}
 					}
 				});
@@ -289,16 +297,19 @@ function scrollChatListEvent(action){
 							$('#talker-g'+value.com_group_id).remove();
 						}
 						if (!$('#talker-g'+value.com_group_id).length){
-								$("#list-chats").prepend('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
+								$("#list-chats").prepend('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+								//$("#list-chats").prepend('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
 							}
 					}else{
 						if ($('#talker-'+value.id_user).length){
 							$('#talker-'+value.id_user).remove();
 						}
 						if (value.online == 1) {
-							$("#list-chats").prepend('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+							$("#list-chats").prepend('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
+							//$("#list-chats").prepend('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
 						}else {
-							$("#list-chats").prepend('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+							$("#list-chats").prepend('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
+							//$("#list-chats").prepend('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
 						}
 						if ($('#talker-'+value.id_user).length){
 							if (value.online == 1) {
@@ -308,7 +319,7 @@ function scrollChatListEvent(action){
 							}
 						}
 					}
-					loadDrawersTalkers("swipe-"+value.id_user);
+					//loadDrawersTalkers("swipe-"+value.id_user);
 				}
 			});
 			$('img').load(function() {
@@ -387,9 +398,9 @@ function scrollChatListEvent(action){
 				if (value != undefined && value != null){
 					$('#message-'+value.mid).remove();
 					if (value.user_id == squadrapp.user.getUserId()){
-						$("#list-messages").prepend ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+						$("#list-messages").prepend ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 					}else{
-						$("#list-messages").prepend ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+						$("#list-messages").prepend ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 					}
 				}
 			});
@@ -419,9 +430,9 @@ function scrollChatWithEvent(action){
 					if (value != undefined && value != null){
 						$('#message-'+value.mid).remove();
 						if (value.user_id == squadrapp.user.getUserId()){
-							$("#list-messages").prepend ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+							$("#list-messages").prepend ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 						}else{
-							$("#list-messages").prepend ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+							$("#list-messages").prepend ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 						}
 					}
 				});
@@ -452,9 +463,9 @@ function getMoreMessages(){
 				if (value != undefined && value != null){
 					$('#message-'+value.mid).remove();
 					if (value.user_id == squadrapp.user.getUserId()){
-						$("#list-messages").prepend ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+						$("#list-messages").prepend ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 					}else{
-						$("#list-messages").prepend ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+						$("#list-messages").prepend ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 					}
 				}
 			});
@@ -473,9 +484,9 @@ function getMoreMessages(){
 						var value = messages[i-1];
 						$('#message-'+value.mid).remove();
 						if (value.user_id == squadrapp.user.getUserId()){
-							$("#list-messages").append ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+							$("#list-messages").append ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 						}else{
-							$("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+							$("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 						} 
 						scrollChatWith.refresh();
 						scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
@@ -513,7 +524,7 @@ function sendMessageToUser(user_id, message){
 	if (user_id > 0 && jQuery.trim(message) != ''){
 		squadrapp.nav.sendMessageToUser(user_id, jQuery.trim(message), function(){
 			$(".vacio").remove();
-			$("#list-messages").append ('<section class="vacio"><section class="me"><div class="date">Enviando</div><div class="message"><div class="user">Yo</div><div class="text">'+message+'</div></section></section>');
+			$("#list-messages").append ('<section class="vacio"><section class="me"><div class="date">Enviando</div><div class="message"><div class="arrow"></div><div class="user">Yo</div><div class="text">'+message+'</div></section></section>');
 			$("#list-messages").append('<section class="vacio">&nbsp;</section>');
 			scrollChatWith.refresh();
 			scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
@@ -532,6 +543,7 @@ function openNewMessage(){
 	});
 }
 function closeNewMessage(){
+	$('#message-form').remove();
 	$('#new-message').animate({top: ($(window).height())},200);
 }
 

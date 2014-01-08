@@ -505,7 +505,7 @@ nav ul li a span{
 #chat-with .header .title{
 	text-align: left;
 	padding: 14px 50px;
-	color: #8b8b8b;
+	color: #222;
 	font-weight: bold;
 	font-size: 16px;
 }
@@ -557,48 +557,86 @@ nav ul li a span{
 #list-messages .me .date, #list-messages .friend .date{
 	color: #a0a0a0;
 }
+#list-messages .me .date{
+	margin-right: 10px;
+}
 #list-messages .me .message{
-	max-width: 80%;
+	max-width: 70%;
 	min-width: 200px;
-	background: #22b573;
+	background: #29ABE2;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	display: inline-block;
 	color: #fff;
+	margin-right: 10px;
+}
+#list-messages .me .message .arrow{
+	background-image: url(../img/message_blue_arrow.png);
+	background-size: 14px 17px; 
+	background-repeat: no-repeat;
+	width: 14px;
+	height: 17px;
+	position: absolute;
+	top: 10px; right: -12px;
 }
 #list-messages .me .message .user{
 	padding: 3px 5px;
-	border-bottom: #6cd9a8 1px solid;
+	font-size: 12px;
 	font-weight: bold;
 }
 #list-messages .me .message .text{
 	padding: 5px;
-	font-size: 16px;
+	font-size: 17px;
 }
 
 #list-messages .friend{
 	text-align: left;
 	margin: 15px 10px;
 }
+#list-messages .friend .image{
+	width: 36px;
+	height: 36px;
+	background: url(../img/pic_men.png);
+	background-size: 36px;
+	display: inline-block;
+}
+#list-messages .friend .image img{
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+#list-messages .friend .date{
+	margin-left: 50px;
+}
 #list-messages .friend .message{
 	max-width: 80%;
 	min-width: 200px;
-	background: #f5f5f5;
+	background: #E6E5EA;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 	display: inline-block;
-	color: #8c8c8c;
+	color: #1F2934;
+	margin-left: 13px;
+}
+#list-messages .friend .message .arrow{
+	background-image: url(../img/message_grey_arrow.png);
+	background-size: 14px 17px; 
+	background-repeat: no-repeat;
+	width: 14px;
+	height: 17px;
+	position: absolute;
+	top: 10px; left: -12px;
 }
 #list-messages .friend .message .user{
 	padding: 3px 5px;
-	border-bottom: #e4e4e4 1px solid;
 	font-weight: bold;
+	font-size: 12px;
 }
 #list-messages .friend .message .text{
 	padding: 5px;
-	font-size: 16px;
+	font-size: 17px;
 }
 
 #message-form{
