@@ -73,6 +73,16 @@ class App_ChatController extends Zend_Controller_Action
         echo json_encode($messages);
     }
 	
+	public function getNewMessagesGroupAction(){
+        header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+        $this->_helper->layout()->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $vars = $this->_getAllParams();
+        $userChat = new Messages_Model_UserChat();
+        $messages = $userChat->getMessagesChatGroup($vars['uid'], $vars['fid'], $vars['timezone'], 0, $vars['nid']);
+        echo json_encode($messages);
+    }
+	
 	public function saveMessageAction(){
 		header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
         $this->_helper->layout()->disableLayout();
