@@ -409,7 +409,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
                 ->where($where)
                 ->order("date DESC")
                  ;
-         //Zend_Debug::dump($select.''); die;
+         Zend_Debug::dump($select.''); die;
          $row = $this->fetchAll($select);
          $users = $row->toArray();
          return $users;
