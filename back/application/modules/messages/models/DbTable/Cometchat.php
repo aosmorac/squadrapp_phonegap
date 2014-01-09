@@ -483,7 +483,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
     
     public function getMessagesChatGroup($uid=0, $gid=0, $timezone=-5, $start=0, $lid=0)
     {
-    	$where = "CHAT.id > 0 AND CHAT.to = {$gid} AND CHAT.isgroup = 1";
+    	$where = "CHAT.id > {$lid} AND CHAT.to = {$gid} AND CHAT.isgroup = 1";
         $select = $this->select()
                 ->from(
                         array("CHAT"=>$this->_name) 
