@@ -433,7 +433,7 @@ squadrapp = {
 		             			}
 		             			allArray[a] = value; a++;
 		             			olders[ot] = value; ot++;
-								if (value.mid > nav_item.chat.idNewerMessage) {
+								if ((value.mid)/1 > (nav_item.chat.idNewerMessage)/1) {
 									nav_item.chat.idNewerMessage = value.mid;
 								}
 							});
@@ -485,7 +485,7 @@ squadrapp = {
 							
 								newers[a] = value;
 								allArray[a] = value; a++;
-								if (value.mid > nav_item.chat.idNewerMessage) {
+								if ((value.mid)/1 > (nav_item.chat.idNewerMessage)/1) {
 									nav_item.chat.idNewerMessage = value.mid;
 								}
 							});
