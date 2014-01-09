@@ -82,7 +82,7 @@ class App_ChatController extends Zend_Controller_Action
 			$vars['isGroup'] = 0;
 		}
         $userChat = new Messages_Model_UserChat();
-        $userChat->saveMessage($vars['me'], $vars['to'], trim($vars['msg'], $vars['isGroup']));
+        $userChat->saveMessage($vars['me'], $vars['to'], trim($vars['msg']), $vars['isGroup']);
     }
 	
 	public function updateReadMessagesAction(){
