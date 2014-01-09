@@ -59,6 +59,7 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 
 function clickBtnChat(){
 	if(($('#chat_icon').data("estado")) == "quiet"){
+		closeMenu();
 		openChatSection(function(){
 			if (squadrapp.nav.isWork()){	// Valida que el usuario este adentro
 				if (squadrapp.nav.isChat()){
@@ -128,6 +129,11 @@ function openMenu(){
 	getMenu(function(){
 		snapper.open('left');
 	});
+}
+function closeMenu(){
+	$('.menu').html('');
+	snapper.close();
+	$('#left-drawer').hide();
 }
 
 // Navegación con ajax
@@ -543,8 +549,8 @@ function openNewMessage(){
 	});
 }
 function closeNewMessage(){
-	$('#message-form').remove();
 	$('#new-message').animate({top: ($(window).height())},200);
+	$('#new-message').html('');
 }
 
 function loadDrawersTalkers(id){
@@ -590,7 +596,7 @@ function loadImages(){
 
 function loadPage(page){
 	$('#pages').load(page, function() {
-		snapper.close();
+		closeMenu();
 	});
 }
 
