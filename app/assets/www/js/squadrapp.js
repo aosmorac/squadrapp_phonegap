@@ -825,6 +825,11 @@ squadrapp = {
 			         data: { me: user_item.id, to: user_ids, msg: message},
 			         success: function(data){
 			         	group_id = data;
+			         	if (group_id>0){
+			         		squadrapp.nav.loadNewTalkers(function(){
+			         			goChatEvent(group_id, 1);	/*group_id var creada en squadrapp.nav.newChat*/
+			         		});
+			         	}
 			         	/*$('#new-message').html(data);*/
 				     	callback();
 					 }

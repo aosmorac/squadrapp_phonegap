@@ -419,7 +419,7 @@ function scrollChatListEvent(action){
 			autoLoadNewMessages('start');
 		});
 		squadrapp.nav.chattingOn();
-		updateReadMessages();
+		//updateReadMessages();
 	}
 
 
@@ -485,6 +485,7 @@ function getMoreMessages(){
 	function getNewMessages(){
 		if ($( "#chat-with" ).attr( "is_group") == 1){
 			squadrapp.nav.loadNewMessagesByGroup($( "#chat-with" ).attr( "user_id"), function(){
+				
 				var messages = squadrapp.nav.getNewMessagesByGroup($( "#chat-with" ).attr( "user_id"));
 					if (messages.length){
 						$(".vacio").remove();
@@ -499,11 +500,13 @@ function getMoreMessages(){
 							scrollChatWith.refresh();
 							scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
 						}
+						autoLoadNewMessages('start');
 						$("#list-messages").append('<section class="vacio">&nbsp;</section>');
 						scrollChatWith.refresh();
+					}else{
+						autoLoadNewMessages('start');
 					}
 					loadImages();
-					autoLoadNewMessages('start');
 			});
 		}else {
 			squadrapp.nav.loadNewMessagesByUser($( "#chat-with" ).attr( "user_id"), function(){

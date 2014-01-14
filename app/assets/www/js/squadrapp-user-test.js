@@ -42,7 +42,7 @@ $(function(){
 								,locale:''
 								,facebook_update_time:''
 								};
-						var serv = 'http://squadrapp.com/app/user/login-facebook';
+						var serv = 'http://desar.squadrapp.com/app/user/login-facebook';
 								$.post(serv, { user: JSON.stringify(userLogueado) }, function (data) {
 									 var user = JSON.parse(data);
 									 if (user.login==1){
