@@ -167,7 +167,7 @@ public function  removeChatAction()
 			$group = new Messages_Model_UserChat();
 			$group_id = $group->createGroup('', '', $vars['me']);
 			$userxgroup_rows = Array();
-			$userxgroup_rows[] = Array($vars['me'], 'com_group_id'=>$group_id);
+			$userxgroup_rows[] = Array('user_id'=>$vars['me'], 'com_group_id'=>$group_id);
 			foreach($ids as $uid){
 				$userxgroup_rows[] = Array('user_id'=>$uid, 'com_group_id'=>$group_id);
 			}
