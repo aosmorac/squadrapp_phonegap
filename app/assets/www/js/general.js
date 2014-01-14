@@ -19,7 +19,7 @@ var scrollChatWith;	// Scroll chat con otro usuario
 
 
 $(function(){
-	//login();
+	login();
 	$('.overlay').hide();
 	$('img').load(function() {
 		$(this).show(); //muestra el div despues de que la imagen carga.
@@ -398,6 +398,7 @@ function scrollChatListEvent(action){
 			});
 			
 			$( "#chat-with" ).attr( "user_id",  user_id);
+			$( "#chat-with" ).attr( "is_group",  isgroup);
 			$('#chat-with .header .title').html(truncate(talker.use_name,15,""));
 			$("#chat-with .header .chat_icon").html('<img width="36" height="36" src="https://graph.facebook.com/'+talker.Facebook_id+'/picture?width=36&height=36">');
 			$.each(talker.chat.messages, function( index, value ) {
@@ -482,27 +483,51 @@ function getMoreMessages(){
 }
 //	Evento al hacer scroll al chat
 	function getNewMessages(){
-		squadrapp.nav.loadNewMessagesByUser($( "#chat-with" ).attr( "user_id"), function(){
-			var messages = squadrapp.nav.getNewMessagesByUser($( "#chat-with" ).attr( "user_id"));
-				if (messages.length){
-					$(".vacio").remove();
-					for (var i = messages.length; i>0; i--){
-						var value = messages[i-1];
-						$('#message-'+value.mid).remove();
-						if (value.user_id == squadrapp.user.getUserId()){
-							$("#list-messages").append ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
-						}else{
-							$("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
-						} 
+		if ($( "#chat-with" ).attr( "is_group") == 1){
+			squadrapp.nav.loadNewMessagesByGroup($( "#chat-with" ).attr( "user_id"), function(){
+				var messages = squadrapp.nav.getNewMessagesByGroup($( "#chat-with" ).attr( "user_id"));
+					if (messages.length){
+						$(".vacio").remove();
+						for (var i = messages.length; i>0; i--){
+							var value = messages[i-1];
+							$('#message-'+value.mid).remove();
+							if (value.user_id == squadrapp.user.getUserId()){
+								$("#list-messages").append ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+							}else{
+								$("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+							} 
+							scrollChatWith.refresh();
+							scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
+						}
+						$("#list-messages").append('<section class="vacio">&nbsp;</section>');
 						scrollChatWith.refresh();
-						scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
 					}
-					$("#list-messages").append('<section class="vacio">&nbsp;</section>');
-					scrollChatWith.refresh();
-				}
-				loadImages();
-				autoLoadNewMessages('start');
-		});
+					loadImages();
+					autoLoadNewMessages('start');
+			});
+		}else {
+			squadrapp.nav.loadNewMessagesByUser($( "#chat-with" ).attr( "user_id"), function(){
+				var messages = squadrapp.nav.getNewMessagesByUser($( "#chat-with" ).attr( "user_id"));
+					if (messages.length){
+						$(".vacio").remove();
+						for (var i = messages.length; i>0; i--){
+							var value = messages[i-1];
+							$('#message-'+value.mid).remove();
+							if (value.user_id == squadrapp.user.getUserId()){
+								$("#list-messages").append ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+							}else{
+								$("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+							} 
+							scrollChatWith.refresh();
+							scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
+						}
+						$("#list-messages").append('<section class="vacio">&nbsp;</section>');
+						scrollChatWith.refresh();
+					}
+					loadImages();
+					autoLoadNewMessages('start');
+			});
+		}
 	}
 	
 	function autoLoadNewMessages(command){
@@ -527,8 +552,9 @@ function sendMessageToUser(user_id, message){
 	message = $('#message-input').val();
 	$('#message-input').val('');
 	user_id = $( "#chat-with" ).attr( "user_id");
+	var is_group = $( "#chat-with" ).attr( "is_group");
 	if (user_id > 0 && jQuery.trim(message) != ''){
-		squadrapp.nav.sendMessageToUser(user_id, jQuery.trim(message), function(){
+		squadrapp.nav.sendMessageToUser(user_id, jQuery.trim(message), is_group, function(){
 			$(".vacio").remove();
 			$("#list-messages").append ('<section class="vacio"><section class="me"><div class="date">Enviando</div><div class="message"><div class="arrow"></div><div class="user">Yo</div><div class="text">'+message+'</div></section></section>');
 			$("#list-messages").append('<section class="vacio">&nbsp;</section>');

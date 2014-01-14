@@ -493,7 +493,6 @@ squadrapp = {
 							li=0;
 							$.each(nav_item.chat.talkers.list, function( index, value ) {
 								
-								
 								if(value.isgroup==1){
 									if ($.inArray( 'g'+value.id_user, loads ) == -1) {
 										all['g'+value.com_group_id] = value; 
@@ -726,6 +725,37 @@ squadrapp = {
 		}, 
 		
 		/*
+		 * squadrapp.nav.loadNewMessagesByGroup(group_id);
+		 * Carga mensajes por grupo
+		 */
+		loadNewMessagesByGroup: function(group_id, callback){
+				nav_item.chat.talkers.newTalkers = Array();
+	            callback = callback || function(){};
+				var serv = url_base+'/app/chat/get-new-messages-group';
+				$.ajax({
+					 type: "POST",
+					 url: serv,
+		             async: true,
+		             data: { uid: user_item.id, fid: group_id, timezone: user_item.timezone, nid: nav_item.chat.talkers.list['g'+group_id].chat.idNewerMessage },
+		             success: function(data){
+		             	var list = JSON.parse(data);
+		             	if (list.length > 0){
+							var all = nav_item.chat.talkers.list['g'+group_id].chat.messages;
+		             		all = list.concat(all);
+							nav_item.chat.talkers.list['g'+group_id].chat.newers = list;
+			             	nav_item.chat.talkers.list['g'+group_id].chat.messages = all;
+			             	nav_item.chat.talkers.list['g'+group_id].chat.totalMessagesLoaded = all.length;
+			             	if ( typeof nav_item.chat.talkers.list['g'+group_id].chat.newers[0] !== 'undefined' ) {
+			             		nav_item.chat.talkers.list['g'+group_id].chat.idNewerMessage = nav_item.chat.talkers.list['g'+group_id].chat.messages[0].mid;
+			             	}
+			             	localStorage.setItem('nav', JSON.stringify(nav_item));
+			            	callback();
+						}
+					}
+	    		});
+		}, 
+		
+		/*
 		 * squadrapp.nav.getNewMessagesByUser(user_id);
 		 * Carga ultimos mensajes de la conversacion con el usuario al cual corresponde el id
 		 */
@@ -743,10 +773,27 @@ squadrapp = {
 		},
 		
 		/*
+		 * squadrapp.nav.getNewMessagesByGroup(group_id);
+		 * Carga ultimos mensajes de la conversacion con el grupo al cual corresponde el id
+		 */
+		getNewMessagesByGroup: function(group_id){
+			if (Object.keys(nav_item.chat.talkers.list['g'+group_id]).length){
+				var messages = Array();
+					if (nav_item.chat.talkers.list['g'+group_id].chat.newers){
+						messages = nav_item.chat.talkers.list['g'+group_id].chat.newers;
+					}
+					nav_item.chat.talkers.list['g'+group_id].chat.newers = Array();
+				return messages;
+			}else{
+				return 'User error';	
+			}	
+		},
+		
+		/*
 		 * squadrapp.nav.sendMessageToUser(user_id, message);
 		 * Carga mensajes por usuario
 		 */
-		sendMessageToUser: function(user_id, message, callback){
+		sendMessageToUser: function(user_id, message, is_group, callback){
 				nav_item.chat.talkers.newTalkers = Array();
 	            callback = callback || function(){};
 				var serv = url_base+'/app/chat/save-message';
@@ -754,7 +801,7 @@ squadrapp = {
 					 type: "POST",
 					 url: serv,
 		             async: true,
-		             data: { me: user_item.id, to: user_id, msg: message},
+		             data: { me: user_item.id, to: user_id, isGroup:is_group, msg: message},
 		             success: function(data){
 			            callback();
 					}
