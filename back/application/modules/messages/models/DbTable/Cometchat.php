@@ -195,7 +195,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
                                         C.message, 
 										C.isgroup,
                                         0 AS unread 
-                                FROM cometchat AS C , userxgroupxcometchat AS UGC 
+                                FROM cometchat AS C 
                                 WHERE C.from = {$uid}  AND C.isgroup = 1  
                                 GROUP BY gid, uid  
 						)AS A 
@@ -245,7 +245,7 @@ class Messages_Model_DbTable_Cometchat extends Zend_Db_Table_Abstract {
                 ->order("date DESC")
                 ->limit(5,$start)
                 ;
-         Zend_Debug::dump($select.''); die;
+         //Zend_Debug::dump($select.''); die;
          $row = $this->fetchAll($select);
          $users = $row->toArray();
          return $users;
