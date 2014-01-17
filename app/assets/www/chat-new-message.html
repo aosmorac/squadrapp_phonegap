@@ -28,7 +28,7 @@
 		
 		<div id="message-form"><form action="javascript:newChat();">
 			<div class="fcontainer">
-				<input type="text" placeholder="Mensaje" name="message" class="field" id="message-input">
+				<input type="text" placeholder="Mensaje" name="message" class="field" id="new-message-input">
 			</div>
 			<button>Enviar</button>
 		</form></div>		 
@@ -77,8 +77,8 @@
 	}
 	
 	function newChat(){
-		var message = $('#message-input').val();
-		$('#message-input').val('');
+		var message = $('#new-message-input').val();
+		$('#new-message-input').val('');
 		var user_ids = getObjectKeys(group_contacts);
 		if (user_ids != '' && jQuery.trim(message) != ''){
 			squadrapp.nav.newChat(user_ids, jQuery.trim(message), function(){

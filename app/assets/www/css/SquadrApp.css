@@ -360,7 +360,7 @@ nav ul li a span{
  * Revisar estilos Chat With
  * */
 #new-message{
-	position: absolute;
+	position: fixed;
 	background: #fff;
 	bottom: 0;
 	width: 100%;
