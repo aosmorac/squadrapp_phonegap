@@ -498,7 +498,7 @@ function getMoreMessages(){
 								$("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 							} 
 							scrollChatWith.refresh();
-							scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
+							scrollChatWith.scrollTo(0, scrollChatWith.maxScrollY-30, 0);
 						}
 						autoLoadNewMessages('start');
 						$("#list-messages").append('<section class="vacio">&nbsp;</section>');
@@ -522,7 +522,7 @@ function getMoreMessages(){
 								$("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
 							} 
 							scrollChatWith.refresh();
-							scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
+							scrollChatWith.scrollTo(0, scrollChatWith.maxScrollY-30, 0);
 						}
 						$("#list-messages").append('<section class="vacio">&nbsp;</section>');
 						scrollChatWith.refresh();
@@ -562,7 +562,7 @@ function sendMessageToUser(user_id, message){
 			$("#list-messages").append ('<section class="vacio"><section class="me"><div class="date">Enviando</div><div class="message"><div class="arrow"></div><div class="user">Yo</div><div class="text">'+message+'</div></section></section>');
 			$("#list-messages").append('<section class="vacio">&nbsp;</section>');
 			scrollChatWith.refresh();
-			scrollChatWith.scrollTo(0, -$('#list-messages').height(), 1);
+			scrollChatWith.scrollTo(0, scrollChatWith.maxScrollY-30, 0);
 		});
 	}
 }
