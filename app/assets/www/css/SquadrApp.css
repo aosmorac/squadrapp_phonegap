@@ -720,12 +720,22 @@ nav ul li a span{
 	color: #555;
 	font-size: 14px;
 	border: 0;
-	min-height: 30px;
-	height: 30px;
-	max-height: 80px;
-	padding: 10px 0 0 0;
-	overflow:auto;
+	min-height: 40px;
+	max-height: 90px;
+	padding: 0;
+	margin: 0;
 	float: left;
+}
+#members-input{
+	max-height: 90px;
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+#members-input-content{
+}
+#new-message .members .members-input .input-span{
+	min-height: 10px;
 }
 #new-message .members .members-input .selected{
 	display: inline-block;

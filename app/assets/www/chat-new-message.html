@@ -6,7 +6,9 @@
 		
 			<section class="members">
 				<div class="label">Participantes (0/30)</div> 
-				<div contenteditable="true" class="members-input"></div>
+				<div class="members-input" ><div id="members-input">
+					<div id="members-input-content" ><div contenteditable="true" class="input-span"> </div></div>
+				</div></div>
 			</section>
 		<div class="corte"> </div>
 		<section class="header header-list">
@@ -52,11 +54,20 @@
 	loadForeignContacts();
 	
 	contactsScroll = new iScroll('list-contacts');
+	minutScroll = new iScroll('members-input');
 	
 	$('#list-contacts').height($(window).height()-167);
 	$('.members-input').width($(window).width()-133);
 	
 	contactsScroll.refresh();
+	
+	$(".members-input").focusin(function(){
+		$(".members-input .input-span").focus();
+	});
+	
+	$(".members-input").onClick(function(){
+		$(".members-input .input-span").focus();
+	});
 	
 	function CheckClick(uid){
 		if ($('#contact_'+uid).attr('class') == 'check selected') {
@@ -65,11 +76,12 @@
 			delete group_contacts[uid];
 		}else{
 			group_contacts[uid] = squadrapp.user.getContact(uid);
-			$('.input-span').remove();
-			$(".members-input").append('<div contenteditable="false" id="contactbygroup_'+uid+'" class="selected">'+group_contacts[uid].name+'</div><span contenteditable="true" class="input-span">,</span>');
+			$('#members-input-content .input-span').remove();
+			$("#members-input-content").append('<div contenteditable="false" id="contactbygroup_'+uid+'" class="selected">'+group_contacts[uid].name+'</div><div contenteditable="true" class="input-span"> </div>');
 			$('#contact_'+uid).addClass('selected');
-			$(".members-input").scrollTop($(".members-input")[0].scrollHeight);
+			$("#members-input-content .input-span").focus();
 		};
+		minutScroll.refresh();
 	}
 	
 	function removeSelected(){
