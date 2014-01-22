@@ -176,6 +176,24 @@ public function  removeChatAction()
 			echo $group_id;
 		} 
 	}
+	
+	/**
+	 * 
+	 */
+	 public function getGroupInfoAction(){
+	 	header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		$vars = $this->_getAllParams();		
+		if ( isset($vars['gid']) && $vars['gid'] >0 ){
+			$gid = $vars['gid'];
+			$group = new Messages_Model_UserChat();
+			$gInfo = $group->getGroupInfo($gid);
+			echo json_encode($gInfo);
+		}else{
+			echo json_encode(array('error'=>'Error'));
+		}
+	 }
 
 
 }

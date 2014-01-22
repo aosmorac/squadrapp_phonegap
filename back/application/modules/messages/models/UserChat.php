@@ -124,6 +124,16 @@ class Messages_Model_UserChat {
      	}else return 0;	
      	
      }
+	 
+	 public function getGroupInfo($gid){
+	 	$group = new Messages_Model_DbTable_CometChatGroup();
+		$gInfo = $group->getGroupInfo($gid);
+		if ( count($gInfo) > 0 ){
+			return $gInfo;
+		}else {
+			return array();
+		}
+	 }
     
     
 }
