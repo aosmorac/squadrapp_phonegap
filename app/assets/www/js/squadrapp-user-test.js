@@ -26,6 +26,7 @@ $(function(){
 						// Por ser un archivo de prueba se cargan datos por defecto
 						var userLogueado={ 
 								 login: 1
+								//,facebook_id:'736187925'
 								,facebook_id:'736187925'
 								,name:'Abel'
 								,first_name:'Abel'

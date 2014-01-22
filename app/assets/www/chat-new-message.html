@@ -3,11 +3,13 @@
 			<a class="cancel" onclick="closeNewMessage();"> Cancelar </a>
 			<div class="title">Nuevo Mensaje</div>
 		</section>
-		
+		<div class="corte"> </div>
 			<section class="members">
 				<div class="label">Participantes (0/30)</div> 
 				<div class="members-input" ><div id="members-input">
-					<div id="members-input-content" ><div contenteditable="true" class="input-span"> </div></div>
+					<div id="members-input-content" >
+						<div class="input-span" contenteditable="true"> </div>
+					</div>
 				</div></div>
 			</section>
 		<div class="corte"> </div>
@@ -53,8 +55,8 @@
 	loadLocalContacts();
 	loadForeignContacts();
 	
-	contactsScroll = new iScroll('list-contacts');
-	minutScroll = new iScroll('members-input');
+	var contactsScroll = new iScroll('list-contacts');
+	var minutScroll = new iScroll('members-input');
 	
 	$('#list-contacts').height($(window).height()-167);
 	$('.members-input').width($(window).width()-133);
@@ -70,6 +72,8 @@
 	});
 	
 	function CheckClick(uid){
+		$('#members-input').removeAttr("style");
+		$('#members-input-content').removeAttr("style");
 		if ($('#contact_'+uid).attr('class') == 'check selected') {
 			$('#contact_'+uid).removeClass('selected');
 			$('#contactbygroup_'+uid).remove();
@@ -81,7 +85,11 @@
 			$('#contact_'+uid).addClass('selected');
 			$("#members-input-content .input-span").focus();
 		};
-		minutScroll.refresh();
+		minutScroll.destroy();
+		minutScroll = null;
+		minutScroll = new iScroll('members-input');
+		minutScroll.scrollTo(0, minutScroll.maxScrollY, 0);
+		contactsScroll.refresh();
 	}
 	
 	function removeSelected(){
