@@ -191,8 +191,9 @@ function getChatList(callback){
 			$.each(talkers.oldTalkers, function( index, value ) {
 				if (value != undefined && value != null){
 					if (value.isgroup == 1){
+						var gInfo = squadrapp.nav.getTalker('g'+value.com_group_id);
 						if (!$('#talker-g'+value.com_group_id).length){
-								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
 								//$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
 							}
 					}else{
@@ -228,8 +229,9 @@ function scrollChatListEvent(action){
 				$.each(talkers.oldTalkers, function( index, value ) {
 					if (value != undefined && value != null){
 						if (value.isgroup == 1){
+							var gInfo = squadrapp.nav.getTalker('g'+value.com_group_id);
 							if (!$('#talker-g'+value.com_group_id).length){
-								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
 								//$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
 							}
 						}else{
@@ -269,15 +271,23 @@ function scrollChatListEvent(action){
 				talkers = squadrapp.nav.getTalkers();
 				$.each(talkers.oldTalkers, function( index, value ) {
 					if (value != undefined && value != null){
-						if (!$('#talker-'+value.id_user).length){
-							if (value.online == 1) {
-								$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
-								//$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
-							}else {
-								$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
-								//$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+						if (value.isgroup == 1){
+							var gInfo = squadrapp.nav.getTalker('g'+value.com_group_id);
+							if (!$('#talker-g'+value.com_group_id).length){
+									$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+									//$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
+								}
+						}else{
+							if (!$('#talker-'+value.id_user).length){
+								if (value.online == 1) {
+									$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
+									//$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info online"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+								}else {
+									$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');	
+									//$("#list-chats").append('<section class="item" id="talker-'+value.id_user+'"><section class="talker" id="swipe-'+value.id_user+'" onClick="goChatEvent('+value.id_user+');" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=60&height=60"></div><section class="content"><h3>'+truncate(value.use_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.id_user+');"></section></section></section>');	
+								}
+								//loadDrawersTalkers("swipe-"+value.id_user);
 							}
-							//loadDrawersTalkers("swipe-"+value.id_user);
 						}
 					}
 				});
@@ -300,11 +310,12 @@ function scrollChatListEvent(action){
 				$.each(talkers.newTalkers, function( index, value ) {
 					if (value != undefined && value != null){
 						if (value.isgroup == 1){
+							var gInfo = squadrapp.nav.getTalker('g'+value.com_group_id);
 							if ($('#talker-g'+value.com_group_id).length){
 								$('#talker-g'+value.com_group_id).remove();
 							}
 							if (!$('#talker-g'+value.com_group_id).length){
-									$("#list-chats").prepend('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+									$("#list-chats").prepend('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
 									//$("#list-chats").prepend('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
 								}
 						}else{
@@ -404,7 +415,11 @@ function scrollChatListEvent(action){
 			
 			$( "#chat-with" ).attr( "user_id",  user_id);
 			$( "#chat-with" ).attr( "is_group",  isgroup);
-			$('#chat-with .header .title').html(truncate(talker.use_name,15,""));
+			if (isgroup == 1){
+				$('#chat-with .header .title').html(truncate(talker.group_name,20,""));
+			}else{ 
+				$('#chat-with .header .title').html(truncate(talker.use_name,15,""));
+			}
 			$("#chat-with .header .chat_icon").html('<img width="36" height="36" src="https://graph.facebook.com/'+talker.Facebook_id+'/picture?width=36&height=36">');
 			$.each(talker.chat.messages, function( index, value ) {
 				if (value != undefined && value != null){

@@ -403,6 +403,14 @@ squadrapp = {
 		},
 		
 		/*
+		 * squadrapp.nav.getTalker(id);
+		 * Carga información de los usuarios que ha tenido conversaciones de la mas reciente a la mas antigua.
+		 */
+		getTalker: function(id){
+				return nav_item.chat.talkers.list[id];			
+		},
+		
+		/*
 		 * squadrapp.nav.loadOldTalkers();
 		 * Carga información de los usuarios y la deja almacenada en el dispositivo
 		 */
@@ -427,9 +435,10 @@ squadrapp = {
 		             		var ot = 0;
 		             		$.each(list, function( index, value ) {
 		             			if(value.isgroup==1){
-		             				all['g'+value.com_group_id] = value;
+		             				nav_item.chat.talkers.list['g'+value.com_group_id] = value;
+		             				squadrapp.nav.getGroupInfo(value.com_group_id);
 		             			}else{
-		             				all[value.id_user] = value;
+		             				nav_item.chat.talkers.list[value.id_user] = value;
 		             			}
 		             			allArray[a] = value; a++;
 		             			olders[ot] = value; ot++;
@@ -438,7 +447,7 @@ squadrapp = {
 								}
 							});
 							nav_item.chat.talkers.oldTalkers = olders;
-			             	nav_item.chat.talkers.list = all;
+			             	//nav_item.chat.talkers.list = all;
 			             	nav_item.chat.talkers.listArray = allArray;
 				            nav_item.chat.talkers.older = Object.keys(nav_item.chat.talkers.list).length;		// Aumenta segun paginado o cargado			
 							nav_item.chat.isLoad = 1;
@@ -478,9 +487,10 @@ squadrapp = {
 								}
 								if(value.isgroup==1)
 									{
-										all['g'+value.com_group_id] = value;
+										nav_item.chat.talkers.list['g'+value.com_group_id] = value;
+										squadrapp.nav.getGroupInfo(value.com_group_id);
 									}else {
-										all[value.id_user] = value;
+										nav_item.chat.talkers.list[value.id_user] = value;
 									}
 							
 								newers[a] = value;
@@ -495,22 +505,23 @@ squadrapp = {
 								
 								if(value.isgroup==1){
 									if ($.inArray( 'g'+value.id_user, loads ) == -1) {
-										all['g'+value.com_group_id] = value; 
+										nav_item.chat.talkers.list['g'+value.com_group_id] = value; 
+										squadrapp.nav.getGroupInfo(value.com_group_id);
 										allArray[a] = value; a++;
 									}else {
-										all['g'+value.com_group_id].chat = value.chat; 
+										nav_item.chat.talkers.list['g'+value.com_group_id].chat = value.chat; 
 									}
 								}else{
 									if ($.inArray( value.id_user, loads ) == -1) {
-										all[value.id_user] = value; 
+										nav_item.chat.talkers.list[value.id_user] = value; 
 										allArray[a] = value; a++;
 									}else {
-										all[value.id_user].chat = value.chat; 
+										nav_item.chat.talkers.list[value.id_user].chat = value.chat; 
 									}
 								}
 								
 							});								
-				             	nav_item.chat.talkers.list = all;
+				             	//nav_item.chat.talkers.list = all;
 			             		nav_item.chat.talkers.listArray = allArray;
 				             	nav_item.chat.talkers.older = Object.keys(nav_item.chat.talkers.list).length;		// Aumenta segun paginado o cargado		
 								localStorage.setItem('nav', JSON.stringify(nav_item));
@@ -847,6 +858,30 @@ squadrapp = {
 				return 0;
 			}
 		},
+		
+		/*
+		 * squadrapp.nav.getGroupInfo(group_id, callback);
+		 * Traer Info de un grupo especifico
+		 */
+		getGroupInfo: function(group_id, callback){
+	            callback = callback || function(){};
+				var serv = url_base+'/app/chat/get-group-info';
+				$.ajax({
+					 type: "POST",
+					 url: serv,
+			         async: true,
+			         data: { gid: group_id},
+			         success: function(data){
+			         	var g = JSON.parse(data);
+			         	nav_item.chat.talkers.list['g'+group_id].com_group_name = g.name;
+			         	nav_item.chat.talkers.list['g'+group_id].group_name = g.name;
+			         	nav_item.chat.talkers.list['g'+group_id].group_max_user = g.max_users;
+			         	nav_item.chat.talkers.list['g'+group_id].group_owner = g.owner;
+			         	nav_item.chat.talkers.list['g'+group_id].group_users = g.users;
+			         	callback();
+					 }
+		    	});
+		}
 		
 		
 		
