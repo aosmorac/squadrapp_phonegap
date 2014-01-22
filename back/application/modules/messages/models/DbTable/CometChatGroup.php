@@ -48,7 +48,7 @@ class Messages_Model_DbTable_CometChatGroup extends Zend_Db_Table_Abstract {
 						)
                     )
                 ->where($where)
-                ->order("U.user_first_name ASC")
+                ->order("U.use_first_name ASC")
             ;
          //Zend_Debug::dump($select.''); die;
          $row = $this->fetchAll($select);
