@@ -127,8 +127,22 @@ class Messages_Model_UserChat {
 	 
 	 public function getGroupInfo($gid){
 	 	$group = new Messages_Model_DbTable_CometChatGroup();
-		$gInfo = $group->getGroupInfo($gid);
-		if ( count($gInfo) > 0 ){
+		$gUsers = $group->getGroupInfo($gid);
+		$gInfo = array('id'=>0, 'name'=>'', 'description'=>'', 'owner'=>0, 'max_users'=>0);
+		if ( count($gUsers) > 0 ){
+			$gInfo['max_users'] = count($gUsers);
+			foreach ($gUsers AS $g) {
+				$gInfo['id'] = $g['group_id'];
+				if ( trim($g['group_name']) != ''){
+					$gInfo['name'] = $g['group_name'];
+				}else{
+					if (trim($gInfo['name'])!=''){ $gInfo['name'] .= ', '; }
+					$gInfo['name'] .= $g['group_name'];
+				}
+				$gInfo['description'] .= $g['group_description'];
+				$gInfo['owner'] .= $g['group_owner'];
+			}
+			$gInfo['users'] = $gUsers;
 			return $gInfo;
 		}else {
 			return array();
