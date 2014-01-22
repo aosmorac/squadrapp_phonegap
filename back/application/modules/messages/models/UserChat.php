@@ -137,10 +137,10 @@ class Messages_Model_UserChat {
 					$gInfo['name'] = $g['group_name'];
 				}else{
 					if (trim($gInfo['name'])!=''){ $gInfo['name'] .= ', '; }
-					$gInfo['name'] .= $g['group_name'];
+					$gInfo['name'] .= $g['user_first_name'];
 				}
 				$gInfo['description'] .= $g['group_description'];
-				$gInfo['owner'] .= $g['group_owner'];
+				$gInfo['owner'] = $g['group_owner'];
 			}
 			$gInfo['users'] = $gUsers;
 			return $gInfo;
