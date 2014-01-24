@@ -291,6 +291,15 @@ squadrapp = {
 			img_height = img_height || 120;
 			return "https://graph.facebook.com/"+user_item.contacts.players[uid].Faacebook_id+"/picture?width="+img_width+"&height="+img_height+"";
 		},
+		
+		/*
+		 * squadrapp.user.getContactImageByFacebookId(facebook_id);
+		 */
+		getContactImageByFacebookId: function(facebook_id, img_width, img_height){
+			img_width = img_width || 120;
+			img_height = img_height || 120;
+			return "https://graph.facebook.com/"+facebook_id+"/picture?width="+img_width+"&height="+img_height+"";
+		},
 	},
 	
 	/*
@@ -535,8 +544,9 @@ squadrapp = {
 		 * squadrapp.nav.getChatWithUser(user_id);
 		 * Carga información de los usuarios que ha tenido conversaciones de la mas reciente a la mas antigua.
 		 */
-		getChatWithUser: function(talker_id, isgroup){
+		getChatWithUser: function(talker_id, isgroup, open){
 			isgroup = typeof(isgroup) != 'undefined' ? isgroup : 0;
+			open = typeof(open) != 'undefined' ? open : 'old';
 			if (isgroup == 1){
 				if (Object.keys(nav_item.chat.talkers.list['g'+talker_id]).length){
 					var chat = nav_item.chat.talkers.list['g'+talker_id].chat;
@@ -545,6 +555,10 @@ squadrapp = {
 					}
 					chat = nav_item.chat.talkers.list['g'+talker_id].chat;
 					if ((chat.messages).length > 0){
+						if (open == 'new'){ 
+							nav_item.chat.talkers.list['g'+talker_id].chat.olders = nav_item.chat.talkers.list['g'+talker_id].chat.messages;
+							nav_item.chat.talkers.list['g'+talker_id].chat.totalMessagesLoaded = (nav_item.chat.talkers.list['g'+talker_id].chat.messages).length;
+						}	
 						return nav_item.chat.talkers.list['g'+talker_id];
 					}else{
 						squadrapp.nav.loadChatByGroup(talker_id);
@@ -561,6 +575,10 @@ squadrapp = {
 					}
 					chat = nav_item.chat.talkers.list[talker_id].chat;
 					if ((chat.messages).length > 0){
+						if (open == 'new'){ 
+							nav_item.chat.talkers.list[talker_id].chat.olders = nav_item.chat.talkers.list[talker_id].chat.messages;
+							nav_item.chat.talkers.list[talker_id].chat.totalMessagesLoaded = (nav_item.chat.talkers.list[talker_id].chat.messages).length;
+						}	
 						return nav_item.chat.talkers.list[talker_id];
 					}else{
 						squadrapp.nav.loadChatByUser(talker_id);
@@ -690,7 +708,7 @@ squadrapp = {
 			             	var list = JSON.parse(data);
 			             	nav_item.chat.talkers.list[user_id].chat.olders = list;
 			             	all = all.concat(list);
-			             	nav_item.chat.talkers.list[user_id].chat.messages = all;
+			             	//nav_item.chat.talkers.list[user_id].chat.messages = all;
 			             	nav_item.chat.talkers.list[user_id].chat.totalMessagesLoaded = all.length;
 			             	if ( typeof nav_item.chat.talkers.list[user_id].chat.messages[0] !== 'undefined' ) {
 			             		nav_item.chat.talkers.list[user_id].chat.idNewerMessage = nav_item.chat.talkers.list[user_id].chat.messages[0].mid;

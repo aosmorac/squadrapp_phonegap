@@ -192,8 +192,11 @@ function getChatList(callback){
 				if (value != undefined && value != null){
 					if (value.isgroup == 1){
 						var gInfo = squadrapp.nav.getTalker('g'+value.com_group_id);
+						if (gInfo.group_max_user == undefined){
+							gInfo.group_max_user = '?';
+						}
 						if (!$('#talker-g'+value.com_group_id).length){
-								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_group.png"></div><section class="content"><p class="nfriends"> '+gInfo.group_max_user+' amigos en el grupo</p><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
 								//$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
 							}
 					}else{
@@ -230,8 +233,11 @@ function scrollChatListEvent(action){
 					if (value != undefined && value != null){
 						if (value.isgroup == 1){
 							var gInfo = squadrapp.nav.getTalker('g'+value.com_group_id);
+							if (gInfo.group_max_user == undefined){
+								gInfo.group_max_user = '?';
+							}
 							if (!$('#talker-g'+value.com_group_id).length){
-								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+								$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_group.png"></div><section class="content"><p class="nfriends"> '+gInfo.group_max_user+' amigos en el grupo</p><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
 								//$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
 							}
 						}else{
@@ -273,8 +279,11 @@ function scrollChatListEvent(action){
 					if (value != undefined && value != null){
 						if (value.isgroup == 1){
 							var gInfo = squadrapp.nav.getTalker('g'+value.com_group_id);
+							if (gInfo.group_max_user == undefined){
+								gInfo.group_max_user = '?';
+							}
 							if (!$('#talker-g'+value.com_group_id).length){
-									$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+									$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_group.png"></div><section class="content"><p class="nfriends"> '+gInfo.group_max_user+' amigos en el grupo</p><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
 									//$("#list-chats").append('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
 								}
 						}else{
@@ -311,11 +320,14 @@ function scrollChatListEvent(action){
 					if (value != undefined && value != null){
 						if (value.isgroup == 1){
 							var gInfo = squadrapp.nav.getTalker('g'+value.com_group_id);
+							if (gInfo.group_max_user == undefined){
+								gInfo.group_max_user = '?';
+							}
 							if ($('#talker-g'+value.com_group_id).length){
 								$('#talker-g'+value.com_group_id).remove();
 							}
 							if (!$('#talker-g'+value.com_group_id).length){
-									$("#list-chats").prepend('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
+									$("#list-chats").prepend('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_group.png"></div><section class="content"><p class="nfriends"> '+gInfo.group_max_user+' amigos en el grupo</p><h3>'+truncate(gInfo.com_group_name,25,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div></section></section>');
 									//$("#list-chats").prepend('<section class="item" id="talker-g'+value.com_group_id+'"><section class="talker" id="swipe-g'+value.com_group_id+'" onClick="goChatEvent('+value.com_group_id+', 1);" ><div class="talker-info"><div class="image user-image-60x60"><img width="60" height="60" src="img/pic_men.png"></div><section class="content"><h3>'+truncate(value.com_group_name,15,"")+'</h3><p>'+truncate(value.message)+'</p></section><section class="date">'+formatChatDate(value.date)+'</section><div class="corte"> </div></div><section class="remove" onclick="removeChat('+value.com_group_id+');"></section></section></section>');
 								}
 						}else{
@@ -371,7 +383,7 @@ function scrollChatListEvent(action){
 		isgroup = typeof(isgroup) != 'undefined' ? isgroup : 0; 
 		mySwipe.next();
 		$(".overlay_chat").show();
-		talker = squadrapp.nav.getChatWithUser(user_id, isgroup);
+		talker = squadrapp.nav.getChatWithUser(user_id, isgroup, 'new');
 		$('#content-chatwith-section').html('');
 		$('#content-chatwith-section').load('chat-with.html', function() {
 			
@@ -417,10 +429,11 @@ function scrollChatListEvent(action){
 			$( "#chat-with" ).attr( "is_group",  isgroup);
 			if (isgroup == 1){
 				$('#chat-with .header .title').html(truncate(talker.group_name,20,""));
+				$("#chat-with .header .chat_icon").html('<img onClick="openGroupInfo('+talker.com_group_id+');" width="36" height="36" src="img/pic_group.png">');
 			}else{ 
 				$('#chat-with .header .title').html(truncate(talker.use_name,15,""));
+				$("#chat-with .header .chat_icon").html('<img width="36" height="36" src="https://graph.facebook.com/'+talker.Facebook_id+'/picture?width=36&height=36">');
 			}
-			$("#chat-with .header .chat_icon").html('<img width="36" height="36" src="https://graph.facebook.com/'+talker.Facebook_id+'/picture?width=36&height=36">');
 			$.each(talker.chat.messages, function( index, value ) {
 				if (value != undefined && value != null){
 					$('#message-'+value.mid).remove();
@@ -600,6 +613,32 @@ function openNewMessage(){
 function closeNewMessage(){
 	$('#new-message').animate({top: ($(window).height())},200);
 	$('#new-message').html('');
+}
+
+/**
+ ** Abre seccion de envio de mensaje
+ **/
+function openGroupInfo(gid){
+	mySwipe.next();
+	$('#content-chatinfo-section').height(($('#chat_section').height()));
+	$('#content-chatinfo-section').html('');
+	$('#content-chatinfo-section').load('chat-group-info.html', function() {
+		var group = squadrapp.nav.getTalker('g'+gid);
+		$('#group_max_users').html(group.group_max_user);
+		$.each( group.group_users, function( key, user_item ) {
+			if (user_item.user_id == group.group_owner) {
+				$('#group-users').append('<li class="friend"><div class="image"><img style="display: block;" width="35" height="35" style="display: block;" src="'+squadrapp.user.getContactImageByFacebookId(user_item.user_facebook_id, 35, 35)+'"></div><div class="name">'+truncate(user_item.user_name,20,"...")+'<span class="admin_title">Administrador del grupo</span></div><div class="corte"></div></li>');
+			}else{
+				$('#group-users').append('<li class="friend"><div class="image"><img style="display: block;" width="35" height="35" style="display: block;" src="'+squadrapp.user.getContactImageByFacebookId(user_item.user_facebook_id, 35, 35)+'"></div><div class="name">'+truncate(user_item.user_name,20,"...")+'</div><div class="corte"></div></li>');
+			}
+		});
+		scrollGroup = new iScroll('group-users-content');
+		console.log(group);
+	});
+}
+function closeGroupInfo(){
+	$('#group-info').animate({top: ($(window).height())},200);
+	$('#group-info').html('');
 }
 
 function loadDrawersTalkers(id){
