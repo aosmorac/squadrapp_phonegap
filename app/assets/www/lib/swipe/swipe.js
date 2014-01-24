@@ -239,7 +239,7 @@ function Swipe(container, options) {
   var events = {
 
     handleEvent: function(event) {
-
+		
       switch (event.type) {
         case 'touchstart': this.start(event); break;
         case 'touchmove': this.move(event); break;
@@ -256,7 +256,7 @@ function Swipe(container, options) {
 
     },
     start: function(event) {
-
+	  if (options.disableTouch) return;
       var touches = event.touches[0];
 
       // measure start values

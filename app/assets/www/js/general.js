@@ -41,8 +41,9 @@ $(function(){
 	window.mySwipe = Swipe(elem, {
 	  // startSlide: 4,
 	  // auto: 3000,
-	  // continuous: true,
+	   continuous: false,
 	   disableScroll: true,
+	   disableTouch: true
 	  // stopPropagation: true,
 	  // callback: function(index, element) {},
 	  // transitionEnd: function(index, element) {}
@@ -381,7 +382,7 @@ function scrollChatListEvent(action){
  */
 	function goChatEvent(user_id, isgroup){
 		isgroup = typeof(isgroup) != 'undefined' ? isgroup : 0; 
-		mySwipe.next();
+		mySwipe.slide(1);
 		$(".overlay_chat").show();
 		talker = squadrapp.nav.getChatWithUser(user_id, isgroup, 'new');
 		$('#content-chatwith-section').html('');
@@ -619,7 +620,7 @@ function closeNewMessage(){
  ** Abre seccion de envio de mensaje
  **/
 function openGroupInfo(gid){
-	mySwipe.next();
+	mySwipe.slide(2);
 	$('#content-chatinfo-section').height(($('#chat_section').height()));
 	$('#content-chatinfo-section').html('');
 	$('#content-chatinfo-section').load('chat-group-info.html', function() {
