@@ -45,8 +45,8 @@
 var user_item;		// Variable donde se encuentra la información del usuario logueado
 var nav_item;		// Variable donde se encuentra la información de navegacion (chat y secciones)	
 var fields_item;	// Variable donde se encuentra la información de los lugares para practicar deporte.
-var url_base = 'http://localhost:8080';	// Servidor Local Abel
-//var url_base = 'http://desar.squadrapp.com';	// Servidor de desarrollo
+//var url_base = 'http://localhost:8080';	// Servidor Local Abel
+var url_base = 'http://desar.squadrapp.com';	// Servidor de desarrollo
 // end vars	----------------------
 var players_item; // variable donde se encuentra informacion de los jugadores
 
