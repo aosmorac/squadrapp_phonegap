@@ -10,7 +10,7 @@
  * fonta face		()
  * Globales			(Estilos para elementos presentes en toda la aplicacion)
  * Menu				(Menu principal, laterla izquierdo)
- * Chat				(Sección de chat)
+ * Chat				(Secciï¿½n de chat)
  * 	Chat List		(Lista de las conversaciones que se han tenido por usuario)
  * 	Chat With		(Conversacion, lista de mensajes y envio de nuevos mensajes)
  * 
@@ -44,8 +44,8 @@ img{ display: none; }	/*	Se debe mostrar la imagen despues de cargarla */
 
 /*
  * ------ JQuery Mobile --------
- * Sobreescribir estilos que estan teniendo conflictos con el diseño
- * de la aplicación.
+ * Sobreescribir estilos que estan teniendo conflictos con el diseï¿½o
+ * de la aplicaciï¿½n.
  * 
  * */
   			
@@ -420,9 +420,8 @@ nav ul li a span{
 }
 #chat-list .header ul li{
     outline: #d3d3d3 1px solid;
-	float:left;
-	width: 50%;
-	text-align: center;
+   	width: 50%;
+	text-align: right;
 	line-height: 50px;
 	color: #8f8f8f;
 	font-weight: bold;
@@ -672,10 +671,10 @@ nav ul li a span{
 	top: 4px;
 	bottom: 4px;
 	right: 90px;
-	left: 5px;
+	left: 40px;
 }
 #message-form .fcontainer .field{
-	background: #fff;
+	background: #fafafa;
 	padding: 5px;
 	width: 100%;
 	-webkit-border-radius: 5px;
@@ -785,11 +784,16 @@ nav ul li a span{
 /*	New Message */
 #new-message .header{
 	background: #f5f5f5;
+<<<<<<< .mine
+	border-bottom: #ccc 1px solid; 
+	height: 42px;
+=======
 	height: 30px;
 	border-bottom: 1px solid #DDDDDD;
 	padding: 3px 8px 11px;
 	z-index: 100;
 	text-align: right;
+>>>>>>> .r160
 }
 
 #new-message .header .cancel{
@@ -797,9 +801,19 @@ nav ul li a span{
 	top: 0; bottom: 0; left: 0;
 	padding: 16px;
 	color: #8f8f8f;
+	font-size: 12px;
+	z-index: 100;
+}
+#new-message .header .filter{
+	position: absolute;
+	top: 0; bottom: 0; 
+	right: 30%;
+	padding: 16px;
+	color: #8f8f8f;
 	font-size: 10px;
 	z-index: 100;
 }
+
 #new-message .header .title{
 	text-align: center;
 	font-size: 16px;
@@ -810,13 +824,14 @@ nav ul li a span{
 
 #new-message .members{
 	background: #fff;
-	border-bottom: #ccc 1px solid;
+	/* border-bottom: #ccc 1px solid; *//*  cambios 15/01*/
 	max-height: 100px;
+	
 }
 #new-message .members .label{
 	color: #999999;
 	font-size: 13px;
-	padding: 14px 10px;
+	padding: 14px 8px;
 	float: left;
 }
 #new-message .members .members-input{
@@ -850,11 +865,14 @@ nav ul li a span{
 
 
 #new-message .header-list{
+	background: #f5f5f5; /* mis cambios*/
+	border-top: #ccc 1px solid;/* mis camb */
 	color: #777777;
     font-size: 13px;
-    height: 20px;
-    padding: 10px;
+    height: 18px;
+    padding: 8px;
     text-align: center
+   
 }
 #new-message .local-list{
 	
@@ -903,14 +921,14 @@ nav ul li a span{
 }
 #new-message .local-list .friend .check{
 	background-image: url(../img/select_filtro.png);
-	background-size: 35px 70px; 
+	background-size: 25px 50px; 
 	background-repeat: no-repeat;
 	display: block;
 	padding: 5px 0 5px 10px;
 	float: right;
-	width: 25px;
-	height: 25px;
-	margin: 0 5px 0 0;
+	width: 15px;
+	height: 15px;
+	margin: 5px 5px 0 0;
 	cursor: pointer;
 }
 #new-message .local-list .friend .selected{
@@ -923,7 +941,7 @@ nav ul li a span{
 #new-message .world-list .header{
 	color: #777777;
     font-size: 13px;
-    height: 20px;
+    height: 13px;
     padding: 10px;
     text-align: center
 }
@@ -1216,6 +1234,48 @@ a.btn_new_msj_35x35{
 	background: url(../img/btn/btn_new_msj_78x78.png) center no-repeat;
 	background-size: 35px 35px;
 }
+a.btn_filter_contcs_24x24{
+	display:inline-block;
+	width: 24px;
+	height: 24px;
+	text-decoration: none;
+	background: url(../img/btn/btn_filter_contcs_54x54.png) center no-repeat;
+	background-size: 24px 24px;
+}
+a.btn_add_player_24x24{
+	display:inline-block;
+	width: 24px;
+	height: 24px;
+	text-decoration: none;
+	background: url(../img/btn/btn_add_player_54x54.png) center no-repeat;
+	background-size: 24px 24px;
+}
+a.btn_message_24x24{
+	display:inline-block;
+	width: 24px;
+	height: 24px;
+	text-decoration: none;
+	background: url(../img/btn/btn_message_52x52.png) center no-repeat;
+	background-size: 24px 24px;
+}
+a.btn_info_othercont_22x22{
+	display:inline-block;
+	width: 22px;
+	height: 22px;
+	text-decoration: none;
+	background: url(../img/btn/btn_info_othercont_50x50.png) center no-repeat;
+	background-size: 22px 22px;
+
+}
+a.btn_add_friend_24x24{
+	display:inline-block;
+	width: 24px;
+	height: 24px;
+	text-decoration: none;
+	background: url(../img/btn/btn_add_friend_52x52.png) center no-repeat;
+	background-size: 24px 24px;
+}
+
 
 /*---	Fin Botones		---*/
 
