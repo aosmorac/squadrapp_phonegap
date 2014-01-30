@@ -17,7 +17,8 @@ $(function(){
 /**
 **	Carga información de usuario logueado
 **/
-		function loadMe() {
+		function loadMe(callback) {
+			callback = callback || function(){};
 				FB.api('/me', function(response) {
 					if (response.error) {
 						alert(JSON.stringify(response.error));
@@ -89,6 +90,7 @@ $(function(){
 											};
 										squadrapp.user.loadUser(userSquadrapp, function(){
 											getMenu();
+											callback();
 										});
 									 }else{
 										 alert('Error en el servidor');
@@ -101,10 +103,11 @@ $(function(){
 			
 			
 			
-			function login() {
+			function login(callback) {
+				callback = callback || function(){};
 				FB.login(function(response) {
 					if (response.authResponse) {
-						loadMe();
+						loadMe(callback);
 					} else {
 						alert('not logged in');
 					}
@@ -116,7 +119,7 @@ $(function(){
 						
 			function logout(){
 				localStorage.removeItem('user');	// Elimina la informacion de usuario logueado
-				alert('logout');
+				navigator.app.exitApp(); 
 			}
 			
 			

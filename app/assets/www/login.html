@@ -1,0 +1,43 @@
+<style>
+	#login{
+		background: #23262b;
+	}
+	#login .logo{
+		background: url(img/logo_login.png) no-repeat center;
+		background-size: 216px 44px;
+		height: 44px;
+	    position: absolute;
+	    left: 0; right: 0; top: 50%;
+	    margin-top: -65px;
+	}
+	#login .login-button{
+		position: absolute;
+		bottom: 0; left: 0; right: 0;
+		height: 25px;
+		padding: 20px;
+		font-size: 16px;
+		font-weight: bold;
+		text-align: center;
+		vertical-align: middle;
+		background: #fff;
+		color: #333;
+	}
+	#chat_icon{
+		display: none;
+	}
+</style>
+
+<section id="login">
+	<div class="logo"> </div>
+	<div class="login-button" onclick="loginButtonAction();">
+		Con&eacute;ctate con facebook
+	</div>	
+</section>
+
+<script>
+	$('#loader-overlay').hide();
+	function loginButtonAction(){
+		$('#loader-overlay').show();
+		login(function(){loadPage('test.html');});
+	}
+</script>

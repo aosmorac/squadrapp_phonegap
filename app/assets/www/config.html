@@ -1,0 +1,36 @@
+<style>
+	#content-config{
+		background: #ffffff;
+		position: absolute;
+		top: 0; bottom: 0;
+		left: 0; right: 0;
+	}
+	#button-logout{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 20px;
+		background: #ec1c24;
+		color: #fff;
+		font-size: 14px;
+		padding: 15px;
+		text-align: center;
+		font-weight: bold;
+	}
+	#chat_icon{
+		display: none;
+	}
+</style>
+			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
+				<a id="menu_icon" onclick="openMenu();"></a>
+				<p>Ajustes</p>
+			</header>
+			<section id="content-config">
+				<div id="button-logout" onclick="logout();">
+					Salir
+				</div>    
+			</section>
+<script>
+		$('#loader-overlay').hide();
+</script>
