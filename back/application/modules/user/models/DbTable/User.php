@@ -393,19 +393,52 @@ class User_Model_DbTable_User extends Zend_Db_Table_Abstract {
                                 ,'locale'=>'use_locale'
                                 ,'visit'=>'use_visit'
                                 ,'date'=>'use_date'
-                                ,'lastactivity'
+                                ,'lastactivity'=>'lastactivity'
                                 ,'online' => new Zend_Db_Expr("IF(((UNIX_TIMESTAMP()-U.lastactivity) < 62 ), 1, 0)")
                               )
                           )
                   ->setIntegrityCheck(false)
                   ->join(array('UF' => 'user_friends')
-                  		, "UF.friend2 = U.id_user AND UF.friend1 = {$uid}"
+                  		, "UF.friend2 = U.id_user AND UF.friend1= {$uid}"
                         , array());
                 ;
 		//Zend_Debug::dump($select.''); die;
 		$row = $this->fetchAll($select);
         $friends = $row->toArray();
         return $friends;
+	}
+	public function getOtherContact($uid){
+	$where="UF.friend2 IS NULL and U.id_user!={$uid}";
+		$select = $this->select()
+                  ->from(array("U"=>$this->_name)
+                          ,array(
+                                 'id'=>'id_user'
+                                ,'Faacebook_id'=>'Facebook_id'
+                                ,'name'=>'use_name'
+                                ,'first_name'=>'use_first_name'
+                                ,'last_name'=>'use_last_name'
+                                ,'Facebook_link'
+                                ,'Facebook_username'
+                                ,'hometown_name'=>'use_hometown_name'
+								,'location_name'=>'use_location_name'
+								,'location_coordinates'=>'use_location_coordinates'
+                                ,'gener'=>'use_gener'
+                                ,'email'=>'use_email'
+                                ,'locale'=>'use_locale'
+                                ,'visit'=>'use_visit'
+                                ,'date'=>'use_date'
+                                ,'lastactivity'=>'lastactivity'
+                                ,'online' => new Zend_Db_Expr("IF(((UNIX_TIMESTAMP()-U.lastactivity) < 62 ), 1, 0)")
+                              )
+                          )
+                  ->setIntegrityCheck(false)
+                  ->joinLeft(array('UF' => 'user_friends'),"U.id_user=UF.friend2"
+                        , array())
+                ->where($where);
+		//Zend_Debug::dump($select.''); die;
+		$row = $this->fetchAll($select);
+        $otherusers = $row->toArray();
+        return $otherusers;
 	}
     
     

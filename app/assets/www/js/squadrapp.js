@@ -33,7 +33,7 @@
  * @class user
  * @class nav 
  * @class fields
- * 
+ * @class player
  */
 
 
@@ -45,13 +45,15 @@
 var user_item;		// Variable donde se encuentra la información del usuario logueado
 var nav_item;		// Variable donde se encuentra la información de navegacion (chat y secciones)	
 var fields_item;	// Variable donde se encuentra la información de los lugares para practicar deporte.
-//var url_base = 'http://localhost:8080';	// Servidor Local Abel
-var url_base = 'http://desar.squadrapp.com';	// Servidor de desarrollo
+var url_base = 'http://localhost:8080';	// Servidor Local Abel
+//var url_base = 'http://desar.squadrapp.com';	// Servidor de desarrollo
 // end vars	----------------------
+var players_item; // variable donde se encuentra informacion de los jugadores
 
 
 squadrapp = {
-	
+		
+		
 	/*
 	* squadrapp.isOnline();
 	* Revisa la conexión a internet y devuelve verdadero o falso
@@ -78,12 +80,15 @@ squadrapp = {
 						, foreignIds: Array()
 					};
 					squadrapp.user.getContacts();
+					//squadrapp.player.loadPlayer();
+					squadrapp.getPlayer();
+				
 				}
 				if (localStorage.nav){
 					nav_item = JSON.parse(localStorage.getItem('nav'));
 				}else{
 					nav_item = { 
-						chat: { 
+						  chat: { 
 							isWork: 0
 							, talkers: { 
 								older: 0
@@ -115,7 +120,19 @@ squadrapp = {
 		}
 		callback();
 	},
-	
+ getPlayer:function(callback){
+	callback = callback || function(){};
+			players_item = JSON.parse(localStorage.getItem('user'));
+			if (squadrapp.isOnline()) {
+				players_item.otherplayers = {
+					    otherIds: Object()
+					   ,otherlocal: Array()
+					   ,otherforeign: Array()
+				};
+				squadrapp.player.getOtherContacts();
+			}
+	callback();
+	},
 	/*
 	 * @class user
 	 * 
@@ -163,6 +180,7 @@ squadrapp = {
 			localStorage.setItem('user', JSON.stringify(user_item));		// Almacena la informaciÃ³n del usuario logueado
 			squadrapp.load(callback);
 		},
+		
 		
 		/*
 		 * squadrapp.user.reloadUser();
@@ -251,9 +269,10 @@ squadrapp = {
 					var loc = (user_item.location).split(",");
 					user_item.contacts.localIds = filterObject(user_item.contacts.players, 'location_name', loc[0]);
 					user_item.contacts.foreignIds = filterObject(user_item.contacts.players, 'location_name', loc[0], 'middle', false);
-			     }
+				 }
 		    });	
 		},
+		
 		
 		/*
 		 * squadrapp.user.getLocalContactsIds();
@@ -269,7 +288,7 @@ squadrapp = {
 			return user_item.contacts.foreignIds;
 		},
 		
-		/*
+    	/*
 		 * squadrapp.user.getUserCity();
 		 */
 		getUserCity: function(){
@@ -968,8 +987,109 @@ squadrapp = {
 			return f;
 		}
 		
-	}
+	},
 	
+	player: {
+		
+		
+		/*
+		 * squadrapp.player.getOtherContacts();
+		 * carga todos los que no son amigos del usuario logueado
+		 */
+    getOtherContacts: function(){
+		var serv = url_base+'/app/user/get-other-contacts';
+		$.ajax({
+			 type: "POST",
+			 url: serv,
+		     async: false,
+		     data: { uid:user_item.id},
+		     success: function(data){ 
+		     	var otherusers = JSON.parse(data);
+		     	$.each(otherusers, function( index, value ) {
+		     		players_item.otherplayers.otherIds[value.id] = value;
+		  
+		 		});
+		     	var loc = (players_item.location).split(",");
+		     	players_item.otherplayers.otherlocal = filterObject(players_item.otherplayers.otherIds, 'location_name', loc[0]);
+		     	players_item.otherplayers.otherforeign = filterObject(players_item.otherplayers.otherIds, 'location_name', loc[0], 'middle', false);
+		     }
+	    });	
+	},
+	loadPlayer: function(user, callback){
+		callback = callback || function(){};
+		players_item={ 
+			 login:user.login
+			,id:user.id
+			,facebook_id:user.facebook_id
+			,name:user.name
+			,first_name:user.first_name
+			,last_name:user.last_name
+			,facebook_link:user.facebook_link
+			,facebook_username:user.facebook_username
+			,hometown_id:user.hometown_id
+			,hometown:user.hometown
+			,location_id:user.location_id
+			,location:user.location
+			,coordinates:user.coordinates
+			,gender:user.gender
+			,email:user.email
+			,timezone:user.timezone
+			,locale:user.locale
+			,since:user.since
+			,birthday:user.birthday
+			,document_id:user.document_id
+			,mobile:user.mobile
+			,telephone:user.telephone
+			,address:user.address
+			,available:user.available
+			,lat:''					// Obterner de coordinates
+			,lng:''					// Obterner de coordinates
+			,city_id:2257			// Obtener en la consulta, si ciudad cambia cambiar id 
+			,sport_id:1				// Deporte por defecto, obtener de la consulta 
+			,my_sports: Object()	// Obtener por consulta
+		};
+		//localStorage.setItem('player', JSON.stringify(players_item));		// Almacena la informaciÃ³n del usuario logueado
+		//squadrapp.getPlayer(callback);
+	},
+	/*
+	 * squadrapp.player.getOtherContactsIds();
+	 * 
+	 */
+
+	getOtherContactsLocalIds: function(){
+		return players_item.otherplayers.otherlocal;
+	},
+	getOtherContactsForeignIds: function(){
+		return players_item.otherplayers.otherforeign;
+	},
+	getContact: function(uid){
+		return players_item.otherplayers.otherIds[uid];
+	},
+	getContactImageUrl: function(uid, img_width, img_height){
+		img_width = img_width || 120;
+		img_height = img_height || 120;
+		return "https://graph.facebook.com/"+players_item.otherplayers.otherIds[uid].Faacebook_id+"/picture?width="+img_width+"&height="+img_height+"";
+	},
+
+	/*
+	 * squadrapp.player.newContact();
+	 * guarda un nuevo contacto del usuario loueado
+	 */
+	newContact: function(fid,callback){
+        callback = callback || function(){};
+		var serv = url_base+'/app/user/add-contacts';
+		$.ajax({
+			 type: "POST",
+			 url: serv,
+	         async: true,
+	         data: { uid:user_item.id, friend: fid},
+	         success: function(data){
+	               		
+		     		callback();
+			 }
+    	});
+},
+}
 	
 };
 

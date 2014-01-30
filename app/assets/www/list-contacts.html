@@ -1,0 +1,461 @@
+			<header data-role="header" data-position="fixed" data-tap-toggle="false" id='header'>
+				<a id="menu_icon" onclick="openMenu();"></a>
+				<p> Contactos </p>
+				<a class="btn_add_player_24x24" onclick=""></a>
+				<div class="filter">Filtro</div>
+			   <a class="btn_filter_contcs_24x24" onclick=""></a>
+			</header>
+			
+   
+	 		<section id="content" class="content">
+				
+					<section class="search-contacts">
+						<form>
+							<div class="search-contacts-input">
+								<input type="text" onblur="cancelFieldSearch();" name="find" id="find-contacts" placeholder="Buscar">
+							</div>
+							
+						</form>
+					</section>
+			    
+				   	 <div data-role="collapsible" id="custom" class='list_fiends'>
+				    	<section class="header-local-list">
+				    		Locales - <span class="user-location"></span>
+				    	</section>
+				    	
+				    	
+				    	   	<div id="list-contacts"><div>
+								<section class="local-list"> 
+								  <div id="local-list-start"></div>
+									<ul id="local-contacts"></ul>
+								</section>
+								<section class="world-list"> 
+									<div id="world-list-start"></div>
+									<section class="header">
+										En el resto del mundo
+									</section>
+									<ul id="foreign-contacts"> </ul>
+								</section>
+								<section class="other-list"> 
+									<div id="other-list-start"></div>
+										<section class="header">
+										Otros contactos
+										</section>
+									<ul id="other-contacts"> 
+										<li class="friend">
+											<div class="info">
+												<div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="img/pic_men.png"></div>
+												<div class="info">
+												<div class="name">otros contactossss</div>
+												<div class="location">Roma</div></div>
+											</div>
+											<div class="line-chat"><a class="btn_info_othercont_22x22" onclick=""></a></div>
+										</li>
+										<li class="friend">
+											<div class="info">
+												<div class="image">
+												<img style="display: block;" width="60" height="60" style="display: block;" src="img/pic_men.png"></div>
+												<div class="info"><div class="name">nuevos contactossss</div>
+												<div class="location">ESpaña</div></div>
+											</div>
+											<div class="line-chat"><a class="btn_info_othercont_22x22" onclick=""></a></div>
+										</li>
+									</ul>
+								</section>
+							
+							</diV>
+			    </div>
+			</section><!-- /content -->
+			
+			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
+				<section id='buscar_nav'>
+					<a class="buscar_nav_contacts" onclick="">Mis contactos</a>
+					<a class="buscar_nav_others" onclick="">Mas personas</a>
+				</section>
+			</footer>
+
+<style type="text/css"> 
+#header{
+	background: #f5f5f5;
+	border-bottom: #ccc 1px solid; 
+	height: 23px;
+}
+#header .filter{
+	display:block;
+	position: absolute;
+	top: 5px;
+	padding: 8px;
+	color: #222222;
+	right:40px;
+	font-size: 13px;
+	text-align:center;
+	z-index: 1002;
+	height: 30px
+	
+}
+#header .btn_filter_contcs_24x24{
+	display:block;
+	position: absolute;
+	top: 0;
+	padding: 8px;
+	color: #8f8f8f;
+	right:5px;
+	font-size: 10px;
+	z-index: 1002;
+	
+}
+#header .btn_add_player_24x24{
+	display:block;
+	position: absolute;
+	top: 0;
+	padding: 8px;
+	color: #8f8f8f;
+	right:30%;
+	font-size: 10px;
+	z-index: 1002;
+	
+}
+
+#content {
+		position:absolute;
+		top:39px; bottom:40px; left:0;
+		width:100%;
+		background:#ffffff;
+	
+}
+#content .list_fiends .header-local-list{
+	background: #f5f5f5;
+	color: #777777;
+    font-size: 13px;
+    height: 25px;
+    padding: 10px 0 0 0;
+    z-index: 1000;
+    text-align: center;	
+    border-bottom: #ccc 1px solid; 
+    
+
+}
+#content .list_fiends .world-list .header{
+	background: #f5f5f5; 
+	color: #777777;
+    font-size: 13px;
+    height: 25px;
+    padding: 10px  0 0 0;
+    z-index: 1000;
+    text-align: center;	
+    border-bottom: #ccc 1px solid; 
+
+}
+#content .list_fiends .other-list .header{
+	background: #f5f5f5; 
+	color: #777777;
+    font-size: 13px;
+    height: 25px;
+    padding: 10px 0 0 0;
+    z-index: 1000;
+    text-align: center;	
+    border-bottom: #ccc 1px solid; 
+
+}
+#content .local-list .current-list{
+	position: fixed;
+	top: 85px;
+	left: 0;
+	width: 100%;
+}
+
+#content .local-list ul{
+
+}
+#content .local-list ul li{
+	height: 90px;
+}
+
+#content .local-list .friend{
+	border-bottom: #DDD 1px solid;
+	
+}
+#content .local-list .friend .info{
+	padding: 15px 5px 5px 15px;
+	float: left;
+    height: 70px;
+    margin-right: 60px;
+    margin: 0 15px;
+}
+#content .local-list .friend .info .image{
+	float: left;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 30px;
+	width: 60px;
+	height: 60px;
+}
+#content .local-list .friend .info .image img{
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+}
+#content .local-list .friend .info .name{
+	color: #888888;
+    float: left;
+    font-weight: bold;
+    margin: 8px 15px;
+    padding: 11px 0px;
+}
+#content .local-list .friend .line-chat{
+
+	border-left: #DDD 1px solid;
+	float: right;
+    height: 90px;
+    width: 60px;
+    top: 0;
+ }
+ #content .local-list .friend .line-chat .btn_message_24x24{
+
+    padding: 30px 15px;
+    margin: 3px;
+ }
+
+/*amigos en el resto del mundo*/
+#content .world-list .current-list{
+	position: fixed;
+	top: 85px;
+	left: 0;
+	width: 100%;
+}
+#content .world-list ul{
+	
+}
+#content .world-list ul li{
+	height: 90px;
+	
+}
+#content .world-list .friend{
+	border-bottom: #DDD 1px solid;
+}
+#content .world-list .friend .image{
+	float: left;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 30px;
+}
+#content .world-list .friend .image img{
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 30px;
+}
+#content .world-list .friend .info{
+	color: #888888;
+    float: left;
+    padding: 10px;
+     margin: 0 15px;
+}
+#content .world-list .friend .info .name{
+	color: #888888;
+    font-weight: bold;
+}
+#content.world-list .friend .info .location{
+	color: #888888;
+	font-size: 12px;
+	font-weight: lighter;
+	
+}
+#content .world-list .friend .line-chat{
+
+	border-left: #DDD 1px solid;
+	float: right;
+    height: 90px;
+    width: 60px;
+    top: 0;
+ }
+ #content .world-list .friend .line-chat .btn_message_24x24{
+
+    padding: 30px 15px;
+    margin: 3px;
+ }
+ /*otros contactos*/
+#content .other-list ul{
+	
+}
+#content .other-list ul li{
+	height: 90px;
+	
+}
+#content .other-list .friend{
+	border-bottom: #DDD 1px solid;
+}
+#content .other-list .friend .image{
+	float: left;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 30px;
+}
+#content .other-list .friend .image img{
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 30px;
+}
+#content .other-list .friend .info{
+	color: #888888;
+    float: left;
+    padding: 10px;
+    margin: 0 15px;
+}
+#content .other-list .friend .info .name{
+	color: #888888;
+    font-weight: bold;
+}
+#content .other-list .friend .info .location{
+	color: #888888;
+	font-size: 12px;
+	font-weight: lighter;
+	
+}
+#content .other-list .friend .line-chat{
+
+	border-left: #DDD 1px solid;
+	float: right;
+    height: 90px;
+    width: 60px;
+    top: 0;
+ }
+ #content .other-list .friend .line-chat .btn_info_othercont_22x22{
+
+    padding: 30px 15px;
+    margin: 3px;
+ }
+
+ /* buscador */
+.search-contacts{
+	background: #f5f5f5;
+	color: #22262b;
+	text-align: center;
+	display: block;
+	padding: 5px 10px 0 5px;
+	border-bottom: 1px solid #e2e2e2;
+	height: 45px;
+}
+.search-contacts .cancel{
+	position: absolute;
+	top: 0; right: 0;
+	padding: 8px 15px;
+	font-size: 13px;
+	color: #929292;
+	font-weight: bold;
+	text-align: center;
+}
+.search-contacts-input{
+	margin: 8px 27px 0 5px;
+	height: 40px;
+}
+#find-contacts{
+	background: #fff url(./img/search_54x54.png) no-repeat center right;
+	background-size: 25px;
+	border: solid 1px #e2e2e2;
+	border-radius: 3px;
+	margin: 0;
+	font-size: 14px;
+	padding: 5px 20px 5px 5px;
+	width: 100%;
+	height: 20px
+}
+#footer{
+	background: #f5f5f5;
+	color: #22262b;
+	height: 40px;
+	border-top: solid 2px #e2e2e2; 
+	position: fixed;
+	bottom: 0; left: 0; right: 0;
+	z-index: 101;
+}
+#nav-footer{
+	border-top: solid 2px #4d4d4d;
+	background:#22262b;
+	position: fixed;
+	bottom: 0; left: 0;
+	width: 272px;
+	height: 40px;
+	z-index: 100;
+}
+/* Navegacion inferior */
+#buscar-nav{
+	display: block;
+	width: 100%;
+}
+#footer  .buscar_nav_contacts{
+	color: #666;
+	display: block;
+	width: 50%;
+	text-align: center;
+	position: absolute;
+	left: 10px;
+	z-index: 1002;
+	padding: 10px 5px 10px 5px;
+	height: 30px;
+}
+#footer .buscar_nav_others{
+	color: #666;
+	display: block;
+	width: 50%;
+	text-align: center;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    z-index: 1002;
+    padding: 10px 5px 10px 5px;
+    
+}
+
+</style> 
+<script>
+	$('.user-location').html(squadrapp.user.getUserCity());
+	LocalContacts();
+	ForeignContacts();
+	//loadOtherContacts();
+	contactsScroll = new iScroll('list-contacts');
+	$('#list-contacts').height($(window).height()-167);
+	$('.content').width($(window).width());
+	contactsScroll.refresh();
+
+	function loadOtherContacts(){
+		var ddd= squadrapp.player.getOtherContacts();
+		//var localIds = squadrapp.user.getOtherContactsIds();
+		$('#other-contacts').html('');
+		$.each( otherIds, function( key, id ) {
+		var m = squadrapp.user.getContact(id);
+					 $('#other-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info"><div class="name">'+truncate(m.name,20,"...")+'</div><div class="location">'+truncate(m.location_name,15,"...")+'</div></div><div class="talker-info online"></div></div><div class="line-chat"><a class="btn_info_othercont_22x22" onclick=""></a></div></li>');
+				});
+		}
+		
+	function LocalContacts(){
+		var localIds = squadrapp.user.getLocalContactsIds();
+		$('#local-contacts').html('');
+		$.each( localIds, function( key, id ) {
+		var m = squadrapp.user.getContact(id);
+		  if(squadrapp.isOnline()){
+			  $('#local-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="name">'+truncate(m.name,15,"...")+'</div><div class="talker-info online"></div></div> <div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div></li>');
+			}
+		  else{  
+			  $('#local-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="name">'+truncate(m.name,15,"...")+'</div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div></li>');
+			}
+			});
+	  }
+
+	function ForeignContacts(){
+		var localIds = squadrapp.user.getForeignContactsIds();
+		$('#foreign-contacts').html('');
+		$.each( localIds, function( key, id ) {
+		var m = squadrapp.user.getContact(id);
+		  if(squadrapp.isOnline()){
+				$('#foreign-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info"><div class="name">'+truncate(m.name,15,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div><div class="talker-info online"></div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div></li>');
+			}
+			else{
+			  $('#foreign-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info"><div class="name">'+truncate(m.name,15,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div></li>');
+		    }
+			});
+	  }
+
+</script>
+
+	
+

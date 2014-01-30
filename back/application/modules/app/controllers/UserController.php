@@ -89,6 +89,29 @@ class App_UserController extends Zend_Controller_Action
 			$friends = $user->getUserFriendsMobile($vars['uid']);
             echo json_encode($friends);
 	}
+		public function getOtherContactsAction ()
+    {
+            header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+            $this->_helper->layout()->disableLayout ();
+            $this->_helper->viewRenderer->setNoRender(true);
+            $vars = $this->_getAllParams(); 
+			$user = new User_Model_User();
+			$otherusers = $user->getOtherContacts($vars['uid']);
+            echo json_encode($otherusers);
+	}
+		public function addContactsAction()
+	{
+	        header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+            $this->_helper->layout()->disableLayout ();
+            $this->_helper->viewRenderer->setNoRender(true);
+            $vars = $this->_getAllParams(); 
+			$friends = new  User_Model_UserFriends();
+			$friends->addContacts($vars['uid'],$vars['friend']);
+			
+		
+	
+	
+	}
 
     
 }

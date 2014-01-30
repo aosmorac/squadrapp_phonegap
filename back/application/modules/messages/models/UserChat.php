@@ -114,7 +114,7 @@ class Messages_Model_UserChat {
 		//Zend_Debug::dump($name, "Modelo");
     	$userxgroup = new Messages_Model_DbTable_UserxGroup();
 		$userxgroup->addUserByGroup($rows);
-     }
+    }
 	
      public function removeChat($id_from,$id_to,$isgroup=0)
      {
