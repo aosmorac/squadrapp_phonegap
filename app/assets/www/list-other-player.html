@@ -3,8 +3,7 @@
 				<a id="menu_icon" onclick="openMenu();"></a>
 				<p> Contactos </p>
 			</header>
-			
-   
+
 	 		<section id="content" class="content">
 				
 					<section class="search-contacts">
@@ -38,8 +37,8 @@
 			
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
 				<section id='buscar_nav'>
-					<a class="buscar_nav_contacts" onclick="">Mis contactos</a>
-					<a class="buscar_nav_others" onclick="">Mas personas</a>
+					<a class="buscar_nav_contacts" onclick="loadPage('list-contacts.html');">Mis contactos</a>
+					<a class="buscar_nav_others" onclick="loadPage('list-other-player.html');">Mas personas</a>
 				</section>
 			</footer>
 
@@ -376,6 +375,7 @@
 	z-index: 1002;
 	padding: 10px 5px 10px 5px;
 	height: 30px;
+	cursor: pointer;
 }
 #footer .buscar_nav_others{
 	color: #666;
@@ -387,12 +387,18 @@
     top: 0;
     z-index: 1002;
     padding: 10px 5px 10px 5px;
+    cursor:pointer;
     
 }
 
 </style> 
 <script>
-
+$('.buscar_nav_contacts').click(function(){
+	$(this).css("color","#44be88");
+});
+$('.buscar_nav_others').click(function(){
+	$(this).css("color","#44be88");
+});
 	$('.user-location').html(squadrapp.user.getUserCity());
 	LocalPlayers();
 	ForeignPlayers();
@@ -401,7 +407,6 @@
 	$('.content').width($(window).width());
 	contactsScroll.refresh();
 	
-
 function newPlayer(fid){
 	$('.check').click(function() {
 	if ($('#'+fid).attr('class') == 'check'){
