@@ -38,7 +38,7 @@
 			<footer data-role="footer" data-position="fixed" data-tap-toggle="false" id="footer">
 				<section id='buscar_nav'>
 					<a class="buscar_nav_contacts" onclick="loadPage('list-contacts.html');">Mis contactos</a>
-					<a class="buscar_nav_others" onclick="loadPage('list-other-player.html');">Mas personas</a>
+					<a class="selected" onclick="loadPage('list-other-player.html');">Mas personas</a>
 				</section>
 			</footer>
 
@@ -377,10 +377,14 @@
 	height: 30px;
 	cursor: pointer;
 }
-#footer .buscar_nav_others{
-	color: #666;
+#footer  .buscar_nav_contacts:hover{
+	color: #44be88;
+}
+#footer .selected{
 	display: block;
-	width: 50%;
+	border-left: #DDD 1px solid ;
+	width: 45%;
+	height:40px;
 	text-align: center;
     position: absolute;
     right: 10px;
@@ -390,15 +394,16 @@
     cursor:pointer;
     
 }
-
+#footer .buscar_nav_others:hover{
+	color: #44be88;
+}
+a.selected{
+	
+	color: #44be88;	
+}
 </style> 
 <script>
-$('.buscar_nav_contacts').click(function(){
-	$(this).css("color","#44be88");
-});
-$('.buscar_nav_others').click(function(){
-	$(this).css("color","#44be88");
-});
+
 	$('.user-location').html(squadrapp.user.getUserCity());
 	LocalPlayers();
 	ForeignPlayers();
