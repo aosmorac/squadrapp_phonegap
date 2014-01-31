@@ -160,8 +160,7 @@
 	padding: 15px 5px 5px 15px;
 	float: left;
     height: 70px;
-    margin-right: 60px;
-    margin: 0 15px;
+    margin-right: 20px;
 }
 #content .local-list .friend .info .image{
 	float: left;
@@ -227,9 +226,10 @@
 }
 #content .world-list .friend .info{
 	color: #888888;
-    float: left;
-    padding: 10px;
-     margin: 0 15px;
+    padding: 15px 5px 5px 15px;
+	float: left;
+    height: 70px;
+    margin-right: 20px;
 }
 #content .world-list .friend .info .info-name {
 	color: #888888;
@@ -272,6 +272,13 @@
 #content .other-list .friend{
 	border-bottom: #DDD 1px solid;
 }
+#content .other-list .friend .info{
+	color: #888888;
+    padding: 15px 5px 5px 15px;
+	float: left;
+    height: 70px;
+    margin-right: 20px;
+}
 #content .other-list .friend .image{
 	float: left;
 	-webkit-border-radius: 40px;
@@ -283,12 +290,7 @@
 	-moz-border-radius: 40px;
 	border-radius: 30px;
 }
-#content .other-list .friend .info{
-	color: #888888;
-    float: left;
-    padding: 10px;
-    margin: 0 15px;
-}
+
 #content .other-list .friend .info .info-name {
 	color: #888888;
     font-weight: bold;
@@ -429,7 +431,7 @@ a.selected {
 	function loadOtherContacts(){
 		var otherIds= squadrapp.player.getOtherContacts();
 		$('#other-contacts').html('');
-		var winfo = $('#list-contacts').width()-162;
+		var winfo = $('#list-contacts').width()-102;
 		$.each( otherIds, function( key, id ) {
 		var m = squadrapp.user.getContact(id);
 					 $('#other-contacts').append('<li class="friend"><div class="info" ><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,20,"...")+'</div><div class="location">'+truncate(m.location_name,15,"...")+'</div></div><div class="talker-info online"></div></div><div class="line-chat"><a class="btn_info_othercont_22x22" onclick=""></a></div><div class="corte"></div></li>');
@@ -440,7 +442,7 @@ a.selected {
 	function LocalContacts(){
 		var localIds = squadrapp.user.getLocalContactsIds();
 		$('#local-contacts').html('');
-		var winfo = $('#list-contacts').width()-162;
+		var winfo = $('#list-contacts').width()-102;
 		$.each( localIds, function( key, id ) {
 		var m = squadrapp.user.getContact(id);
 		  if(squadrapp.isOnline()){
@@ -456,7 +458,7 @@ a.selected {
 	function ForeignContacts(){
 		var localIds = squadrapp.user.getForeignContactsIds();
 		$('#foreign-contacts').html('');
-		var winfo = $('#list-contacts').width()-162;
+		var winfo = $('#list-contacts').width()-102;
 		$.each( localIds, function( key, id ) {
 		var m = squadrapp.user.getContact(id);
 		  if(squadrapp.isOnline()){
