@@ -144,10 +144,11 @@
 	
 }
 #content .local-list .player .info{
-	padding: 15px 5px 5px 15px;
 	float: left;
-    height: 70px;
-    margin-right: 20px;
+    height: 90px;
+	padding: 0 5px; 
+	display: table-cell;
+	vertical-align: middle;
 
 }
 #content .local-list .player .info .image{
@@ -169,6 +170,7 @@
     font-weight: bold;
     margin: 8px 15px;
     padding: 11px 0px;
+    font-size: 12px;
 }
 #content .local-list .player .line-chat{
 
@@ -455,10 +457,10 @@ a.selected{
 		$.each( foreignIds, function( key, id ) {
 		var m = squadrapp.player.getContact(id);
 	    if(squadrapp.isOnline()){
-				$('#foreign-contacts').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.player.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,13,"...")+'</div><div class="location">'+truncate(m.location_name,15,"...")+'</div></div><div class="talker-info online"></div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></div></div><div class="corte"></div></li>');
+				$('#foreign-contacts').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.player.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,13,"...")+'</div><div class="location">'+truncate(m.location_name,15,"...")+'</div></div><div class="corte"></div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></div></div><div class="corte"></div></li>');
 			}
 		 else{
-			  $('#foreign-contacts').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.player.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,13,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></a></div><div class="corte"></div></li>');
+			  $('#foreign-contacts').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.player.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,13,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div><div class="corte"></div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></a></div><div class="corte"></div></li>');
 		    }
 			});
 			$('#list-contacts .player .info').width(winfo);	
