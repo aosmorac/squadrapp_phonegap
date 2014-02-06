@@ -118,8 +118,15 @@ $(function(){
 	
 						
 			function logout(){
-				localStorage.removeItem('user');	// Elimina la informacion de usuario logueado
-				navigator.app.exitApp(); 
+				FB.logout(function(response) {
+					squadrapp.setNull();
+					navigator.app.exitApp(); 
+			    });
+			}
+			
+			function logoutFacebook(){
+				FB.logout(function(response) {
+			    });
 			}
 			
 			

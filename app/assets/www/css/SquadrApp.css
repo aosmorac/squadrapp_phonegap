@@ -158,6 +158,8 @@ body{
 	background: #23262b url(../img/icono_loading_page.png) center no-repeat;
 	background-size: 44px 44px;
 	z-index: 9999;
+	padding: 200px 0;
+	text-align: center;
 }
 
 

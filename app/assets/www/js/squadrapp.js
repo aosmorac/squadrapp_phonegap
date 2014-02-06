@@ -50,6 +50,8 @@ var url_base = 'http://desar.squadrapp.com';	// Servidor de desarrollo
 // end vars	----------------------
 var players_item; // variable donde se encuentra informacion de los jugadores
 
+var loaded = false;	// variable que indica que el usuario ya ha sido cargado
+
 
 squadrapp = {
 		
@@ -60,6 +62,31 @@ squadrapp = {
 	*/
 	isOnline: function(){
 		return true;
+	},
+	
+	/*
+	* squadrapp.isLoaded();
+	* Indica si existe algun usuario logueado en el dispositivo
+	*/
+	isLoaded: function(){
+		if ( typeof user_item == 'undefined' || typeof user_item.login == 'undefined' || user_item.login == 0 ) {
+			return false;
+		}else {
+			return true;
+		}
+	},
+	
+	/*
+	* squadrapp.setNull();
+	* Revisa la conexión a internet y devuelve verdadero o falso
+	*/
+	setNull: function(){
+		user_item = null;
+		nav_item = null;
+		fields_item = null;
+		players_item = null;
+		localStorage.removeItem('user');	// Elimina la informacion de usuario logueado
+		localStorage.removeItem('nav');	// Elimina la informacion de navegacion logueado
 	},
 	
 	/*
@@ -177,6 +204,7 @@ squadrapp = {
 				,sport_id:1				// Deporte por defecto, obtener de la consulta 
 				,my_sports: Object()	// Obtener por consulta
 			};
+			loaded = true;
 			localStorage.setItem('user', JSON.stringify(user_item));		// Almacena la informaciÃ³n del usuario logueado
 			squadrapp.load(callback);
 		},

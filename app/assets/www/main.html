@@ -44,7 +44,9 @@
 			<input type="hidden" id="overlay_input" />
 		</section>
 		
-		<section id="loader-overlay"> </section>
+		<section id="loader-overlay">
+			<img src="img/loader_43x11.gif" />	
+		</section>
 
 		<!--	Phonegap - Cordova	-->
 		<script type="text/javascript" src="js/cordova.js"></script>
@@ -80,7 +82,6 @@ var map;
 				} catch (e) {
 					alert(e);
 				}
-				//login();
 			}, false);
 			
 			var snapper = new Snap({
@@ -109,9 +110,14 @@ var map;
 var myScroll;
 		
 function loaded() {
-	loadPage('login.html');
-	//loadPage('test.html');
+	if (squadrapp.isLoaded()) {
+		loadPage('test.html');	
+	}else{
+		logoutFacebook();
+		loadPage('login.html');
+	}
 }
+
 document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 document.addEventListener('DOMContentLoaded', function () { setTimeout(loaded, 200); }, false);
 

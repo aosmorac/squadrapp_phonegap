@@ -13,7 +13,7 @@ public class MainActivity extends DroidGap {
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
         
-        super.setIntegerProperty("splashscreen", R.drawable.ic_launcher); // Displays the splash screen for android
+        //super.setIntegerProperty("splashscreen", R.drawable.ic_launcher); // Displays the splash screen for android
         super.loadUrl("file:///android_asset/www/index.html",3000);
     }
 	

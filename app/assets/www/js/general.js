@@ -588,6 +588,7 @@ function getMoreMessages(){
 function sendMessageToUser(user_id, message){
 	message = $('#message-input').val();
 	$('#message-input').val('');
+	$('#message-input').focus();
 	user_id = $( "#chat-with" ).attr( "user_id");
 	var is_group = $( "#chat-with" ).attr( "is_group");
 	if (user_id > 0 && jQuery.trim(message) != ''){
