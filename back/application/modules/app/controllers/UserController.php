@@ -50,7 +50,7 @@ class App_UserController extends Zend_Controller_Action
                 if (isset($user->location) && trim($user->location)!=''){ 
                         $userInfo['use_location_name'] = $user->location; 
                 }else{
-                    $userInfo['use_location_name'] = 'Bogotá Colombia';
+                    $userInfo['use_location_name'] = 'Bogotá, Colombia';
                 }
                 if (isset($user->gender)){ $userInfo['use_gener'] = $user->gender; }
                 if (isset($user->email)){ $userInfo['use_email'] = $user->email; }
@@ -89,18 +89,20 @@ class App_UserController extends Zend_Controller_Action
 			$friends = $user->getUserFriendsMobile($vars['uid']);
             echo json_encode($friends);
 	}
+
 	
-		public function getOtherContactsAction ()
+	public function getOtherContactsAction ()
     {
             header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
             $this->_helper->layout()->disableLayout ();
             $this->_helper->viewRenderer->setNoRender(true);
             $vars = $this->_getAllParams(); 
+			if (!isset($vars['ini'])){ $vars['ini']=''; }
 			$user = new User_Model_User();
-			$otherusers = $user->getOtherContacts($vars['uid']);
+			$otherusers = $user->getOtherContacts($vars['uid'],$vars['ini']);
             echo json_encode($otherusers);
 	}
-		public function addContactsAction()
+	public function addContactsAction()
 	{
 	        header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
             $this->_helper->layout()->disableLayout ();
@@ -108,10 +110,17 @@ class App_UserController extends Zend_Controller_Action
             $vars = $this->_getAllParams(); 
 			$friends = new  User_Model_UserFriends();
 			$friends->addContacts($vars['uid'],$vars['friend']);
-			
 		
-	
-	
+	}
+	public function searchContactsAction()
+	{
+			header("Access-Control-Allow-Origin: *");   //  Ajax desde cualquier llamado
+            $this->_helper->layout()->disableLayout ();
+            $this->_helper->viewRenderer->setNoRender(true);
+            $vars = $this->_getAllParams();	
+			$user = new User_Model_User();
+			$findcontacts=$user->searchContact($vars['uid'],$vars['cadena']);
+			echo json_encode($findcontacts);
 	}
 
     

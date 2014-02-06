@@ -407,8 +407,9 @@ class User_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $friends = $row->toArray();
         return $friends;
 	}
-	public function getOtherContact($uid){
+	public function getOtherContact($uid,$ini){
 	$where="UF.friend2 IS NULL and U.id_user!={$uid}";
+	if ($ini != '') { $where .= " AND U.use_name LIKE '%{$ini}%'"; }
 		$select = $this->select()
                   ->from(array("U"=>$this->_name)
                           ,array(
@@ -432,13 +433,35 @@ class User_Model_DbTable_User extends Zend_Db_Table_Abstract {
                               )
                           )
                   ->setIntegrityCheck(false)
-                  ->joinLeft(array('UF' => 'user_friends'),"U.id_user=UF.friend2"
+                  ->joinLeft(array('UF' => 'user_friends'),"U.id_user=UF.friend2 AND UF.friend1={$uid}"
                         , array())
                 ->where($where);
 		//Zend_Debug::dump($select.''); die;
 		$row = $this->fetchAll($select);
         $otherusers = $row->toArray();
         return $otherusers;
+	}
+	public function searchContact($uid,$cadena){
+	$where="U.id_user!={$uid}";  
+	if ($cadena!= ''){ $where .=" AND U.use_name LIKE '%{$cadena}%'";}
+	$select=$this->select() 
+			->from( array('U'=>$this->_name)
+                          ,array(
+                                'id_user','Facebook_id','use_name','use_first_name'
+                                ,'use_last_name','Facebook_link','Facebook_username'
+                                ,'use_hometown_id','use_hometown_name','use_location_id'
+                                ,'use_location_name','use_location_coordinates'
+                                ,'use_gener','use_email','use_locale','use_visit'
+                                ,'use_date','lastactivity'
+                                //,'online' => new Zend_Db_Expr("IF((UNIX_TIMESTAMP()-U.lastactivity) < 240 AND (S.status = 'busy' OR S.status = 'away' OR S.status = 'available'), 1, 0)")
+								,'online' => new Zend_Db_Expr("IF(((UNIX_TIMESTAMP()-U.lastactivity) < 62 ), 1, 0)")
+                              )
+                          )
+		    ->where($where);
+			//Zend_Debug::dump($select.''); die;
+			$row = $this->fetchAll($select);
+			$findcontacts = $row->toArray();
+			return $findcontacts;
 	}
     
     

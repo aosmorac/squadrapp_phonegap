@@ -996,13 +996,13 @@ squadrapp = {
 		 * squadrapp.player.getOtherContacts();
 		 * carga todos los que no son amigos del usuario logueado
 		 */
-    getOtherContacts: function(){
+    getOtherContacts: function(playsearch){
 		var serv = url_base+'/app/user/get-other-contacts';
 		$.ajax({
 			 type: "POST",
 			 url: serv,
 		     async: false,
-		     data: { uid:user_item.id},
+		     data: { uid:user_item.id,ini:playsearch},
 		     success: function(data){ 
 		     	var otherusers = JSON.parse(data);
 		     	$.each(otherusers, function( index, value ) {

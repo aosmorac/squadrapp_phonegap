@@ -5,8 +5,6 @@
 				<div class="filter">Filtro</div>
 			   <a class="btn_filter_contcs_24x24" onclick=""></a>
 			</header>
-			
-   
 	 		<section id="content" class="content">
 				
 					<section class="search-contacts">
@@ -18,12 +16,11 @@
 						</form>
 					</section>
 			    
-				   	 <div data-role="collapsible" id="custom" class='list_fiends'>
+				   	 <div data-role="collapsible" id="custom" class='list-friends'>
 				    	<section class="header-local-list">
 				    		Locales - <span class="user-location"></span>
 				    	</section>
-				    	
-				    	
+							    	
 				    	   	<div id="list-contacts"><div>
 								<section class="local-list"> 
 								  <div id="local-list-start"></div>
@@ -99,12 +96,13 @@
 
 #content {
 		position:absolute;
-		top:39px; bottom:40px; left:0;
+		top:39px; bottom:40px;
 		width:100%;
 		background:#ffffff;
+		
 	
 }
-#content .list_fiends .header-local-list{
+#content .list-friends .header-local-list{
 	background: #f5f5f5;
 	color: #777777;
     font-size: 13px;
@@ -116,7 +114,7 @@
     
 
 }
-#content .list_fiends .world-list .header{
+#content .list-friends .world-list .header{
 	background: #f5f5f5; 
 	color: #777777;
     font-size: 13px;
@@ -127,7 +125,7 @@
     border-bottom: #ccc 1px solid; 
 
 }
-#content .list_fiends .other-list .header{
+#content .list-friends .other-list .header{
 	background: #f5f5f5; 
 	color: #777777;
     font-size: 13px;
@@ -138,18 +136,13 @@
     border-bottom: #ccc 1px solid; 
 
 }
-#content .local-list .current-list{
-	position: fixed;
-	top: 85px;
-	left: 0;
-	width: 100%;
-}
 
 #content .local-list ul{
-
+	list-style: none;
 }
 #content .local-list ul li{
-	height: 90px;
+	list-style: none;
+	/*height: 90px;*/
 }
 
 #content .local-list .friend{
@@ -160,27 +153,29 @@
 	padding: 15px 5px 5px 15px;
 	float: left;
     height: 70px;
-    margin-right: 20px;
+    margin-right: 5px;
+    font-size: 12px;
 }
 #content .local-list .friend .info .image{
 	float: left;
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
 	border-radius: 30px;
-	width: 60px;
 	height: 60px;
+	width: 60px;
 }
 #content .local-list .friend .info .image img{
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
-	border-radius: 40px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
 }
 #content .local-list .friend .info .name{
 	color: #888888;
     float: left;
     font-weight: bold;
-    margin: 8px 15px;
+    margin: 8px 5px 5px 15px;
     padding: 11px 0px;
+    font-size: 12px;
 }
 #content .local-list .friend .line-chat{
 
@@ -197,50 +192,50 @@
  }
 
 /*amigos en el resto del mundo*/
-#content .world-list .current-list{
-	position: fixed;
-	top: 85px;
-	left: 0;
-	width: 100%;
-}
 #content .world-list ul{
-	
+	list-style: none;
 }
 #content .world-list ul li{
-	height: 90px;
+	list-style: none;
+	/*height: 90px;*/
 	
 }
 #content .world-list .friend{
 	border-bottom: #DDD 1px solid;
-}
-#content .world-list .friend .image{
-	float: left;
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
-	border-radius: 30px;
-}
-#content .world-list .friend .image img{
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
-	border-radius: 30px;
 }
 #content .world-list .friend .info{
 	color: #888888;
     padding: 15px 5px 5px 15px;
 	float: left;
     height: 70px;
-    margin-right: 20px;
+    margin-right: 5px;
 }
+#content .world-list .friend .image{
+	float: left;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	height: 60px;
+	width: 60px;
+}
+#content .world-list .friend .image img{
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+}
+
 #content .world-list .friend .info .info-name {
 	color: #888888;
     font-weight: bold;
     float:left;
     padding-left: 5px;
-    margin: 10px 2px 2px 10px;
+    margin: 10px 5px 5px 10px;
+    font-size: 12px;
 }
 #content .world-list .friend .info-name .name{
 	color: #888888;
     font-weight: bold;
+    font-size: 12px;
 }
 #content.world-list .friend .info-name .location{
 	color: #888888;
@@ -263,10 +258,11 @@
  }
  /*otros contactos*/
 #content .other-list ul{
-	
+	list-style: none;
 }
 #content .other-list ul li{
-	height: 90px;
+	list-style: none;
+	/*height: 90px;*/
 	
 }
 #content .other-list .friend{
@@ -277,17 +273,19 @@
     padding: 15px 5px 5px 15px;
 	float: left;
     height: 70px;
-    margin-right: 20px;
+    margin-right: 5px;
 }
 #content .other-list .friend .image{
 	float: left;
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
 	border-radius: 30px;
+	height: 60px;
+	width: 60px;
 }
 #content .other-list .friend .image img{
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
 	border-radius: 30px;
 }
 
@@ -296,11 +294,13 @@
     font-weight: bold;
     float:left;
     padding-left: 5px;
-    margin: 10px 2px 2px 10px;
+    margin: 10px 5px 5px 10px;
+    font-size: 12px;
 }
 #content .other-list .friend .info-name .name{
 	color: #888888;
     font-weight: bold;
+    font-size: 12px;
 }
 #content .other-list .friend .info-name .location{
 	color: #888888;
@@ -428,17 +428,6 @@ a.selected {
 	
 	contactsScroll.refresh();
 
-	function loadOtherContacts(){
-		var otherIds= squadrapp.player.getOtherContacts();
-		$('#other-contacts').html('');
-		var winfo = $('#list-contacts').width()-102;
-		$.each( otherIds, function( key, id ) {
-		var m = squadrapp.user.getContact(id);
-					 $('#other-contacts').append('<li class="friend"><div class="info" ><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,20,"...")+'</div><div class="location">'+truncate(m.location_name,15,"...")+'</div></div><div class="talker-info online"></div></div><div class="line-chat"><a class="btn_info_othercont_22x22" onclick=""></a></div><div class="corte"></div></li>');
-				});
-		$('#list-contacts .friend .info').width(winfo);			
-		}
-		
 	function LocalContacts(){
 		var localIds = squadrapp.user.getLocalContactsIds();
 		$('#local-contacts').html('');
@@ -446,10 +435,10 @@ a.selected {
 		$.each( localIds, function( key, id ) {
 		var m = squadrapp.user.getContact(id);
 		  if(squadrapp.isOnline()){
-			  $('#local-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="name">'+truncate(m.name,15,"...")+'</div><div class="talker-info online"></div></div> <div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="corte"></div></li>');
+			  $('#local-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" src="'+squadrapp.user.getContactImageUrl(m.id, 60, 60)+'"></div><div class="name">'+truncate(m.name,20,"...")+'</div><div class="talker-info online"></div></div> <div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="corte"></div></li>');
 			}
 		  else{  
-			  $('#local-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="name">'+truncate(m.name,15,"...")+'</div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="corte"></div></li>');
+			  $('#local-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60"  src="'+squadrapp.user.getContactImageUrl(m.id, 60, 60)+'"></div><div class="name">'+truncate(m.name,20,"...")+'</div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="corte"></div></li>');
 			}
 			});
 			$('#list-contacts .friend .info').width(winfo);	
@@ -462,14 +451,25 @@ a.selected {
 		$.each( localIds, function( key, id ) {
 		var m = squadrapp.user.getContact(id);
 		  if(squadrapp.isOnline()){
-				$('#foreign-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,15,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div><div class="talker-info online"></div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="corte"></div></li>');
+				$('#foreign-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60"  src="'+squadrapp.user.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,20,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div><div class="talker-info online"></div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="corte"></div></li>');
 			}
 			else{
-			  $('#foreign-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,15,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="corte"></div></li>');
+			  $('#foreign-contacts').append('<li class="friend"><div class="info"><div class="image"><img style="display: block;" width="60" height="60"  src="'+squadrapp.user.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,20,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div></div><div class="line-chat"><a class="btn_message_24x24" onclick=""></a></div><div class="corte"></div></li>');
 		    }
 			});
 		   $('#list-contacts .friend .info').width(winfo);		
 	  }
+	  
+	function loadOtherContacts(){
+		var otherIds= squadrapp.player.getOtherContacts();
+		$('#other-contacts').html('');
+		var winfo = $('#list-contacts').width()-102;
+		$.each( otherIds, function( key, id ) {
+		var m = squadrapp.user.getContact(id);
+					 $('#other-contacts').append('<li class="friend"><div class="info" ><div class="image"><img style="display: block;" width="60" height="60" src="'+squadrapp.user.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,20,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div><div class="talker-info online"></div></div><div class="line-chat"><a class="btn_info_othercont_22x22" onclick=""></a></div><div class="corte"></div></li>');
+				});
+		$('#list-contacts .friend .info').width(winfo);			
+		}
 
 </script>
 

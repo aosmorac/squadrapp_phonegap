@@ -375,13 +375,14 @@ class User_Model_User {
 		return $friends;
 	 }
 	  /**
-	 * Obtiene otros contactos que no estan como  amigos del usuario logueADO
+	 * Obtiene otros contactos que no estan como  amigos del usuario logueado y busca uno especifico
 	 * 
 	 */
-	 public function getOtherContacts($userId=0){
+	 public function getOtherContacts($userId=0,$ini=''){
 	 	$user = new User_Model_DbTable_User();
-		$otherusers = $user->getOtherContact($userId);
+		$otherusers = $user->getOtherContact($userId,$ini);
 		return $otherusers;
 	 }
+
 	 	 
 	}
