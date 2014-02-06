@@ -15,18 +15,18 @@
 					</section>
 			    
 				   	 <div data-role="collapsible" id="custom" class='list-player'>
-				    	<section class="header-local-list">
+				    	<section class="header-local-player">
 				    		Locales - <span class="user-location"></span>
 				    	</section>
 				    	   	<div id="list-contacts"><div>
-								<section class="local-list"> 
-								  <ul id="local-contacts"></ul>
+								<section class="local-player"> 
+								  <ul id="local-player-list"></ul>
 								</section>
-								<section class="world-list"> 
+								<section class="world-player"> 
 									<section class="header">
 										En el resto del mundo
 									</section>
-									<ul id="foreign-contacts"> </ul>
+									<ul id="foreign-player-list"> </ul>
 								</section>				
 							</diV>
 			    </div>
@@ -88,7 +88,7 @@
 		background:#ffffff;
 	
 }
-#content .list-player .header-local-list{
+#content .list-player .header-local-player{
 	background: #f5f5f5;
 	color: #777777;
     font-size: 13px;
@@ -100,7 +100,7 @@
     
 
 }
-#content .list-player .world-list .header{
+#content .list-player .world-player .header{
 	background: #f5f5f5; 
 	color: #777777;
     font-size: 13px;
@@ -112,18 +112,18 @@
 
 }
 
-#content .local-list ul{
+#content .local-player ul{
 	list-style: none;
 }
-#content .local-list ul li{
+#content .local-player ul li{
 	/*height: 90px;*/
     list-style: none;
 }
-#content .local-list .player{
+#content .local-player .player{
 	border-bottom: #DDD 1px solid;
 	
 }
-#content .local-list .player .info{
+#content .local-player .player .info{
 	float: left;
     height: 70px;
 	display: table-cell;
@@ -133,7 +133,7 @@
 	
 	
 }
-#content .local-list .player .info .image{
+#content .local-player .player .info .image{
 	float: left;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
@@ -142,12 +142,12 @@
 	width: 60px;
 
 }
-#content .local-list .player .info .image img{
+#content .local-player .player .info .image img{
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
 	border-radius: 30px;
 }
-#content .local-list .player .info .name{
+#content .local-player .player .info .name{
 	color: #888888;
     float: left;
     font-weight: bold;
@@ -155,7 +155,7 @@
     padding: 11px 0px; 
     font-size: 12px;
 }
-#content .local-list .player .line-chat{
+#content .local-player .player .line-chat{
 
 	border-left: #DDD 1px solid;
 	float: right;
@@ -165,7 +165,7 @@
    
     
  }
-  #content .local-list .player .line-chat .chatplayer{
+  #content .local-player .player .line-chat .chatplayer{
 	background-image: url("./img/btn/btn_message_52x52.png");
 	background-size: 24px 24px; 
 	background-repeat: no-repeat;
@@ -176,7 +176,7 @@
     padding: 0;	
     margin: 30px 15px;
  }
- #content .local-list  .player .add-friend{
+ #content .local-player  .player .add-friend{
 
 	border-left: #DDD 1px solid;
 	float: right;
@@ -186,7 +186,7 @@
         
  }
 
- #content .local-list .player .add-friend .check{
+ #content .local-player .player .add-friend .check{
 	background-image: url("./img/btn/btn_select_payer.png");
 	background-size: 24px 48px; 
 	background-repeat: no-repeat;
@@ -200,30 +200,30 @@
    	margin: 30px 15px;
    
 }
-#content .local-list .player .add-friend .check:hover{
+#content .local-player .player .add-friend .check:hover{
  	background-position: 0 100%;
  }
 /*amigos en el resto del mundo*/
 
-#content .world-list ul{
+#content .world-player ul{
 	 list-style: none;
 }
-#content .world-list ul li{
+#content .world-player ul li{
 	list-style: none;
 	height: 90px;
 	
 }
-#content .world-list .player{
+#content .world-player .player{
 	border-bottom: #DDD 1px solid;
 }
-#content .world-list .player .info{
+#content .world-player .player .info{
 	color: #888888;
    	float: left;
     height: 70px;
     margin-right: 5px;
     padding: 15px 5px 5px 15px;
 }
-#content .world-list .player .image{
+#content .world-player .player .image{
 	float: left;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
@@ -231,12 +231,12 @@
 	height: 60px;
 	width: 60px;
 }
-#content .world-list .player .image img{
+#content .world-player .player .image img{
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
 	border-radius: 30px;
 }
-#content .world-list .player .info .info-name {
+#content .world-player .player .info .info-name {
 	color: #888888;
     font-weight: bold;
     float:left;
@@ -245,17 +245,17 @@
     font-size: 12px;
 }
 
-#content .world-list .player .info-name .name{
+#content .world-player .player .info-name .name{
 	color: #888888;
     font-weight: bold;
 }
-#content.world-list .player .info-name .location{
+#content.world-player .player .info-name .location{
 	color: #888888;
 	font-size: 12px;
 	font-weight: lighter;
 	
 }
-#content .world-list .player .line-chat{
+#content .world-player .player .line-chat{
 
 	border-left: #DDD 1px solid;
 	float: right;
@@ -276,7 +276,7 @@
     padding: 0;	
     margin: 30px 15px;
  }
-#content .world-list .player .add-friend{
+#content .world-player .player .add-friend{
 
 	border-left: #DDD 1px solid;
 	float: right;
@@ -285,7 +285,7 @@
     top: 0;
    }
 
-  #content .world-list .player .add-friend .check{
+  #content .world-player .player .add-friend .check{
 	background-image: url("./img/btn/btn_select_payer.png");
 	background-size: 24px 48px; 
 	background-repeat: no-repeat;
@@ -298,7 +298,7 @@
     margin: 30px 15px;
    
 }
-#content .world-list .player .add-friend .check:hover{
+#content .world-player .player .add-friend .check:hover{
  	background-position: 0 100%;
  }
  
@@ -422,15 +422,15 @@ a.selected{
 	
 	function LocalPlayers(){
 		var localIds = squadrapp.player.getOtherContactsLocalIds();
-		$('#local-contacts').html('');
+		$('#local-player-list').html('');
 		var winfo = $('#list-contacts').width()-162;
 		$.each( localIds, function( key, id ) {
 		var m = squadrapp.player.getContact(id);
 		 if(squadrapp.isOnline()){
-			  $('#local-contacts').append('<li class="player" id="player_'+id+'"><div class="info" ><div class="image"><img style="display: inline;" width="60" height="60" src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="name">'+truncate(m.name,10,"...")+'</div><div class="talker-info online"></div></div> <div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><div class="check" id="playercheck_'+id+'"  onclick="newPlayer('+id+')"></div></div><div class="corte"></div></li>');
+			  $('#local-player-list').append('<li class="player" id="player_'+id+'"><div class="info" ><div class="image"><img style="display: inline;" width="60" height="60" src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="name">'+truncate(m.name,10,"...")+'</div><div class="talker-info online"></div></div> <div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><div class="check" id="playercheck_'+id+'"  onclick="newPlayer('+id+')"></div></div><div class="corte"></div></li>');
 			}
 		  else{  
-			  $('#local-contacts').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="name">'+truncate(m.name,10,"...")+'</div></div><div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><a class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></a></div><div class="corte"></div></li>');
+			  $('#local-player-list').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="name">'+truncate(m.name,10,"...")+'</div></div><div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><a class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></a></div><div class="corte"></div></li>');
 			}
 		});
 		$('#list-contacts .player .info').width(winfo);		
@@ -438,15 +438,15 @@ a.selected{
 
 	function ForeignPlayers(){
 		var foreignIds = squadrapp.player.getOtherContactsForeignIds();
-		$('#foreign-contacts').html('');
+		$('#foreign-player-list').html('');
 		var winfo = $('#list-contacts').width()-162;
 		$.each( foreignIds, function( key, id ) {
 		var m = squadrapp.player.getContact(id);
 	    if(squadrapp.isOnline()){
-				$('#foreign-contacts').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,10,"...")+'</div><div class="location">'+truncate(m.location_name,10,"...")+'</div></div><div class="corte"></div></div><div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></div></div><div class="corte"></div></li>');
+				$('#foreign-player-list').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,10,"...")+'</div><div class="location">'+truncate(m.location_name,10,"...")+'</div></div><div class="corte"></div></div><div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></div></div><div class="corte"></div></li>');
 			}
 		 else{
-			  $('#foreign-contacts').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,10,"...")+'</div><div class="location">'+truncate(m.location_name,10,"...")+'</div></div><div class="corte"></div></div><div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></a></div><div class="corte"></div></li>');
+			  $('#foreign-player-list').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,10,"...")+'</div><div class="location">'+truncate(m.location_name,10,"...")+'</div></div><div class="corte"></div></div><div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></a></div><div class="corte"></div></li>');
 		    }
 			});
 			$('#list-contacts .player .info').width(winfo);	
