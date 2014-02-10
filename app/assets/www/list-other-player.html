@@ -8,7 +8,7 @@
 					<section class="search-contacts">
 						<form action="javascript:searchPlayer()">
 							<div class="search-contacts-input">
-								<input type="text" onblur="" name="find" id="find-contacts" placeholder="Buscar">
+								<input type="text" onblur="" name="find" id="find-contacts" placeholder="Buscar" disabled="disabled">
 							</div>
 							
 						</form>
@@ -265,7 +265,7 @@
     
  }
 
- #content .word-list .player .line-chat .chatplayer{
+ #content .world-player .player .line-chat .chatplayer{
 	background-image: url("./img/btn/btn_message_52x52.png");
 	background-size: 24px 24px; 
 	background-repeat: no-repeat;
@@ -285,7 +285,7 @@
     top: 0;
    }
 
-  #content .world-player .player .add-friend .check{
+#content .world-player .player .add-friend .check{
 	background-image: url("./img/btn/btn_select_payer.png");
 	background-size: 24px 48px; 
 	background-repeat: no-repeat;
@@ -389,9 +389,6 @@
     cursor:pointer;
 
 }
-#footer .buscar_nav_others:hover{
-	color: #44be88;
-}
 a.selected{
 	
 	color: #44be88;	
@@ -409,10 +406,15 @@ a.selected{
 	
 	function newPlayer(fid){
 		$('.check').click(function() {
+		$('.check').focus();
 		if ($('#playercheck_'+fid).attr('class') == 'check'){
+			$('#loader-overlay').show();
 			if('#playercheck_'+fid!='' && squadrapp.user.getUserId()!=''){
 				squadrapp.player.newContact(fid,function(){ 
 				$('#player_'+fid).remove();
+				squadrapp.getPlayer();
+				squadrapp.user.getContacts();
+				$('#loader-overlay').hide();
 			});
 			 }
 		   }
@@ -433,7 +435,8 @@ a.selected{
 			  $('#local-player-list').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="name">'+truncate(m.name,10,"...")+'</div></div><div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><a class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></a></div><div class="corte"></div></li>');
 			}
 		});
-		$('#list-contacts .player .info').width(winfo);		
+		$('#list-contacts .player .info').width(winfo);	
+		order($('#local-player-list .player'), true,$('.info .name'));	
 	  }
 
 	function ForeignPlayers(){
@@ -443,20 +446,20 @@ a.selected{
 		$.each( foreignIds, function( key, id ) {
 		var m = squadrapp.player.getContact(id);
 	    if(squadrapp.isOnline()){
-				$('#foreign-player-list').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,10,"...")+'</div><div class="location">'+truncate(m.location_name,10,"...")+'</div></div><div class="corte"></div></div><div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></div></div><div class="corte"></div></li>');
+				$('#foreign-player-list').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,10,"...")+'</div><div class="location">'+truncate(m.location_name,10,"...")+'</div></div><div class="corte"></div></div><div class="line-chat"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></div></div><div class="corte"></div></li>');
 			}
 		 else{
-			  $('#foreign-player-list').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,10,"...")+'</div><div class="location">'+truncate(m.location_name,10,"...")+'</div></div><div class="corte"></div></div><div class="line-chat" id="linechatplay_'+id+'"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></a></div><div class="corte"></div></li>');
+			  $('#foreign-player-list').append('<li class="player" id="player_'+id+'"><div class="info"><div class="image"><img style="display: inline;" width="60" height="60"  src="'+squadrapp.player.getContactImageUrl(m.id, 60, 60)+'"></div><div class="info-name"><div class="name">'+truncate(m.name,10,"...")+'</div><div class="location">'+truncate(m.location_name,10,"...")+'</div></div><div class="corte"></div></div><div class="line-chat"><div class="chatplayer" id="playerchat_'+id+'" onclick=""></div></div><div class="add-friend"><div class="check" id="playercheck_'+id+'" onclick="newPlayer('+id+')"></a></div><div class="corte"></div></li>');
 		    }
 			});
 			$('#list-contacts .player .info').width(winfo);	
+			order($('#foreign-player-list .player'), true,$('.info .name'));
 	  }
 	  
 	 function searchPlayer(){
  		var strplay=$('#find-contacts').val();
  		$('#find-contacts').val('');
- 		
- 	
+ 	 	
  	}
-
+ 	
 </script>
