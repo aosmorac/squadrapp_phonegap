@@ -19,7 +19,7 @@ var scrollChatWith;	// Scroll chat con otro usuario
 
 
 $(function(){
-	//login();
+	login();
 	$('.overlay').hide();
 	$('img').load(function() {
 		$(this).show(); //muestra el div despues de que la imagen carga.
@@ -189,7 +189,7 @@ function getChatList(callback){
 			$("#list-chats").html('<div align="center" style="padding: 50px 0;"><img src="img/loader.gif" /></div>');
 			talkers = squadrapp.nav.getTalkers();
 			$("#list-chats").html('');
-			$.each(talkers.oldTalkers, function( index, value ) {
+			$.each(talkers.listArray, function( index, value ) {//oldTalkers
 				if (value != undefined && value != null){
 					if (value.isgroup == 1){
 						var gInfo = squadrapp.nav.getTalker('g'+value.com_group_id);
@@ -317,7 +317,7 @@ function scrollChatListEvent(action){
 		squadrapp.nav.loadNewTalkers(function(){
 			talkers = squadrapp.nav.getTalkers();
 			var nt = 0; /*New talkers, total*/
-				$.each(talkers.newTalkers, function( index, value ) {
+	    	  $.each(talkers.newTalkers, function( index, value ) {
 					if (value != undefined && value != null){
 						if (value.isgroup == 1){
 							var gInfo = squadrapp.nav.getTalker('g'+value.com_group_id);
@@ -384,6 +384,7 @@ function scrollChatListEvent(action){
 		isgroup = typeof(isgroup) != 'undefined' ? isgroup : 0; 
 		mySwipe.slide(1);
 		$(".overlay_chat").show();
+
 		talker = squadrapp.nav.getChatWithUser(user_id, isgroup, 'new');
 		$('#content-chatwith-section').html('');
 		$('#content-chatwith-section').load('chat-with.html', function() {
@@ -517,55 +518,70 @@ function getMoreMessages(){
 }
 //	Evento al hacer scroll al chat
 	function getNewMessages(){
-		if ($( "#chat-with" ).attr( "is_group") == 1){
+	 squadrapp.nav.loadNewMessagesByUser($( "#chat-with" ).attr( "user_id"), function(){
+		var messages = squadrapp.nav.getNewMessagesByUser($( "#chat-with" ).attr( "user_id"));
+		if (messages.length){
+			$(".vacio").remove();
+			for (var i = messages.length; i>0; i--){
+			  var value = messages[i-1];
+			  $('#message-'+value.mid).remove();
+			  if (value.user_id == squadrapp.user.getUserId()){
+				 $("#list-messages").append ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+			  }else{
+				  $("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+			    } 
+		  if ($( "#chat-with" ).attr( "is_group") == 1){
 			squadrapp.nav.loadNewMessagesByGroup($( "#chat-with" ).attr( "user_id"), function(){
-				
-				var messages = squadrapp.nav.getNewMessagesByGroup($( "#chat-with" ).attr( "user_id"));
-					if (messages.length){
-						$(".vacio").remove();
-						for (var i = messages.length; i>0; i--){
-							var value = messages[i-1];
-							$('#message-'+value.mid).remove();
-							if (value.user_id == squadrapp.user.getUserId()){
-								$("#list-messages").append ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
-							}else{
-								$("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
-							} 
-							scrollChatWith.refresh();
-							scrollChatWith.scrollTo(0, scrollChatWith.maxScrollY-30, 0);
-						}
-						autoLoadNewMessages('start');
-						$("#list-messages").append('<section class="vacio">&nbsp;</section>');
-						scrollChatWith.refresh();
-					}else{
-						autoLoadNewMessages('start');
+			  var messages = squadrapp.nav.getNewMessagesByGroup($( "#chat-with" ).attr( "user_id"));
+				if (messages.length){
+					$(".vacio").remove();
+					for (var i = messages.length; i>0; i--){
+					  var value = messages[i-1];
+					  $('#message-'+value.mid).remove();
+					  if (value.user_id == squadrapp.user.getUserId()){
+						 $("#list-messages").append ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+					  }else{
+						  $("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+						 } 
+					  scrollChatWith.refresh();
+					  scrollChatWith.scrollTo(0, scrollChatWith.maxScrollY-30, 0);
 					}
-					loadImages();
-			});
-		}else {
-			squadrapp.nav.loadNewMessagesByUser($( "#chat-with" ).attr( "user_id"), function(){
-				var messages = squadrapp.nav.getNewMessagesByUser($( "#chat-with" ).attr( "user_id"));
-					if (messages.length){
-						$(".vacio").remove();
-						for (var i = messages.length; i>0; i--){
-							var value = messages[i-1];
-							$('#message-'+value.mid).remove();
-							if (value.user_id == squadrapp.user.getUserId()){
-								$("#list-messages").append ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
-							}else{
-								$("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
-							} 
-							scrollChatWith.refresh();
-							scrollChatWith.scrollTo(0, scrollChatWith.maxScrollY-30, 0);
-						}
-						$("#list-messages").append('<section class="vacio">&nbsp;</section>');
-						scrollChatWith.refresh();
-					}
-					loadImages();
 					autoLoadNewMessages('start');
-			});
-		}
+					$("#list-messages").append('<section class="vacio">&nbsp;</section>');
+					scrollChatWith.refresh();
+				}else{
+					autoLoadNewMessages('start');
+					}
+			    loadImages();
+		   });
+		 }else {
+		  squadrapp.nav.loadNewMessagesByUser($( "#chat-with" ).attr( "user_id"), function(){
+			var messages = squadrapp.nav.getNewMessagesByUser($( "#chat-with" ).attr( "user_id"));
+			 if (messages.length){
+			   $(".vacio").remove();
+			   for (var i = messages.length; i>0; i--){
+				 var value = messages[i-1];
+				 $('#message-'+value.mid).remove();
+				 if (value.user_id == squadrapp.user.getUserId()){
+					 $("#list-messages").append ('<section class="me" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+				 }else{
+					  $("#list-messages").append ('<section class="friend" id="message-'+value.mid+'"><div class="date">'+formatChatDate(value.date)+'</div><div class="image"><img width="36" height="36" src="https://graph.facebook.com/'+value.Facebook_id+'/picture?width=36&height=36"></div><div class="message"><div class="arrow"></div><div class="user">'+truncate(value.user_name,15,"...")+'</div><div class="text">'+value.message+'</div></section>');
+					} 
+				 scrollChatWith.refresh();
+				 scrollChatWith.scrollTo(0, scrollChatWith.maxScrollY-30, 0);
+			   }
+			   $("#list-messages").append('<section class="vacio">&nbsp;</section>');
+			   scrollChatWith.refresh();
+			 }
+			loadImages();
+			autoLoadNewMessages('start');
+		  });
+		 }
 	}
+  }
+});
+}
+	
 	
 	function autoLoadNewMessages(command){
 		if(command == 'start'){
@@ -598,8 +614,11 @@ function sendMessageToUser(user_id, message){
 			$("#list-messages").append('<section class="vacio">&nbsp;</section>');
 			scrollChatWith.refresh();
 			scrollChatWith.scrollTo(0, scrollChatWith.maxScrollY-30, 0);
+			
 		});
+		
 	}
+	
 }
 
 
@@ -607,8 +626,10 @@ function sendMessageToUser(user_id, message){
  ** Abre seccion de envio de mensaje
  **/
 function openNewMessage(){
+	$('#new-message').html('');
 	$('#new-message').animate({top: (0)},200, function(){
 		$('#new-message').load('chat-new-message.html', function() {
+			$('.check').removeClass('selected');
 		});
 	});
 }
@@ -694,23 +715,6 @@ function loadPage(page){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
  * Utilidades
  */
@@ -756,8 +760,12 @@ function loadLocalContacts(){
 		$('#local-contacts').html('');
 		$.each( localIds, function( key, id ) {
 			var m = squadrapp.user.getContact(id);
-			$('#local-contacts').append('<li class="friend"><div class="image"><img style="display: block;" width="35" height="35" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="name">'+truncate(m.name,20,"...")+'</div><div class="check" id="contact_'+id+'" onclick="CheckClick('+id+')"></div><div class="corte"></div></li>');
-		});
+			if(squadrapp.isOnline()){
+				$('#local-contacts').append('<li class="friend"><div class="image"><img style="display: block;" width="35" height="35" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="name">'+truncate(m.name,20,"...")+'</div><div class="check" id="contact_'+id+'" onclick="CheckClick('+id+')"></div><div class="talker-info online"></div><div class="corte"></div></li>');
+			}
+			else{  $('#local-contacts').append('<li class="friend"><div class="image"><img style="display: block;" width="35" height="35" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="name">'+truncate(m.name,20,"...")+'</div><div class="check" id="contact_'+id+'" onclick="CheckClick('+id+')"></div><div class="corte"></div></li>');
+			}
+			});
 	}
 
 function loadForeignContacts(){
@@ -765,6 +773,11 @@ function loadForeignContacts(){
 		$('#foreign-contacts').html('');
 		$.each( localIds, function( key, id ) {
 			var m = squadrapp.user.getContact(id);
-			$('#foreign-contacts').append('<li class="friend"><div class="image"><img style="display: block;" width="35" height="35" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info"><div class="name">'+truncate(m.name,20,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div><div class="check" id="contact_'+id+'" onclick="CheckClick('+id+')"></div><div class="corte"></div></li>');
-		});
+			if(squadrapp.isOnline()){
+				 $('#foreign-contacts').append('<li class="friend"><div class="image"><img style="display: block;" width="35" height="35" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info"><div class="name">'+truncate(m.name,20,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div><div class="check" id="contact_'+id+'" onclick="CheckClick('+id+')"></div><div class="corte"></div></li>');
+			}
+			else{
+			  $('#foreign-contacts').append('<li class="friend"><div class="image"><img style="display: block;" width="35" height="35" style="display: block;" src="'+squadrapp.user.getContactImageUrl(m.id, 35, 35)+'"></div><div class="info"><div class="name">'+truncate(m.name,20,"...")+'</div><div class="location">'+truncate(m.location_name,20,"...")+'</div></div><div class="check" id="contact_'+id+'" onclick="CheckClick('+id+')"></div><div class="corte"></div></li>');
+		    }
+			});
 	}
